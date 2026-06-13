@@ -1,0 +1,69 @@
+name: Iugu Plans and Pricing
+description: >
+  Iugu offers subscription-based plans for Brazilian businesses needing payment
+  infrastructure. Plans include transaction fees for credit card, boleto, and Pix
+  payments. Rates are negotiable for high-volume merchants and vary by plan tier.
+url: https://www.iugu.com/planos
+plans:
+  - name: Essencial
+    description: >
+      Core payment infrastructure plan covering invoicing, boleto, Pix, and
+      credit card processing. Does not include split payment functionality.
+    monthlyFee: negotiated
+    features:
+      - Invoice generation
+      - Boleto bancário processing
+      - Pix payments
+      - Credit card processing
+      - Webhooks
+      - REST API access
+      - Customer and subscription management
+    transactionFees:
+      creditCard: varies by installments and plan
+      boleto: per transaction (negotiated)
+      pix: per transaction (negotiated)
+
+  - name: Essencial + Split
+    description: >
+      Extends the Essencial plan with split payment (payment splitting) support,
+      enabling revenue distribution across multiple sub-accounts. Suited for
+      marketplaces and platforms.
+    monthlyFee: negotiated
+    features:
+      - All Essencial features
+      - Split de pagamentos (payment splitting)
+      - Sub-account management
+      - Marketplace payment flows
+    transactionFees:
+      creditCard: varies by installments and plan
+      boleto: per transaction (negotiated)
+      pix: per transaction (negotiated)
+
+  - name: Motor
+    description: >
+      Premium plan for high-volume businesses requiring advanced financial
+      tooling, negotiated rates, and specialized consulting for customized
+      financial management. Includes access to all advanced iugu tools.
+    monthlyFee: negotiated
+    features:
+      - All Essencial + Split features
+      - Negotiable rates for high transaction volumes
+      - Specialized consulting
+      - Customized financial management
+      - Full access to all advanced iugu tools
+      - Dedicated support
+    transactionFees:
+      creditCard: negotiated for high volume
+      boleto: negotiated for high volume
+      pix: negotiated for high volume
+
+notes:
+  - Resources are charged in a subscription model with monthly charges.
+  - Initial configuration fees may apply depending on plan and setup.
+  - Variable tariffs are added to monthly subscription costs.
+  - A 30-day cancellation notice is required.
+  - Credit card fees vary based on number of installments and contracted plan.
+  - No tariff is charged for payment reversals.
+  - Specific rates can be viewed in the iugu panel at https://alia.iugu.com/
+    under Settings > Account Information > My Plan.
+  - A fee calculator is available at https://www.iugu.com/calculadora

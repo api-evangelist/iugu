@@ -1,0 +1,44 @@
+name: Iugu API Rate Limits
+description: >
+  Iugu does not publicly publish explicit API rate limit thresholds in their
+  developer documentation. Rate limits are enforced at the infrastructure level
+  and may be communicated through account-specific agreements, particularly
+  for high-volume Motor plan customers.
+url: https://dev.iugu.com/docs
+limits:
+  - scope: API (general)
+    limit: not publicly disclosed
+    window: not publicly disclosed
+    notes: >
+      Iugu's developer documentation does not specify numeric rate limits.
+      Merchants experiencing throttling should contact Iugu support or review
+      their account-specific plan details at https://alia.iugu.com/
+
+authentication:
+  type: API Token (HTTP Basic Auth)
+  tokens:
+    - name: api_token
+      description: Standard API token for most REST API operations
+    - name: user_token
+      description: Generated during sub-account creation for account-level management
+    - name: live_api_token
+      description: Production environment token
+    - name: test_api_token
+      description: Sandbox/test environment token
+    - name: master_token
+      description: Required for marketplace sub-account operations
+  notes: >
+    Tokens are passed via HTTP Basic Auth (token as username, password blank)
+    or as the api_token query parameter. Sandbox and production environments
+    use separate tokens.
+
+environments:
+  - name: Production
+    baseUrl: https://api.iugu.com/v1
+  - name: Sandbox/Test
+    baseUrl: https://api.iugu.com/v1
+    notes: Use test_api_token to operate in test mode
+
+support:
+  url: https://support.iugu.com
+  notes: Contact support for account-specific rate limit information

@@ -1,0 +1,79 @@
+name: Iugu FinOps
+description: >
+  Financial operations guidance for teams integrating with the Iugu payment
+  platform. Covers cost structure, fee categories, monitoring, and optimization
+  strategies for Brazilian payment processing via boleto, credit card, and Pix.
+url: https://www.iugu.com/planos
+costCategories:
+  - name: Monthly Subscription Fee
+    description: >
+      Recurring monthly charge for the contracted Iugu plan (Essencial,
+      Essencial + Split, or Motor). Amount is negotiated at account setup.
+    type: fixed
+    billing: monthly
+
+  - name: Credit Card Transaction Fee
+    description: >
+      Percentage fee per credit card transaction. Rate varies based on the
+      number of installments and the contracted plan tier.
+    type: variable (percentage per transaction)
+    notes: >
+      Rates increase with higher installment counts. View exact rates in the
+      iugu panel at https://alia.iugu.com/ under Settings > Account Information >
+      My Plan. A fee calculator is available at https://www.iugu.com/calculadora
+
+  - name: Boleto Bancário Fee
+    description: >
+      Per-transaction fee for boleto bancário issuance. Negotiated based on
+      plan and expected volume.
+    type: variable (per transaction)
+    notes: Unpaid boletos do not incur a fee in most plan configurations.
+
+  - name: Pix Fee
+    description: >
+      Per-transaction fee for Pix instant payments. Brazilian PSPs typically
+      charge 0.99% to 1.49% for Pix-in transactions.
+    type: variable (percentage per transaction)
+    estimatedRange: "0.99% - 1.49% per Pix-in transaction"
+
+  - name: Initial Configuration Fee
+    description: >
+      One-time onboarding/setup fee that may apply depending on plan and
+      integration complexity.
+    type: one-time (if applicable)
+
+  - name: Split Payment Fee
+    description: >
+      Additional fees for payment splitting across marketplace sub-accounts,
+      available on the Essencial + Split and Motor plans.
+    type: variable
+    notes: Included as part of Essencial + Split and Motor plan subscriptions.
+
+optimization:
+  - tip: >
+      Use the Iugu fee calculator (https://www.iugu.com/calculadora) to model
+      costs per payment method before committing to a plan.
+  - tip: >
+      Pix typically has lower per-transaction fees than credit card and no
+      chargeback risk — prefer Pix for eligible use cases.
+  - tip: >
+      High-volume merchants should negotiate the Motor plan for reduced
+      per-transaction rates that improve unit economics at scale.
+  - tip: >
+      Monitor receivables via the /financial_transaction_requests API to
+      maintain real-time visibility into expected cash flows.
+  - tip: >
+      Avoid unnecessary chargebacks and reversals; while iugu does not charge
+      for reversals, they can affect settlement timelines.
+  - tip: >
+      Use sandbox (test_api_token) extensively before going live to avoid
+      unnecessary test charges in production.
+
+monitoring:
+  statusPage: https://status.iugu.com/
+  panel: https://alia.iugu.com/
+  support: https://support.iugu.com/
+  webhooks: >
+    Configure webhooks (Gatilhos) in the iugu panel to receive real-time
+    payment events and track successful vs. failed transactions for FinOps
+    reporting.

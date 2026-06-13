@@ -1,0 +1,79 @@
+aid: iugu
+name: Iugu
+description: >
+  Iugu is a Brazilian payment infrastructure platform offering REST APIs for
+  invoicing, subscriptions, payment splits, boleto bancário generation, credit
+  card processing, and marketplace payments. The platform enables businesses to
+  automate financial operations including recurring billing, split payments for
+  marketplaces, Pix instant payments, and sub-account management. Iugu operates
+  as a Bacen-licensed Payment Institution and is PCI DSS compliant, serving
+  e-commerce, SaaS, and marketplace companies across Brazil.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/iugu/refs/heads/main/apis.yml
+created: "2026-06-13"
+modified: "2026-06-13"
+specificationVersion: "0.19"
+tags:
+  - Payments
+  - Brazil
+  - Invoicing
+  - Subscriptions
+  - Boleto
+  - Pix
+  - Credit Card
+  - Marketplace
+  - Split Payments
+  - Financial Infrastructure
+  - FinTech
+apis:
+  - aid: iugu:iugu-api
+    name: Iugu API
+    description: >
+      RESTful API providing 140+ endpoints for payment processing, customer
+      management, invoicing, subscriptions, marketplace split payments, Pix,
+      boleto bancário, credit card tokenization, webhooks, and financial
+      reporting in Brazil.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://dev.iugu.com/docs
+    baseURL: https://api.iugu.com/v1
+    tags:
+      - Payments
+      - Brazil
+      - Invoicing
+      - Subscriptions
+      - Boleto
+      - Pix
+      - Credit Card
+      - Marketplace
+    properties:
+      - type: Documentation
+        url: https://dev.iugu.com/docs
+      - type: OpenAPI
+        url: https://dev.iugu.com/llms.txt
+common:
+  - type: Website
+    url: https://www.iugu.com
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+  - type: GitHubOrg
+    url: https://github.com/iugu
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/iugu
+  - type: Blog
+    url: https://www.iugu.com/blog
+  - type: Pricing
+    url: https://www.iugu.com/planos
+  - type: StatusPage
+    url: https://status.iugu.com/
+  - type: X
+    url: https://x.com/iugu
+  - type: Plans
+    url: plans/iugu-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/iugu-rate-limits.yml
+  - type: FinOps
+    url: finops/iugu-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
