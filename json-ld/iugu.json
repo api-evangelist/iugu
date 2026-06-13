@@ -1,0 +1,38 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.iugu.com",
+  "name": "Iugu",
+  "description": "Iugu is a Brazilian payment infrastructure platform offering REST APIs for invoicing, subscriptions, payment splits, boleto bancário generation, credit card processing, and marketplace payments. The platform enables businesses to automate financial operations including recurring billing, split payments for marketplaces, Pix instant payments, and sub-account management. Iugu operates as a Bacen-licensed Payment Institution and is PCI DSS compliant, serving e-commerce, SaaS, and marketplace companies across Brazil.",
+  "url": "https://www.iugu.com",
+  "sameAs": [
+    "https://github.com/iugu",
+    "https://www.linkedin.com/company/iugu",
+    "https://x.com/iugu"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "developer support",
+    "url": "https://dev.iugu.com/docs"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Iugu API",
+    "description": "RESTful API providing 140+ endpoints for payment processing, customer management, invoicing, subscriptions, marketplace split payments, Pix, boleto bancário, credit card tokenization, webhooks, and financial reporting in Brazil.",
+    "url": "https://dev.iugu.com/docs"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Brazil"
+  },
+  "serviceType": [
+    "Payments",
+    "Invoicing",
+    "Subscriptions",
+    "Boleto",
+    "Pix",
+    "Credit Card Processing",
+    "Marketplace Split Payments",
+    "Financial Infrastructure"
+  ]
+}
