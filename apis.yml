@@ -9,7 +9,7 @@ description: >
   as a Bacen-licensed Payment Institution and is PCI DSS compliant, serving
   e-commerce, SaaS, and marketplace companies across Brazil.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/iugu/refs/heads/main/apis.yml
 created: "2026-06-13"
 modified: "2026-06-13"
@@ -34,7 +34,7 @@ apis:
       management, invoicing, subscriptions, marketplace split payments, Pix,
       boleto bancário, credit card tokenization, webhooks, and financial
       reporting in Brazil.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://dev.iugu.com/docs
     baseURL: https://api.iugu.com/v1
     tags:
