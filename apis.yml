@@ -30,6 +30,18 @@ tags:
   - Payments
   - Brazil
   - Invoicing
+  - Subscription
+  - Boleto
+  - Pix
+  - Credit Card
+  - Marketplace
+  - Split Payments
+  - Financial Infrastructure
+  - Fintech
+tags_raw:
+  - Payments
+  - Brazil
+  - Invoicing
   - Subscriptions
   - Boleto
   - Pix
@@ -50,6 +62,15 @@ apis:
     humanURL: https://dev.iugu.com/docs
     baseURL: https://api.iugu.com/v1
     tags:
+      - Payments
+      - Brazil
+      - Invoicing
+      - Subscription
+      - Boleto
+      - Pix
+      - Credit Card
+      - Marketplace
+    tags_raw:
       - Payments
       - Brazil
       - Invoicing
