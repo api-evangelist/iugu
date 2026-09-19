@@ -44,7 +44,7 @@ tags:
   - Subscription
   - Boleto
   - Pix
-  - Credit Card
+  - Credit Cards
   - Marketplace
   - Split Payments
   - Financial Infrastructure
@@ -79,7 +79,7 @@ apis:
       - Subscription
       - Boleto
       - Pix
-      - Credit Card
+      - Credit Cards
       - Marketplace
     tags_raw:
       - Payments
