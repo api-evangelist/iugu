@@ -1,0 +1,62 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/iugu-antecipa-o-de-receb-veis-openapi.yml
+- openapi/iugu-assinaturas-openapi.yml
+- openapi/iugu-baas-openapi.yml
+- openapi/iugu-bancos-openapi.yml
+- openapi/iugu-carn-s-openapi.yml
+- openapi/iugu-clientes-openapi.yml
+- openapi/iugu-configurar-nome-cedente-openapi.yml
+- openapi/iugu-conta-de-pagamento-e-marketplace-openapi.yml
+- openapi/iugu-contesta-o-openapi.yml
+- openapi/iugu-emails-transacionais-openapi.yml
+- openapi/iugu-faturas-openapi.yml
+- openapi/iugu-formas-de-pagamento-do-cliente-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: null
+coverage:
+  operations: 144
+  statuses_declared: 5
+problems:
+- status: 400
+  title: Bad Request
+  description: '400'
+  operations: 111
+  media_types:
+  - application/json
+  - text/plain
+  schema: null
+- status: 401
+  title: Unauthorized
+  description: '401'
+  operations: 5
+  media_types:
+  - application/json
+  schema: null
+- status: 404
+  title: Not Found
+  description: '404'
+  operations: 15
+  media_types:
+  - application/json
+  - text/plain
+  schema: null
+- status: 422
+  title: Unprocessable Content
+  description: '422'
+  operations: 10
+  media_types:
+  - application/json
+  - text/plain
+  schema: null
+- status: 500
+  title: Internal Server Error
+  description: '500'
+  operations: 1
+  media_types:
+  - application/json
+  schema: null

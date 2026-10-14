@@ -1,0 +1,40 @@
+generated: '2026-10-14'
+method: probed
+generator: harvest-packages.py
+source: registry metadata endpoints (registry.npmjs.org, pypi.org, rubygems.org, api.nuget.org, packagist.org, crates.io)
+ownership_rule: 'official: true only when the registry metadata (homepage, repository, author, URLs) names the provider''s domain (authentication/iugu-authentication.yml,
+  finops/iugu-finops.yml, iugu.com, linkedin.com, plans/iugu-plans-pricing.yml, rate-limits/iugu-rate-limits.yml, security/iugu-domain-security.yml,
+  x.com) or its accepted GitHub org.'
+packages:
+- name: iugu
+  registry: npm
+  url: https://www.npmjs.com/package/iugu
+  language: JavaScript
+  official: true
+  version: 0.0.6
+  published: '2014-08-13'
+  evidence: metadata names iugu.com
+- name: iugu
+  registry: pypi
+  url: https://pypi.org/project/iugu/
+  language: Python
+  official: true
+  version: 0.1.3.2
+  published: '2017-11-09'
+  evidence: metadata names iugu.com
+- name: iugu
+  registry: rubygems
+  url: https://rubygems.org/gems/iugu
+  language: Ruby
+  official: true
+  version: 1.0.8
+  published: '2014-10-20'
+  evidence: metadata names iugu.com
+- name: iugu/iugu
+  registry: packagist
+  url: https://packagist.org/packages/iugu/iugu
+  language: PHP
+  official: true
+  version: 1.0.7
+  published: '2024-03-01'
+  evidence: metadata names iugu.com

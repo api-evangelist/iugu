@@ -1,0 +1,236 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-mcp-candidate.py
+source:
+- openapi/iugu-antecipa-o-de-receb-veis-openapi.yml
+- openapi/iugu-assinaturas-openapi.yml
+- openapi/iugu-baas-openapi.yml
+- openapi/iugu-bancos-openapi.yml
+- openapi/iugu-carn-s-openapi.yml
+- openapi/iugu-clientes-openapi.yml
+- openapi/iugu-configurar-nome-cedente-openapi.yml
+- openapi/iugu-conta-de-pagamento-e-marketplace-openapi.yml
+- openapi/iugu-contesta-o-openapi.yml
+- openapi/iugu-emails-transacionais-openapi.yml
+- openapi/iugu-faturas-openapi.yml
+- openapi/iugu-formas-de-pagamento-do-cliente-openapi.yml
+- openapi/iugu-gatilhos-openapi.yml
+- openapi/iugu-listar-pagamentos-openapi.yml
+- openapi/iugu-log-de-gatilhos-openapi.yml
+- openapi/iugu-multi-split-openapi.yml
+- openapi/iugu-planos-openapi.yml
+- openapi/iugu-qrcode-est-tico-openapi.yml
+- openapi/iugu-relat-rios-para-concilia-o-openapi.yml
+- openapi/iugu-tokens-de-api-openapi.yml
+- openapi/iugu-tokens-e-cobran-a-direta-openapi.yml
+- openapi/iugu-transfer-ncia-banc-ria-openapi.yml
+- openapi/iugu-transfer-ncia-de-valores-openapi.yml
+- openapi/iugu-zero-auth-openapi.yml
+status: candidate
+deployment:
+  mode: none
+  auth: unknown
+  verified: derived
+note: No MCP server was found. No probe result in the dossier. Candidate tools below are derived from the 143 operation(s) in the provider's own
+  OpenAPI (40 listed); they describe what a server WOULD expose, not one that exists.
+tools:
+- name: antecipar_recebiveis
+  operationId: antecipar-recebiveis
+  method: POST
+  path: /advancement_request/simulation
+  description: Criar Simulação de Antecipação
+- name: criar_assinatura
+  operationId: criar-assinatura
+  method: POST
+  path: /subscriptions
+  description: Criar Assinatura
+- name: baas_listar_pagamentos
+  operationId: baas-listar-pagamentos
+  method: GET
+  path: /
+  description: Listar Pagamentos de Boletos
+- name: baas_ativar_desativar_pix
+  operationId: baas-ativar-desativar-pix
+  method: PUT
+  path: /payments/pix
+  description: Ativar/desativar Pix
+- name: cancelamentodocarne
+  operationId: cancelamentodocarne
+  method: PUT
+  path: /payment_booklets/{id}/cancel
+  description: Cancelar carnê
+- name: criar_cliente
+  operationId: criar-cliente
+  method: POST
+  path: /customers
+  description: Criar Cliente
+- name: inserir_dados_cedente
+  operationId: inserir-dados-cedente
+  method: POST
+  path: /transferors
+  description: Inserir Dados do Cedente
+- name: consultar_envio_de_documentos
+  operationId: consultar-envio-de-documentos
+  method: GET
+  path: /account/documents
+  description: Consultar Envio de Documentos para Verificação de Conta iugu
+- name: listar_contestacao
+  operationId: listar-contestacao
+  method: GET
+  path: /chargebacks
+  description: Listar Contestação
+- name: criar_email
+  operationId: criar-email
+  method: POST
+  path: /emails
+  description: Criar E-mail
+- name: post_automatic_pix_receiver_recurrence_payments_cancel
+  operationId: post_automatic-pix-receiver-recurrence-payments-cancel
+  method: POST
+  path: /automatic_pix/receiver_recurrence_payments/cancel
+  description: Copy of Copy of Copy of
+- name: criar_forma_de_pagamento
+  operationId: criar-forma-de-pagamento
+  method: POST
+  path: /customers/{customer_id}/payment_methods
+  description: Criar Forma de Pagamento
+- name: criar_gatilho
+  operationId: criar-gatilho
+  method: POST
+  path: /web_hooks
+  description: Criar Gatilho
+- name: listar_pagamentos
+  operationId: listar-pagamentos
+  method: GET
+  path: /
+  description: Listar Pagamentos
+- name: getting_started_with_your_api
+  operationId: getting-started-with-your-api
+  method: GET
+  path: /web_hook_logs/{invoice_id}
+  description: Listar Logs
+- name: criar_split_1
+  operationId: criar-split-1
+  method: POST
+  path: /splits
+  description: Criar Splits
+- name: criar_plano
+  operationId: criar-plano
+  method: POST
+  path: /plans
+  description: Criar Plano
+- name: listagem_qrcode_estatico
+  operationId: listagem-qrcode-estatico
+  method: GET
+  path: /static_qr_codes
+  description: Listagem QRCode estático
+- name: recebiveis_consolidados
+  operationId: recebiveis-consolidados
+  method: GET
+  path: /accounts/consolidated_receivables
+  description: Recebíveis Consolidados
+- name: renovar_api_token_de_usuario
+  operationId: renovar-api-token-de-usuario
+  method: POST
+  path: /profile/renew_access_token
+  description: Renovar API Token de Usuário
+- name: cobranca_direta
+  operationId: cobranca-direta
+  method: POST
+  path: /charge
+  description: Cobrança Direta
+- name: listar_transferencia_bancaria
+  operationId: listar-transferencia-bancaria
+  method: GET
+  path: /withdraw_requests
+  description: Listar Saques/Transferência Próprias
+- name: cancelar_pix_agendado
+  operationId: cancelar-pix-agendado
+  method: PATCH
+  path: /transfer_requests/{id}/scheduled_cancel
+  description: Cancelar Pix Agendado
+- name: consultar_zero_auth
+  operationId: consultar-zero-auth
+  method: POST
+  path: /zero_auth
+  description: Consultar Zero Auth
+- name: listar_recebiveis
+  operationId: listar-recebiveis
+  method: GET
+  path: /financial_transaction_requests
+  description: Listar Recebíveis
+- name: listar_assinaturas
+  operationId: listar-assinaturas
+  method: GET
+  path: /subscriptions
+  description: Listar Assinaturas
+- name: baas_consultar_envio_de_documentos
+  operationId: baas-consultar-envio-de-documentos
+  method: GET
+  path: /account/documents
+  description: Consultar Envio de Documentos para Verificação de Conta iugu
+- name: listar_cliente
+  operationId: listar-cliente
+  method: GET
+  path: /customers
+  description: Listar Clientes
+- name: alterar_dados_cedente
+  operationId: alterar-dados-cedente
+  method: PUT
+  path: /transferors
+  description: Alterar Dados do Cedente
+- name: reenviar_documentos
+  operationId: reenviar-documentos
+  method: PUT
+  path: /account/documents
+  description: Reenviar Documentos para Verificar Conta iugu
+- name: buscar_contestacao
+  operationId: buscar-contestacao
+  method: GET
+  path: /chargebacks/{id}
+  description: Buscar Contestação
+- name: listar_emails
+  operationId: listar-emails
+  method: GET
+  path: /emails
+  description: Listar E-mails
+- name: get_automatic_pix_receiver_recurrences
+  operationId: get_automatic-pix-receiver-recurrences
+  method: GET
+  path: /automatic_pix/receiver_recurrences
+  description: GET /automatic_pix/receiver_recurrences
+- name: listar_forma_de_pagamento
+  operationId: listar-forma-de-pagamento
+  method: GET
+  path: /customers/{customer_id}/payment_methods
+  description: Listar Formas de Pagamento
+- name: listar_gatilhos
+  operationId: listar-gatilhos
+  method: GET
+  path: /web_hooks
+  description: Listar Gatilhos
+- name: criar_pedido_de_pagamento
+  operationId: criar-pedido-de-pagamento
+  method: POST
+  path: /
+  description: Criar Pedido de Pagamento
+- name: listar_split
+  operationId: listar-split
+  method: GET
+  path: /splits
+  description: Listar Splits
+- name: listar_plano
+  operationId: listar-plano
+  method: GET
+  path: /plans
+  description: Listar Planos
+- name: extrato_consolidado
+  operationId: extrato-consolidado
+  method: GET
+  path: /accounts/consolidated_statements
+  description: Extrato Consolidado
+- name: criar_token_de_api
+  operationId: criar-token-de-api
+  method: POST
+  path: /{account_id}/api_tokens
+  description: Criar API Token

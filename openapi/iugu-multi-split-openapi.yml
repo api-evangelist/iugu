@@ -1,0 +1,454 @@
+openapi: 3.1.0
+info:
+  title: multi-split
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+x-readme-fauxas: true
+paths:
+  /splits:
+    post:
+      summary: Criar Splits
+      description: Permite a criação de multi splits para uma conta. Criar um novo multi split sobrepõe o que já está configurado. Todas as faturas em aberto em uma conta irão acatar a nova regra de split criada.
+      operationId: criar-split-1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                split_rules:
+                  type: array
+                  description: Lista de splits a serém aplicado nas faturas pagas
+                  items:
+                    properties:
+                      recipient_account_id:
+                        type: string
+                        description: ID Da conta que irá receber o split
+                      cents:
+                        type: integer
+                        description: Centavos a serem cobrados da fatura.
+                        format: int32
+                      percent:
+                        type: number
+                        description: Porcentagem a ser cobrada da fatura.
+                        format: float
+                      bank_slip_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações no boleto.
+                        format: int32
+                      bank_slip_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações no boleto.
+                        format: float
+                      credit_card_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações no cartão de crédito.
+                        format: int32
+                      credit_card_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações no cartão de crédito.
+                        format: float
+                      pix_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações no pix.
+                        format: int32
+                      pix_percent:
+                        type: string
+                        description: Valor em porcentagem a ser cobrado apenas em transações no pix.
+                      permit_aggregated:
+                        type: boolean
+                        description: Permite agregar comissionamento percentual + fixo.
+                      credit_card_1x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 1x no cartão de crédito.
+                        format: int32
+                      credit_card_2x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 2x no cartão de crédito.
+                        format: int32
+                      credit_card_3x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 3x no cartão de crédito.
+                        format: int32
+                      credit_card_4x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 4x no cartão de crédito.
+                        format: int32
+                      credit_card_5x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 5x no cartão de crédito.
+                        format: int32
+                      credit_card_6x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 6x no cartão de crédito.
+                        format: int32
+                      credit_card_7x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 7x no cartão de crédito.
+                        format: int32
+                      credit_card_8x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 8x no cartão de crédito.
+                        format: int32
+                      credit_card_9x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 9x no cartão de crédito.
+                        format: int32
+                      credit_card_10x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 10x no cartão de crédito.
+                        format: int32
+                      credit_card_11x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 11x no cartão de crédito.
+                        format: int32
+                      credit_card_12x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 12x no cartão de crédito.
+                        format: int32
+                      credit_card_1x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 1x no cartão de crédito.
+                        format: float
+                      credit_card_2x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 2x no cartão de crédito.
+                        format: float
+                      credit_card_3x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 3x no cartão de crédito.
+                        format: float
+                      credit_card_4x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 4x no cartão de crédito.
+                        format: float
+                      credit_card_5x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 5x no cartão de crédito.
+                        format: float
+                      credit_card_6x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 6x no cartão de crédito.
+                        format: float
+                      credit_card_7x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 7x no cartão de crédito.
+                        format: float
+                      credit_card_8x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 8x no cartão de crédito.
+                        format: float
+                      credit_card_9x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 9x no cartão de crédito.
+                        format: float
+                      credit_card_10x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 10x no cartão de crédito.
+                        format: float
+                      credit_card_11x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 11x no cartão de crédito.
+                        format: float
+                      credit_card_12x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 12x no cartão de crédito.
+                        format: float
+                    type: object
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": \"4322DAFCE8574D058D83E2F8E29F1951\",\n  \"splittable_id\": \"27016E1AD888499A98994E781B6C3762\",\n  \"splittable_type\": \"Account\",\n  \"created_at\": \"2024-05-02T15:33:20-03:00\",\n  \"updated_at\": \"2024-05-02T15:33:20-03:00\",\n  \"split_rules\": [\n    {\n      \"id\": \"9EFED8C0B63D417AB5A9964EC21FE265\",\n      \"recipient_account_id\": \"8DF741D75DC448CE852BB4687ED28CE6\",\n      \"cents\": 100,\n    }\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+    get:
+      summary: Listar Splits
+      description: Consulta a lista de splits da conta.
+      operationId: listar-split
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "[\n    {\n        \"id\": \"0F143A08D30C4A009E27CD8ED88601C3\",\n        \"splittable_id\": \"E255E580AB9B49B087F9FBA07CD0A1A3\",\n        \"splittable_type\": \"Account\",\n        \"created_at\": \"2020-11-16T17:43:14-03:00\",\n        \"updated_at\": \"2020-11-16T17:43:14-03:00\",\n        \"split_rules\": [\n          {\n            \"recipient_account_id\":\"11DA8B1662EC4C30BC4C78AEDC619145\",\n            \"cents\":1000\n          },\n          {\n            \"recipient_account_id\":\"0958D2AAD34049AB889583E26DFA0BF1\",\n            \"percent\":1.5\n          }\n        ]\n    },\n  \t{\n        \"id\": \"173188E2F1CC4003A5B3EF11A4A96AB3\",\n        \"splittable_id\": \"E255E580AB9B49B087F9FBA07CD0A1A3\",\n        \"splittable_type\": \"Account\",\n        \"created_at\": \"2020-11-16T18:38:31-03:00\",\n        \"updated_at\": \"2020-11-16T18:38:31-03:00\",\n        \"split_rules\": [\n          {\n            \"recipient_account_id\":\"11DA8B1662EC4C30BC4C78AEDC619145\"\
+                    ,\n            \"cents\":1000\n          },\n          {\n            \"recipient_account_id\":\"0958D2AAD34049AB889583E26DFA0BF1\",\n            \"percent\":1.5\n          }\n        ]\n    }\n]"
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: 0F143A08D30C4A009E27CD8ED88601C3
+                    splittable_id:
+                      type: string
+                      example: E255E580AB9B49B087F9FBA07CD0A1A3
+                    splittable_type:
+                      type: string
+                      example: Account
+                    created_at:
+                      type: string
+                      example: '2020-11-16T17:43:14-03:00'
+                    updated_at:
+                      type: string
+                      example: '2020-11-16T17:43:14-03:00'
+                    split_rules:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          recipient_account_id:
+                            type: string
+                            example: 11DA8B1662EC4C30BC4C78AEDC619145
+                          cents:
+                            type: integer
+                            example: 1000
+                            default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /splits/current:
+    get:
+      summary: Consultar Split Atual
+      description: Consulta o split atualmente cadastrado na conta.
+      operationId: current-split
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": \"0F143A08D30C4A009E27CD8ED88601C3\",\n    \"splittable_id\": \"E255E580AB9B49B087F9FBA07CD0A1A3\",\n    \"splittable_type\": \"Account\",\n    \"created_at\": \"2020-11-16T17:43:14-03:00\",\n    \"updated_at\": \"2020-11-16T17:43:14-03:00\",\n    \"split_rules\": [\n      {\n        \"recipient_account_id\":\"11DA8B1662EC4C30BC4C78AEDC619145\",\n        \"cents\":1000\n      },\n      {\n        \"recipient_account_id\":\"0958D2AAD34049AB889583E26DFA0BF1\",\n        \"percent\":1.5\n      }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 0F143A08D30C4A009E27CD8ED88601C3
+                  splittable_id:
+                    type: string
+                    example: E255E580AB9B49B087F9FBA07CD0A1A3
+                  splittable_type:
+                    type: string
+                    example: Account
+                  created_at:
+                    type: string
+                    example: '2020-11-16T17:43:14-03:00'
+                  updated_at:
+                    type: string
+                    example: '2020-11-16T17:43:14-03:00'
+                  split_rules:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        recipient_account_id:
+                          type: string
+                          example: 11DA8B1662EC4C30BC4C78AEDC619145
+                        cents:
+                          type: integer
+                          example: 1000
+                          default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+    delete:
+      summary: Remover Split Atual
+      description: Remove o split atualmente cadastrado na conta.
+      operationId: remover-split-atual
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"split_rules\": {}\n}"
+              schema:
+                type: object
+                properties:
+                  split_rules:
+                    type: object
+                    properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /splits/invoices/{id}:
+    get:
+      summary: Listar Splits da Fatura
+      description: Lista a situação atual dos splits da fatura informada.
+      operationId: listar-splits-da-fatura
+      parameters:
+      - name: id
+        in: path
+        description: ID da Fatura
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "[\n    {\n        \"account_id\": \"12E559794A794391BBAC265B5F332A1C\",\n        \"account_name\": \"Parafuzo\",\n        \"amount_cents\": 36,\n        \"amount\": \"0.36 BRL\",\n        \"paid_at\": \"2022-09-30T21:28:12-03:00\"\n    }\n]"
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    account_id:
+                      type: string
+                      example: 12E559794A794391BBAC265B5F332A1C
+                    account_name:
+                      type: string
+                      example: Parafuzo
+                    amount_cents:
+                      type: integer
+                      example: 36
+                      default: 0
+                    amount:
+                      type: string
+                      example: 0.36 BRL
+                    paid_at:
+                      type: string
+                      example: '2022-09-30T21:28:12-03:00'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /splits/{id}:
+    get:
+      summary: Buscar Split
+      description: Consulta um splits da conta.
+      operationId: buscar-split
+      parameters:
+      - name: id
+        in: path
+        description: ID do Split
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": \"0F143A08D30C4A009E27CD8ED88601C3\",\n    \"splittable_id\": \"E255E580AB9B49B087F9FBA07CD0A1A3\",\n    \"splittable_type\": \"Account\",\n    \"created_at\": \"2020-11-16T17:43:14-03:00\",\n    \"updated_at\": \"2020-11-16T17:43:14-03:00\",\n    \"split_rules\": [\n      {\n        \"recipient_account_id\":\"11DA8B1662EC4C30BC4C78AEDC619145\",\n        \"cents\":1000\n      },\n      {\n        \"recipient_account_id\":\"0958D2AAD34049AB889583E26DFA0BF1\",\n        \"percent\":1.5\n      }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 0F143A08D30C4A009E27CD8ED88601C3
+                  splittable_id:
+                    type: string
+                    example: E255E580AB9B49B087F9FBA07CD0A1A3
+                  splittable_type:
+                    type: string
+                    example: Account
+                  created_at:
+                    type: string
+                    example: '2020-11-16T17:43:14-03:00'
+                  updated_at:
+                    type: string
+                    example: '2020-11-16T17:43:14-03:00'
+                  split_rules:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        recipient_account_id:
+                          type: string
+                          example: 11DA8B1662EC4C30BC4C78AEDC619145
+                        cents:
+                          type: integer
+                          example: 1000
+                          default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: query
+      name: api_token
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/buscar-split.md
+  - https://dev.iugu.com/reference/criar-split-1.md
+  - https://dev.iugu.com/reference/current-split.md
+  - https://dev.iugu.com/reference/listar-split.md
+  - https://dev.iugu.com/reference/listar-splits-da-fatura.md
+  - https://dev.iugu.com/reference/remover-split-atual.md
+  merge:
+    pages: 6
+    deduped: 5
+    conflicts_kept_first: 0

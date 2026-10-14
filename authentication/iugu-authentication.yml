@@ -1,0 +1,42 @@
+generated: '2026-10-14'
+method: derived
+source: openapi/iugu-antecipa-o-de-receb-veis-openapi.yml, openapi/iugu-assinaturas-openapi.yml,
+  openapi/iugu-baas-openapi.yml, openapi/iugu-bancos-openapi.yml, openapi/iugu-carn-s-openapi.yml,
+  openapi/iugu-clientes-openapi.yml, openapi/iugu-configurar-nome-cedente-openapi.yml, openapi/iugu-conta-de-pagamento-e-marketplace-openapi.yml,
+  openapi/iugu-contesta-o-openapi.yml, openapi/iugu-emails-transacionais-openapi.yml, openapi/iugu-faturas-openapi.yml,
+  openapi/iugu-formas-de-pagamento-do-cliente-openapi.yml ...
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: sec0
+  type: apiKey
+  in: query
+  parameter: api_token
+  sources:
+  - openapi/iugu-antecipa-o-de-receb-veis-openapi.yml
+  - openapi/iugu-assinaturas-openapi.yml
+  - openapi/iugu-baas-openapi.yml
+  - openapi/iugu-bancos-openapi.yml
+  - openapi/iugu-carn-s-openapi.yml
+  - openapi/iugu-clientes-openapi.yml
+  - openapi/iugu-configurar-nome-cedente-openapi.yml
+  - openapi/iugu-conta-de-pagamento-e-marketplace-openapi.yml
+  - openapi/iugu-contesta-o-openapi.yml
+  - openapi/iugu-emails-transacionais-openapi.yml
+  - openapi/iugu-faturas-openapi.yml
+  - openapi/iugu-formas-de-pagamento-do-cliente-openapi.yml
+  - openapi/iugu-gatilhos-openapi.yml
+  - openapi/iugu-listar-pagamentos-openapi.yml
+  - openapi/iugu-log-de-gatilhos-openapi.yml
+  - openapi/iugu-multi-split-openapi.yml
+  - openapi/iugu-planos-openapi.yml
+  - openapi/iugu-qrcode-est-tico-openapi.yml
+  - openapi/iugu-relat-rios-para-concilia-o-openapi.yml
+  - openapi/iugu-tokens-de-api-openapi.yml
+  - openapi/iugu-tokens-e-cobran-a-direta-openapi.yml
+  - openapi/iugu-transfer-ncia-banc-ria-openapi.yml
+  - openapi/iugu-transfer-ncia-de-valores-openapi.yml
+  - openapi/iugu-zero-auth-openapi.yml

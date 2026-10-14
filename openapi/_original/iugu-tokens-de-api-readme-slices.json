@@ -1,0 +1,411 @@
+[
+ {
+  "page": "https://dev.iugu.com/reference/criar-token-de-api.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "tokens-de-api",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/{account_id}/api_tokens": {
+     "post": {
+      "summary": "Criar API Token",
+      "description": "Cria um \"api_token\" em uma subconta.<div class=\"magic-block-callout type-warning\"><h3><i title=\"Warning\" class=\"fa fa-exclamation-circle\"></i>Atenção</h3><div class=\"callout-body\"><p>Essa API obriga a utilização do **<Glossary>master_token</Glossary>** da conta mestre na autenticação da chamada.</p></div></div>",
+      "operationId": "criar-token-de-api",
+      "parameters": [
+       {
+        "name": "account_id",
+        "in": "path",
+        "description": "ID da conta em que o token será criado",
+        "schema": {
+         "type": "string"
+        },
+        "required": true
+       },
+       {
+        "name": "Request-Time",
+        "in": "header",
+        "description": "Timestamp do momento que enviar a requisição de assinatura digital (RSA)",
+        "required": true,
+        "schema": {
+         "type": "string",
+         "format": "date-time"
+        }
+       },
+       {
+        "name": "Signature",
+        "in": "header",
+        "description": "Assinatura digital",
+        "required": true,
+        "schema": {
+         "type": "string",
+         "default": "signature="
+        }
+       },
+       {
+        "in": "header",
+        "name": "X-Signature-Token-Id",
+        "schema": {
+         "type": "string"
+        },
+        "description": "Indica explicitamente qual token/chave deve ser utilizado na assinatura da requisição, informando o ID do token desejado. Se omitido, mantém o comportamento atual."
+       }
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "type": "object",
+          "required": [
+           "api_type",
+           "description"
+          ],
+          "properties": {
+           "api_type": {
+            "type": "string",
+            "description": "Tipo de chave API. `LIVE` = Produção. `TEST` = Homologação/testes."
+           },
+           "description": {
+            "type": "string",
+            "description": "Descrição"
+           }
+          }
+         }
+        }
+       }
+      },
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n  \"id\": \"1234567890ABCDEF\",\n  \"token\": \"ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF123456\",\n  \"api_type\": \"LIVE\",\n  \"description\": \"Documentação\",\n  \"created_at\": \"2025-04-02T12:54:31-03:00\",\n  \"status\": \"active\"\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "id": {
+             "type": "string",
+             "example": "1234567890ABCDEF"
+            },
+            "token": {
+             "type": "string",
+             "example": "ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF123456"
+            },
+            "api_type": {
+             "type": "string",
+             "example": "LIVE"
+            },
+            "description": {
+             "type": "string",
+             "example": "Documentação"
+            },
+            "created_at": {
+             "type": "string",
+             "example": "2025-04-02T12:54:31-03:00"
+            },
+            "status": {
+             "type": "string",
+             "example": "active"
+            }
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "400",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n  \"errors\": [\n    \"Description não pode ficar em branco\",\n    \"Api type não pode ficar em branco\",\n    \"Api type tipo de api não suportado\"\n  ]\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "errors": {
+             "type": "array",
+             "items": {
+              "type": "string",
+              "example": "Description não pode ficar em branco"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ },
+ {
+  "page": "https://dev.iugu.com/reference/renovar-api-token-de-usuario.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "tokens-de-api",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/profile/renew_access_token": {
+     "post": {
+      "summary": "Renovar API Token de Usuário",
+      "description": "Gera um novo user_token de uma conta, nessa endpoint é obrigatório o uso do user_token da subconta.",
+      "operationId": "renovar-api-token-de-usuario",
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n  \"new_user_token\": \"1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF\"\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "new_user_token": {
+             "type": "string",
+             "example": "1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF"
+            }
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "400",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n  \"errors\": \"Unauthorized\"\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "errors": {
+             "type": "string",
+             "example": "Unauthorized"
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "deprecated": false
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ },
+ {
+  "page": "https://dev.iugu.com/reference/remover-token-de-api.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "tokens-de-api",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/{account_id}/api_tokens/{id}": {
+     "delete": {
+      "summary": "Remover API Token",
+      "description": "Remove um \"api_token\" em uma subconta.<div class=\"magic-block-callout type-warning\"><h3><i title=\"Warning\" class=\"fa fa-exclamation-circle\"></i>Atenção</h3><div class=\"callout-body\"><p>Essa API obriga a utilização do \"Master_token\" na autenticação da chamada.</p></div></div>",
+      "operationId": "remover-token-de-api",
+      "parameters": [
+       {
+        "name": "account_id",
+        "in": "path",
+        "description": "ID da conta em que o token será removido",
+        "schema": {
+         "type": "string"
+        },
+        "required": true
+       },
+       {
+        "name": "id",
+        "in": "path",
+        "description": "ID do Token",
+        "schema": {
+         "type": "string"
+        },
+        "required": true
+       },
+       {
+        "name": "Request-Time",
+        "in": "header",
+        "description": "Timestamp do momento que enviar a requisição de assinatura digital (RSA)",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "Signature",
+        "in": "header",
+        "description": "Assinatura digital",
+        "required": true,
+        "schema": {
+         "type": "string",
+         "default": "singature="
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n  \"id\": \"1234567890ABCDEF\",\n  \"token\": \"ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890\",\n  \"api_type\": \"LIVE\",\n  \"description\": \"Descrição\",\n  \"created_at\": \"2025-04-02T13:09:08-03:00\",\n  \"status\": \"active\"\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "id": {
+             "type": "string",
+             "example": "1234567890ABCDEF"
+            },
+            "token": {
+             "type": "string",
+             "example": "ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890"
+            },
+            "api_type": {
+             "type": "string",
+             "example": "LIVE"
+            },
+            "description": {
+             "type": "string",
+             "example": "Descrição"
+            },
+            "created_at": {
+             "type": "string",
+             "example": "2025-04-02T13:09:08-03:00"
+            },
+            "status": {
+             "type": "string",
+             "example": "active"
+            }
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "400",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n  \"errors\": \"Api token Not Found\"\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "errors": {
+             "type": "string",
+             "example": "Api token Not Found"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ }
+]

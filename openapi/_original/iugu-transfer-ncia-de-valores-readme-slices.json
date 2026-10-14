@@ -1,0 +1,752 @@
+[
+ {
+  "page": "https://dev.iugu.com/reference/transferir-valor.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "transferência-de-valores",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/transfers": {
+     "post": {
+      "summary": "Transferir Valor entre contas iugu",
+      "description": "Transferir valor de uma Conta iugu para outra Conta iugu. <br><br>Este endpoint está configurado para operar exclusivamente em ambiente de produção <b>(live_mode)</b>.",
+      "operationId": "transferir-valor",
+      "parameters": [
+       {
+        "name": "Request-Time",
+        "in": "header",
+        "description": "Timestamp do momento que enviar a requisição de assinatura digital (RSA)",
+        "required": true,
+        "schema": {
+         "type": "string",
+         "format": "date-time"
+        }
+       },
+       {
+        "name": "Signature",
+        "in": "header",
+        "description": "Assinatura digital validada",
+        "required": true,
+        "schema": {
+         "type": "string",
+         "default": "signature="
+        }
+       },
+       {
+        "in": "header",
+        "name": "X-Signature-Token-Id",
+        "schema": {
+         "type": "string"
+        },
+        "description": "Indica explicitamente qual token/chave deve ser utilizado na assinatura da requisição, informando o ID do token desejado. Se omitido, mantém o comportamento atual."
+       }
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "type": "object",
+          "properties": {
+           "receiver_id": {
+            "type": "string",
+            "description": "Account ID da conta que irá receber o valor. [Saiba mais](https://support.iugu.com/hc/pt-br/articles/201726767-ID-da-conta-e-tokens-de-API-de-teste-e-de-produ%C3%A7%C3%A3o)"
+           },
+           "amount_cents": {
+            "type": "integer",
+            "description": "Valor a transferir em centavos",
+            "format": "int32"
+           },
+           "custom_variables": {
+            "type": "array",
+            "description": "Variáveis Personalizadas",
+            "items": {
+             "properties": {
+              "name": {
+               "type": "string",
+               "description": "Nome da Variável"
+              },
+              "value": {
+               "type": "string",
+               "description": "Valor da Variável"
+              }
+             },
+             "type": "object"
+            }
+           },
+           "api_token": {
+            "type": "string",
+            "description": "Chave de API privada"
+           }
+          }
+         }
+        }
+       }
+      },
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n  \"id\": \"7839481C235A47C088987FE94360E9BD\",\n  \"created_at\": \"2024-04-29T10:16:34-03:00\",\n  \"amount_cents\": 100,\n  \"amount_localized\": \"R$ 1,00\",\n  \"updated_at\": \"2024-04-29T10:16:34-03:00\",\n  \"receiver\": {\n    \"id\": \"0D16C52DD91F413BACFA24FD6868B18A\",\n    \"name\": \"Nome da Conta Destino\"\n  },\n  \"sender\": {\n    \"id\": \"27016E1AD888499A98994E781B6C3762\",\n    \"name\": \"Nome da Conta Pagadora \"\n  },\n  \"custom_variables\": []\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "id": {
+             "type": "string",
+             "example": "7839481C235A47C088987FE94360E9BD"
+            },
+            "created_at": {
+             "type": "string",
+             "example": "2024-04-29T10:16:34-03:00"
+            },
+            "amount_cents": {
+             "type": "integer",
+             "example": 100,
+             "default": 0
+            },
+            "amount_localized": {
+             "type": "string",
+             "example": "R$ 1,00"
+            },
+            "updated_at": {
+             "type": "string",
+             "example": "2024-04-29T10:16:34-03:00"
+            },
+            "receiver": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "string",
+               "example": "0D16C52DD91F413BACFA24FD6868B18A"
+              },
+              "name": {
+               "type": "string",
+               "example": "Nome da Conta Destino"
+              }
+             }
+            },
+            "sender": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "string",
+               "example": "27016E1AD888499A98994E781B6C3762"
+              },
+              "name": {
+               "type": "string",
+               "example": "Nome da Conta Pagadora "
+              }
+             }
+            },
+            "custom_variables": {
+             "type": "array",
+             "items": {
+              "type": "object",
+              "properties": {}
+             }
+            }
+           }
+          }
+         }
+        }
+       },
+       "422": {
+        "description": "422",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Empty params": {
+            "value": "{\n  \"message\": {\n    \"receiver_account_id\": [\n      \"não pode ficar em branco\"\n    ],\n    \"amount_cents\": [\n      \"não pode ficar em branco\",\n      \"não é um número\"\n    ]\n  }\n}"
+           },
+           "Insufficient funds": {
+            "value": "{\n  \"message\": {\n    \"amount_cents\": [\n      \"Saldo insuficiente\"\n    ]\n  }\n}"
+           },
+           "Receiver Not Found": {
+            "value": "{\n  \"message\": {\n    \"receiver_account\": [\n      \"não encontrado\"\n    ]\n  }\n}"
+           }
+          },
+          "schema": {
+           "oneOf": [
+            {
+             "title": "Empty params",
+             "type": "object",
+             "properties": {
+              "message": {
+               "type": "object",
+               "properties": {
+                "receiver_account_id": {
+                 "type": "array",
+                 "items": {
+                  "type": "string",
+                  "example": "não pode ficar em branco"
+                 }
+                },
+                "amount_cents": {
+                 "type": "array",
+                 "items": {
+                  "type": "string",
+                  "example": "não pode ficar em branco"
+                 }
+                }
+               }
+              }
+             }
+            },
+            {
+             "title": "Insufficient funds",
+             "type": "object",
+             "properties": {
+              "message": {
+               "type": "object",
+               "properties": {
+                "amount_cents": {
+                 "type": "array",
+                 "items": {
+                  "type": "string",
+                  "example": "Saldo insuficiente"
+                 }
+                }
+               }
+              }
+             }
+            },
+            {
+             "title": "Receiver Not Found",
+             "type": "object",
+             "properties": {
+              "message": {
+               "type": "object",
+               "properties": {
+                "receiver_account": {
+                 "type": "array",
+                 "items": {
+                  "type": "string",
+                  "example": "não encontrado"
+                 }
+                }
+               }
+              }
+             }
+            }
+           ]
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ },
+ {
+  "page": "https://dev.iugu.com/reference/listar-transferencias.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "transferência-de-valores",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/transfers": {
+     "get": {
+      "summary": "Listar Transferências",
+      "description": "Retorna uma lista com as transferências efetuadas pela conta. Por padrão, retorna no máximo 100 registros.",
+      "operationId": "listar-transferencias",
+      "parameters": [
+       {
+        "name": "custom_variables_name",
+        "in": "query",
+        "description": "Filtra as transferências bancárias pelo nome da variável customizada",
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "custom_variables_value",
+        "in": "query",
+        "description": "Filtra as transferências bancárias pelo valor da variável customizada",
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "limit",
+        "in": "query",
+        "description": "Limita em até 100 o número de registros listados, usado para paginação.",
+        "schema": {
+         "type": "integer",
+         "format": "int32",
+         "default": 100
+        }
+       },
+       {
+        "name": "start",
+        "in": "query",
+        "description": "Usado para paginação. Define o número de registros que serão \"pulados\" na busca pelas transferências.",
+        "schema": {
+         "type": "integer",
+         "format": "int32",
+         "default": 0
+        }
+       },
+       {
+        "name": "created_at_from",
+        "in": "query",
+        "description": "Data e hora a partir das quais os saques foram atualizados (updated_at). Por padrão: 1 dia atrás. Formato: 2018-05-01T14:30:00-03:00.",
+        "schema": {
+         "type": "string",
+         "format": "date"
+        }
+       },
+       {
+        "name": "created_at_to",
+        "in": "query",
+        "description": "Data e hora até as quais os saques foram atualizadas (updated_at). Por padrão: data e hora presentes. Formato: 2018-05-01T14:30:00-03:00.",
+        "schema": {
+         "type": "string",
+         "format": "date"
+        }
+       },
+       {
+        "name": "transfer_type",
+        "in": "query",
+        "description": "Tipo de transaferência. Utilizado somente para \"Transferências\". Por padrão, todos os tipos de transferências considerados: account_requested, internal_transfer, mirror ou debit_transfer.",
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n    \"sent\": [\n    {\n      \"id\": \"1234565F6F06412345ED425581234567\",\n      \"created_at\": \"2013-11-19T11:24:29-02:00\",\n      \"amount_cents\": \"1000\",\n      \"amount_localized\": \"R$ 10,00\",\n      \"receiver\": {\n        \"id\": \"77C2565F6F064A26ABED4255894224F0\",\n        \"name\": \"Nome da Conta\"\n      }\n    }\n  ],\n  \"received\": [\n    {\n      \"id\": \"1234565F6F06132345ED425581234567\",\n      \"created_at\": \"2013-12-19T11:24:29-02:00\",\n      \"amount_cents\": \"2000\",\n      \"amount_localized\": \"R$ 20,00\",\n      \"sender\": {\n        \"id\": \"77C2565F6F0611111BED4255894224F0\",\n        \"name\": \"Conta Teste\"\n      }\n    }\n  ]\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "sent": {
+             "type": "array",
+             "items": {
+              "type": "object",
+              "properties": {
+               "id": {
+                "type": "string",
+                "example": "1234565F6F06412345ED425581234567"
+               },
+               "created_at": {
+                "type": "string",
+                "example": "2013-11-19T11:24:29-02:00"
+               },
+               "amount_cents": {
+                "type": "string",
+                "example": "1000"
+               },
+               "amount_localized": {
+                "type": "string",
+                "example": "R$ 10,00"
+               },
+               "receiver": {
+                "type": "object",
+                "properties": {
+                 "id": {
+                  "type": "string",
+                  "example": "77C2565F6F064A26ABED4255894224F0"
+                 },
+                 "name": {
+                  "type": "string",
+                  "example": "Nome da Conta"
+                 }
+                }
+               }
+              }
+             }
+            },
+            "received": {
+             "type": "array",
+             "items": {
+              "type": "object",
+              "properties": {
+               "id": {
+                "type": "string",
+                "example": "1234565F6F06132345ED425581234567"
+               },
+               "created_at": {
+                "type": "string",
+                "example": "2013-12-19T11:24:29-02:00"
+               },
+               "amount_cents": {
+                "type": "string",
+                "example": "2000"
+               },
+               "amount_localized": {
+                "type": "string",
+                "example": "R$ 20,00"
+               },
+               "sender": {
+                "type": "object",
+                "properties": {
+                 "id": {
+                  "type": "string",
+                  "example": "77C2565F6F0611111BED4255894224F0"
+                 },
+                 "name": {
+                  "type": "string",
+                  "example": "Conta Teste"
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "400",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {}
+          }
+         }
+        }
+       }
+      },
+      "deprecated": false
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ },
+ {
+  "page": "https://dev.iugu.com/reference/cancelar-pix-agendado.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "transferência-de-valores",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/transfer_requests/{id}/scheduled_cancel": {
+     "patch": {
+      "summary": "Cancelar Pix Agendado",
+      "description": "Utilize o `live_api_token`<br><br>Cancela um PIX previamente agendado. **Importante:** O status da transferência deve ser `scheduled`.",
+      "operationId": "cancelar-pix-agendado",
+      "parameters": [
+       {
+        "name": "id",
+        "in": "path",
+        "description": "ID da Transferência. Informada no retorno do endpoint [Transferência para Terceiros](https://dev.iugu.com/reference/transfer%C3%AAncia-para-terceiros-1) — `/v1/transfer_requests` na propriedade `transfer_request_id`.",
+        "schema": {
+         "type": "string"
+        },
+        "required": true
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n    \"transfer_request_id\": \"E2483B68CA624DC98A88AFC7D1565213\",\n    \"created_at\": \"2025-02-11T11:28:08-03:00\",\n    \"amount_cents\": 10,\n    \"transfer_type\": \"pix\",\n    \"end_to_end_id\": \"E151119752025021114280e7d38e1745\",\n    \"external_reference\": null,\n    \"receipt_url\": \"https://comprovantes.iugu.test/e2483b68-ca62-4dc9-8a88-afc7d1565213-d52c04\",\n    \"status\": \"cancelled\"\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "transfer_request_id": {
+             "type": "string",
+             "example": "E2483B68CA624DC98A88AFC7D1565213"
+            },
+            "created_at": {
+             "type": "string",
+             "example": "2025-02-11T11:28:08-03:00"
+            },
+            "amount_cents": {
+             "type": "integer",
+             "example": 10,
+             "default": 0
+            },
+            "transfer_type": {
+             "type": "string",
+             "example": "pix"
+            },
+            "end_to_end_id": {
+             "type": "string",
+             "example": "E151119752025021114280e7d38e1745"
+            },
+            "external_reference": {},
+            "receipt_url": {
+             "type": "string",
+             "example": "https://comprovantes.iugu.test/e2483b68-ca62-4dc9-8a88-afc7d1565213-d52c04"
+            },
+            "status": {
+             "type": "string",
+             "example": "cancelled"
+            }
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "400",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n    \"errors\": \"Transfer status must be scheduled.\"\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "errors": {
+             "type": "string",
+             "example": "Transfer status must be scheduled."
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ },
+ {
+  "page": "https://dev.iugu.com/reference/buscar-transferencia.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "transferência-de-valores",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/transfers/{id}": {
+     "get": {
+      "summary": "Buscar Transferência",
+      "description": "Retorna as informações de uma transferência de valores.",
+      "operationId": "buscar-transferencia",
+      "parameters": [
+       {
+        "name": "id",
+        "in": "path",
+        "description": "ID da transferência",
+        "schema": {
+         "type": "string"
+        },
+        "required": true
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n    \"id\": \"1234565F6F06412345ED425581234567\",\n    \"created_at\": \"2013-11-19T11:24:29-02:00\",\n    \"amount_cents\": \"1000\",\n    \"amount_localized\": \"R$ 10,00\",\n    \"receiver\": {\n      \"id\": \"77C2565F6F064A26ABED4255894224F0\",\n      \"name\": \"Nome da Conta\" \n    },\n    \"custom_variables\": [{\n        \"name\": \"nome_da_variavel\",\n        \"value\": \"valor_da_variavel\"\n    }]\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "id": {
+             "type": "string",
+             "example": "1234565F6F06412345ED425581234567"
+            },
+            "created_at": {
+             "type": "string",
+             "example": "2013-11-19T11:24:29-02:00"
+            },
+            "amount_cents": {
+             "type": "string",
+             "example": "1000"
+            },
+            "amount_localized": {
+             "type": "string",
+             "example": "R$ 10,00"
+            },
+            "receiver": {
+             "type": "object",
+             "properties": {
+              "id": {
+               "type": "string",
+               "example": "77C2565F6F064A26ABED4255894224F0"
+              },
+              "name": {
+               "type": "string",
+               "example": "Nome da Conta"
+              }
+             }
+            },
+            "custom_variables": {
+             "type": "array",
+             "items": {
+              "type": "object",
+              "properties": {
+               "name": {
+                "type": "string",
+                "example": "nome_da_variavel"
+               },
+               "value": {
+                "type": "string",
+                "example": "valor_da_variavel"
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "400",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {}
+          }
+         }
+        }
+       }
+      },
+      "deprecated": false
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ }
+]

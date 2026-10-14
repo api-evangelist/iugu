@@ -1,0 +1,153 @@
+[
+ {
+  "page": "https://dev.iugu.com/reference/getting-started-with-your-api.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "log-de-gatilhos",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/web_hook_logs/{invoice_id}": {
+     "get": {
+      "summary": "Listar Logs",
+      "description": "Caso utilize o **gatilho na conta mestre**, enviar api_token da conta mestre.\nSe o **gatilho estiver na subconta**, enviar o api_token da subconta.",
+      "operationId": "getting-started-with-your-api",
+      "parameters": [
+       {
+        "name": "invoice_id",
+        "in": "path",
+        "description": "ID da  fatura",
+        "schema": {
+         "type": "string"
+        },
+        "required": true
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "[\n  {\n    \"id\": \"87ad0321-da96-44f0-b07e-3db1683be18l\",\n    \"web_hook_id\": \"QND6TZC2KXT5MN9I9IR44R3N3J94JBR5\",\n    \"data\": {\n      \"event\": \"invoice.created\",\n      \"data[id]\": \"LHB49MZZU4MW5KQ14FANL7T96CE5O2E6\",\n      \"data[status]\": \"pending\",\n      \"data[account_id]\": \"LG7R5Y769EJK6XJT9LZS0KLZL4NAQ81L\",\n      \"data[async_charged]\": \"\",\n      \"data[source]\": \"api\",\n      \"data[order_id]\": \"GH1O585QN2YSZRF6WXZMMPR3NLGW1SQ8\"\n    },\n    \"status\": \"success\",\n    \"error\": \"200\",\n    \"loggable_id\": \"LHB49MZZU4MW5KQ14FANL7T96CE5O2E6\",\n    \"loggable_type\": \"Invoice\"\n  }\n]"
+           }
+          },
+          "schema": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "id": {
+              "type": "string",
+              "example": "87ad0321-da96-44f0-b07e-3db1683be18l"
+             },
+             "web_hook_id": {
+              "type": "string",
+              "example": "QND6TZC2KXT5MN9I9IR44R3N3J94JBR5"
+             },
+             "data": {
+              "type": "object",
+              "properties": {
+               "event": {
+                "type": "string",
+                "example": "invoice.created"
+               },
+               "data[id]": {
+                "type": "string",
+                "example": "LHB49MZZU4MW5KQ14FANL7T96CE5O2E6"
+               },
+               "data[status]": {
+                "type": "string",
+                "example": "pending"
+               },
+               "data[account_id]": {
+                "type": "string",
+                "example": "LG7R5Y769EJK6XJT9LZS0KLZL4NAQ81L"
+               },
+               "data[async_charged]": {
+                "type": "string",
+                "example": ""
+               },
+               "data[source]": {
+                "type": "string",
+                "example": "api"
+               },
+               "data[order_id]": {
+                "type": "string",
+                "example": "GH1O585QN2YSZRF6WXZMMPR3NLGW1SQ8"
+               }
+              }
+             },
+             "status": {
+              "type": "string",
+              "example": "success"
+             },
+             "error": {
+              "type": "string",
+              "example": "200"
+             },
+             "loggable_id": {
+              "type": "string",
+              "example": "LHB49MZZU4MW5KQ14FANL7T96CE5O2E6"
+             },
+             "loggable_type": {
+              "type": "string",
+              "example": "Invoice"
+             }
+            }
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "400",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {}
+          }
+         }
+        }
+       }
+      },
+      "deprecated": false
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ }
+]

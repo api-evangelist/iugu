@@ -1,0 +1,722 @@
+[
+ {
+  "page": "https://dev.iugu.com/reference/listar-recebiveis.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "antecipação-de-recebíveis",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/financial_transaction_requests": {
+     "get": {
+      "summary": "Listar Recebíveis",
+      "description": "Lista Recebíveis de uma conta",
+      "operationId": "listar-recebiveis",
+      "parameters": [
+       {
+        "name": "limit",
+        "in": "query",
+        "description": "Quantidade de recebíveis retornadas (recomendamos usar no máximo limit=100)",
+        "schema": {
+         "type": "integer",
+         "format": "int32"
+        }
+       },
+       {
+        "name": "start",
+        "in": "query",
+        "description": "Quantos registros pular do início da pesquisa, usado para paginação (verificar modo de uso em [Paginação](https://dev.iugu.com/reference/pagina%C3%A7%C3%A3o))",
+        "schema": {
+         "type": "integer",
+         "format": "int32"
+        }
+       },
+       {
+        "name": "status_filter",
+        "in": "query",
+        "description": "Lista recebíveis filtrando por status (`pending`, `done` ou `canceled`)",
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "since[year]",
+        "in": "query",
+        "description": "Filtrar registros a partir de determinado ano",
+        "schema": {
+         "type": "integer",
+         "format": "int32"
+        }
+       },
+       {
+        "name": "since[month]",
+        "in": "query",
+        "description": "Filtrar registros a partir de determinado mês",
+        "schema": {
+         "type": "integer",
+         "format": "int32"
+        }
+       },
+       {
+        "name": "since[day]",
+        "in": "query",
+        "description": "Filtrar registros a partir de determinado dia",
+        "schema": {
+         "type": "integer",
+         "format": "int32"
+        }
+       },
+       {
+        "name": "to[year]",
+        "in": "query",
+        "description": "Filtrar registros até determinado ano",
+        "schema": {
+         "type": "integer",
+         "format": "int32"
+        }
+       },
+       {
+        "name": "to[month]",
+        "in": "query",
+        "description": "Filtrar registros até determinado mês",
+        "schema": {
+         "type": "integer",
+         "format": "int32"
+        }
+       },
+       {
+        "name": "to[day]",
+        "in": "query",
+        "description": "Filtrar registros até determinado dia",
+        "schema": {
+         "type": "integer",
+         "format": "int32"
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n  \"items\": [\n    {\n      \"id\": 164913709,\n      \"description\": \"Fatura 3D6620BF8352449CB0F2BDB3ADC368B1 Parcela: Unica\",\n      \"scheduled_date\": \"2025-05-28\",\n      \"transaction_code\": \"MCC\",\n      \"installment\": 1,\n      \"status\": \"pending\",\n      \"invoice_id\": \"3D6620BF8352449CB0F2BDB3ADC368B1\",\n      \"customer_ref\": \"email@iugu.com\",\n      \"order_id\": null,\n      \"total\": \"R$ 5,00\",\n      \"taxes\": \"R$ 0,65\",\n      \"client_share\": \"R$ 4,35\",\n      \"commission\": \"R$ 0,00\",\n      \"advance_fee\": \"R$ 0,07\",\n      \"estimated_advance_fee\": {\n        \"fractional\": \"7.0\",\n        \"currency\": {\n          \"id\": \"brl\",\n          \"alternate_symbols\": null,\n          \"decimal_mark\": \",\",\n          \"disambiguate_symbol\": null,\n          \"html_entity\": \"R$\",\n          \"iso_code\": \"BRL\",\n          \"iso_numeric\": \"986\",\n          \"name\": \"Brazilian Real\",\n          \"priority\": 100,\n          \"smallest_denomination\": 5,\n          \"subunit\": \"Centavo\",\n          \"subunit_to_unit\": 100,\n          \"symbol\": \"R$\",\n          \"symbol_first\": true,\n          \"thousands_separator\": \".\",\n          \"format\": null\n        },\n        \"bank\": {\n          \"store\": {\n            \"rates\": {},\n            \"options\": {},\n            \"guard\": {\n              \"mon_owner\": null,\n              \"mon_count\": 0,\n              \"mon_mutex\": {}\n            }\n          },\n          \"rounding_method\": null\n        }\n      },\n      \"total_cents\": 500,\n      \"taxes_cents\": 65,\n      \"client_share_cents\": 435,\n      \"commission_cents\": 0,\n      \"advance_fee_cents\": null,\n      \"number_of_installments\": 1,\n      \"created_at\": \"2025-04-28T16:04:22-03:00\",\n      \"updated_at\": \"2025-04-28T16:04:22-03:00\",\n      \"executed_date\": null,\n      \"advanceable\": true\n    }\n  ],\n  \"totalItems\": 1\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "items": {
+             "type": "array",
+             "items": {
+              "type": "object",
+              "properties": {
+               "id": {
+                "type": "integer",
+                "example": 164913709,
+                "default": 0
+               },
+               "description": {
+                "type": "string",
+                "example": "Fatura 3D6620BF8352449CB0F2BDB3ADC368B1 Parcela: Unica"
+               },
+               "scheduled_date": {
+                "type": "string",
+                "example": "2025-05-28"
+               },
+               "transaction_code": {
+                "type": "string",
+                "example": "MCC"
+               },
+               "installment": {
+                "type": "integer",
+                "example": 1,
+                "default": 0
+               },
+               "status": {
+                "type": "string",
+                "example": "pending"
+               },
+               "invoice_id": {
+                "type": "string",
+                "example": "3D6620BF8352449CB0F2BDB3ADC368B1"
+               },
+               "customer_ref": {
+                "type": "string",
+                "example": "email@iugu.com"
+               },
+               "order_id": {},
+               "total": {
+                "type": "string",
+                "example": "R$ 5,00"
+               },
+               "taxes": {
+                "type": "string",
+                "example": "R$ 0,65"
+               },
+               "client_share": {
+                "type": "string",
+                "example": "R$ 4,35"
+               },
+               "commission": {
+                "type": "string",
+                "example": "R$ 0,00"
+               },
+               "advance_fee": {
+                "type": "string",
+                "example": "R$ 0,07"
+               },
+               "estimated_advance_fee": {
+                "type": "object",
+                "properties": {
+                 "fractional": {
+                  "type": "string",
+                  "example": "7.0"
+                 },
+                 "currency": {
+                  "type": "object",
+                  "properties": {
+                   "id": {
+                    "type": "string",
+                    "example": "brl"
+                   },
+                   "alternate_symbols": {},
+                   "decimal_mark": {
+                    "type": "string",
+                    "example": ","
+                   },
+                   "disambiguate_symbol": {},
+                   "html_entity": {
+                    "type": "string",
+                    "example": "R$"
+                   },
+                   "iso_code": {
+                    "type": "string",
+                    "example": "BRL"
+                   },
+                   "iso_numeric": {
+                    "type": "string",
+                    "example": "986"
+                   },
+                   "name": {
+                    "type": "string",
+                    "example": "Brazilian Real"
+                   },
+                   "priority": {
+                    "type": "integer",
+                    "example": 100,
+                    "default": 0
+                   },
+                   "smallest_denomination": {
+                    "type": "integer",
+                    "example": 5,
+                    "default": 0
+                   },
+                   "subunit": {
+                    "type": "string",
+                    "example": "Centavo"
+                   },
+                   "subunit_to_unit": {
+                    "type": "integer",
+                    "example": 100,
+                    "default": 0
+                   },
+                   "symbol": {
+                    "type": "string",
+                    "example": "R$"
+                   },
+                   "symbol_first": {
+                    "type": "boolean",
+                    "example": true,
+                    "default": true
+                   },
+                   "thousands_separator": {
+                    "type": "string",
+                    "example": "."
+                   },
+                   "format": {}
+                  }
+                 },
+                 "bank": {
+                  "type": "object",
+                  "properties": {
+                   "store": {
+                    "type": "object",
+                    "properties": {
+                     "rates": {
+                      "type": "object",
+                      "properties": {}
+                     },
+                     "options": {
+                      "type": "object",
+                      "properties": {}
+                     },
+                     "guard": {
+                      "type": "object",
+                      "properties": {
+                       "mon_owner": {},
+                       "mon_count": {
+                        "type": "integer",
+                        "example": 0,
+                        "default": 0
+                       },
+                       "mon_mutex": {
+                        "type": "object",
+                        "properties": {}
+                       }
+                      }
+                     }
+                    }
+                   },
+                   "rounding_method": {}
+                  }
+                 }
+                }
+               },
+               "total_cents": {
+                "type": "integer",
+                "example": 500,
+                "default": 0
+               },
+               "taxes_cents": {
+                "type": "integer",
+                "example": 65,
+                "default": 0
+               },
+               "client_share_cents": {
+                "type": "integer",
+                "example": 435,
+                "default": 0
+               },
+               "commission_cents": {
+                "type": "integer",
+                "example": 0,
+                "default": 0
+               },
+               "advance_fee_cents": {},
+               "number_of_installments": {
+                "type": "integer",
+                "example": 1,
+                "default": 0
+               },
+               "created_at": {
+                "type": "string",
+                "example": "2025-04-28T16:04:22-03:00"
+               },
+               "updated_at": {
+                "type": "string",
+                "example": "2025-04-28T16:04:22-03:00"
+               },
+               "executed_date": {},
+               "advanceable": {
+                "type": "boolean",
+                "example": true,
+                "default": true
+               }
+              }
+             }
+            },
+            "totalItems": {
+             "type": "integer",
+             "example": 1,
+             "default": 0
+            }
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "400",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {}
+          }
+         }
+        }
+       }
+      },
+      "deprecated": false
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ },
+ {
+  "page": "https://dev.iugu.com/reference/listar-unidade-de-recebiveis.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "antecipação-de-recebíveis",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/receivable_units": {
+     "get": {
+      "description": "Retorna as unidades a receber agregadas de uma conta, agrupadas por data de liquidação e código do arranjo de pagamento.",
+      "responses": {
+       "200": {
+        "description": "",
+        "content": {
+         "application/json": {
+          "examples": {
+           "OK": {
+            "summary": "OK",
+            "value": {
+             "items": [
+              {
+               "data_liquidacao": "2026-05-08",
+               "codigo_arranjo_pagamento": "MCC",
+               "valor_total": "0.48",
+               "valor_disponivel": "0.48",
+               "valor_antecipado": "0.0",
+               "valor_cedido": "0.0"
+              }
+             ],
+             "totalItems": 1
+            }
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "content": {
+         "application/json": {
+          "schema": {
+           "type": "object",
+           "properties": {}
+          },
+          "examples": {
+           "Bad Request": {
+            "summary": "Bad Request",
+            "value": {
+             "errors": "Date range cannot exceed 90 days"
+            }
+           }
+          }
+         }
+        },
+        "description": "Bad Request"
+       },
+       "401": {
+        "content": {
+         "application/json": {
+          "schema": {
+           "type": "object",
+           "properties": {}
+          },
+          "examples": {
+           "Unauthorized": {
+            "summary": "Unauthorized",
+            "value": {
+             "errors": "Unauthorized"
+            }
+           }
+          }
+         }
+        },
+        "description": "Unauthorized"
+       }
+      },
+      "parameters": [
+       {
+        "in": "query",
+        "name": "start",
+        "schema": {
+         "type": "integer",
+         "format": "int32"
+        },
+        "description": "Quantos registros pular do início da pesquisa, usado para paginação."
+       },
+       {
+        "in": "query",
+        "name": "limit",
+        "schema": {
+         "type": "integer",
+         "format": "int32"
+        },
+        "description": "Limita o número de registros retornados em até 100, que é o padrão de retorno desta chamada. Também utilizado em <a href=\"https://dev.iugu.com/v1.0/reference#paginação\">paginação</a>."
+       },
+       {
+        "in": "query",
+        "name": "from_date",
+        "schema": {
+         "type": "string"
+        },
+        "description": "Data inicial do intervalo da consulta. Formato (AAAA-MM-DD).",
+        "required": false
+       },
+       {
+        "in": "query",
+        "name": "codigo_arranjo_pagamento",
+        "schema": {
+         "type": "string"
+        },
+        "description": "Exemplo: VCC (Visa), ECC (Elo), MCC (Mastercard), etc."
+       },
+       {
+        "in": "query",
+        "name": "to_date",
+        "schema": {
+         "type": "string"
+        },
+        "description": "Data final para o intervalo de consulta. Formato (AAAA-MM-DD). <br>**O intervalo máximo é de 90 dias.**"
+       }
+      ],
+      "operationId": "get_receivable-units",
+      "summary": "Listar Unidade de Recebíveis"
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ },
+ {
+  "page": "https://dev.iugu.com/reference/consultar-unidade-de-recebiveis.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "antecipação-de-recebíveis",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/receivable_units/details/{data_liquidacao}/{codigo_arranjo_pagamento}": {
+     "get": {
+      "description": "Fornece uma discriminação detalhada de uma unidade de recebíveis específica por data de liquidação e forma de pagamento.",
+      "responses": {
+       "200": {
+        "description": "",
+        "content": {
+         "application/json": {
+          "examples": {
+           "OK": {
+            "summary": "OK",
+            "value": {
+             "receivables": [
+              {
+               "invoice_id": "C4664CD4815048EEB51505E976F128D8",
+               "installment": "1/1",
+               "status": "pending",
+               "amount": "0.48",
+               "advanced": false
+              }
+             ],
+             "cessions": []
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "parameters": [
+       {
+        "in": "path",
+        "name": "data_liquidacao",
+        "schema": {
+         "type": "string"
+        },
+        "required": true,
+        "description": "Data de liquidação. Formato (AAAA-MM-DD)."
+       },
+       {
+        "in": "path",
+        "name": "codigo_arranjo_pagamento",
+        "schema": {
+         "type": "string"
+        },
+        "required": true,
+        "description": "Exemplo: VCC (Visa), ECC (Elo), MCC (Mastercard), etc."
+       }
+      ],
+      "operationId": "get_receivable-units-details-data-liquidacao-codigo-arranjo-pagamento",
+      "summary": "Consultar Unidade de Recebiveis"
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ },
+ {
+  "page": "https://dev.iugu.com/reference/antecipar-recebiveis.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "antecipação-de-recebíveis",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/advancement_request/simulation": {
+     "post": {
+      "summary": "Criar Simulação de Antecipação",
+      "description": "Simula a antecipação de um valor sugerido. Após a simulação ser concluída, a antecipação poderá ser efetuada ou não. Seja",
+      "operationId": "antecipar-recebiveis",
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "type": "object",
+          "required": [
+           "requested_advancement_cents"
+          ],
+          "properties": {
+           "requested_advancement_cents": {
+            "type": "integer",
+            "description": "Valor à ser simulado para a antecipação (em centavos)",
+            "format": "int32"
+           }
+          }
+         }
+        }
+       }
+      },
+      "responses": {
+       "202": {
+        "description": "202",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "Esta endpoint retorna apenas uma confirmação de que o pedido de simulação foi aceito. Para verificar o status da Simulação, utilize a endpoint \"Verificar Status da Simulação\" ou seja notificado via Webhook."
+           }
+          }
+         }
+        }
+       },
+       "404": {
+        "description": "404",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": " {\n   \"errors\": \"string\"\n }"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "errors": {
+             "type": "string",
+             "example": "string"
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "deprecated": false
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ }
+]

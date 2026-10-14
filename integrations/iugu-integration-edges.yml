@@ -1,8 +1,24 @@
-generated: '2026-10-13'
+generated: '2026-10-14'
 method: searched
+source:
+- https://zapier.com/apps/iugu/integrations
 checked:
+- https://composio.dev/toolkits/iugu
+- https://monid.ai/tools/iugu
+- https://n8n.io/integrations/iugu/
 - https://openid.net/developers/certified-openid-connect-implementations/
-marketplace_apps: []
+- https://zapier.com/apps/iugu/integrations
+summary: null
+marketplace_apps:
+- marketplace: zapier
+  channel: ipaas-listing
+  app: iugu
+  url: https://zapier.com/apps/iugu/integrations
+  external_url: http://iugu.com/
+  partner_tier: null
+  triggers: []
+  actions: []
+  searches: []
 edges:
 - partner_name: OpenID Foundation certification
   partner: null
@@ -28,3 +44,4 @@ edges:
     detected: '2026-10-13'
   detected_by: sweep-identity.py
   detected: '2026-10-13'
+templates: []

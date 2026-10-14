@@ -1,0 +1,1463 @@
+[
+ {
+  "page": "https://dev.iugu.com/reference/listar-api-tokens.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "tokens-e-cobrança-direta",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/{account_id}/api_tokens": {
+     "get": {
+      "summary": "Listar API Tokens",
+      "description": "Lista os \"api_tokens\" de uma conta. <br> <h3><i title=\"Warning\" class=\"fa fa-exclamation-circle\"></i>Atenção</h3><div class=\"callout-body\"><p>Essa API obriga a utilização do **<<glossary:master_token>>** da conta mestre na autenticação da chamada.</p></div></div>",
+      "operationId": "listar-api-tokens",
+      "parameters": [
+       {
+        "name": "Request-Time",
+        "in": "header",
+        "description": "Timestamp do momento que enviar a requisição de assinatura digital (RSA)",
+        "required": true,
+        "schema": {
+         "type": "string",
+         "format": "date-time"
+        }
+       },
+       {
+        "name": "Signature",
+        "in": "header",
+        "description": "Assinatura digital",
+        "required": true,
+        "schema": {
+         "type": "string",
+         "default": "signature="
+        }
+       },
+       {
+        "name": "account_id",
+        "in": "path",
+        "description": "ID da Conta que deseja consultar",
+        "schema": {
+         "type": "string"
+        },
+        "required": true
+       },
+       {
+        "in": "header",
+        "name": "X-Signature-Token-Id",
+        "schema": {
+         "type": "string"
+        },
+        "description": "Indica explicitamente qual token/chave deve ser utilizado na assinatura da requisição, informando o ID do token desejado. Se omitido, mantém o comportamento atual."
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "[\n  {\n    \"id\": \"3F8B2C71D04E4A9B8E6C15A7F9D20B43\",\n    \"token\": \"7C2A91********************\",\n    \"api_type\": \"LIVE\",\n    \"description\": \"integracao prod\",\n    \"created_at\": \"2024-03-18T14:22:07-03:00\",\n    \"status\": \"active\"\n  },\n  {\n    \"id\": \"8D65A2F0E91B47C3B2F4A6C8D0E13579\",\n    \"token\": \"5A9F6E********************\",\n    \"api_type\": \"TEST\",\n    \"description\": \"integracao test\",\n    \"created_at\": \"2024-03-18T14:22:07-03:00\",\n    \"status\": \"active\"\n  }"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "referrer_id": {
+             "type": "string",
+             "example": "27016E1AD888499A98994E781B6C3762"
+            },
+            "accounts": {
+             "type": "object",
+             "properties": {
+              "03F7E599890F4CC78EF1D2537948598C": {
+               "type": "object",
+               "properties": {
+                "live_token": {
+                 "type": "string",
+                 "example": "B2C614**********************************************************"
+                },
+                "live_token_status": {
+                 "type": "string",
+                 "example": "active"
+                },
+                "test_token": {
+                 "type": "string",
+                 "example": "CF0F19**********************************************************"
+                },
+                "test_token_status": {
+                 "type": "string",
+                 "example": "active"
+                },
+                "user_token": {
+                 "type": "string",
+                 "example": "BF0A58**********************************************************"
+                }
+               }
+              },
+              "0D16C52DD91F413BACFA24FD6868B18A": {
+               "type": "object",
+               "properties": {
+                "live_token": {
+                 "type": "string",
+                 "example": "E79E4F**********************************************************"
+                },
+                "live_token_status": {
+                 "type": "string",
+                 "example": "active"
+                },
+                "test_token": {
+                 "type": "string",
+                 "example": "8B68D9**********************************************************"
+                },
+                "test_token_status": {
+                 "type": "string",
+                 "example": "active"
+                },
+                "user_token": {
+                 "type": "string",
+                 "example": "0DE2B0**********************************************************"
+                }
+               }
+              },
+              "1591722D78CA4CB18F4D7C6B7B938520": {
+               "type": "object",
+               "properties": {
+                "live_token": {
+                 "type": "string",
+                 "example": "EC7BDB**********************************************************"
+                },
+                "live_token_status": {
+                 "type": "string",
+                 "example": "active"
+                },
+                "test_token": {
+                 "type": "string",
+                 "example": "FDCD94**********************************************************"
+                },
+                "test_token_status": {
+                 "type": "string",
+                 "example": "active"
+                },
+                "user_token": {
+                 "type": "string",
+                 "example": "724450**********************************************************"
+                }
+               }
+              },
+              "1B1379CE58004ED3AD1DCD6460A0FBE7": {
+               "type": "object",
+               "properties": {
+                "live_token": {
+                 "type": "string",
+                 "example": "1D106F**********************************************************"
+                },
+                "live_token_status": {
+                 "type": "string",
+                 "example": "active"
+                },
+                "test_token": {
+                 "type": "string",
+                 "example": "6D4E11**********************************************************"
+                },
+                "test_token_status": {
+                 "type": "string",
+                 "example": "active"
+                },
+                "user_token": {
+                 "type": "string",
+                 "example": "A36D5F**********************************************************"
+                }
+               }
+              },
+              "20D8B2E06AB94254B26DE8C31FFD3072": {
+               "type": "object",
+               "properties": {
+                "live_token": {
+                 "type": "string",
+                 "example": "FAF0C3**********************************************************"
+                },
+                "live_token_status": {
+                 "type": "string",
+                 "example": "active"
+                },
+                "test_token": {
+                 "type": "string",
+                 "example": "91C790**********************************************************"
+                },
+                "test_token_status": {
+                 "type": "string",
+                 "example": "active"
+                },
+                "user_token": {
+                 "type": "string",
+                 "example": "4A7270**********************************************************"
+                }
+               }
+              },
+              "3A605D267BBD4B41BC6CCF2CCA086C4A": {
+               "type": "object",
+               "properties": {
+                "live_token": {
+                 "type": "string",
+                 "example": "416686**********************************************************"
+                },
+                "live_token_status": {
+                 "type": "string",
+                 "example": "active"
+                },
+                "test_token": {
+                 "type": "string",
+                 "example": "550EED**********************************************************"
+                },
+                "test_token_status": {
+                 "type": "string",
+                 "example": "active"
+                },
+                "user_token": {
+                 "type": "string",
+                 "example": "DDA836**********************************************************"
+                }
+               }
+              },
+              "F55C5EEE3D1E4EA58BA6B7333F34243D": {
+               "type": "object",
+               "properties": {
+                "live_token": {
+                 "type": "string",
+                 "example": "285699**********************************************************"
+                },
+                "live_token_status": {
+                 "type": "string",
+                 "example": "active"
+                },
+                "test_token": {
+                 "type": "string",
+                 "example": "FE5764**********************************************************"
+                },
+                "test_token_status": {
+                 "type": "string",
+                 "example": "active"
+                },
+                "user_token": {
+                 "type": "string",
+                 "example": "AA893F**********************************************************"
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "400",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {}
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ },
+ {
+  "page": "https://dev.iugu.com/reference/reemissao-de-fatura-expirada.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "tokens-e-cobrança-direta",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/invoices/{id}/duplicate": {
+     "post": {
+      "summary": "Reemitir Fatura Expirada",
+      "description": "Reemissão de faturas com situação EXPIRADA e de Cobrança a Vista.",
+      "operationId": "reemissao-de-fatura-expirada",
+      "parameters": [
+       {
+        "name": "id",
+        "in": "path",
+        "description": "ID da fatura Expirada",
+        "schema": {
+         "type": "string"
+        },
+        "required": true
+       }
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "type": "object",
+          "properties": {
+           "due_date": {
+            "type": "string",
+            "description": "Nova data de vencimento no formato AAAA-MM-DD. Caso não seja informado a data do vencimento, ir assumir o vencimento em 5 dias",
+            "format": "date"
+           },
+           "items": {
+            "type": "array",
+            "description": "Adicione, altere ou remova itens da nova fatura. Para remover, envie \"id\" do subitem + \"_destroy=true\"",
+            "items": {
+             "properties": {
+              "description": {
+               "type": "string",
+               "description": "Descrição do Item"
+              },
+              "quantity": {
+               "type": "integer",
+               "description": "Quantidade",
+               "format": "int32"
+              },
+              "price_cents": {
+               "type": "integer",
+               "description": "Preço em Centavos. Valores negativos entram como desconto no total",
+               "format": "int32"
+              },
+              "id": {
+               "type": "string",
+               "description": "ID do item, utilizado só em casos de edição ou remoção."
+              },
+              "_destroy": {
+               "type": "boolean",
+               "description": "Caso `true`, remove o item de uma fatura. ID do item é obrigatório."
+              }
+             },
+             "type": "object"
+            }
+           },
+           "ignore_due_email": {
+            "type": "boolean",
+            "description": "Ignora o envio do e-mail de cobrança da nova fatura."
+           },
+           "ignore_canceled_email": {
+            "type": "boolean",
+            "description": "Ignora o envio do e-mail de cancelamento da fatura atual."
+           },
+           "current_fines_option": {
+            "type": "boolean",
+            "description": "Caso `true`, aplica multas da fatura original à segunda via."
+           },
+           "keep_early_payment_discount": {
+            "type": "boolean",
+            "description": "Caso `true`, copia os descontos de pagamento antecipado da fatura original para a 2ª via."
+           },
+           "payable_with": {
+            "type": "string",
+            "description": "Método de pagamento que será disponibilizado para esta Fatura (\"all\", \"credit_card\", \"bank_slip\" ou \"pix\").  Caso não seja enviado será assumido os métodos da fatura expirada."
+           }
+          }
+         }
+        }
+       }
+      },
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n  \"id\": \"ACD03D71D16249BAB49FC89EB6F8516F\",\n  \"due_date\": \"2025-04-07\",\n  \"currency\": \"BRL\",\n  \"discount_cents\": null,\n  \"email\": \"email@iugu.com\",\n  \"items_total_cents\": 500,\n  \"notification_url\": null,\n  \"return_url\": null,\n  \"status\": \"pending\",\n  \"tax_cents\": null,\n  \"total_cents\": 500,\n  \"total_paid_cents\": 0,\n  \"taxes_paid_cents\": null,\n  \"paid_at\": null,\n  \"paid_cents\": null,\n  \"cc_emails\": null,\n  \"financial_return_date\": null,\n  \"payable_with\": \"credit_card\",\n  \"overpaid_cents\": null,\n  \"ignore_due_email\": null,\n  \"ignore_canceled_email\": null,\n  \"advance_fee_cents\": null,\n  \"commission_cents\": null,\n  \"early_payment_discount\": false,\n  \"order_id\": null,\n  \"updated_at\": \"2025-04-02T13:27:43-03:00\",\n  \"credit_card_brand\": null,\n  \"credit_card_bin\": null,\n  \"credit_card_last_4\": null,\n  \"credit_card_captured_at\": null,\n  \"credit_card_tid\": null,\n  \"external_reference\": null,\n  \"max_installments_value\": null,\n  \"payer_name\": null,\n  \"payer_email\": null,\n  \"payer_cpf_cnpj\": null,\n  \"payer_phone\": null,\n  \"payer_phone_prefix\": null,\n  \"payer_address_zip_code\": null,\n  \"payer_address_street\": null,\n  \"payer_address_district\": null,\n  \"payer_address_city\": null,\n  \"payer_address_state\": null,\n  \"payer_address_number\": null,\n  \"payer_address_complement\": null,\n  \"payer_address_country\": null,\n  \"late_payment_fine\": 0,\n  \"late_payment_fine_cents\": null,\n  \"split_id\": null,\n  \"external_payment_id\": null,\n  \"external_payment_description\": null,\n  \"payment_booklet_id\": null,\n  \"subscription_id\": null,\n  \"variables\": [],\n  \"custom_variables\": [],\n  \"logs\": [\n    {\n      \"id\": \"95885CA1558F442ABF54BC7D3619FD43\",\n      \"description\": \"Email de Lembrete enviado!\",\n      \"notes\": \"Lembrete enviado com sucesso para: email@iugu.com\",\n      \"created_at\": \"02/04, 13:27\"\n    },\n    {\n      \"id\": \"54AC37A495864C218A1EB2CD602E1564\",\n      \"description\": \"Segunda via gerada\",\n      \"notes\": \"Segunda via gerada da FATURA # C5C083B537324A4C8A325FC7B67DFC13\",\n      \"created_at\": \"02/04, 13:27\"\n    },\n    {\n      \"id\": \"83D69B2F680544C5B8E9FAC9278D35A3\",\n      \"description\": \"Fatura criada com sucesso!\",\n      \"notes\": \"Fatura criada!\",\n      \"created_at\": \"02/04, 13:27\"\n    }\n  ],\n  \"credit_card_transaction\": null,\n  \"account_id\": \"44C5DC6376804D1FA792CBCA382105C1\",\n  \"bank_account_branch\": \"0001\",\n  \"bank_account_number\": \"2739435-0\",\n  \"account_name\": \"Nome da Conta\",\n  \"secure_id\": \"acd03d71-d162-49ba-b49f-c89eb6f8516f-5fa4\",\n  \"secure_url\": \"https://checkout.iugu.com/invoices/acd03d71-d162-49ba-b49f-c89eb6f8516f-5fa4\",\n  \"customer_id\": null,\n  \"customer_ref\": null,\n  \"customer_name\": null,\n  \"user_id\": null,\n  \"total\": \"R$ 5,00\",\n  \"taxes_paid\": \"R$ 0,00\",\n  \"total_paid\": \"R$ 0,00\",\n  \"total_overpaid\": \"R$ 0,00\",\n  \"total_refunded\": \"R$ 0,00\",\n  \"fine_cents\": 0,\n  \"commission\": \"R$ 0,00\",\n  \"fines_on_occurrence_day\": \"R$ 0,00\",\n  \"total_on_occurrence_day\": \"R$ 0,00\",\n  \"fines_on_occurrence_day_cents\": 0,\n  \"total_on_occurrence_day_cents\": 0,\n  \"refunded_cents\": 0,\n  \"remaining_captured_cents\": 0,\n  \"advance_fee\": null,\n  \"estimated_advance_fee\": null,\n  \"paid\": \"R$ 0,00\",\n  \"original_payment_id\": null,\n  \"double_payment_id\": null,\n  \"per_day_interest\": false,\n  \"per_day_interest_value\": null,\n  \"per_day_interest_cents\": 0,\n  \"interest\": null,\n  \"discount\": null,\n  \"duplicated_invoice_id\": null,\n  \"bank_slip_extra_due\": 10,\n  \"created_at\": \"02/04, 13:27\",\n  \"created_at_iso\": \"2025-04-02T13:27:43-03:00\",\n  \"authorized_at\": null,\n  \"authorized_at_iso\": null,\n  \"expired_at\": null,\n  \"expired_at_iso\": null,\n  \"refunded_at\": null,\n  \"refunded_at_iso\": null,\n  \"canceled_at\": null,\n  \"canceled_at_iso\": null,\n  \"protested_at\": null,\n  \"protested_at_iso\": null,\n  \"chargeback_at\": null,\n  \"chargeback_at_iso\": null,\n  \"occurrence_date\": null,\n  \"refundable\": null,\n  \"installments\": null,\n  \"transaction_number\": null,\n  \"payment_method\": null,\n  \"financial_return_dates\": null,\n  \"bank_slip\": null,\n  \"pix\": {\n    \"qrcode\": null,\n    \"qrcode_text\": null,\n    \"status\": null,\n    \"payer_cpf_cnpj\": null,\n    \"payer_name\": null,\n    \"end_to_end_id\": null,\n    \"end_to_end_refund_id\": null,\n    \"account_number_last_digits\": null\n  },\n  \"items\": [\n    {\n      \"id\": \"14E870A66B4B46DA8947DB8661590009\",\n      \"description\": \"Desc\",\n      \"price_cents\": 500,\n      \"quantity\": 1,\n      \"created_at\": \"2025-04-02T13:27:43-03:00\",\n      \"updated_at\": \"2025-04-02T13:27:43-03:00\",\n      \"price\": \"R$ 5,00\"\n    }\n  ],\n  \"early_payment_discounts\": [],\n  \"split_rules\": null\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "id": {
+             "type": "string",
+             "example": "ACD03D71D16249BAB49FC89EB6F8516F"
+            },
+            "due_date": {
+             "type": "string",
+             "example": "2025-04-07"
+            },
+            "currency": {
+             "type": "string",
+             "example": "BRL"
+            },
+            "discount_cents": {},
+            "email": {
+             "type": "string",
+             "example": "email@iugu.com"
+            },
+            "items_total_cents": {
+             "type": "integer",
+             "example": 500,
+             "default": 0
+            },
+            "notification_url": {},
+            "return_url": {},
+            "status": {
+             "type": "string",
+             "example": "pending"
+            },
+            "tax_cents": {},
+            "total_cents": {
+             "type": "integer",
+             "example": 500,
+             "default": 0
+            },
+            "total_paid_cents": {
+             "type": "integer",
+             "example": 0,
+             "default": 0
+            },
+            "taxes_paid_cents": {},
+            "paid_at": {},
+            "paid_cents": {},
+            "cc_emails": {},
+            "financial_return_date": {},
+            "payable_with": {
+             "type": "string",
+             "example": "credit_card"
+            },
+            "overpaid_cents": {},
+            "ignore_due_email": {},
+            "ignore_canceled_email": {},
+            "advance_fee_cents": {},
+            "commission_cents": {},
+            "early_payment_discount": {
+             "type": "boolean",
+             "example": false,
+             "default": true
+            },
+            "order_id": {},
+            "updated_at": {
+             "type": "string",
+             "example": "2025-04-02T13:27:43-03:00"
+            },
+            "credit_card_brand": {},
+            "credit_card_bin": {},
+            "credit_card_last_4": {},
+            "credit_card_captured_at": {},
+            "credit_card_tid": {},
+            "external_reference": {},
+            "max_installments_value": {},
+            "payer_name": {},
+            "payer_email": {},
+            "payer_cpf_cnpj": {},
+            "payer_phone": {},
+            "payer_phone_prefix": {},
+            "payer_address_zip_code": {},
+            "payer_address_street": {},
+            "payer_address_district": {},
+            "payer_address_city": {},
+            "payer_address_state": {},
+            "payer_address_number": {},
+            "payer_address_complement": {},
+            "payer_address_country": {},
+            "late_payment_fine": {
+             "type": "integer",
+             "example": 0,
+             "default": 0
+            },
+            "late_payment_fine_cents": {},
+            "split_id": {},
+            "external_payment_id": {},
+            "external_payment_description": {},
+            "payment_booklet_id": {},
+            "subscription_id": {},
+            "variables": {
+             "type": "array",
+             "items": {
+              "type": "object",
+              "properties": {}
+             }
+            },
+            "custom_variables": {
+             "type": "array",
+             "items": {
+              "type": "object",
+              "properties": {}
+             }
+            },
+            "logs": {
+             "type": "array",
+             "items": {
+              "type": "object",
+              "properties": {
+               "id": {
+                "type": "string",
+                "example": "95885CA1558F442ABF54BC7D3619FD43"
+               },
+               "description": {
+                "type": "string",
+                "example": "Email de Lembrete enviado!"
+               },
+               "notes": {
+                "type": "string",
+                "example": "Lembrete enviado com sucesso para: email@iugu.com"
+               },
+               "created_at": {
+                "type": "string",
+                "example": "02/04, 13:27"
+               }
+              }
+             }
+            },
+            "credit_card_transaction": {},
+            "account_id": {
+             "type": "string",
+             "example": "44C5DC6376804D1FA792CBCA382105C1"
+            },
+            "bank_account_branch": {
+             "type": "string",
+             "example": "0001"
+            },
+            "bank_account_number": {
+             "type": "string",
+             "example": "2739435-0"
+            },
+            "account_name": {
+             "type": "string",
+             "example": "Nome da Conta"
+            },
+            "secure_id": {
+             "type": "string",
+             "example": "acd03d71-d162-49ba-b49f-c89eb6f8516f-5fa4"
+            },
+            "secure_url": {
+             "type": "string",
+             "example": "https://checkout.iugu.com/invoices/acd03d71-d162-49ba-b49f-c89eb6f8516f-5fa4"
+            },
+            "customer_id": {},
+            "customer_ref": {},
+            "customer_name": {},
+            "user_id": {},
+            "total": {
+             "type": "string",
+             "example": "R$ 5,00"
+            },
+            "taxes_paid": {
+             "type": "string",
+             "example": "R$ 0,00"
+            },
+            "total_paid": {
+             "type": "string",
+             "example": "R$ 0,00"
+            },
+            "total_overpaid": {
+             "type": "string",
+             "example": "R$ 0,00"
+            },
+            "total_refunded": {
+             "type": "string",
+             "example": "R$ 0,00"
+            },
+            "fine_cents": {
+             "type": "integer",
+             "example": 0,
+             "default": 0
+            },
+            "commission": {
+             "type": "string",
+             "example": "R$ 0,00"
+            },
+            "fines_on_occurrence_day": {
+             "type": "string",
+             "example": "R$ 0,00"
+            },
+            "total_on_occurrence_day": {
+             "type": "string",
+             "example": "R$ 0,00"
+            },
+            "fines_on_occurrence_day_cents": {
+             "type": "integer",
+             "example": 0,
+             "default": 0
+            },
+            "total_on_occurrence_day_cents": {
+             "type": "integer",
+             "example": 0,
+             "default": 0
+            },
+            "refunded_cents": {
+             "type": "integer",
+             "example": 0,
+             "default": 0
+            },
+            "remaining_captured_cents": {
+             "type": "integer",
+             "example": 0,
+             "default": 0
+            },
+            "advance_fee": {},
+            "estimated_advance_fee": {},
+            "paid": {
+             "type": "string",
+             "example": "R$ 0,00"
+            },
+            "original_payment_id": {},
+            "double_payment_id": {},
+            "per_day_interest": {
+             "type": "boolean",
+             "example": false,
+             "default": true
+            },
+            "per_day_interest_value": {},
+            "per_day_interest_cents": {
+             "type": "integer",
+             "example": 0,
+             "default": 0
+            },
+            "interest": {},
+            "discount": {},
+            "duplicated_invoice_id": {},
+            "bank_slip_extra_due": {
+             "type": "integer",
+             "example": 10,
+             "default": 0
+            },
+            "created_at": {
+             "type": "string",
+             "example": "02/04, 13:27"
+            },
+            "created_at_iso": {
+             "type": "string",
+             "example": "2025-04-02T13:27:43-03:00"
+            },
+            "authorized_at": {},
+            "authorized_at_iso": {},
+            "expired_at": {},
+            "expired_at_iso": {},
+            "refunded_at": {},
+            "refunded_at_iso": {},
+            "canceled_at": {},
+            "canceled_at_iso": {},
+            "protested_at": {},
+            "protested_at_iso": {},
+            "chargeback_at": {},
+            "chargeback_at_iso": {},
+            "occurrence_date": {},
+            "refundable": {},
+            "installments": {},
+            "transaction_number": {},
+            "payment_method": {},
+            "financial_return_dates": {},
+            "bank_slip": {},
+            "pix": {
+             "type": "object",
+             "properties": {
+              "qrcode": {},
+              "qrcode_text": {},
+              "status": {},
+              "payer_cpf_cnpj": {},
+              "payer_name": {},
+              "end_to_end_id": {},
+              "end_to_end_refund_id": {},
+              "account_number_last_digits": {}
+             }
+            },
+            "items": {
+             "type": "array",
+             "items": {
+              "type": "object",
+              "properties": {
+               "id": {
+                "type": "string",
+                "example": "14E870A66B4B46DA8947DB8661590009"
+               },
+               "description": {
+                "type": "string",
+                "example": "Desc"
+               },
+               "price_cents": {
+                "type": "integer",
+                "example": 500,
+                "default": 0
+               },
+               "quantity": {
+                "type": "integer",
+                "example": 1,
+                "default": 0
+               },
+               "created_at": {
+                "type": "string",
+                "example": "2025-04-02T13:27:43-03:00"
+               },
+               "updated_at": {
+                "type": "string",
+                "example": "2025-04-02T13:27:43-03:00"
+               },
+               "price": {
+                "type": "string",
+                "example": "R$ 5,00"
+               }
+              }
+             }
+            },
+            "early_payment_discounts": {
+             "type": "array",
+             "items": {
+              "type": "object",
+              "properties": {}
+             }
+            },
+            "split_rules": {}
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "400",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n  \"errors\": \"Faturas expiradas originadas em Carnês ou Assinaturas não podem ser duplicadas.\"\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "errors": {
+             "type": "string",
+             "example": "Faturas expiradas originadas em Carnês ou Assinaturas não podem ser duplicadas."
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "deprecated": false
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ },
+ {
+  "page": "https://dev.iugu.com/reference/criar-token.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "tokens-e-cobrança-direta",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/payment_token": {
+     "post": {
+      "summary": "Criar Token",
+      "description": "O Token é uma representação do Cartão de Crédito, sendo totalmente seguro, de forma que não é possível que alguém consiga as informações deste cartão. O token é gerado para uma transação específica, tornando-o ainda mais seguro. <div class=\"magic-block-callout type-danger\"><h3><i title=\"Danger\" class=\"fa fa-exclamation-triangle\"></i> Cuidado</h3><div class=\"callout-body\"><p>A API de Criação de Token não utiliza a autenticação via api_token.</p></div></div><div class=\"magic-block-callout type-danger\"><h3><i title=\"Danger\" class=\"fa fa-exclamation-triangle\"></i> Alerta de conformidade com PCI</h3><div class=\"callout-body\"><p> Esta chamada API deve ser utilizada apenas em aplicações sem compatibilidade com JavaScript como por exemplo aplicações móveis. Se você efetuar esta chamada por dentro de seus servidores estará sujeito a uma auditoria do PCI. Para aplicações WEB, utilize a geração do token de cartão pelo <a href=\"https://dev.iugu.com/docs/tokenizacao-de-cartao-de-credito#iugujs\" target=\"_blank\"><b>iugu.js</b></a>  </p></div></div>",
+      "operationId": "criar-token",
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "type": "object",
+          "required": [
+           "account_id",
+           "method"
+          ],
+          "properties": {
+           "account_id": {
+            "type": "string",
+            "description": "ID de sua Conta na Iugu (<a href=\"https://app.iugu.com/account\" target=\"_blank\">O ID de sua conta pode ser encontrado aqui</a>)"
+           },
+           "method": {
+            "type": "string",
+            "description": "Método de Pagamento (atualmente somente credit_card)"
+           },
+           "test": {
+            "type": "boolean",
+            "description": "Valor true para criar tokens de teste. <a href=\"http://support.iugu.com/hc/pt-br/articles/212456346-Usar-cart%C3%B5es-de-teste-em-modo-de-teste\" target=\"_blank\">Use cartões de teste</a>"
+           },
+           "data": {
+            "properties": {
+             "number": {
+              "type": "string",
+              "description": "Número do Cartão de Crédito"
+             },
+             "verification_value": {
+              "type": "string",
+              "description": "CVV do Cartão de Crédito"
+             },
+             "first_name": {
+              "type": "string",
+              "description": "Nome do Cliente como está no Cartão"
+             },
+             "last_name": {
+              "type": "string",
+              "description": "Sobrenome do Cliente como está no Cartão"
+             },
+             "month": {
+              "type": "string",
+              "description": "Mês de Vencimento no Formato \"MM\" (Ex: 01, 06, 12)"
+             },
+             "year": {
+              "type": "string",
+              "description": "Ano de Vencimento no Formato \"AAAA\" (Ex: 2020, 2030, 2018)"
+             }
+            },
+            "required": [
+             "number",
+             "verification_value",
+             "first_name",
+             "last_name",
+             "month",
+             "year"
+            ],
+            "type": "object",
+            "description": "Dados do Método de Pagamento"
+           }
+          }
+         }
+        }
+       }
+      },
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n  \"id\": \"ca9f3aa5-4df1-4a4c-9145-81641f1b4f6b\",\n  \"method\": \"credit_card\",\n  \"extra_info\": {\n    \"bin\": \"411111\",\n    \"year\": 2030,\n    \"month\": 1,\n    \"brand\": \"VISA\",\n    \"holder_name\": \"FIRST LAST\",\n    \"display_number\": \"XXXX-XXXX-XXXX-1111\"\n  },\n  \"test\": true\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "id": {
+             "type": "string",
+             "example": "ca9f3aa5-4df1-4a4c-9145-81641f1b4f6b"
+            },
+            "method": {
+             "type": "string",
+             "example": "credit_card"
+            },
+            "extra_info": {
+             "type": "object",
+             "properties": {
+              "bin": {
+               "type": "string",
+               "example": "411111"
+              },
+              "year": {
+               "type": "integer",
+               "example": 2030,
+               "default": 0
+              },
+              "month": {
+               "type": "integer",
+               "example": 1,
+               "default": 0
+              },
+              "brand": {
+               "type": "string",
+               "example": "VISA"
+              },
+              "holder_name": {
+               "type": "string",
+               "example": "FIRST LAST"
+              },
+              "display_number": {
+               "type": "string",
+               "example": "XXXX-XXXX-XXXX-1111"
+              }
+             }
+            },
+            "test": {
+             "type": "boolean",
+             "example": true,
+             "default": true
+            }
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "400",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n  \"errors\": \"account_id invalido\"\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "errors": {
+             "type": "string",
+             "example": "account_id invalido"
+            }
+           }
+          }
+         }
+        }
+       },
+       "422": {
+        "description": "422",
+        "content": {
+         "text/plain": {
+          "examples": {
+           "Un.Entity": {
+            "value": "{\n  \"errors\": {\n    \"method\": [\n      \"credit_cards não é suportado. (Métodos suportados: credit_card)\"\n    ], \n    \"number\": [\n      \"is not a valid credit card number\"\n    ], \n    \"year\": [\n      \"expired\"\n    ]\n  }\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "errors": {
+             "type": "object",
+             "properties": {
+              "method": {
+               "type": "array",
+               "items": {
+                "type": "string",
+                "example": "credit_cards não é suportado. (Métodos suportados: credit_card)"
+               }
+              },
+              "number": {
+               "type": "array",
+               "items": {
+                "type": "string",
+                "example": "is not a valid credit card number"
+               }
+              },
+              "year": {
+               "type": "array",
+               "items": {
+                "type": "string",
+                "example": "expired"
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "deprecated": false,
+      "security": []
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ },
+ {
+  "page": "https://dev.iugu.com/reference/cobranca-direta.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "tokens-e-cobrança-direta",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/charge": {
+     "post": {
+      "summary": "Cobrança Direta",
+      "description": "Cobrança simples via boleto ou cartão de crédito. [Para mais informações sobre cobrança direta](https://dev.iugu.com/docs/diferen%C3%A7a-entre-cobran%C3%A7a-direta-e-fatura)",
+      "operationId": "cobranca-direta",
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "type": "object",
+          "properties": {
+           "method": {
+            "type": "string",
+            "description": "Apenas suporta \"bank_slip\", que é boleto bancário. Não é preenchido se enviar parâmetro token"
+           },
+           "token": {
+            "type": "string",
+            "description": "ID do Token. **Não é preenchido** caso o método de pagamento seja `bank_slip`. **O token é de uso único** — Se já tiver sido utilizado numa cobrança, mesmo que a chamada tenha sido mal sucedida, deve-se criar um novo token. Em caso de Marketplace, é possível enviar um token criado pela conta mestre."
+           },
+           "customer_payment_method_id": {
+            "type": "string",
+            "description": "<a href=\"https://dev.iugu.com/reference#criar-forma-de-pagamento\">ID da Forma de Pagamento do Cliente</a>. Em caso de Marketplace, é possível enviar um \"customer_payment_method_id\" de um Cliente criado pela conta mestre (não é preenchido caso Método de Pagamento seja \"bank_slip\" ou utilize \"token\")"
+           },
+           "restrict_payment_method": {
+            "type": "boolean",
+            "description": "Se true, restringe o método de pagamento da cobrança para o definido em `method`, que no caso será apenas `bank_slip`."
+           },
+           "customer_id": {
+            "type": "string",
+            "description": "ID do Cliente. Utilizado para vincular a Fatura a um Cliente"
+           },
+           "invoice_id": {
+            "type": "string",
+            "description": "ID da Fatura a ser utilizada para pagamento"
+           },
+           "email": {
+            "type": "string",
+            "description": "E-mail do Cliente (não é preenchido caso seja enviado um \"invoice_id\")"
+           },
+           "months": {
+            "type": "integer",
+            "description": "Número de Parcelas (2 até 12), não é necessário passar 1. Não é preenchido caso o método de pagamento seja \"bank_slip\". O valor mínino de cada parcela é de R$5,00.",
+            "format": "int32"
+           },
+           "discount_cents": {
+            "type": "integer",
+            "description": "Valor de desconto, em centavos, aplicado sobre os itens criados em caso de não haver fatura vinculada à chamada.",
+            "format": "int32"
+           },
+           "bank_slip_extra_days": {
+            "type": "integer",
+            "description": "Define o prazo em dias para o pagamento do boleto. Caso não seja enviado, aplica-se o prazo padrão de 3 dias corridos.",
+            "format": "int32"
+           },
+           "keep_dunning": {
+            "type": "boolean",
+            "description": "Por padrão, a fatura é cancelada caso haja falha na cobrança, a não ser que este parâmetro seja enviado como \"true\". Obs: Funcionalidade disponível apenas para faturas criadas no momento da cobrança."
+           },
+           "items": {
+            "type": "array",
+            "description": "Itens de cobrança da Fatura que será gerada. \"price_cents\" valor mínimo 100. <b> Limite de 30 items </b>",
+            "items": {
+             "properties": {
+              "description": {
+               "type": "string",
+               "description": "Descrição do Item"
+              },
+              "quantity": {
+               "type": "integer",
+               "description": "Quantidade",
+               "format": "int32"
+              },
+              "price_cents": {
+               "type": "integer",
+               "description": "Preço em Centavos. Valores negativos entram como desconto no total",
+               "format": "int32"
+              },
+              "id": {
+               "type": "string",
+               "description": "ID do item, utilizado só em casos de edição ou remoção."
+              },
+              "_destroy": {
+               "type": "boolean",
+               "description": "Caso `true`, remove o item de uma fatura. ID do item é obrigatório."
+              }
+             },
+             "type": "object"
+            }
+           },
+           "*atenção*": {
+            "type": "object",
+            "description": "Informações do cliente abaixo \"payer\" são obrigatórias para a emissão de boletos ou necessárias para seu sistema de antifraude.",
+            "properties": {}
+           },
+           "payer": {
+            "properties": {
+             "cpf_cnpj": {
+              "type": "string",
+              "description": "CPF ou CNPJ (apenas números)"
+             },
+             "name": {
+              "type": "string",
+              "description": "Nome"
+             },
+             "phone_prefix": {
+              "type": "string",
+              "description": "Prefixo do número de telefone"
+             },
+             "phone": {
+              "type": "string",
+              "description": "Número de telefone"
+             },
+             "email": {
+              "type": "string",
+              "description": "E-mail"
+             },
+             "address": {
+              "type": "object",
+              "description": "Endereço do cliente",
+              "properties": {
+               "street": {
+                "type": "string",
+                "description": "Rua"
+               },
+               "number": {
+                "type": "string",
+                "description": "Número"
+               },
+               "district": {
+                "type": "string",
+                "description": "Bairro"
+               },
+               "city": {
+                "type": "string",
+                "description": "Cidade"
+               },
+               "state": {
+                "type": "string",
+                "description": "Estado"
+               },
+               "zip_code": {
+                "type": "string",
+                "description": "CEP"
+               },
+               "complement": {
+                "type": "string",
+                "description": "Complemento (opcional)"
+               }
+              }
+             }
+            },
+            "required": [],
+            "type": "object",
+            "description": "Informações do cliente, obrigatórias para a emissão de boletos registrados ou necessárias para seu sistema de antifraude."
+           },
+           "order_id": {
+            "type": "string",
+            "description": "Número único que identifica o pedido de compra. Opcional, ajuda a evitar o pagamento da mesma fatura."
+           },
+           "soft_descriptor_light": {
+            "type": "string",
+            "description": "Altera a descrição da cobrança no cartão de crédito do cliente final (Até 12 caracteres). Caso não seja enviado, será utilizada a descrição configurada na conta."
+           }
+          }
+         }
+        }
+       }
+      },
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "//credit_card response\n{\n  \"message\": \"Autorizado\",\n  \"errors\": {},\n  \"status\": \"captured\",\n  \"info_message\": \"Transação capturada\",\n  \"reversible\": null,\n  \"token\": \"token4\",\n  \"brand\": null,\n  \"bin\": null,\n  \"last4\": null,\n  \"issuer\": null,\n  \"success\": true,\n  \"url\": \"https://checkout.iugu.dev/invoices/b332de4d-61aa-4e0c-ae3a-945b29b07eca-53d4\",\n  \"pdf\": \"https://checkout.iugu.dev/invoices/b332de4d-61aa-4e0c-ae3a-945b29b07eca-53d4.pdf\",\n  \"identification\": null,\n  \"invoice_id\": \"B332DE4D61AA4E0CAE3A945B29B07ECA\",\n  \"LR\": \"00\"\n}\n\n//bank_slip response\n{\n  \"success\": true,\n  \"url\": \"https://checkout.iugu.com/invoices/d819a14d-cb10-4c1d-80c7-e14d040a18cc-5213?bs=true\",\n  \"pdf\": \"https://checkout.iugu.com/invoices/d819a14d-cb10-4c1d-80c7-e14d040a18cc-5213.pdf\",\n  \"bank_slip_url\": \"https://boletos.iugu.com/v1/public/invoice/d819a14d-cb10-4c1d-80c7-e14d040a18cc-5213/bank_slip\",\n  \"bank_slip_pdf_url\": \"https://boletos.iugu.com/v1/public/invoice/d819a14d-cb10-4c1d-80c7-e14d040a18cc-5213/bank_slip.pdf\",\n  \"identification\": \"40192025089200000000700002597151910420000005000\",\n  \"invoice_id\": \"D819A14DCB104C1D80C7E14D040A18CC\"\n}"
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "400",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "//credit_cart return\n{\n  \"errors\": \"token não é válido\"\n}\n\n//bank_slip return\n{\n  \"errors\": \"credit_cards não é suportado. (Métodos suportados: bank_slip)\"\n}"
+           }
+          }
+         }
+        }
+       },
+       "422": {
+        "description": "422",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Un.Entity": {
+            "value": "{\n  \"errors\": {\n    \"total\": [\n      \"deve ser maior que 1\" /* \"price_cents\" deve ser maior que 100 */\n    ]\n  }\n}\n\n//bank_slip return\n{\n  \"errors\": {\n    \"payer.cpf_cnpj\": [\n      \"não pode ficar em branco\"\n    ],\n    \"payer.name\": [\n      \"não pode ficar em branco\"\n    ],\n    \"payer.address.zip_code\": [\n      \"não pode ficar em branco\",\n      \"não é válido\"\n    ],\n    \"payer.address.number\": [\n      \"não pode ficar em branco\"\n    ]\n  }\n}"
+           }
+          }
+         }
+        }
+       }
+      },
+      "deprecated": false
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ },
+ {
+  "page": "https://dev.iugu.com/reference/cobranca-direta-com-2-cartoes.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "tokens-e-cobrança-direta",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/charge_two_credit_cards": {
+     "post": {
+      "summary": "Cobrança Direta com 2 Cartões",
+      "description": "Cobre **faturas avulsas** em 2 cartões diferentes. [Saiba mais sobre Tokenização](https://dev.iugu.com/docs/tokenizacao-de-cartao-de-credito).",
+      "operationId": "cobranca-direta-com-2-cartoes",
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "type": "object",
+          "required": [
+           "api_token"
+          ],
+          "properties": {
+           "api_token": {
+            "type": "string",
+            "description": "`api_token` da Conta que efetuará a cobrança"
+           },
+           "invoice_id": {
+            "type": "string",
+            "description": "ID da invoice"
+           },
+           "iugu_credit_card_payment": {
+            "type": "array",
+            "description": "**Limite de 2 objetos**",
+            "items": {
+             "properties": {
+              "token": {
+               "type": "string",
+               "description": "Token do Cartão"
+              },
+              "amount": {
+               "type": "integer",
+               "description": "Quantia a ser cobrada neste cartão (em cents)",
+               "format": "int32"
+              }
+             },
+             "type": "object"
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n    \"invoice\": {\n        \"status\": \"paid\"\n    },\n    \"credit_card_transactions\": [\n        {\n            \"reversible\": true,\n            \"last4\": \"5076\",\n            \"bin\": 516292,\n            \"brand\": \"Master\",\n            \"token\": \"token\",\n            \"message\": \"Transacao capturada com sucesso\",\n            \"success\": true,\n            \"issuer\": \"BANCO X\",\n            \"invoice_id\": \"BD9B9AE34DD44B08A75AB245CEA9B78D\",\n            \"LR\": \"00\"\n        },\n        {\n            \"reversible\": true,\n            \"last4\": \"1111\",\n            \"bin\": 549354,\n            \"brand\": \"Master\",\n            \"token\": \"token\",\n            \"message\": \"Transacao capturada com sucesso\",\n            \"success\": true,\n            \"issuer\": \"BANCO Y\",\n            \"invoice_id\": \"BD9B9AE34DD44B08A75AB245CEA9B78D\",\n            \"LR\": \"00\"\n        }\n    ]\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "invoice": {
+             "type": "object",
+             "properties": {
+              "status": {
+               "type": "string",
+               "example": "paid"
+              }
+             }
+            },
+            "credit_card_transactions": {
+             "type": "array",
+             "items": {
+              "type": "object",
+              "properties": {
+               "reversible": {
+                "type": "boolean",
+                "example": true,
+                "default": true
+               },
+               "last4": {
+                "type": "string",
+                "example": "5076"
+               },
+               "bin": {
+                "type": "integer",
+                "example": 516292,
+                "default": 0
+               },
+               "brand": {
+                "type": "string",
+                "example": "Master"
+               },
+               "token": {
+                "type": "string",
+                "example": "token"
+               },
+               "message": {
+                "type": "string",
+                "example": "Transacao capturada com sucesso"
+               },
+               "success": {
+                "type": "boolean",
+                "example": true,
+                "default": true
+               },
+               "issuer": {
+                "type": "string",
+                "example": "BANCO X"
+               },
+               "invoice_id": {
+                "type": "string",
+                "example": "BD9B9AE34DD44B08A75AB245CEA9B78D"
+               },
+               "LR": {
+                "type": "string",
+                "example": "00"
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "400",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {}
+          }
+         }
+        }
+       }
+      },
+      "deprecated": false,
+      "security": []
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ }
+]

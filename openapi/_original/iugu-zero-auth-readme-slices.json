@@ -1,0 +1,187 @@
+[
+ {
+  "page": "https://dev.iugu.com/reference/consultar-zero-auth.md",
+  "definition": {
+   "openapi": "3.1.0",
+   "info": {
+    "title": "zero-auth",
+    "version": "1.0"
+   },
+   "servers": [
+    {
+     "url": "https://api.iugu.com/v1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "sec0": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+     }
+    }
+   },
+   "security": [
+    {
+     "sec0": []
+    }
+   ],
+   "paths": {
+    "/zero_auth": {
+     "post": {
+      "summary": "Consultar Zero Auth",
+      "description": "Para mais detalhes sobre o Zero Auth, [clique aqui](https://dev.iugu.com/docs/zero-auth)",
+      "operationId": "consultar-zero-auth",
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "type": "object",
+          "required": [
+           "token"
+          ],
+          "properties": {
+           "token": {
+            "type": "string",
+            "description": "Token de Pagamento criado, <a href=\"https://dev.iugu.com/docs/tokenizacao-de-cartao-de-credito#iugujs\" target=\"_blank\"> [clique aqui] para mais informações</a>"
+           }
+          }
+         }
+        }
+       }
+      },
+      "responses": {
+       "200": {
+        "description": "200",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n    \"zero_auth\": {\n        \"code\": \"00\",\n        \"message\": \"Transacao autorizada\",\n        \"valid\": true\n    }\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "zero_auth": {
+             "type": "object",
+             "properties": {
+              "code": {
+               "type": "string",
+               "example": "00"
+              },
+              "message": {
+               "type": "string",
+               "example": "Transacao autorizada"
+              },
+              "valid": {
+               "type": "boolean",
+               "example": true,
+               "default": true
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       },
+       "400": {
+        "description": "400",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n    \"token\": [\n        \"must be a kind of: String\",\n        \"can't be blank\"\n    ]\n}"
+           }
+          },
+          "schema": {
+           "type": "object",
+           "properties": {
+            "token": {
+             "type": "array",
+             "items": {
+              "type": "string",
+              "example": "must be a kind of: String"
+             }
+            }
+           }
+          }
+         }
+        }
+       },
+       "422": {
+        "description": "422",
+        "content": {
+         "application/json": {
+          "examples": {
+           "Result": {
+            "value": "{\n    \"zero_auth\": {\n        \"code\": \"54\",\n        \"message\": \"Autorizacao negada\",\n        \"valid\": false\n    }\n}"
+           },
+           "invalid brand": {
+            "value": "{\n    \"zero_auth\": {\n        \"code\": \"57\",\n        \"message\": \"Bandeira Inválida\"\n    }\n}"
+           }
+          },
+          "schema": {
+           "oneOf": [
+            {
+             "type": "object",
+             "properties": {
+              "zero_auth": {
+               "type": "object",
+               "properties": {
+                "code": {
+                 "type": "string",
+                 "example": "54"
+                },
+                "message": {
+                 "type": "string",
+                 "example": "Autorizacao negada"
+                },
+                "valid": {
+                 "type": "boolean",
+                 "example": false,
+                 "default": true
+                }
+               }
+              }
+             }
+            },
+            {
+             "title": "invalid brand",
+             "type": "object",
+             "properties": {
+              "zero_auth": {
+               "type": "object",
+               "properties": {
+                "code": {
+                 "type": "string",
+                 "example": "57"
+                },
+                "message": {
+                 "type": "string",
+                 "example": "Bandeira Inválida"
+                }
+               }
+              }
+             }
+            }
+           ]
+          }
+         }
+        }
+       }
+      },
+      "deprecated": false
+     }
+    }
+   },
+   "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "x-readme-fauxas": true
+  }
+ }
+]

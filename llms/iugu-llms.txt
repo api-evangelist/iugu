@@ -1,0 +1,414 @@
+# Central do Desenvolvedor Documentation
+
+> A central do desenvolvedor é um repositório com referências técnicas, conceitos e materiais passo a passo sobre o funcionamento e comunicação através de API.
+
+## Conceitos: Visão Geral
+- [🧭 Introdução à iugu](https://dev.iugu.com/docs/introdução.md): Bem-vindo à iugu, tecnologia que vira potência!
+- ▶️ Comece por aqui
+  - [Tokens de Autenticação](https://dev.iugu.com/docs/tokens-de-autenticacao.md): Saiba como obter acesso aos API tokens.
+  - [Criar, Verificar e Configurar Subconta](https://dev.iugu.com/docs/criar-verificar-e-configurar-subconta.md): Veja como funcionam as Subcontas antes de utilizá-las.
+    - [Cartão de Crédito — Configurações Extras](https://dev.iugu.com/docs/cc-configuracoes-extras.md): Confira as configurações adicionais para Cartão de Crédito
+    - [Boleto Bancário — Configurações Extras](https://dev.iugu.com/docs/bb-configuracoes-extras.md): Confira as configurações adicionais para Boleto Bancário
+  - [Faturas](https://dev.iugu.com/docs/faturas-1.md): Confira sobre as invoices da iugu
+    - [Reembolso](https://dev.iugu.com/docs/estorno.md)
+  - [Split de Pagamentos](https://dev.iugu.com/docs/split-de-pagamentos.md)
+  - [Checkout Transparente e Checkout iugu](https://dev.iugu.com/docs/checkout.md)
+  - [Tokens de Cartão de Crédito](https://dev.iugu.com/docs/tokens-de-cartão-de-crédito.md)
+    - [Zero Auth](https://dev.iugu.com/docs/zero-auth.md)
+  - [Cobrança Recorrente (Assinaturas)](https://dev.iugu.com/docs/cobrança-recorrente-assinaturas.md)
+    - [Recursos Extras — Cobrança Recorrente (Assinaturas)](https://dev.iugu.com/docs/recursos-extras-cobrança-recorrente-assinaturas.md): Confira alguns recursos extras para Assinaturas
+  - Cobrança Direta
+    - [Cobrança simples — Cartão de Crédito](https://dev.iugu.com/docs/realizar-uma-cobrança-simples-no-cartão-de-crédito-por-api.md)
+    - [Cobrança simples — Boleto Bancário](https://dev.iugu.com/docs/realizar-uma-cobrança-simples-via-boleto-por-api.md)
+    - [Cobrança com 2 Cartões](https://dev.iugu.com/docs/cobranca-com-2-cartoes.md)
+    - [Cartões de Teste](https://dev.iugu.com/docs/guide-cartoes-de-teste.md): Utilize os nossos Cartões de Crédito em ambiente de testes (sandbox)
+  - [Gatilhos da iugu](https://dev.iugu.com/docs/gatilhos-da-iugu.md): Conheça um pouco dos nossos gatilhos
+  - [E-mails e SMS Transacionais](https://dev.iugu.com/docs/e-mails-transacionais.md)
+  - [Glossário](https://dev.iugu.com/docs/glossario.md)
+  - Links úteis
+    - [Segurança](https://dev.iugu.com/docs/segurança.md)
+    - [Migração de Dados - Chave GPG](https://dev.iugu.com/docs/migração-de-dados-chave-gpg.md): Criptografe dados confidenciais para migração compatível com PCI usando esta chave PGP.
+
+## Conceitos: Módulos e Bibliotecas
+- [📚 Bibliotecas SDK](https://dev.iugu.com/docs/bibliotecas.md): Abaixo, você encontrará algumas SDKs disponíveis nas principais linguagens de desenvolvimento utilizadas atualmente
+- [🔐 Recipes RSA](https://dev.iugu.com/docs/bibliotecas-rsa.md)
+- [🔌 Plataformas Integradas na iugu](https://dev.iugu.com/docs/módulos-parceiro.md): A iugu disponibiliza a integração com plataformas, que podem facilitar e agilizar seu negócio e são desenvolvidas e suportadas pela iugu.
+  - VTEX
+    - [Configurando conector iugu na VTEX](https://dev.iugu.com/docs/configurando-conector-iugu-na-vtex.md): O conector da iugu é um facilitador de integração entre Vtex e iugu, com a finalidade de auxiliar na cobrança de vendas e permitimos ao Marketplace a opção de Split de Pagamento.
+  - WooCommerce
+    - [Configurações do Plugin WooCommerce iugu 3.2.5+](https://dev.iugu.com/docs/configuração-plugin-woocommerce-iugu-30.md): Receba pagamentos por cartão de crédito, boleto bancário, Pix e/ou Carnê em sua loja WooCommerce com a iugu.
+    - [Funcionalidades do plugin WooCommerce iugu 3.2.0+](https://dev.iugu.com/docs/funcionalidades-plugin-woocommerce-iugu-30.md): Esta documentação tem como objetivo apresentar todas as funcionalidades disponíveis no plugin WooCommerce iugu e como configurá-las.
+    - [Soluções de problemas](https://dev.iugu.com/docs/woocommerce-soluções-de-alguns-problemas.md)
+  - Integrações Parceiros
+    - [Módulos Parceiros](https://dev.iugu.com/docs/modulos-de-e-commerce.md)
+    - [Outras Plataformas e Módulos](https://dev.iugu.com/docs/plataformas-comunicado.md)
+
+## Conceitos: Referências Técnicas
+- [💳 Tokenização de Cartão de Crédito](https://dev.iugu.com/docs/tokenizacao-de-cartao-de-credito.md)
+- [✅ Habilitar métodos de pagamento via API](https://dev.iugu.com/docs/habilitar-métodos-de-pagamento-via-api.md)
+- [➗ Compartilhar forma de pagamento](https://dev.iugu.com/docs/compartilhar-forma-de-pagamento.md)
+- [🔔 Gatilhos](https://dev.iugu.com/docs/gatilhos.md): A iugu disponibiliza a funcionalidade de gatilhos (webhooks) para facilitar a integração entre sistemas.
+  - Lista de Gatilhos
+    - [Fatura](https://dev.iugu.com/docs/gatilhos-fatura.md): Confira os eventos acionados por faturas e os dados enviados.
+    - [Pix Automático](https://dev.iugu.com/docs/pix-automático.md)
+    - [Assinatura](https://dev.iugu.com/docs/gatilhos-assinatura.md): Confira os eventos acionados por assinaturas e os dados enviados.
+    - [Saque — Mesmo Domicílio Bancário](https://dev.iugu.com/docs/saque.md): Confira os eventos acionados por saques e os dados enviados.
+    - [PIX/TED Out — Transferência para Terceiros](https://dev.iugu.com/docs/gatilhos-pix-ted-out.md): Confira os eventos acionados por PIX/TED Out (Transferências para Terceiros) e os dados enviados.
+    - [Transferência entre Contas iugu](https://dev.iugu.com/docs/transferência-entre-contas-iugu.md): Confira os eventos acionados por transferência entre contas iugu e os dados enviados.
+    - [Depósito](https://dev.iugu.com/docs/gatilhos-deposito.md): Confira os eventos acionados por depósitos e os dados enviados.
+    - [KYC — Verificação de Conta iugu](https://dev.iugu.com/docs/gatilhos-kyc.md): Confira os eventos acionados por verificação de contas e os dados enviados.
+    - [Método de Pagamento de Cliente](https://dev.iugu.com/docs/gatilhos-metodo-pagamento.md): Confira os eventos acionados por métodos de pagamento de um cliente e os dados enviados.
+    - [Antecipação de Recebíveis](https://dev.iugu.com/docs/gatilhos-antecipacao.md): Confira os eventos acionados por antecipação de recebíveis e os dados enviados.
+    - [Pedido de Pagamento — Pagamento de Boletos via Conta iugu](https://dev.iugu.com/docs/gatilhos-pagamento-boletos.md): Confira os eventos acionados por pedido de pagamento (pagamento de boletos) e os dados enviados.
+- [🤔 Diferença entre Cobrança Direta e Fatura](https://dev.iugu.com/docs/diferença-entre-cobrança-direta-e-fatura.md)
+- [🤔 Diferença de subconta para conta mestre](https://dev.iugu.com/docs/diferença-de-subconta-para-conta-mestre.md)
+- [📩 Emails transacionais](https://dev.iugu.com/docs/emails-transacionais.md)
+- [🔀 Split de pagamento](https://dev.iugu.com/docs/split-de-pagamento.md)
+- [🗝️ Chave de Idempotência](https://dev.iugu.com/docs/chave-de-idempotência-1.md)
+- [📃Campos dos boletos e linha digitável: o que significam?](https://dev.iugu.com/docs/campos-de-boleto-bancario.md): Conheça sobre os campos de um boleto bancário
+
+## Conceitos: Casos de Uso
+- Marketplace
+  - [Criar e Configurar Subconta por API](https://dev.iugu.com/docs/configurar-subconta-por-api.md)
+- Recorrência
+  - [Cobranças recorrentes por API](https://dev.iugu.com/docs/realizar-cobranças-recorrentes-por-api.md): A recorrência é uma excelente estratégia para fidelizar clientes e garantir uma maior previsibilidade de caixa. Configurar esse tipo de cobrança de acordo com as necessidades do seu negócio é fácil e…
+  - [Cobranças recorrentes por API - Pix Automático](https://dev.iugu.com/docs/cobranças-recorrentes-por-api-pix-automático.md): Este artigo explica como configurar cobranças recorrentes via API na iugu, com foco no Pix Automático (Pix Recorrente): cobranças debitadas automaticamente da conta do pagador, mediante autorização…
+- Faturas
+  - [Cobrar com PIX por API](https://dev.iugu.com/docs/realizar-cobrança-com-pix-por-api.md)
+  - [Cobrar com Pix Automático via API](https://dev.iugu.com/docs/cobrar-com-pix-automatico-por-api.md)
+  - [Agendar Nova Cobrança com Pix Automático via API](https://dev.iugu.com/docs/agendar-nova-cobranca-com-pix-automatico-via-api.md)
+  - [Reembolsar Faturas por API](https://dev.iugu.com/docs/realizar-o-reembolso-de-faturas-estorno-por-api.md)
+  - [Cobrança em Duas Etapas (Captura Tardia)](https://dev.iugu.com/docs/cobrança-em-duas-etapas.md)
+  - [Consultar fatura duplicada](https://dev.iugu.com/docs/consultar-fatura-duplicada.md)
+- Transferência
+  - [Transferências](https://dev.iugu.com/docs/transferências.md)
+  - [Transferência para Terceiros](https://dev.iugu.com/docs/transferência-para-terceiros.md): Documentação técnica da funcionalidade
+- Cashback
+  - [Criar cashback](https://dev.iugu.com/docs/criar-cashback.md)
+  - [Como sacar o valor do cashback](https://dev.iugu.com/docs/cashback-como-resgate.md)
+  - [Como utilizar o cashback como desconto](https://dev.iugu.com/docs/cashback-como-desconto.md)
+
+## Conceitos: ENGLISH
+- [Introduction to iugu 🇺🇸](https://dev.iugu.com/docs/introduction-to-iugu.md): Welcome to iugu: Technology That Turns into Power!
+
+## Conceitos: SPANISH
+- [Introducción a iugu 🇪🇸](https://dev.iugu.com/docs/introducción-a-iugu.md): ¡Bienvenido a iugu: Tecnología que se convierte en potencia!
+
+## Conceitos: CHINESE
+- [iugu 简介 🇨🇳](https://dev.iugu.com/docs/introdução-à-iugu-cn.md): 欢迎来到 iugu，将技术转化为力量
+
+## Referência: Visão Geral
+- [🧭 Introdução à API](https://dev.iugu.com/reference/introdução-a-api.md): Confira uma breve introdução das APIs da iugu.
+- [🔒 Autenticação](https://dev.iugu.com/reference/autenticação.md): Métodos de autenticação na iugu
+- [👨‍🚀 Collections](https://dev.iugu.com/reference/collections.md): Uma coleção é um contêiner de modelos JSON, ou seja, procedimentos armazenados, disparadores e funções pré-definidas.
+- [🔢 Paginação](https://dev.iugu.com/reference/paginação.md): Em nossas APIs de listagem, usamos dois parâmetros que possibilitam a paginação em sua aplicação.
+- ↔️ Diagramas de Sequência
+  - iuguCobrança
+    - [Pix](https://dev.iugu.com/reference/cobranca-simples-pix.md): Como realizar uma cobrança simples no Pix sem configurações de recursos extras.
+    - [Boleto Bancário](https://dev.iugu.com/reference/cobranca-simples-com-boleto.md): Como realizar uma cobrança simples no Boleto Bancário sem configurações de recursos extras.
+    - [Cartão de Crédito (PCI)](https://dev.iugu.com/reference/cobrança-simples-cartao-de-credito-pci.md): Como realizar uma cobrança simples no cartão de crédito para companhias PCI DSS.
+    - [Cartão de Crédito (não PCI)](https://dev.iugu.com/reference/cobrança-simples-cartao-de-credito-nao-pci.md): Como realizar uma cobrança simples no cartão de crédito para companhias não PCI DSS.
+    - [Reembolso [Pix]](https://dev.iugu.com/reference/reembolso-pix.md): Como reembolsar faturas pagas com Pix.
+    - [Reembolso [Boleto Bancário — Sugestão]](https://dev.iugu.com/reference/reembolso-boleto-bancario.md): Sugestão alternativa de como reembolsar faturas pagas com Boleto Bancário
+    - [Reembolso [Cartão de Crédito]](https://dev.iugu.com/reference/reembolso-cartao-de-credito.md): Como reembolsar faturas pagas com Cartão de Crédito
+    - [Criar Método de Pagamento (PCI)](https://dev.iugu.com/reference/criar-metodo-de-pagamento.md): Como criar um método de pagamento de um cliente.
+    - [Criar Método de Pagamento (não PCI)](https://dev.iugu.com/reference/criar-método-de-pagamento-não-pci.md): Como criar um método de pagamento de um cliente.
+    - [Alterar Cartão Padrão de Assinatura](https://dev.iugu.com/reference/alterar-cartao-padrao-de-assinatura.md): Como alterar o Cartão de Crédito padrão para as próximas cobranças de assinatura.
+    - [Gerenciar todos os Métodos de Pagamento (usuário)](https://dev.iugu.com/reference/gerenciar-todos-os-metodos-de-pagamento-usuario.md): Como gerenciar todos os métodos de pagamento de um usuário.
+    - [Compartilhar Método de Pagamento](https://dev.iugu.com/reference/compartilhar-metodo-de-pagamento.md): Como compartilhar método de pagamento de um cliente entre subcontas e também conta mestre.
+  - iuguRecorrência
+    - [Pix (Checkout Transparente)](https://dev.iugu.com/reference/assinautra-pix-checkout-transparente.md): Como criar uma Assinatura cobrando no Pix e com Checkout Transparente.
+    - [Boleto Bancário (Checkout Transparente)](https://dev.iugu.com/reference/boleto-bancário-checkout-transparente.md): Como criar uma Assinatura cobrando no Boleto Bancário e com Checkout Transparente.
+    - [Cartão de Crédito (Checkout Transparente)](https://dev.iugu.com/reference/assinatura-cartao-de-credito-checkout-transparente.md): Como criar uma Assinatura cobrando no Cartão de Crédito do usuário e com Checkout Transparente.
+    - [Checkout iugu (todos os métodos)](https://dev.iugu.com/reference/assinatura-com-checkout-iugu.md): Como criar uma Assinatura utilizando o Checkout iugu.
+  - iuguBaaS
+    - [Criar e Verificar Subconta](https://dev.iugu.com/reference/criar-e-verificar-subconta.md): Como Criar e Verificar uma Subconta iugu.
+    - [Reenviar Documentos de KYC](https://dev.iugu.com/reference/diagram-reenviar-documentos-de-kyc.md)
+    - [Ativar e Configurar Métodos de Pagamento](https://dev.iugu.com/reference/ativar-e-configurar-metodos-de-pagamento.md): Como ativar e configurar os métodos de pagamentos na iugu.
+    - [Depósito — Pix](https://dev.iugu.com/reference/diagram-baas-deposito-pix.md)
+    - [Pagar um Boleto](https://dev.iugu.com/reference/diagram-baas-pagar-um-boleto.md)
+    - [PIX/TED Out](https://dev.iugu.com/reference/diagram-baas-pixted-out.md)
+  - iuguSplit
+    - [Split por Fatura](https://dev.iugu.com/reference/split-por-fatura.md): Como utilizar Split por Fatura.
+    - [Split por Assinatura](https://dev.iugu.com/reference/split-por-assinatura.md): Como utilizar Split por Assinatura
+- [↪️ Fluxos de Implementação](https://dev.iugu.com/reference/fluxos-de-implementação.md)
+- [🗝️ Chave de Idempotência](https://dev.iugu.com/reference/chave-de-idempotência.md)
+- [💳 Cartões de Teste](https://dev.iugu.com/reference/int-ref-cartoes-de-teste.md): Utilize os nossos Cartões de Crédito em ambiente de testes (sandbox)
+- [🪲 Tabela de Erros](https://dev.iugu.com/reference/erros.md): Estes são os principais erros e suas descrições que cada endpoint retorna.
+- [0️⃣ Tabela de LRs](https://dev.iugu.com/reference/tabela-de-lrs.md)
+
+## Referência: Overview
+- [Introduction to the API](https://dev.iugu.com/reference/introduction-to-the-api.md): Here’s a brief introduction to iugu's APIs.
+
+## Referência: Tokens de API
+- [Criar API Token](https://dev.iugu.com/reference/criar-token-de-api.md): Cria um "api_token" em uma subconta.<div class="magic-block-callout type-warning"><h3><i title="Warning" class="fa fa-exclamation-circle"></i>Atenção</h3><div class="callout-body"><p>Essa API obriga…
+- [Renovar API Token de Usuário](https://dev.iugu.com/reference/renovar-api-token-de-usuario.md): Gera um novo user_token de uma conta, nessa endpoint é obrigatório o uso do user_token da subconta.
+- [Remover API Token](https://dev.iugu.com/reference/remover-token-de-api.md): Remove um "api_token" em uma subconta.<div class="magic-block-callout type-warning"><h3><i title="Warning" class="fa fa-exclamation-circle"></i>Atenção</h3><div class="callout-body"><p>Essa API…
+- [Listar API Tokens](https://dev.iugu.com/reference/listar-api-tokens.md): Lista os "api_tokens" de uma conta. <br> <h3><i title="Warning" class="fa fa-exclamation-circle"></i>Atenção</h3><div class="callout-body"><p>Essa API obriga a utilização do…
+
+## Referência: Faturas
+- Faturas
+  - [Status de Fatura](https://dev.iugu.com/reference/status.md)
+  - [Criar Fatura](https://dev.iugu.com/reference/criar-fatura.md): Cria uma fatura para um cliente. [Para mais informações sobre fatura](https://dev.iugu.com/docs/diferen%C3%A7a-entre-cobran%C3%A7a-direta-e-fatura)
+  - [Reembolsar Fatura](https://dev.iugu.com/reference/reembolsar-fatura.md): Efetua o reembolso de uma Fatura. Somente alguns meios de pagamento permitem o reembolso, como por exemplo Cartão de Crédito e Pix. Após o reembolso, a Fatura fica com o status de "reembolsada", ou…
+  - [Cancelar Fatura](https://dev.iugu.com/reference/cancelar.md): Cancela uma Fatura. Os status possíveis para cancelamento: Em análise, pendente e expirada.
+  - [Capturar Fatura](https://dev.iugu.com/reference/capturar-fatura.md): Captura uma fatura com status "em análise" (`in_analysis`) através do seu ID. [Para mais informações sobre cobrança em duas etapas](https://dev.iugu.com/docs/cobran%C3%A7a-em-duas-etapas)
+  - [Gerar 2ª Via de Fatura](https://dev.iugu.com/reference/gerar-segunda-via.md): Gera a segunda via de uma fatura com o status "pendente". A fatura atual é cancelada e uma nova é criada com o mesmo status.
+  - [Reemitir Fatura Expirada](https://dev.iugu.com/reference/reemissao-de-fatura-expirada.md): Reemissão de faturas com situação EXPIRADA e de Cobrança a Vista.
+  - [Listar/Buscar Faturas](https://dev.iugu.com/reference/listar-faturas.md): Retorna uma lista das faturas em sua conta ordenadas pela data de criação, da mais à menos recente. Por padrão, este endpoint retorna no máximo 100 registros. O campo "totalItems" contém sempre a…
+  - [Consultar Fatura](https://dev.iugu.com/reference/buscar-fatura.md): Retorna os dados de uma Fatura.
+  - [Considerar Fatura Paga Externamente](https://dev.iugu.com/reference/considerar-fatura-paga-externamente.md): Possibilita a baixa de pagamento de uma fatura iugu que foi paga externamente e/ou por outros intermédios. Este processo altera o status pendente de uma fatura para "Paga Externamente".
+  - [Buscar Fatura por IDs externos](https://dev.iugu.com/reference/buscar-fatura-por-ids-externos.md): Permite consultar uma Fatura através dos valores informados nos parâmetros `external_id`, `order_id`, `end_to_end` ou `digitable_line`.
+  - [Buscar Fatura por ID Externos de Subcontas](https://dev.iugu.com/reference/buscar-fatura-por-id-externos-de-subcontas.md): Permite uma Conta Mestre consultar uma Fatura de uma Subconta através dos valores informados nos parâmetros `external_id`, `order_id`, `end_to_end` ou `digitable_line`.
+  - [Enviar Fatura por Email](https://dev.iugu.com/reference/enviar-por-email.md): Envia a fatura iugu para o email vinculado a ela.
+  - Gestão Pix Automático
+    - [Solicitar Retentativa de Agendamento](https://dev.iugu.com/reference/solicitar-retentativa-de-agendamento.md): Solicita um novo agendamento de cobrança para uma fatura cujo débito foi cancelado por insuficiência de saldo. Esta operação só é disponível quando a recorrência foi criada com retry_policy:…
+    - [Cancelar Agendamento Pix Automático](https://dev.iugu.com/reference/cancelar-agendamento-pix-automatico.md): Solicita o cancelamento de uma cobrança previamente agendada.
+    - [Cancelar Pix Automático](https://dev.iugu.com/reference/cancelar-pix-automatico.md): Solicita o cancelamento de um Pix Automático ativo.
+    - [Consultar Cancelamento de Pix Automático](https://dev.iugu.com/reference/consultar-cancelamento-de-pix-automatico.md): Retorna os detalhes de um cancelamento específico de um Pix Automático.
+    - [Listar Cancelamentos de Pix Automático](https://dev.iugu.com/reference/listar-cancelamentos-de-pix-automatico.md): Retorna o histórico de cancelamentos de uma recorrência específica.
+    - [Listar Pix Automático](https://dev.iugu.com/reference/listar-pix-automatico.md): Retorna a lista de Pix Automatico de um recebedor.
+    - [Consultar Pix Automático](https://dev.iugu.com/reference/consultar-pix-automatico.md): Retorna os detalhes de uma recorrência específica.
+    - [Buscar um agendamento de Pix Automatico](https://dev.iugu.com/reference/buscar-um-agendamento-de-pix-automatico.md): Retorna os dados de um agendamento de recorrência específico.
+    - [Listar agendamentos do Pix Automático](https://dev.iugu.com/reference/listar-agendamentos-do-pix-automático.md): Lista, de forma paginada, os agendamentos de recorrência da conta, do mais recente para o mais antigo (por data de criação). É possível filtrar pelos agendamentos de uma recorrência específica.
+  - [Pix Automático Recebedor - Jornada 2](https://dev.iugu.com/reference/pix-automatico-jornada-2.md): Cria uma autorização de recorrência via Pix Automático (Jornada 2) sem gerar cobrança associada no momento da criação. Destinada a clientes que possuem motor de recorrência próprio e desejam migrar…
+- Carnês
+  - [Criar um carnê](https://dev.iugu.com/reference/criar-um-carnê.md): Crie seus carnês através desta endpoint
+  - [Consultar um carnê](https://dev.iugu.com/reference/consultar-um-carnê.md): Consulta um carnê criado através do seu ID
+  - [Cancelar carnê](https://dev.iugu.com/reference/cancelamentodocarne.md): Cancelamento de Carnê que está com status de "pending"
+  - [Listar carnês](https://dev.iugu.com/reference/listar-carnês.md): Lista os carnês criados em uma conta
+  - Carnês Customizados
+    - [Criar um carnê customizado](https://dev.iugu.com/reference/criar-carnê-customizado.md): Crie um "carnê personalizado" utilizando faturas pendentes existentes.
+    - [Consultar um carnê customizado](https://dev.iugu.com/reference/consultar-um-carnê-customizado.md): Consulte um carnê customizado através do seu ID.
+    - [Listar carnês customizados](https://dev.iugu.com/reference/listar-carnês-customizados.md): Liste os carnês customizados de uma conta
+- Chargeback
+  - [Status de Retorno de Contestação](https://dev.iugu.com/reference/status-de-retorno-de-contestação.md): Status de Chargeback que podem retornar na API
+  - [Disputar Contestação](https://dev.iugu.com/reference/disputar-contestacao.md): Abre uma disputa sobre a contestação.
+  - [Listar Contestação](https://dev.iugu.com/reference/listar-contestacao.md): Retorna uma lista com todas as contestações de sua conta.
+
+## Referência: Tokens e Cobrança Direta
+- [Tokenização e iugu.js](https://dev.iugu.com/reference/tokens-e-iugujs.md)
+- [Criar Token](https://dev.iugu.com/reference/criar-token.md): O Token é uma representação do Cartão de Crédito, sendo totalmente seguro, de forma que não é possível que alguém consiga as informações deste cartão. O token é gerado para uma transação específica,…
+- [Cobrança Direta](https://dev.iugu.com/reference/cobranca-direta.md): Cobrança simples via boleto ou cartão de crédito. [Para mais informações sobre cobrança direta](https://dev.iugu.com/docs/diferen%C3%A7a-entre-cobran%C3%A7a-direta-e-fatura)
+- [Cobrança Direta com 2 Cartões](https://dev.iugu.com/reference/cobranca-direta-com-2-cartoes.md): Cobre **faturas avulsas** em 2 cartões diferentes. [Saiba mais sobre Tokenização](https://dev.iugu.com/docs/tokenizacao-de-cartao-de-credito).
+- [Cartões de Teste](https://dev.iugu.com/reference/ref-cartoes-de-teste.md): Utilize os nossos Cartões de Crédito em ambiente de testes (sandbox)
+
+## Referência: ZERO AUTH
+- [Consultar Zero Auth](https://dev.iugu.com/reference/consultar-zero-auth.md): Para mais detalhes sobre o Zero Auth, [clique aqui](https://dev.iugu.com/docs/zero-auth)
+
+## Referência: iugurecorrência
+- Planos
+  - [Criar Plano](https://dev.iugu.com/reference/criar-plano.md): Cria um plano.
+  - [Editar Plano](https://dev.iugu.com/reference/alterar-plano.md): Altera os dados de um Plano, quaisquer parâmetros não informados não serão alterados. As alterações não irão mudar as Assinaturas que já utilizam o Plano, mas só as novas.
+  - [Remover Plano](https://dev.iugu.com/reference/remover-plano.md): Retorna os dados de um Plano.
+  - [Buscar Plano](https://dev.iugu.com/reference/buscar-plano.md): Retorna os dados de um Plano.
+  - [Buscar Plano pelo Identificador](https://dev.iugu.com/reference/buscar-plano-pelo-identificador.md): Retorna os dados de um plano utilizando um identificador.
+  - [Listar Planos](https://dev.iugu.com/reference/listar-plano.md): Retorna uma lista com todos os planos da sua conta, ordenada pela data de criação, exibindo primeiro o plano criado mais recentemente. <br><br> :warning: **Importante:** O parâmetro `totalItems`…
+- Clientes
+  - [Criar Cliente](https://dev.iugu.com/reference/criar-cliente.md): Essa chamada cria um objeto cliente. A propriedade zip_code realiza uma pré-consulta e valida se existe um endereço valido para o cliente, porém caso não seja retornado os dados do endereço completo…
+  - [Editar Cliente](https://dev.iugu.com/reference/alterar-cliente.md): Alterar os dados de um Cliente. Quaisquer parâmetros não informados não serão alterados.
+  - [Buscar Cliente](https://dev.iugu.com/reference/buscar-cliente.md): Retorna os dados de um cliente
+  - [Listar Clientes](https://dev.iugu.com/reference/listar-cliente.md): Retorna uma lista com os clientes cadastrados em sua conta, ordenados pela data de criação, do mais recente para o mais antigo. O campo totalItems indica a quantidade de registros retornados nesta…
+  - [Remover Cliente](https://dev.iugu.com/reference/remover-cliente.md): Remove permanentemente um cliente. Porém, não permite remover clientes com assinaturas vinculadas.
+  - Forma de Pagamento
+    - [Criar Forma de Pagamento](https://dev.iugu.com/reference/criar-forma-de-pagamento.md): Cria uma forma de pagamento de cliente.
+    - [Editar Forma de Pagamento](https://dev.iugu.com/reference/alterar-forma-de-pagamento.md): Altera os dados de uma Forma de Pagamento, quaisquer parâmetros não informados não serão alterados.
+    - [Buscar Forma de Pagamento](https://dev.iugu.com/reference/buscar-forma-de-pagamento.md): Retorna os dados de uma Forma de Pagamento de um Cliente
+    - [Listar Formas de Pagamento](https://dev.iugu.com/reference/listar-forma-de-pagamento.md): Retorna uma lista com todas as formas de pagamento de determinado cliente.
+    - [Remover Forma de Pagamento](https://dev.iugu.com/reference/remover-forma-de-pagamento.md): Remove permanentemente uma forma de pagamento de um cliente.
+- Assinaturas
+  - [Criar Assinatura](https://dev.iugu.com/reference/criar-assinatura.md): Cria uma Assinatura. [Para mais informações sobre como criar uma assinatura](https://dev.iugu.com/docs/realizar-cobran%C3%A7as-recorrentes-por-api)
+  - [Buscar Assinatura](https://dev.iugu.com/reference/buscar-assinatura.md): Retorna os dados de uma Assinatura.
+  - [Listar Assinaturas](https://dev.iugu.com/reference/listar-assinaturas.md): Retorna uma lista com as assinaturas geradas pela sua conta, ordenadas pela data de criação, da mais nova para a mais antiga. O campo totalItems indica a quantidade de registros retornados nesta…
+  - [Editar Assinatura](https://dev.iugu.com/reference/alterar-assinatura.md): Altera os dados de uma Assinatura, quaisquer parâmetros não informados não serão alterados.
+  - [Simular Alteração de Plano de Assinatura](https://dev.iugu.com/reference/simular-alteração-de-plano.md): Simula a alteração de plano de uma assinatura.
+  - [Ativar Assinatura](https://dev.iugu.com/reference/ativar-assinatura.md): Ativa uma Assinatura. Uma Fatura poderá ser gerada para o cliente.
+  - [Alterar Plano da Assinatura](https://dev.iugu.com/reference/alterar-o-plano.md): Altera o Plano de uma Assinatura. Uma Fatura cobrando a mudança de plano poderá ser gerada para o cliente.
+  - [Suspender Assinatura](https://dev.iugu.com/reference/suspender-assinatura.md): Suspende uma Assinatura.
+  - [Remover Assinatura](https://dev.iugu.com/reference/remover-assinatura.md): Remove uma Assinatura permanentemente.
+  - Créditos
+    - [Adicionar Créditos a Assinatura](https://dev.iugu.com/reference/adicionar-créditos.md): Adiciona créditos a uma assinatura.
+    - [Remover Créditos da Assinatura](https://dev.iugu.com/reference/remover-créditos.md): Remove créditos de uma assinatura.
+
+## Referência: IUGUBAAS
+- Conta Bancária iugu
+  - [Criar Conta](https://dev.iugu.com/reference/baas-criar-conta.md): Utilize o `live_api_token` da Conta Mestre.   Para planos que têm o recurso Marketplace. Permite a criação de contas bancárias iugu [Para mais informações sobre como configurar um…
+  - [Enviar Verificação de Conta iugu](https://dev.iugu.com/reference/baas-enviar-verificacao-de-conta.md): Utilize `user_token` nesta requisição. <br> Esse endpoint permite o envio de informações para a verificação de subcontas. Por motivos de segurança, enquanto uma subconta estiver pendente de…
+    - [Lista de Bancos, Agência e Conta para Verificação de Conta e Domicílio Bancário](https://dev.iugu.com/reference/baas-lista-de-bancos-para-verificar-conta.md): Confira os bancos aceitos pela iugu na requisição Enviar Verificação de Subconta e Adicionar Domicílio Bancário, incluindo os nomes e os formatos dos números de agência e conta.
+    - [Consultar Envio de Documentos para Verificação de Conta iugu](https://dev.iugu.com/reference/baas-consultar-envio-de-documentos.md): Utilize o `live_ api_token` da subconta.  Este endpoint permite consultar o status do Envio de Documentos para Verificação de Subconta.
+    - [Reenviar Documentos para Verificar Conta iugu](https://dev.iugu.com/reference/reenviar-documentos-para-verificar-conta-iugu-copy.md): Utilize o `live_ api_token` da subconta.  Utilize este endpoint quando os Documentos enviados no endpoint `/v1/accounts/{account_id}/request_verification` são reprovados por nosso Time de Prevenção à…
+    - [Reenvio de Documentos: Códigos e Mensagens](https://dev.iugu.com/reference/copy-of-reenvio-de-documentos-códigos-e-mensagens.md): Lista completa dos códigos e mensagens exibidos quando um documento enviado no KYC apresenta pendência, com a ação necessária para cada caso.
+  - [Informações da Conta](https://dev.iugu.com/reference/baas-informacoes-da-conta.md): Utilize o `live_api_token` ou  `test_api_token` da subconta.  Retorna informações de uma Subconta, como Saldo Disponível para Saque, se o Saque Automático está ligado ou não etc.
+  - [Desativar Conta iugu](https://dev.iugu.com/reference/desativar-subconta-copy.md): Utilize o `live_api_token` da subconta.  Desative uma conta a partir do seu ID. Certifique-se que a conta **não tem saldo**.
+- Extrato
+  - [Extrato Financeiro](https://dev.iugu.com/reference/baas-extrato-financeiro.md): Utilize o `live_api_token` ou `test_api_token` da subconta ou conta mestre. Retorna o extrato financeiro de uma conta. <br><br>**Importante:** Somente em modo produção há movimentação de saldo na…
+  - [Listar Saques para Domicílio Bancário](https://dev.iugu.com/reference/baas-listar-saques-transferencia-proprias.md): Utilize o `live_api_token` ou `test_api_token` da subconta ou conta mestre.  Retorna a lista de todas as transferências bancárias.
+  - [Listar Transferências entre Contas iugu](https://dev.iugu.com/reference/baas-listar-transferencias-entre-contas-iugu.md): Utilize o `live_api_token` ou `test_api_token` da subconta ou conta mestre.  Retorna uma lista com as transferências efetuadas pela conta. Por padrão, retorna no máximo 100 registros.
+- Pagamento de Contas
+  - [Validar Linha Digitável de um Boleto](https://dev.iugu.com/reference/baas-validar-pagamento.md): Utilize o `live_api_token` da subconta ou conta mestre.  Valida se a linha digitavel de um boleto é valida. É importante se atentar ao parâmetro *"details"* onde será informado se o boleto esta em…
+  - [Pagar Boleto](https://dev.iugu.com/reference/baas-criar-pedido-de-pagamento.md): Utilize o `live_api_token` da subconta ou conta mestre.  Cria um pedido de pagamento de boleto.
+  - [Listar Pagamentos de Boletos](https://dev.iugu.com/reference/baas-listar-pagamentos.md): Utilize o `live_api_token` da subconta ou conta mestre.  Lista pagamentos de boleto de uma conta
+- Depósito
+  - [Depósito via QR Code Estático](https://dev.iugu.com/reference/baas-criar-qr-deposito.md): Criação de QRCode estático.
+- Transferências Pix e TED
+  - [Saque para Domicílio Bancário](https://dev.iugu.com/reference/baas-pedido-de-saque-para-domicilio-proprio.md): Realiza um pedido de saque de um determinado valor. O valor será enviado para o domicílio bancário da mesma titularidade cadastrado na conta.
+  - [PIX/TED Out](https://dev.iugu.com/reference/baas-pix-ted-out.md): Realize uma transferência para terceiros via TED ou PIX
+  - [Cancelar Pix Agendado](https://dev.iugu.com/reference/cancelar-pix-agendado-1.md): Utilize o `live_api_token`<br><br>Cancela um PIX agendado. **Importante:** O status da transferência deve ser `scheduled`.
+  - [Consultar Comprovante de Transferência para Terceiros](https://dev.iugu.com/reference/baas-consultar-comprovante-de-pix-ted-out.md): Consulte um comprovante de Transferência para Terceiros através do seu ID.
+  - [Listar Comprovantes de Transferências para Terceiros](https://dev.iugu.com/reference/baas-listar-comprovantes-de-pix-ted-out.md): Retorna uma lista com os comprovantes de Transferências para Terceiros de uma conta.
+- Recursos Pix
+  - [Ativar/desativar Pix](https://dev.iugu.com/reference/baas-ativar-desativar-pix.md): Ative ou desative o método Pix. Ao requisitá-la, é criada uma chave EVP no BACEN.
+  - [Extrair Informações do QR Code Pix](https://dev.iugu.com/reference/baas-decode-qrcode.md): Este endpoint decodifica uma string previamente extraída de um QR Code, convertendo o código em informações legíveis. Ele não processa a imagem do QR Code diretamente, mas atua sobre a string gerada…
+  - Consultas de Chaves Pix
+    - [Consultar chave Pix na Conta iugu](https://dev.iugu.com/reference/baas-consulta-de-chave-pix-conta-iugu.md): Consultar a chave PIX da Conta Iugu, funciona apenas em ambiente de **Produção**
+    - [Listar chaves Pix na Conta iugu](https://dev.iugu.com/reference/baas-listar-chaves-pix.md): Lista todas as chaves PIX atreladas a conta, ativas, processando e aguardando um pedido de custodia solicitado ou enviado ou aguardando resolução.
+- Consulta de Bancos
+  - [Consulta de Bancos Cadastrados na Iugu](https://dev.iugu.com/reference/consulta-de-bancos-cadastrados.md): Consulta bancos cadastrados na iugu e retorna com o ISPB e COMPE
+  - [Consulta de ISPB e COMPE](https://dev.iugu.com/reference/consulta-ispb-compe.md): Consulta o ISPB e COMPE de **todos** os bancos cadastrados no Bacen
+
+## Referência: SAQUE PARA DOMICÍLIO PRÓPRIO
+- [Pedido de Saque/Transferências Próprias](https://dev.iugu.com/reference/pedido-de-saque.md): Realiza um pedido de saque de um determinado valor. O valor será enviado para o domicílio bancário da mesma titularidade cadastrado na conta.
+- [Buscar Saques/Transferência Própria](https://dev.iugu.com/reference/buscar-transferencia-bancaria.md): Retorna as informações de uma transferência bancária.
+- [Listar Saques/Transferência Próprias](https://dev.iugu.com/reference/listar-transferencia-bancaria.md): Retorna a lista de todas as transferências bancárias.
+
+## Referência: Transferência de Valores
+- [Transferir Valor entre contas iugu](https://dev.iugu.com/reference/transferir-valor.md): Transferir valor de uma Conta iugu para outra Conta iugu. <br><br>Este endpoint está configurado para operar exclusivamente em ambiente de produção <b>(live_mode)</b>.
+- [Listar Transferências](https://dev.iugu.com/reference/listar-transferencias.md): Retorna uma lista com as transferências efetuadas pela conta. Por padrão, retorna no máximo 100 registros.
+
+## Referência: Conta de Pagamento e Marketplace
+- Subconta
+  - [Criar Subconta](https://dev.iugu.com/reference/criar-subconta.md): Permite a criação de subcontas (contas de pagamento) para contas com permissão de Marketplace ou parceiro de negócios. [Para mais informações sobre como configurar um…
+    - [Criar Subconta — Propriedades do response](https://dev.iugu.com/reference/criar-subconta-propriedades-do-response.md): Descrição das propriedades do response do endpoint Criar Subconta —v1/marketplace/create_account
+  - [Enviar Verificação de Subconta](https://dev.iugu.com/reference/enviar-verificação-de-subconta.md): **Utilize o `user_token` nesta requisição.** <br>Esse endpoint permite o envio de informações para a verificação de subcontas. Por motivos de segurança, enquanto uma subconta estiver pendente de…
+    - [Consultar Envio de Documentos para Verificação de Conta iugu](https://dev.iugu.com/reference/consultar-envio-de-documentos.md): Utilize o `live_ api_token` da subconta. Este endpoint permite consultar o status do Envio de Documentos para Verificação de Subconta.
+    - [Reenviar Documentos para Verificar Conta iugu](https://dev.iugu.com/reference/reenviar-documentos.md): Utilize o `live_ api_token` da subconta. <br><br> Utilize este endpoint quando os Documentos enviados no endpoint `/v1/accounts/{account_id}/request_verification` são reprovados por nosso Time de…
+    - [Reenvio de Documentos: Códigos e Mensagens](https://dev.iugu.com/reference/reenvio-de-documentos-codigos-e-mensagens.md): Lista completa dos códigos e mensagens exibidos quando um documento enviado no KYC apresenta pendência, com a ação necessária para cada caso.
+    - [Lista de Bancos, Agência e Conta para Verificação de Conta e Domicílio Bancário](https://dev.iugu.com/reference/lista-de-bancos-iugu.md): Confira os bancos aceitos pela iugu na requisição Enviar Verificação de Subconta e Adicionar Domicílio Bancário, incluindo os nomes e os formatos dos números de agência e conta.
+  - [Configurar Conta](https://dev.iugu.com/reference/configurar-conta.md): Configura parâmetros de uma conta de pagamentos.
+  - [Editar Subconta](https://dev.iugu.com/reference/atualizar-subconta.md): Atualiza os parâmetros de uma conta de pagamentos.<div class="magic-block-callout type-warning"><h3><i title="Danger" class="fa fa-exclamation-triangle"></i> IMPORTANTE!</h3><div…
+  - [Desativar Subconta](https://dev.iugu.com/reference/desativar-subconta.md): Desative uma Subconta a partir do seu ID. Certifique-se que a conta **não tem saldo**.
+  - [Adicionar/cadastrar Domicílio Bancário](https://dev.iugu.com/reference/adicionar-domicilio-bancario.md): Envia dados para cadastrar ou alterar o domicílio bancário da conta que recebe saques e transferências.  <div class="magic-block-callout type-danger"><h3><i title="Danger" class="fa…
+    - [Verificar envio de domicilio bancário](https://dev.iugu.com/reference/verificar-envio-de-domicilio-bancario.md): Consultar dados enviados para alterar domicílio bancário.
+- [Ativar/desativar método Pix](https://dev.iugu.com/reference/configurar-pagamentos.md): Ative ou desative o método de pagamento Pix da subconta.
+- [Informações da Conta](https://dev.iugu.com/reference/informacoes-da-conta.md): Retorna as informações de uma conta. Use o LIVE_API_TOKEN da sub-conta na autenticação.
+  - [Informações da Conta — Propriedades do response](https://dev.iugu.com/reference/informações-da-conta-propriedades-do-response.md): Descrição das propriedades do response do endpoint Informações da Conta — GET v1/accounts/{id}
+- [Listar contas](https://dev.iugu.com/reference/listar-as-subcontas.md): Lista as contas de um marketplace ou parceiro de negócios.
+- Regras de Split
+  - [Criar Splits](https://dev.iugu.com/reference/criar-split-1.md): Permite a criação de multi splits para uma conta. Criar um novo multi split sobrepõe o que já está configurado. Todas as faturas em aberto em uma conta irão acatar a nova regra de split criada.
+  - [Consultar Split Atual](https://dev.iugu.com/reference/current-split.md): Consulta o split atualmente cadastrado na conta.
+- Sócios de Conta
+  - [Criar sócio de conta](https://dev.iugu.com/reference/criar-sócio-de-conta.md): Permite a criação de sócio da conta
+  - [Buscar sócio de conta](https://dev.iugu.com/reference/buscar-sócio-de-conta.md): Retorna os dados de um determinado sócio de conta
+  - [Listar sócios de conta](https://dev.iugu.com/reference/listar-sócios-de-conta.md): Permite listar sócios de conta
+  - [Atualizar sócio de conta](https://dev.iugu.com/reference/atualizar-contato-de-subconta.md): Permite a criação de contatos vinculados à contas
+  - [Deletar sócio de conta](https://dev.iugu.com/reference/deletar-sócio-de-conta.md): Apaga os dados de um sócio de conta.
+- Contatos de Conta
+  - [Criar contato de conta](https://dev.iugu.com/reference/criar-contato-de-subconta.md): Permite a criação de contatos vinculados à contas
+  - [Atualizar contato de conta](https://dev.iugu.com/reference/atualizar-contato-de-conta.md): Permite atualizar contato de conta. Não permite alterar o CPF.
+  - [Buscar contato de conta](https://dev.iugu.com/reference/buscar-contato-de-subconta.md): Retorna os dados de um determinado contato de conta
+  - [Listar contatos de conta](https://dev.iugu.com/reference/listar-contatos-de-subconta.md): Permite listar contatos de conta
+  - [Deletar contato de conta](https://dev.iugu.com/reference/deletar-contato-de-conta.md): Deleta os dados de um determinado contato de conta
+
+## Referência: Gatilhos
+- Lista de Gatilhos
+  - [Faturas](https://dev.iugu.com/reference/ref-lista-de-gatilhos-faturas.md): Confira os eventos acionados por faturas e os dados enviados.
+  - [Assinaturas](https://dev.iugu.com/reference/ref-lista-de-gatilhos-assinaturas.md): Confira os eventos acionados por assinaturas e os dados enviados.
+  - [Saque — Mesmo Domicílio Bancário](https://dev.iugu.com/reference/ref-lista-de-gatilhos-saque-mesmo-domicilio-bancario.md): Confira os eventos acionados por saques e os dados enviados.
+  - [PIX/TED Out — Transferência para Terceiros](https://dev.iugu.com/reference/ref-lista-de-gatilhos-pixted-out-transferencia-para-terceiros.md): Confira os eventos acionados por PIX/TED Out (Transferências para Terceiros) e os dados enviados.
+  - [Transferência entre Contas iugu](https://dev.iugu.com/reference/ref-lista-de-gatilhos-transferencia-entre-contas-iugu.md): Confira os eventos acionados por transferência entre contas iugu e os dados enviados.
+  - [Depósito](https://dev.iugu.com/reference/ref-lista-de-gatilhos-deposito.md): Confira os eventos acionados por depósitos e os dados enviados.
+  - [KYC — Verificação de Conta iugu](https://dev.iugu.com/reference/ref-lista-de-gatilhos-kyc.md): Confira os eventos acionados por verificação de contas e os dados enviados.
+  - [Método de Pagamento de Cliente](https://dev.iugu.com/reference/ref-lista-de-gatilhos-metodo-de-pagamento-de-cliente.md): Confira os eventos acionados por métodos de pagamento de um cliente e os dados enviados.
+  - [Antecipação de Recebíveis](https://dev.iugu.com/reference/ref-lista-de-gatilhos-antecipacao-de-recebiveis.md): Confira os eventos acionados por antecipação de recebíveis e os dados enviados.
+  - [Pedido de Pagamento — Pagamento de Boletos via Conta iugu](https://dev.iugu.com/reference/ref-lista-de-gatilhos-pedido-de-pagamento.md): Confira os eventos acionados por pedido de pagamento (pagamento de boletos) e os dados enviados.
+- [Listar Eventos Disponíveis](https://dev.iugu.com/reference/listar-eventos-disponíveis.md): Lista todos os eventos disponíveis para criação de um Gatilho
+- [Criar Gatilho](https://dev.iugu.com/reference/criar-gatilho.md): Cria um gatilho
+- [Alterar Gatilho](https://dev.iugu.com/reference/alterar-gatilho.md): Altera e também permite editar um gatilho
+- [Remover Gatilho](https://dev.iugu.com/reference/remover-gatilho.md): Remove um gatilho
+- [Buscar Gatilho](https://dev.iugu.com/reference/buscar-gatilho.md): Busca por um gatilho específico através do seu ID.
+- [Listar Gatilhos](https://dev.iugu.com/reference/listar-gatilhos.md): Retorna a lista de gatilhos de uma conta
+- [Reenviar Gatilho (por período)](https://dev.iugu.com/reference/reenviar-gatilho-por-período.md): Reenvia gatilho por período, ocorrendo de 3 em 3 dias. [Para mais informações sobre como reenviar gatilhos (webhooks), clique aqui.](https://dev.iugu.com/docs/reenviar-gatilhos-para-o-webhook)
+- Logs
+  - [Listar Logs](https://dev.iugu.com/reference/getting-started-with-your-api.md): Caso utilize o **gatilho na conta mestre**, enviar api_token da conta mestre. Se o **gatilho estiver na subconta**, enviar o api_token da subconta.
+  - [Disparar Log Novamente](https://dev.iugu.com/reference/forçar-retentativa.md): Efetua o disparo de um gatilho manualmente através do seu ID.
+
+## Referência: Emails transacionais
+- [Listar Identificadores de E-mail Disponíveis](https://dev.iugu.com/reference/listar-emails-disponíveis.md): Retorna lista de emails disponíveis para personalização
+- [Buscar Layout Padrão de E-mail](https://dev.iugu.com/reference/buscar-layout-padrão-de-email.md): Retorna layout padrão de e-mail conforme o retorno da chamada do Listar Identificadores de E-mail Disponíveis.
+- [Criar E-mail](https://dev.iugu.com/reference/criar-email.md)
+- [Editar E-mail](https://dev.iugu.com/reference/alterar-email.md): Altera um E-mail
+- [Deletar E-mail](https://dev.iugu.com/reference/remover-email.md): Remove um e-mail
+- [Visualizar Template de E-mail](https://dev.iugu.com/reference/visualizar-templade-de-email.md): Retorna template salvo para determinado e-mail
+- [Buscar E-mail](https://dev.iugu.com/reference/buscar-email.md): Retorna os dados de um determinado e-mail.
+- [Listar E-mails](https://dev.iugu.com/reference/listar-emails.md): Retorna a lista de e-mails.
+
+## Referência: Antecipação de Recebíveis
+- [Listar Recebíveis](https://dev.iugu.com/reference/listar-recebiveis.md): Lista Recebíveis de uma conta
+- [Verificar Status da Antecipação](https://dev.iugu.com/reference/verificar-status-da-antecipação.md): Verifica o status atual da Antecipação em andamento. Um [gatilho](https://dev.iugu.com/docs/gatilhos#status-da-antecipa%C3%A7%C3%A3o) também pode ser configurado para notificar quando a Antecipação…
+- [Listar Unidade de Recebíveis](https://dev.iugu.com/reference/listar-unidade-de-recebiveis.md): Retorna as unidades a receber agregadas de uma conta, agrupadas por data de liquidação e código do arranjo de pagamento.
+- [Consultar Unidade de Recebiveis](https://dev.iugu.com/reference/consultar-unidade-de-recebiveis.md): Fornece uma discriminação detalhada de uma unidade de recebíveis específica por data de liquidação e forma de pagamento.
+
+## Referência: Relatórios para Conciliação
+- [Listar Transações de Cartão de Crédito](https://dev.iugu.com/reference/transações.md): Necessário utilizar api_token (live ou test).
+- [Listar Transações de Cartão de Crédito de Subcontas](https://dev.iugu.com/reference/listar-transações-de-cartão-de-crédito.md): Lista transações de Cartão de Crédito de todas as Subcontas atreladas à uma Conta Mestre.
+- [Extrato Financeiro](https://dev.iugu.com/reference/extrato-financeiro.md): Retorna o extrato financeiro de uma conta.  <div class="magic-block-callout type-warning"><h3><i title="Warning" class="fa fa-exclamation-circle"></i>Atenção</h3><div class="callout-body"><p>Esta API…
+- [Extrato de Faturas](https://dev.iugu.com/reference/extrato-de-faturas.md): Retorna o extrato de faturas de uma conta.
+- [Conciliação de Saques](https://dev.iugu.com/reference/conciliacao-de-saques.md): Retorna todos os pedidos de saques criados em ambiente de produção (`LIVE`) que tenham um determinado `status` e tenham sido atualizados em determinado período (entre `from`e `to`). No caso de…
+- [Extrato Consolidado](https://dev.iugu.com/reference/extrato-consolidado.md): Extrato consolidado de uma conta agrupado por tipo de movimento.  <div class="magic-block-callout type-warning"> <h3><i title="Warning" class="fa fa-exclamation-circle"></i>Atenção</h3> <div…
+- [Recebíveis Consolidados](https://dev.iugu.com/reference/recebiveis-consolidados.md): Recebíveis Consolidados por: Data de Liquidação e Bandeira  <div class="magic-block-callout type-warning"> <h3><i title="Warning" class="fa fa-exclamation-circle"></i>Atenção</h3> <div…
+- [Extrato Consolidado de Liquidados](https://dev.iugu.com/reference/extrato-consolidado-de-liquidados.md): Retorna o extrato de transações liquidadas e pagamentos pendentes/efetivados. Apenas disponível para o ambiente produção.
+
+## Referência: Pagamentos de Boletos
+- [Listar Pagamentos](https://dev.iugu.com/reference/listar-pagamentos.md): Lista pagamentos de boleto de uma conta
+- [Buscar Pagamento](https://dev.iugu.com/reference/buscar-pagamento.md): Busca por um pagamento através do seu ID.
+- [Criar Pedido de Pagamento](https://dev.iugu.com/reference/criar-pedido-de-pagamento.md): Cria um pedido de pagamento.
+- [Validar Pagamento](https://dev.iugu.com/reference/valida-pagamento.md): Valida se a linha digitavel de um boleto é valida. É importante se atentar ao parâmetro *"details"* onde será informado se o boleto esta em aberto ou baixado na CIP/Nuclea, Exemplo:  Boletos pagos,…
+
+## Referência: Depósitos
+- [Listar Depósitos](https://dev.iugu.com/reference/listar-depósitos.md): Lista os depósitos de uma conta.
+- [Buscar depósito](https://dev.iugu.com/reference/buscar-depósito.md): Busca um depósito específico através do seu ID.
+- [Reembolsar Depósito Pix](https://dev.iugu.com/reference/reembolsar-depósito.md): Reembolsar um depósito através do seu ID.
+
+## Referência: Transferência para Terceiros
+- [Transferência para Terceiros](https://dev.iugu.com/reference/transferência-para-terceiros.md): Realize uma transferência para terceiros via TED ou PIX
+- [Cancelar Pix Agendado](https://dev.iugu.com/reference/cancelar-pix-agendado.md): Utilize o `live_api_token`<br><br>Cancela um PIX previamente agendado. **Importante:** O status da transferência deve ser `scheduled`.
+- [Consultar Transferência para Terceiros](https://dev.iugu.com/reference/consultar-transferência-para-terceiros.md): Consulte aqui o status de uma transferência efetuada anteriormente utilizando seu ID.
+
+## Referência: QRCode Estático
+- [Criação QRCode estático](https://dev.iugu.com/reference/criação-qrcode-estático.md): Criação de QRCode estático.
+- [Consulta QRCode estático](https://dev.iugu.com/reference/consulta-qrcode-estático.md): Consulta de QRCode estático.
+- [Listagem QRCode estático](https://dev.iugu.com/reference/listagem-qrcode-estatico.md): Retorna lista de QRCode estático.
+
+## Recipes
+- [[Assinatura] Assinatura Parcelada](https://dev.iugu.com/recipes/assinatura-assinatura-parcelada.md)
+- [[Cartão de Crédito] Cobrança Simples (única)](https://dev.iugu.com/recipes/cartão-de-crédito-cobrança-simples-única.md)
+- [[Cartão de Crédito] Cobrar com 2 Cartões](https://dev.iugu.com/recipes/cartão-de-crédito-cobrar-com-2-cartões.md)
+- [[Cartão de Crédito] Reutilizar Token de Cartão](https://dev.iugu.com/recipes/cartão-de-crédito-reutilizar-token-de-cartão.md)
+- [[Cashback] Como utilizar Cashback como Desconto](https://dev.iugu.com/recipes/cashback-como-utilizar-cashback-como-desconto.md)
+- [[Cashback] Configurar Cashback (padrão)](https://dev.iugu.com/recipes/cashback-configurar-cashback-padrão.md)
+- [Chave de Idempotência](https://dev.iugu.com/recipes/chave-de-idempotência.md)
+- [[Checkout Transparente] Elementos do Checkout Transparente](https://dev.iugu.com/recipes/checkout-transparente-elementos-do-checkout-transparente.md)
+- [[Pix Automático] Cobrar via API — Jornada 3](https://dev.iugu.com/recipes/cobrar-com-pix-automático-via-api.md)
+- [[KYC] Reenviar Documentação](https://dev.iugu.com/recipes/kyc-reenviar-documentação.md)
+- [[KYC] Verificar Subconta iugu](https://dev.iugu.com/recipes/kyc-verificar-subconta-iugu.md)
+- [[Marketplace] Cobrar Tarifa de Saque da Subconta](https://dev.iugu.com/recipes/marketplace-cobrar-tarifa-de-saque-da-subconta.md)
+- [[Marketplace] Configurar Métodos de Pagamento na Conta iugu](https://dev.iugu.com/recipes/marketplace-configurar-métodos-de-pagamento-na-conta-iugu.md)
+- [[Marketplace] Configurar Split (padrão da conta)](https://dev.iugu.com/recipes/marketplace-configurar-split-padrão-da-conta.md)
+- [[Pix Automático] Agendar Nova Cobrança](https://dev.iugu.com/recipes/pix-automático-agendar-nova-cobrança.md)
+- [[RSA] [Java] Assinatura RSA](https://dev.iugu.com/recipes/rsa-java-assinatura-rsa.md)
+- [[RSA] [Node.js] Assinatura RSA](https://dev.iugu.com/recipes/rsa-nodejs-assinatura-rsa.md)
+- [[RSA] [PHP] Assinatura RSA](https://dev.iugu.com/recipes/rsa-php-assinatura-rsa.md)
+- [[RSA] [Python] Assinatura RSA](https://dev.iugu.com/recipes/rsa-python-assinatura-rsa-1.md)
+- [[RSA] [Ruby] Assinatura RSA](https://dev.iugu.com/recipes/rsa-ruby-assinatura-rsa.md)
+
+## Atualizações
+- [17/09/2026  — Novo detalhamento de rejeição e pendenciamento no KYC de subcontas](https://dev.iugu.com/changelog/17092026-novo-detalhamento-de-rejeição-e-pendenciamento-no-kyc-de-subcontas.md)
+- [01/09/2026 — Pix Automático: suporte à Jornada 2 de adesão](https://dev.iugu.com/changelog/01092026-pix-automático-suporte-à-jornada-2-de-adesão.md)
+- [20/08/2026 — Intervalo Mínimo entre Transferências para Terceiros](https://dev.iugu.com/changelog/20082026-intervalo-mínimo-entre-transferências-para-terceiros.md)
+- [11/08/2026 — Novo status no Webhook de Depósitos](https://dev.iugu.com/changelog/11082026-novo-status-no-webhook-de-depósitos.md)
+- [29/07/2026 — Busca de Fatura por Linha Digitável](https://dev.iugu.com/changelog/29072026-busca-de-fatura-por-linha-digitável.md)
+- [28/07/2026 — Assinatura RSA: Múltiplos Tokens e Novo Parâmetro "X-Signature-Token-Id"](https://dev.iugu.com/changelog/28072026-assinatura-rsa-múltiplos-tokens-e-novo-parâmetro-x-signature-token-id.md)
+- [16/07/2026 — Pix Automático em Assinaturas](https://dev.iugu.com/changelog/16072026-pix-automático-em-assinaturas.md)
+- [06/07/2026 — Saque Automático Agendado](https://dev.iugu.com/changelog/06072026-saque-automático-agendado.md)
+- [02/07/2026 — Novo formato de CNPJ "alfanumérico"](https://dev.iugu.com/changelog/02072026-atualizações-novo-formato-de-cnpj-alfanumérico.md)
+- [11/06/2026 — Novos filtros e limites de busca em GET /v1/customers e GET /v1/subscriptions](https://dev.iugu.com/changelog/11062026-novos-filtros-e-limites-de-busca-em-get-v1customers-e-get-v1subscriptions.md)
