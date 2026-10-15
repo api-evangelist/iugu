@@ -9,6 +9,7 @@ checked:
 - https://n8n.io/integrations/iugu/
 - https://openid.net/developers/certified-openid-connect-implementations/
 - https://www.bcb.gov.br/estabilidadefinanceira/participantespix
+- https://zapier.com/api/v4/apps/
 - https://zapier.com/apps/iugu/integrations
 summary: null
 marketplace_apps:
@@ -76,5 +77,30 @@ edges:
     detected_by: sweep-latam-open-finance.py
     detected: '2026-10-15'
   detected_by: sweep-latam-open-finance.py
+  first_seen: '2026-10-15'
+- partner_name: Zapier
+  partner: zapier
+  partner_match: aggregator
+  type: marketplace
+  marketplace: zapier-directory
+  channel: ipaas-listing
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://zapier.com/apps/iugu/integrations
+  category: null
+  contract_reference:
+    register: Zapier app directory (zapier.com/api/v4/apps)
+    spec_file: null
+    role: ipaas-connector:zapier
+    registered_name: Iugu
+    matched_domain: iugu.com
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: iugu
+    beta: false
+    builder: unknown (not in the directory record)
+  detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
 templates: []
