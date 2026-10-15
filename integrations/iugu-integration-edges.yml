@@ -4,9 +4,11 @@ source:
 - https://zapier.com/apps/iugu/integrations
 checked:
 - https://composio.dev/toolkits/iugu
+- https://data.directory.openbankingbrasil.org.br/participants
 - https://monid.ai/tools/iugu
 - https://n8n.io/integrations/iugu/
 - https://openid.net/developers/certified-openid-connect-implementations/
+- https://www.bcb.gov.br/estabilidadefinanceira/participantespix
 - https://zapier.com/apps/iugu/integrations
 summary: null
 marketplace_apps:
@@ -44,4 +46,35 @@ edges:
     detected: '2026-10-13'
   detected_by: sweep-identity.py
   detected: '2026-10-13'
+- partner_name: Pix (Banco Central do Brasil)
+  partner: null
+  partner_match: register
+  type: register
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.bcb.gov.br/estabilidadefinanceira/participantespix
+  category: instant payments (Brazil)
+  contract_reference:
+    register: Pix participants (Banco Central do Brasil, https://www.bcb.gov.br/content/estabilidadefinanceira/participantes_pix/lista-participantes-instituicoes-em-adesao-pix-20261015.csv)
+    spec_file: null
+    standard: Pix
+    role: pix-participant
+    registrations:
+    - registered_name: IUGU IP S.A.
+      ispb: '15111975'
+      cnpj: 15.111.975/0001-64
+      institution_type: Instituição de Pagamento
+      spi_participation: Direta
+      pix_participation: Facultativa
+      pix_modality: Provedor de Conta Transacional
+      payment_initiation: false
+      matched_domain: iugu.com
+      matched_by: domain
+      identity: wikidata Q130740888 'Iugu' P6204 15.111.975/0001-64 P856 https://www.iugu.com
+    signal_note: 'participation only: the domain comes from a labelled lookup (registrations[].identity)'
+    detected_by: sweep-latam-open-finance.py
+    detected: '2026-10-15'
+  detected_by: sweep-latam-open-finance.py
+  first_seen: '2026-10-15'
 templates: []
