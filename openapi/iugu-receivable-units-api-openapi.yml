@@ -1,0 +1,146 @@
+openapi: 3.2.0
+info:
+  title: antecipação-de-recebíveis Receivable Units API
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: Receivable Units
+paths:
+  /receivable_units:
+    get:
+      description: Retorna as unidades a receber agregadas de uma conta, agrupadas por data de liquidação e código do arranjo de pagamento.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                OK:
+                  summary: OK
+                  value:
+                    items:
+                    - data_liquidacao: '2026-05-08'
+                      codigo_arranjo_pagamento: MCC
+                      valor_total: '0.48'
+                      valor_disponivel: '0.48'
+                      valor_antecipado: '0.0'
+                      valor_cedido: '0.0'
+                    totalItems: 1
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Bad Request:
+                  summary: Bad Request
+                  value:
+                    errors: Date range cannot exceed 90 days
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Unauthorized:
+                  summary: Unauthorized
+                  value:
+                    errors: Unauthorized
+          description: Unauthorized
+      parameters:
+      - in: query
+        name: start
+        schema:
+          type: integer
+          format: int32
+        description: Quantos registros pular do início da pesquisa, usado para paginação.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          format: int32
+        description: Limita o número de registros retornados em até 100, que é o padrão de retorno desta chamada. Também utilizado em <a href="https://dev.iugu.com/v1.0/reference#paginação">paginação</a>.
+      - in: query
+        name: from_date
+        schema:
+          type: string
+        description: Data inicial do intervalo da consulta. Formato (AAAA-MM-DD).
+        required: false
+      - in: query
+        name: codigo_arranjo_pagamento
+        schema:
+          type: string
+        description: 'Exemplo: VCC (Visa), ECC (Elo), MCC (Mastercard), etc.'
+      - in: query
+        name: to_date
+        schema:
+          type: string
+        description: Data final para o intervalo de consulta. Formato (AAAA-MM-DD). <br>**O intervalo máximo é de 90 dias.**
+      operationId: get_receivable-units
+      summary: Listar Unidade de Recebíveis
+      tags:
+      - Receivable Units
+  /receivable_units/details/{data_liquidacao}/{codigo_arranjo_pagamento}:
+    get:
+      description: Fornece uma discriminação detalhada de uma unidade de recebíveis específica por data de liquidação e forma de pagamento.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                OK:
+                  summary: OK
+                  value:
+                    receivables:
+                    - invoice_id: C4664CD4815048EEB51505E976F128D8
+                      installment: 1/1
+                      status: pending
+                      amount: '0.48'
+                      advanced: false
+                    cessions: []
+      parameters:
+      - in: path
+        name: data_liquidacao
+        schema:
+          type: string
+        required: true
+        description: Data de liquidação. Formato (AAAA-MM-DD).
+      - in: path
+        name: codigo_arranjo_pagamento
+        schema:
+          type: string
+        required: true
+        description: 'Exemplo: VCC (Visa), ECC (Elo), MCC (Mastercard), etc.'
+      operationId: get_receivable-units-details-data-liquidacao-codigo-arranjo-pagamento
+      summary: Consultar Unidade de Recebiveis
+      tags:
+      - Receivable Units
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: query
+      name: api_token
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/antecipar-recebiveis.md
+  - https://dev.iugu.com/reference/consultar-unidade-de-recebiveis.md
+  - https://dev.iugu.com/reference/listar-recebiveis.md
+  - https://dev.iugu.com/reference/listar-unidade-de-recebiveis.md
+  merge:
+    pages: 4
+    deduped: 3
+    conflicts_kept_first: 0

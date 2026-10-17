@@ -1,0 +1,411 @@
+openapi: 3.2.0
+info:
+  title: Iugu Api Tokens API
+  version: '1.0'
+  description: 'Operations tagged Api Tokens across 2 of this provider''s published API definitions: iugu-tokens-e-cobran-a-direta-openapi.yml, iugu-tokens-de-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: API Tokens
+paths:
+  /{account_id}/api_tokens:
+    get:
+      summary: Listar API Tokens
+      description: 'Lista os "api_tokens" de uma conta.
+
+
+        Atenção
+
+
+        Essa API obriga a utilização do **>** da conta mestre na autenticação da chamada.'
+      operationId: listar-api-tokens
+      parameters:
+      - name: Request-Time
+        in: header
+        description: Timestamp do momento que enviar a requisição de assinatura digital (RSA)
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: Signature
+        in: header
+        description: Assinatura digital
+        required: true
+        schema:
+          type: string
+          default: signature=
+      - name: account_id
+        in: path
+        description: ID da Conta que deseja consultar
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: X-Signature-Token-Id
+        schema:
+          type: string
+        description: Indica explicitamente qual token/chave deve ser utilizado na assinatura da requisição, informando o ID do token desejado. Se omitido, mantém o comportamento atual.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "[\n  {\n    \"id\": \"3F8B2C71D04E4A9B8E6C15A7F9D20B43\",\n    \"token\": \"7C2A91********************\",\n    \"api_type\": \"LIVE\",\n    \"description\": \"integracao prod\",\n    \"created_at\": \"2024-03-18T14:22:07-03:00\",\n    \"status\": \"active\"\n  },\n  {\n    \"id\": \"8D65A2F0E91B47C3B2F4A6C8D0E13579\",\n    \"token\": \"5A9F6E********************\",\n    \"api_type\": \"TEST\",\n    \"description\": \"integracao test\",\n    \"created_at\": \"2024-03-18T14:22:07-03:00\",\n    \"status\": \"active\"\n  }"
+              schema:
+                type: object
+                properties:
+                  referrer_id:
+                    type: string
+                    example: 27016E1AD888499A98994E781B6C3762
+                  accounts:
+                    type: object
+                    properties:
+                      03F7E599890F4CC78EF1D2537948598C:
+                        type: object
+                        properties:
+                          live_token:
+                            type: string
+                            example: B2C614**********************************************************
+                          live_token_status:
+                            type: string
+                            example: active
+                          test_token:
+                            type: string
+                            example: CF0F19**********************************************************
+                          test_token_status:
+                            type: string
+                            example: active
+                          user_token:
+                            type: string
+                            example: BF0A58**********************************************************
+                      0D16C52DD91F413BACFA24FD6868B18A:
+                        type: object
+                        properties:
+                          live_token:
+                            type: string
+                            example: E79E4F**********************************************************
+                          live_token_status:
+                            type: string
+                            example: active
+                          test_token:
+                            type: string
+                            example: 8B68D9**********************************************************
+                          test_token_status:
+                            type: string
+                            example: active
+                          user_token:
+                            type: string
+                            example: 0DE2B0**********************************************************
+                      1591722D78CA4CB18F4D7C6B7B938520:
+                        type: object
+                        properties:
+                          live_token:
+                            type: string
+                            example: EC7BDB**********************************************************
+                          live_token_status:
+                            type: string
+                            example: active
+                          test_token:
+                            type: string
+                            example: FDCD94**********************************************************
+                          test_token_status:
+                            type: string
+                            example: active
+                          user_token:
+                            type: string
+                            example: 724450**********************************************************
+                      1B1379CE58004ED3AD1DCD6460A0FBE7:
+                        type: object
+                        properties:
+                          live_token:
+                            type: string
+                            example: 1D106F**********************************************************
+                          live_token_status:
+                            type: string
+                            example: active
+                          test_token:
+                            type: string
+                            example: 6D4E11**********************************************************
+                          test_token_status:
+                            type: string
+                            example: active
+                          user_token:
+                            type: string
+                            example: A36D5F**********************************************************
+                      20D8B2E06AB94254B26DE8C31FFD3072:
+                        type: object
+                        properties:
+                          live_token:
+                            type: string
+                            example: FAF0C3**********************************************************
+                          live_token_status:
+                            type: string
+                            example: active
+                          test_token:
+                            type: string
+                            example: 91C790**********************************************************
+                          test_token_status:
+                            type: string
+                            example: active
+                          user_token:
+                            type: string
+                            example: 4A7270**********************************************************
+                      3A605D267BBD4B41BC6CCF2CCA086C4A:
+                        type: object
+                        properties:
+                          live_token:
+                            type: string
+                            example: 416686**********************************************************
+                          live_token_status:
+                            type: string
+                            example: active
+                          test_token:
+                            type: string
+                            example: 550EED**********************************************************
+                          test_token_status:
+                            type: string
+                            example: active
+                          user_token:
+                            type: string
+                            example: DDA836**********************************************************
+                      F55C5EEE3D1E4EA58BA6B7333F34243D:
+                        type: object
+                        properties:
+                          live_token:
+                            type: string
+                            example: 285699**********************************************************
+                          live_token_status:
+                            type: string
+                            example: active
+                          test_token:
+                            type: string
+                            example: FE5764**********************************************************
+                          test_token_status:
+                            type: string
+                            example: active
+                          user_token:
+                            type: string
+                            example: AA893F**********************************************************
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      tags:
+      - API Tokens
+    post:
+      summary: Criar API Token
+      description: 'Cria um "api_token" em uma subconta.
+
+
+        Atenção
+
+
+        Essa API obriga a utilização do **master_token** da conta mestre na autenticação da chamada.'
+      operationId: criar-token-de-api
+      parameters:
+      - name: account_id
+        in: path
+        description: ID da conta em que o token será criado
+        schema:
+          type: string
+        required: true
+      - name: Request-Time
+        in: header
+        description: Timestamp do momento que enviar a requisição de assinatura digital (RSA)
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: Signature
+        in: header
+        description: Assinatura digital
+        required: true
+        schema:
+          type: string
+          default: signature=
+      - in: header
+        name: X-Signature-Token-Id
+        schema:
+          type: string
+        description: Indica explicitamente qual token/chave deve ser utilizado na assinatura da requisição, informando o ID do token desejado. Se omitido, mantém o comportamento atual.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - api_type
+              - description
+              properties:
+                api_type:
+                  type: string
+                  description: Tipo de chave API. `LIVE` = Produção. `TEST` = Homologação/testes.
+                description:
+                  type: string
+                  description: Descrição
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": \"1234567890ABCDEF\",\n  \"token\": \"ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF123456\",\n  \"api_type\": \"LIVE\",\n  \"description\": \"Documentação\",\n  \"created_at\": \"2025-04-02T12:54:31-03:00\",\n  \"status\": \"active\"\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 1234567890ABCDEF
+                  token:
+                    type: string
+                    example: ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF123456
+                  api_type:
+                    type: string
+                    example: LIVE
+                  description:
+                    type: string
+                    example: Documentação
+                  created_at:
+                    type: string
+                    example: '2025-04-02T12:54:31-03:00'
+                  status:
+                    type: string
+                    example: active
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"errors\": [\n    \"Description não pode ficar em branco\",\n    \"Api type não pode ficar em branco\",\n    \"Api type tipo de api não suportado\"\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                      example: Description não pode ficar em branco
+      tags:
+      - API Tokens
+    servers:
+    - url: https://api.iugu.com/v1
+  /{account_id}/api_tokens/{id}:
+    delete:
+      summary: Remover API Token
+      description: 'Remove um "api_token" em uma subconta.
+
+
+        Atenção
+
+
+        Essa API obriga a utilização do "Master_token" na autenticação da chamada.'
+      operationId: remover-token-de-api
+      parameters:
+      - name: account_id
+        in: path
+        description: ID da conta em que o token será removido
+        schema:
+          type: string
+        required: true
+      - name: id
+        in: path
+        description: ID do Token
+        schema:
+          type: string
+        required: true
+      - name: Request-Time
+        in: header
+        description: Timestamp do momento que enviar a requisição de assinatura digital (RSA)
+        required: true
+        schema:
+          type: string
+      - name: Signature
+        in: header
+        description: Assinatura digital
+        required: true
+        schema:
+          type: string
+          default: singature=
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": \"1234567890ABCDEF\",\n  \"token\": \"ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890\",\n  \"api_type\": \"LIVE\",\n  \"description\": \"Descrição\",\n  \"created_at\": \"2025-04-02T13:09:08-03:00\",\n  \"status\": \"active\"\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 1234567890ABCDEF
+                  token:
+                    type: string
+                    example: ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890
+                  api_type:
+                    type: string
+                    example: LIVE
+                  description:
+                    type: string
+                    example: Descrição
+                  created_at:
+                    type: string
+                    example: '2025-04-02T13:09:08-03:00'
+                  status:
+                    type: string
+                    example: active
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"errors\": \"Api token Not Found\"\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Api token Not Found
+      tags:
+      - API Tokens
+    servers:
+    - url: https://api.iugu.com/v1
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: query
+      name: api_token
+x-refined-from:
+- iugu-tokens-e-cobran-a-direta-openapi.yml
+- iugu-tokens-de-api-openapi.yml
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/antecipar-recebiveis.md
+  - https://dev.iugu.com/reference/consultar-unidade-de-recebiveis.md
+  - https://dev.iugu.com/reference/listar-recebiveis.md
+  - https://dev.iugu.com/reference/listar-unidade-de-recebiveis.md
+  merge:
+    pages: 4
+    deduped: 3
+    conflicts_kept_first: 0

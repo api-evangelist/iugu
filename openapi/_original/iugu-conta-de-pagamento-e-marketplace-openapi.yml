@@ -1,0 +1,3155 @@
+# x-archived-from: iugu-conta-de-pagamento-e-marketplace-openapi.yml
+# x-archived-on: 2026-10-17
+openapi: 3.1.0
+info:
+  title: conta-de-pagamento-e-marketplace
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+x-readme-fauxas: true
+paths:
+  /account/documents:
+    get:
+      summary: Consultar Envio de Documentos para Verificação de Conta iugu
+      description: 'Utilize o `live_ api_token` da subconta.
+
+        Este endpoint permite consultar o status do Envio de Documentos para Verificação de Subconta.'
+      operationId: consultar-envio-de-documentos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: '**Filtro de status:** `pending_manual_analysis`, `requested`, `approved`, `processing`, `not_approved`, `rejected`, `expired` ou `invalid`'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    items:
+                    - kind: identification
+                      status: rejected
+                      created_at: '2026-09-17T14:26:56-03:00'
+                      updated_at: '2026-09-17T14:42:43-03:00'
+                      reason: O documento de identificação enviado não é válido. Envie um novo documento.
+                      reason_code: CAF-ID-INVALIDO
+                Sem pendências:
+                  value: "{\n  \"items\": []\n}"
+              schema:
+                oneOf:
+                - type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          kind:
+                            type: string
+                            example: selfie
+                          status:
+                            type: string
+                            example: pending_manual_analysis
+                          created_at:
+                            type: string
+                            example: '2024-10-28T12:01:37-03:00'
+                          updated_at:
+                            type: string
+                            example: '2024-10-28T12:01:37-03:00'
+                - title: Sem pendências
+                  type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Conta Mestre requisitou:
+                  value: "{\n  \"errors\": \"Only subaccount are allowed\"\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Only subaccount are allowed
+    put:
+      summary: Reenviar Documentos para Verificar Conta iugu
+      description: Utilize o `live_ api_token` da subconta. <br><br> Utilize este endpoint quando os Documentos enviados no endpoint `/v1/accounts/{account_id}/request_verification` são reprovados por nosso Time de Prevenção à Fraude.
+      operationId: reenviar-documentos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: object
+                  description: Formatado em `Base64`. Limite de 15 MB por arquivo.
+                  properties:
+                    identification:
+                      type: string
+                      description: Documento de Identificação Pessoal do Titular da Conta (frente e verso) — RG, CNH ou Passaporte  <br><br> **RG:** físico ou digital com QR Code <br> **CNH:** físico ou digital com QR Code <br> **Passaporte:** físico ou digital
+                      format: binary
+                    identification_front:
+                      type: string
+                      description: Documento de Identificação Pessoal do Titular da Conta **Frente** <br> **Obrigatório** se campo `identification` não for preenchido. <br><br> **RG:** físico ou digital com QR Code <br> **CNH:** físico ou digital com QR Code <br> **Passaporte:** físico ou digital
+                      format: binary
+                    identification_back:
+                      type: string
+                      description: Documento de Identificação Pessoal do Titular da Conta **Verso** <br> **Obrigatório** se campo `identification` não for preenchido. <br><br> **RG:** físico ou digital com QR Code <br> **CNH:** físico ou digital com QR Code <br> **Passaporte:** físico ou digital
+                      format: binary
+                    selfie:
+                      type: string
+                      description: Selfie (foto) do Titular da Conta — **Importante:** Deve ser tirada pela própria pessoa, sem interferência de terceiros, para garantir autenticidade. <br><br> **CNPJ (`person_type` = `Pessoa Jurídica`):** Representante legal da companhia
+                      format: binary
+                    address_proof:
+                      type: string
+                      description: Comprovante de Endereço do Titular da Conta em formato `PDF` ou `JPG` encodado em `Base64`. <br><br>**Importante**<br> O documento deve conter nome, endereço completo, código de barras, valor da fatura e data da emissão.<br><br> **Tipos de Contas**<br>Luz, energia, água, telefone fixou ou celular, internet ou faturas de instituições financeiras dos últimos **90 dias**. <br><br>**CNPJ (`person_type` = `Pessoa Jurídica`):** Envie Comprovante de Endereço da **companhia**.
+                      format: binary
+                    balance_sheet:
+                      type: string
+                      description: Relatório Financeiro da Companhia dos últimos **12 meses com a assinatura do representante legal e do contador (deve conter nome e CRC do contador)**. <br><br> **Tipos de Documento**<br> Declaração de que não há Faturamento <br> Declaração de Faturamento simples <br> Relação de Faturamento Pessoa Jurídica <br> Extrato do SIMEI <br> Declaração anual do SIMEI <br> Declaração de Informações Socioeconômicas e Fiscais (DEFIS)
+                      format: binary
+                    social_contract:
+                      type: string
+                      description: Contrato Social. **Obrigatório** se `person_type` é `Pessoa Jurídica`.
+                      format: binary
+                    additional_document_one:
+                      type: string
+                      description: Documento adicional `1`
+                      format: binary
+                    additional_document_two:
+                      type: string
+                      description: Documento adicional `2`
+                      format: binary
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"items\": [\n    {\n      \"kind\": \"selfie\",\n      \"status\": \"pending_manual_analysis\",\n      \"created_at\": \"2024-10-28T12:01:37-03:00\",\n      \"updated_at\": \"2024-10-28T12:01:37-03:00\"\n    },\n    {\n      \"kind\": \"identification\",\n      \"status\": \"pending_manual_analysis\",\n      \"created_at\": \"2024-10-28T12:01:37-03:00\",\n      \"updated_at\": \"2024-10-28T12:01:37-03:00\"\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        kind:
+                          type: string
+                          example: selfie
+                        status:
+                          type: string
+                          example: pending_manual_analysis
+                        created_at:
+                          type: string
+                          example: '2024-10-28T12:01:37-03:00'
+                        updated_at:
+                          type: string
+                          example: '2024-10-28T12:01:37-03:00'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /accounts/configuration:
+    post:
+      summary: Configurar Conta
+      description: Configura parâmetros de uma conta de pagamentos.
+      operationId: configurar-conta
+      parameters:
+      - name: Request-Time
+        in: header
+        description: Timestamp do momento que enviar a requisição de assinatura digital (RSA)
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: Signature
+        in: header
+        description: Assinatura Digital
+        required: true
+        schema:
+          type: string
+          default: signature=
+      - in: header
+        name: X-Signature-Token-Id
+        schema:
+          type: string
+        description: Indica explicitamente qual token/chave deve ser utilizado na assinatura da requisição, informando o ID do token desejado. Se omitido, mantém o comportamento atual.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                splits:
+                  type: array
+                  description: Lista de splits que será utilizado nesse conta.
+                  items:
+                    properties:
+                      recipient_account_id:
+                        type: string
+                        description: ID Da conta que irá receber o split
+                      cents:
+                        type: integer
+                        description: Centavos a serem cobrados.
+                        format: int32
+                      percent:
+                        type: number
+                        description: Porcentagem a ser cobrada.
+                        format: float
+                      bank_slip_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações no boleto.
+                        format: int32
+                      bank_slip_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações no boleto.
+                        format: float
+                      credit_card_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações no cartão de crédito.
+                        format: int32
+                      credit_card_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações no cartão de crédito.
+                        format: float
+                      pix_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações no pix.
+                        format: int32
+                      pix_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações no pix.
+                        format: float
+                      permit_aggregated:
+                        type: boolean
+                        description: Permite agregar comissionamento percentual + fixo.
+                      credit_card_1x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 1x no cartão de crédito.
+                        format: int32
+                      credit_card_2x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 2x no cartão de crédito.
+                        format: int32
+                      credit_card_3x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 3x no cartão de crédito.
+                        format: int32
+                      credit_card_4x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 4x no cartão de crédito.
+                        format: int32
+                      credit_card_5x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 5x no cartão de crédito.
+                        format: int32
+                      credit_card_6x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 6x no cartão de crédito.
+                        format: int32
+                      credit_card_7x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 7x no cartão de crédito.
+                        format: int32
+                      credit_card_8x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 8x no cartão de crédito.
+                        format: int32
+                      credit_card_9x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 9x no cartão de crédito.
+                        format: int32
+                      credit_card_10x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 10x no cartão de crédito.
+                        format: int32
+                      credit_card_11x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 11x no cartão de crédito.
+                        format: int32
+                      credit_card_12x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 12x no cartão de crédito.
+                        format: int32
+                      credit_card_1x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 1x no cartão de crédito.
+                        format: float
+                      credit_card_2x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 2x no cartão de crédito.
+                        format: float
+                      credit_card_3x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 3x no cartão de crédito.
+                        format: float
+                      credit_card_4x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 4x no cartão de crédito.
+                        format: float
+                      credit_card_5x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 5x no cartão de crédito.
+                        format: float
+                      credit_card_6x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 6x no cartão de crédito.
+                        format: float
+                      credit_card_7x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 7x no cartão de crédito.
+                        format: float
+                      credit_card_8x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 8x no cartão de crédito.
+                        format: float
+                      credit_card_9x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 9x no cartão de crédito.
+                        format: float
+                      credit_card_10x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 10x no cartão de crédito.
+                        format: float
+                      credit_card_11x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 11x no cartão de crédito.
+                        format: float
+                      credit_card_12x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 12x no cartão de crédito.
+                        format: float
+                    type: object
+                auto_withdraw:
+                  type: boolean
+                  description: Saque automático?
+                auto_withdraw_type:
+                  type: string
+                  description: 'Periodicidade da agenda: `daily`, `weekly`, `biweekly` ou `monthly`.<br>
+
+                    Quando presente, ativa a agenda. Ausente ou vazio, desativa.'
+                auto_withdraw_option:
+                  type: integer
+                  format: int32
+                  description: 'Depende do `auto_withdraw_type`. Para `weekly` e `biweekly`: dia da semana de `1` a `5` (1= Segunda, 2= Terça, 3= Quarta, 4= Quinta, 5= Sexta). Para `monthly`: dia do mês de `1` a `31`. Não se aplica a `daily`.'
+                auto_withdraw_anchor_date:
+                  type: string
+                  description: 'Apenas `biweekly`: data de referência (início do ciclo) que define quais semanas são ativas. (Formato: ''AAAA-MM-DD''). <br> Obrigatória para `biweekly`; ignorada para os demais tipos.'
+                per_day_interest:
+                  type: boolean
+                  description: Juros de mora?
+                fines:
+                  type: boolean
+                  description: Multas?
+                late_payment_fine:
+                  type: integer
+                  description: 'Valor da multa em % (Ex: 2)'
+                  format: int32
+                auto_advance:
+                  type: boolean
+                  description: Antecipação Automática. Só pode ser atribuído caso a conta tenha a funcionalidade de Novo Adiantamento habilitado (entre em contato com o Suporte para habilitar). Caso o parâmetro não seja enviado, considera-se a mesma configuração de adiantamento automático da conta mestre.
+                auto_advance_type:
+                  type: string
+                  description: Opções de Antecipação Automática. Obrigatório caso auto_advance seja true. Recebe os valores 'daily' (Antecipação diária), 'weekly' (Antecipação semanal, que ocorre no dia da semana determinado pelo usuário), 'monthly' (Antecipação mensal, que ocorre no dia do mês determinado pelo usuário) e 'days_after_payment' (Antecipação que ocorre em um número de dias após o pagamento especificado pelo usuário)
+                auto_advance_option:
+                  type: integer
+                  description: Obrigatório caso auto_advance seja true e auto_advance_type diferente de 'daily'. Em caso de auto_advance_type = weekly, recebe valores de 0 a 6 (Número correspondente ao dia da semana que a antecipação será realizada, 0 para domingo, 1 para segunda e assim por diante). Em caso de auto_advance_type = monthly, recebe valores de 1 a 28 (Número correspondente ao dia do mês que a antecipação será realizada). Em caso de auto_advance_type = days_after_payment, recebe valores de 1 a 30 (Número de dias após o pagamento em que a antecipação será realizada)
+                  format: int32
+                bank_slip:
+                  type: object
+                  description: Configurações de boleto bancário
+                  properties:
+                    active:
+                      type: boolean
+                      description: Ativo?
+                    extra_due:
+                      type: integer
+                      description: 'Dias de Vencimento Extras no Boleto (Ex: 2)'
+                      format: int32
+                    reprint_extra_due:
+                      type: integer
+                      description: 'Dias de Vencimento Extras na 2a Via do Boleto (Ex: 1)'
+                      format: int32
+                credit_card:
+                  type: object
+                  description: Configurações de cartão de crédito
+                  properties:
+                    active:
+                      type: boolean
+                      description: Ativo?
+                    soft_descriptor:
+                      type: string
+                      description: 'Descrição que apareça na Fatura do Cartão do Cliente (Obs: Esse campo pode sofrer limitação de 12 ou 22 caracteres dependendo da adquirente utilizada pela iugu no momento da transação, a adquirente não permite a utilização de caracteres especiais)'
+                    installments:
+                      type: boolean
+                      description: Parcelamento ativo?
+                    max_installments:
+                      type: integer
+                      description: Número máximo de parcelas (Nr entre 1 a 18)
+                      format: int32
+                    max_installments_without_interest:
+                      type: integer
+                      description: Número de parcelas sem cobrança de juros ao cliente (Nr entre 1 a 18). *somente contas antigas
+                      format: int32
+                    two_step_transaction:
+                      type: boolean
+                      description: Habilita o fluxo de pagamento em duas etapas (Autorização e Captura)
+                    installments_pass_interest:
+                      type: boolean
+                      description: Repasse de Juros de Parcelamento ativo? *somente contas antigas
+                    two_credit_cards_payment:
+                      type: boolean
+                      description: '**(NOVO✨)** Ativar/desativar [Pagamento com 2 Cartões](https://dev.iugu.com/docs/cobranca-com-2-cartoes)'
+                payment_email_notification:
+                  type: boolean
+                  description: boolean Ativa ou desativa a notificação de pagamento
+                payment_email_notification_receiver:
+                  type: string
+                  description: Email que deve receber as notificações de pagamento (Obrigatório caso payment_email_notification seja true)
+                early_payment_discount:
+                  type: boolean
+                  description: Ativa ou desativa o desconto por pagamento antecipado
+                early_payment_discounts:
+                  type: array
+                  description: Configuração do desconto a ser aplicado
+                  items:
+                    properties:
+                      days:
+                        type: integer
+                        description: Dias antecedentes ao vencimento da fatura em que o desconto será aplicado
+                        format: int32
+                      percent:
+                        type: number
+                        description: 'Percentual de desconto a ser aplicado. Obs.: O percentual máximo que deve ser aplicado é de 80%.'
+                        format: float
+                      value_cents:
+                        type: integer
+                        description: Valor em centavos de desconto a ser aplicado
+                        format: int32
+                    type: object
+                disabled_withdraw:
+                  type: boolean
+                  description: Desabilita saque da conta
+                customer_minimum_balance_cents:
+                  type: string
+                  description: Configuração de valor para reserva de saque
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": \"12345ABCDE67890FGHIJK12345LMNOPQR\",\n  \"name\": \"ACME Teste Produto e Integrações\",\n  \"created_at\": \"2023-10-16T15:44:18-03:00\",\n  \"updated_at\": \"2024-08-20T09:28:08-03:00\",\n  \"can_receive?\": true,\n  \"is_verified?\": true,\n  \"last_verification_request_status\": null,\n  \"last_verification_request_data\": null,\n  \"last_verification_request_feedback\": null,\n  \"change_plan_type\": 1,\n  \"subscriptions_trial_period\": 0,\n  \"subscriptions_billing_days\": 5,\n  \"disable_emails\": false,\n  \"last_withdraw\": null,\n  \"reply_to\": \"no-reply@acme.com\",\n  \"webapp_on_test_mode\": false,\n  \"marketplace\": true,\n  \"default_return_url\": \"\",\n  \"credit_card_verified\": true,\n  \"fines\": false,\n  \"late_payment_fine\": 1,\n  \"per_day_interest\": false,\n  \"old_advancement\": true,\n  \"early_payment_discount\": false,\n  \"early_payment_discount_days\": null,\n  \"early_payment_discount_percent\": null,\n  \"sac_phone\"\
+                    : null,\n  \"sac_email\": null,\n  \"informations\": null,\n  \"configuration\": {\n    \"auto_withdraw\": false,\n    \"disabled_withdraw\": false,\n    \"payment_email_notification\": false,\n    \"payment_email_notification_receiver\": \"finance@acme.com\",\n    \"auto_advance\": true,\n    \"auto_advance_type\": \"daily\",\n    \"auto_advance_option\": null,\n    \"commission_percent\": null,\n    \"owner_emails_to_notify\": \"john.doe@acme.com,jane.smith@acme.com,bob.brown@acme.com,alice.white@acme.com\",\n    \"fines\": false,\n    \"late_payment_fine\": 1,\n    \"per_day_interest\": false,\n    \"bank_slip\": {\n      \"active\": true,\n      \"extra_due\": \"2\",\n      \"reprint_extra_due\": \"2\"\n    },\n    \"credit_card\": {\n      \"active\": true,\n      \"soft_descriptor\": \"ACME DESC\",\n      \"installments\": true,\n      \"installments_pass_interest\": false,\n      \"max_installments\": \"12\",\n      \"max_installments_without_interest\": \"1\"\
+                    ,\n      \"two_step_transaction\": true\n    },\n    \"pix\": {\n      \"active\": true\n    },\n    \"early_payment_discount\": false,\n    \"early_payment_discount_days\": null,\n    \"early_payment_discount_percent\": null\n  },\n  \"bank_accounts\": [\n    {\n      \"branch\": \"0001\",\n      \"number\": \"1234567\",\n      \"digit\": \"8\"\n    }\n  ],\n  \"auto_withdraw\": false,\n  \"disabled_withdraw\": false,\n  \"payment_email_notification\": false,\n  \"payment_email_notification_receiver\": \"finance@acme.com\",\n  \"auto_advance\": true,\n  \"auto_advance_type\": \"daily\",\n  \"auto_advance_option\": null,\n  \"balance\": \"R$ 58,03\",\n  \"balance_in_protest\": \"R$ 0,00\",\n  \"balance_available_for_withdraw\": \"R$ 58,03\",\n  \"protected_balance\": \"R$ 0,00\",\n  \"customer_minimum_balance_cents\": 3000,\n  \"payable_balance\": \"R$ -2,47\",\n  \"receivable_balance\": \"R$ 13,53\",\n  \"commission_balance\": \"R$ 0,00\",\n  \"volume_last_month\": \"\
+                    R$ 8,00\",\n  \"volume_this_month\": \"R$ 17,00\",\n  \"total_subscriptions\": 30,\n  \"total_active_subscriptions\": 8,\n  \"taxes_paid_last_month\": \"R$ 0,00\",\n  \"taxes_paid_this_month\": \"R$ 0,00\",\n  \"has_bank_address?\": true,\n  \"permissions\": null,\n  \"custom_logo_url\": \"https://s3-sa-east-1.amazonaws.com/storage.acme.com/custom_logos/12345abcde67890fghijk12345lmnopqr-big?AWSAccessKeyId=EXAMPLEKEY&Expires=1724157249&Signature=EXAMPLESIGNATURE\",\n  \"custom_logo_small_url\": \"https://s3-sa-east-1.amazonaws.com/storage.acme.com/custom_logos/12345abcde67890fghijk12345lmnopqr-small?AWSAccessKeyId=EXAMPLEKEY&Expires=1724157249&Signature=EXAMPLESIGNATURE\",\n  \"early_payment_discounts\": [],\n  \"commissions\": null,\n  \"splits\": [\n    {\n      \"id\": \"ABCDE12345FGHIJ67890KLMNOPQRSTUV\",\n      \"split_id\": \"WXYZ1234567890ABCDEFGHIJKL\",\n      \"recipient_account_id\": \"MNOPQRSTUV1234567890ABCDEFGHIJK\",\n      \"cents\": 0,\n      \"percent\"\
+                    : 0,\n      \"credit_card_cents\": null,\n      \"credit_card_percent\": null,\n      \"bank_slip_cents\": 9,\n      \"bank_slip_percent\": null,\n      \"pix_cents\": 109,\n      \"pix_percent\": null,\n      \"permit_aggregated\": true,\n      \"created_at\": \"2024-07-15T16:42:54-03:00\",\n      \"updated_at\": \"2024-07-15T16:42:54-03:00\",\n      \"credit_card_1x_cents\": null,\n      \"credit_card_2x_cents\": null,\n      \"credit_card_3x_cents\": null,\n      \"credit_card_4x_cents\": null,\n      \"credit_card_5x_cents\": null,\n      \"credit_card_6x_cents\": null,\n      \"credit_card_7x_cents\": null,\n      \"credit_card_8x_cents\": null,\n      \"credit_card_9x_cents\": null,\n      \"credit_card_10x_cents\": null,\n      \"credit_card_11x_cents\": null,\n      \"credit_card_12x_cents\": null,\n      \"credit_card_1x_percent\": 0.09,\n      \"credit_card_2x_percent\": 0.1,\n      \"credit_card_3x_percent\": null,\n      \"credit_card_4x_percent\": null,\n\
+                    \      \"credit_card_5x_percent\": null,\n      \"credit_card_6x_percent\": null,\n      \"credit_card_7x_percent\": null,\n      \"credit_card_8x_percent\": null,\n      \"credit_card_9x_percent\": null,\n      \"credit_card_10x_percent\": null,\n      \"credit_card_11x_percent\": null,\n      \"credit_card_12x_percent\": null,\n      \"credit_card_13x_cents\": null,\n      \"credit_card_14x_cents\": null,\n      \"credit_card_15x_cents\": null,\n      \"credit_card_16x_cents\": null,\n      \"credit_card_17x_cents\": null,\n      \"credit_card_18x_cents\": null,\n      \"credit_card_13x_percent\": null,\n      \"credit_card_14x_percent\": null,\n      \"credit_card_15x_percent\": null,\n      \"credit_card_16x_percent\": null,\n      \"credit_card_17x_percent\": null,\n      \"credit_card_18x_percent\": null\n    }\n  ],\n  \"contact_data\": {\n    \"name\": \"ACME Corp\",\n    \"document_number\": \"00000000000123\",\n    \"full_address\": \"123 Fictional Street, Suite\
+                    \ 100, Metropolis, SP, 00000000\"\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 12345ABCDE67890FGHIJK12345LMNOPQR
+                  name:
+                    type: string
+                    example: ACME Teste Produto e Integrações
+                  created_at:
+                    type: string
+                    example: '2023-10-16T15:44:18-03:00'
+                  updated_at:
+                    type: string
+                    example: '2024-08-20T09:28:08-03:00'
+                  can_receive?:
+                    type: boolean
+                    example: true
+                    default: true
+                  is_verified?:
+                    type: boolean
+                    example: true
+                    default: true
+                  last_verification_request_status: {}
+                  last_verification_request_data: {}
+                  last_verification_request_feedback: {}
+                  change_plan_type:
+                    type: integer
+                    example: 1
+                    default: 0
+                  subscriptions_trial_period:
+                    type: integer
+                    example: 0
+                    default: 0
+                  subscriptions_billing_days:
+                    type: integer
+                    example: 5
+                    default: 0
+                  disable_emails:
+                    type: boolean
+                    example: false
+                    default: true
+                  last_withdraw: {}
+                  reply_to:
+                    type: string
+                    example: no-reply@acme.com
+                  webapp_on_test_mode:
+                    type: boolean
+                    example: false
+                    default: true
+                  marketplace:
+                    type: boolean
+                    example: true
+                    default: true
+                  default_return_url:
+                    type: string
+                    example: ''
+                  credit_card_verified:
+                    type: boolean
+                    example: true
+                    default: true
+                  fines:
+                    type: boolean
+                    example: false
+                    default: true
+                  late_payment_fine:
+                    type: integer
+                    example: 1
+                    default: 0
+                  per_day_interest:
+                    type: boolean
+                    example: false
+                    default: true
+                  old_advancement:
+                    type: boolean
+                    example: true
+                    default: true
+                  early_payment_discount:
+                    type: boolean
+                    example: false
+                    default: true
+                  early_payment_discount_days: {}
+                  early_payment_discount_percent: {}
+                  sac_phone: {}
+                  sac_email: {}
+                  informations: {}
+                  configuration:
+                    type: object
+                    properties:
+                      auto_withdraw:
+                        type: boolean
+                        example: false
+                        default: true
+                      disabled_withdraw:
+                        type: boolean
+                        example: false
+                        default: true
+                      payment_email_notification:
+                        type: boolean
+                        example: false
+                        default: true
+                      payment_email_notification_receiver:
+                        type: string
+                        example: finance@acme.com
+                      auto_advance:
+                        type: boolean
+                        example: true
+                        default: true
+                      auto_advance_type:
+                        type: string
+                        example: daily
+                      auto_advance_option: {}
+                      commission_percent: {}
+                      owner_emails_to_notify:
+                        type: string
+                        example: john.doe@acme.com,jane.smith@acme.com,bob.brown@acme.com,alice.white@acme.com
+                      fines:
+                        type: boolean
+                        example: false
+                        default: true
+                      late_payment_fine:
+                        type: integer
+                        example: 1
+                        default: 0
+                      per_day_interest:
+                        type: boolean
+                        example: false
+                        default: true
+                      bank_slip:
+                        type: object
+                        properties:
+                          active:
+                            type: boolean
+                            example: true
+                            default: true
+                          extra_due:
+                            type: string
+                            example: '2'
+                          reprint_extra_due:
+                            type: string
+                            example: '2'
+                      credit_card:
+                        type: object
+                        properties:
+                          active:
+                            type: boolean
+                            example: true
+                            default: true
+                          soft_descriptor:
+                            type: string
+                            example: ACME DESC
+                          installments:
+                            type: boolean
+                            example: true
+                            default: true
+                          installments_pass_interest:
+                            type: boolean
+                            example: false
+                            default: true
+                          max_installments:
+                            type: string
+                            example: '12'
+                          max_installments_without_interest:
+                            type: string
+                            example: '1'
+                          two_step_transaction:
+                            type: boolean
+                            example: true
+                            default: true
+                      pix:
+                        type: object
+                        properties:
+                          active:
+                            type: boolean
+                            example: true
+                            default: true
+                      early_payment_discount:
+                        type: boolean
+                        example: false
+                        default: true
+                      early_payment_discount_days: {}
+                      early_payment_discount_percent: {}
+                  bank_accounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        branch:
+                          type: string
+                          example: '0001'
+                        number:
+                          type: string
+                          example: '1234567'
+                        digit:
+                          type: string
+                          example: '8'
+                  auto_withdraw:
+                    type: boolean
+                    example: false
+                    default: true
+                  disabled_withdraw:
+                    type: boolean
+                    example: false
+                    default: true
+                  payment_email_notification:
+                    type: boolean
+                    example: false
+                    default: true
+                  payment_email_notification_receiver:
+                    type: string
+                    example: finance@acme.com
+                  auto_advance:
+                    type: boolean
+                    example: true
+                    default: true
+                  auto_advance_type:
+                    type: string
+                    example: daily
+                  auto_advance_option: {}
+                  balance:
+                    type: string
+                    example: R$ 58,03
+                  balance_in_protest:
+                    type: string
+                    example: R$ 0,00
+                  balance_available_for_withdraw:
+                    type: string
+                    example: R$ 58,03
+                  protected_balance:
+                    type: string
+                    example: R$ 0,00
+                  customer_minimum_balance_cents:
+                    type: integer
+                    example: 3000
+                    default: 0
+                  payable_balance:
+                    type: string
+                    example: R$ -2,47
+                  receivable_balance:
+                    type: string
+                    example: R$ 13,53
+                  commission_balance:
+                    type: string
+                    example: R$ 0,00
+                  volume_last_month:
+                    type: string
+                    example: R$ 8,00
+                  volume_this_month:
+                    type: string
+                    example: R$ 17,00
+                  total_subscriptions:
+                    type: integer
+                    example: 30
+                    default: 0
+                  total_active_subscriptions:
+                    type: integer
+                    example: 8
+                    default: 0
+                  taxes_paid_last_month:
+                    type: string
+                    example: R$ 0,00
+                  taxes_paid_this_month:
+                    type: string
+                    example: R$ 0,00
+                  has_bank_address?:
+                    type: boolean
+                    example: true
+                    default: true
+                  permissions: {}
+                  custom_logo_url:
+                    type: string
+                    example: https://s3-sa-east-1.amazonaws.com/storage.acme.com/custom_logos/12345abcde67890fghijk12345lmnopqr-big?AWSAccessKeyId=EXAMPLEKEY&Expires=1724157249&Signature=EXAMPLESIGNATURE
+                  custom_logo_small_url:
+                    type: string
+                    example: https://s3-sa-east-1.amazonaws.com/storage.acme.com/custom_logos/12345abcde67890fghijk12345lmnopqr-small?AWSAccessKeyId=EXAMPLEKEY&Expires=1724157249&Signature=EXAMPLESIGNATURE
+                  early_payment_discounts:
+                    type: array
+                    items:
+                      type: object
+                      properties: {}
+                  commissions: {}
+                  splits:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: ABCDE12345FGHIJ67890KLMNOPQRSTUV
+                        split_id:
+                          type: string
+                          example: WXYZ1234567890ABCDEFGHIJKL
+                        recipient_account_id:
+                          type: string
+                          example: MNOPQRSTUV1234567890ABCDEFGHIJK
+                        cents:
+                          type: integer
+                          example: 0
+                          default: 0
+                        percent:
+                          type: integer
+                          example: 0
+                          default: 0
+                        credit_card_cents: {}
+                        credit_card_percent: {}
+                        bank_slip_cents:
+                          type: integer
+                          example: 9
+                          default: 0
+                        bank_slip_percent: {}
+                        pix_cents:
+                          type: integer
+                          example: 109
+                          default: 0
+                        pix_percent: {}
+                        permit_aggregated:
+                          type: boolean
+                          example: true
+                          default: true
+                        created_at:
+                          type: string
+                          example: '2024-07-15T16:42:54-03:00'
+                        updated_at:
+                          type: string
+                          example: '2024-07-15T16:42:54-03:00'
+                        credit_card_1x_cents: {}
+                        credit_card_2x_cents: {}
+                        credit_card_3x_cents: {}
+                        credit_card_4x_cents: {}
+                        credit_card_5x_cents: {}
+                        credit_card_6x_cents: {}
+                        credit_card_7x_cents: {}
+                        credit_card_8x_cents: {}
+                        credit_card_9x_cents: {}
+                        credit_card_10x_cents: {}
+                        credit_card_11x_cents: {}
+                        credit_card_12x_cents: {}
+                        credit_card_1x_percent:
+                          type: number
+                          example: 0.09
+                          default: 0
+                        credit_card_2x_percent:
+                          type: number
+                          example: 0.1
+                          default: 0
+                        credit_card_3x_percent: {}
+                        credit_card_4x_percent: {}
+                        credit_card_5x_percent: {}
+                        credit_card_6x_percent: {}
+                        credit_card_7x_percent: {}
+                        credit_card_8x_percent: {}
+                        credit_card_9x_percent: {}
+                        credit_card_10x_percent: {}
+                        credit_card_11x_percent: {}
+                        credit_card_12x_percent: {}
+                        credit_card_13x_cents: {}
+                        credit_card_14x_cents: {}
+                        credit_card_15x_cents: {}
+                        credit_card_16x_cents: {}
+                        credit_card_17x_cents: {}
+                        credit_card_18x_cents: {}
+                        credit_card_13x_percent: {}
+                        credit_card_14x_percent: {}
+                        credit_card_15x_percent: {}
+                        credit_card_16x_percent: {}
+                        credit_card_17x_percent: {}
+                        credit_card_18x_percent: {}
+                  contact_data:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: ACME Corp
+                      document_number:
+                        type: string
+                        example: '00000000000123'
+                      full_address:
+                        type: string
+                        example: 123 Fictional Street, Suite 100, Metropolis, SP, 00000000
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+  /accounts/{account_id}/contacts:
+    post:
+      summary: Criar contato de conta
+      description: Permite a criação de contatos vinculados à contas
+      operationId: criar-contato-de-subconta
+      parameters:
+      - name: account_id
+        in: path
+        description: ID da Conta
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nome do contato
+                cpf:
+                  type: string
+                  description: CPF do contato sem pontos (opcional)
+                email:
+                  type: string
+                  description: Email do contato
+                phone:
+                  type: string
+                  description: Telefone do contato no formato `(xx) xxxxx-xxxx`
+                kind:
+                  type: string
+                  description: 'Deve ser um destes: `administrative, financial, technical`. Sendo que se referem a contatos do tipo administrativo, financeiro e técnico, respectivamente.'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": \"B7ED9DA6AC97460C9249B0DABD82D77A\",\n    \"name\": \"Nome do contato\",\n    \"cpf\": \"12312312312\",\n    \"email\": \"contact@email.com\",\n    \"phone\": \"(11) 91234-1234\",\n    \"kind\": \"financial\"\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: B7ED9DA6AC97460C9249B0DABD82D77A
+                  name:
+                    type: string
+                    example: Nome do contato
+                  cpf:
+                    type: string
+                    example: '12312312312'
+                  email:
+                    type: string
+                    example: contact@email.com
+                  phone:
+                    type: string
+                    example: (11) 91234-1234
+                  kind:
+                    type: string
+                    example: financial
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"errors\": {\n        \"cpf\": [\n            \"não é válido\"\n        ],\n        \"name\": [\n            \"não pode ficar em branco\"\n        ]\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      cpf:
+                        type: array
+                        items:
+                          type: string
+                          example: não é válido
+                      name:
+                        type: array
+                        items:
+                          type: string
+                          example: não pode ficar em branco
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl --request POST \\\n  --url https://api.iugu.com/v1/account_id/contacts\\\n  --header 'Content-Type: application/json'"
+        - language: javascript
+          code: "const fetch = require('node-fetch');\n\nlet url = 'https://api.iugu.com/v1/account_id/contacts';\n\nlet options = {method: 'POST', headers: {'Content-Type': 'application/json'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          name: Node
+        - language: ruby
+          code: 'require ''uri''
+
+            require ''net/http''
+
+            require ''openssl''
+
+
+            url = URI("https://api.iugu.com/v1/account_id/contacts")
+
+
+            http = Net::HTTP.new(url.host, url.port)
+
+            http.use_ssl = true
+
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+
+            request = Net::HTTP::Post.new(url)
+
+            request["Content-Type"] = ''application/json''
+
+
+            response = http.request(request)
+
+            puts response.read_body'
+        - language: python
+          code: 'import requests
+
+
+            url = "https://api.iugu.com/v1/account_id/contacts"
+
+
+            headers = {"Content-Type": "application/json"}
+
+
+            response = requests.request("POST", url, headers=headers)
+
+
+            print(response.text)'
+        samples-languages:
+        - curl
+        - javascript
+        - ruby
+        - python
+    get:
+      summary: Listar contatos de conta
+      description: Permite listar contatos de conta
+      operationId: listar-contatos-de-subconta
+      parameters:
+      - name: account_id
+        in: path
+        description: ID da Conta
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "[\n  {\n    \"id\": \"B7ED9DA6AC97460C9249B0DABD82D77A\",\n    \"name\": \"Nome do primeiro contato\",\n    \"cpf\": \"12312312312\",\n    \"email\": \"teste.teste@iugu.com\",\n    \"phone\": \"(11) 91234-1234\",\n    \"kind\": \"financial\"\n},\n  {\n    \"id\": \"4E6956B90FF649BF814955ABC7A45D5E\",\n    \"name\": \"Nome do segundo contato\",\n    \"cpf\": \"32132132132\",\n    \"email\": \"teste.teste@iugu.com\",\n    \"phone\": \"(11) 91234-1234\",\n    \"kind\": \"technical\"\n  }\n]\n"
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: B7ED9DA6AC97460C9249B0DABD82D77A
+                    name:
+                      type: string
+                      example: Nome do primeiro contato
+                    cpf:
+                      type: string
+                      example: '12312312312'
+                    email:
+                      type: string
+                      example: teste.teste@iugu.com
+                    phone:
+                      type: string
+                      example: (11) 91234-1234
+                    kind:
+                      type: string
+                      example: financial
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"errors\": \"Account Not Found\"\n}\n#Não foi informado o ID da conta#"
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl --request GET \\\n  --url https://api.iugu.com/v1/account_id/contacts\\\n  --header 'Content-Type: application/json'"
+        - language: javascript
+          code: "const fetch = require('node-fetch');\n\nlet url = 'https://api.iugu.com/v1/account_id/contacts';\n\nlet options = {method: 'GET'};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          name: Node
+        - language: ruby
+          code: 'require ''uri''
+
+            require ''net/http''
+
+            require ''openssl''
+
+
+            url = URI("https://api.iugu.com/v1/account_id/accounts")
+
+
+            http = Net::HTTP.new(url.host, url.port)
+
+            http.use_ssl = true
+
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+
+            request = Net::HTTP::Get.new(url)
+
+
+            response = http.request(request)
+
+            puts response.read_body'
+        - language: python
+          code: 'import requests
+
+
+            url = "https://api.iugu.com/v1/accounts_id/accounts"
+
+
+            response = requests.request("GET", url)
+
+
+            print(response.text)'
+        samples-languages:
+        - curl
+        - javascript
+        - ruby
+        - python
+  /accounts/{account_id}/contacts/{id}:
+    put:
+      summary: Atualizar contato de conta
+      description: Permite atualizar contato de conta. Não permite alterar o CPF.
+      operationId: atualizar-contato-de-conta
+      parameters:
+      - name: account_id
+        in: path
+        description: ID da Conta
+        schema:
+          type: string
+        required: true
+      - name: id
+        in: path
+        description: ID do Contato
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nome do contato
+                cpf:
+                  type: string
+                  description: CPF do contato sem pontos
+                email:
+                  type: string
+                  description: Email do contato
+                phone:
+                  type: string
+                  description: Telefone do contato no formato `(xx) xxxxx-xxxx`
+                kind:
+                  type: string
+                  description: 'Deve ser um destes: `administrative, financial, technical`. Sendo que se referem a contatos do tipo administrativo, financeiro e técnico, respectivamente.'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": \"CA095430B56745DE90EE098DDD7F6EB2\",\n    \"name\": \"teste\",\n    \"cpf\": \"12345678912\",\n    \"email\": \"teste@teste.com\",\n    \"phone\": \"(11)91234-1234\",\n    \"kind\": \"administrative\"\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: CA095430B56745DE90EE098DDD7F6EB2
+                  name:
+                    type: string
+                    example: teste
+                  cpf:
+                    type: string
+                    example: '12345678912'
+                  email:
+                    type: string
+                    example: teste@teste.com
+                  phone:
+                    type: string
+                    example: (11)91234-1234
+                  kind:
+                    type: string
+                    example: administrative
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"errors\": {\n        \"cpf\": [\n            \"Invalid CPF/CNPJ\",\n            \"CPF can`t be changed.\"\n        ]\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      cpf:
+                        type: array
+                        items:
+                          type: string
+                          example: Invalid CPF/CNPJ
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl --request PUT \\\n  --url https://api.iugu.com/v1/account_id/contacts/contact_id\\\n  --header 'Content-Type: application/json'"
+        - language: javascript
+          code: "const fetch = require('node-fetch');\n\nlet url = 'https://api.iugu.com/v1/account_id/contacts/id';\n\nlet options = {method: 'PUT', headers: {'Content-Type': 'application/json'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          name: Node
+        - language: ruby
+          code: 'require ''uri''
+
+            require ''net/http''
+
+            require ''openssl''
+
+
+            url = URI("https://api.iugu.com/v1/account_id/contacts/id")
+
+
+            http = Net::HTTP.new(url.host, url.port)
+
+            http.use_ssl = true
+
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+
+            request = Net::HTTP::Put.new(url)
+
+            request["Content-Type"] = ''application/json''
+
+
+            response = http.request(request)
+
+            puts response.read_body'
+        - language: python
+          code: 'import requests
+
+
+            url = "https://api.iugu.com/v1/account_id/contacts/id"
+
+
+            headers = {"Content-Type": "application/json"}
+
+
+            response = requests.request("PUT", url, headers=headers)
+
+
+            print(response.text)'
+        samples-languages:
+        - curl
+        - javascript
+        - ruby
+        - python
+    get:
+      summary: Buscar contato de conta
+      description: Retorna os dados de um determinado contato de conta
+      operationId: buscar-contato-de-subconta
+      parameters:
+      - name: account_id
+        in: path
+        description: ID da Conta
+        schema:
+          type: string
+        required: true
+      - name: id
+        in: path
+        description: id do contato
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": \"A3AE2A25CB4747F0B0BC82D613462536\",\n    \"name\": \"Teste Iugu\",\n    \"cpf\": \"038697111111\",\n    \"email\": \"teste.teste@iugu.com\",\n    \"phone\": \"(11) 91234-1234\",\n    \"kind\": \"technical\"\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: A3AE2A25CB4747F0B0BC82D613462536
+                  name:
+                    type: string
+                    example: Teste Iugu
+                  cpf:
+                    type: string
+                    example: 038697111111
+                  email:
+                    type: string
+                    example: teste.teste@iugu.com
+                  phone:
+                    type: string
+                    example: (11) 91234-1234
+                  kind:
+                    type: string
+                    example: technical
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"errors\": \"Account contact Not Found\"\n}\n#ID do contato não encontrado#"
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl --request GET \\\n  --url https://api.iugu.com/v1/account_id/contacts/contact_id \\\n  --header 'Content-Type: application/json'"
+        - language: javascript
+          code: "const fetch = require('node-fetch');\n\nlet url = 'https://api.iugu.com/v1/account_id/contacts/contact_id';\n\nlet options = {method: 'GET'};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          name: Node
+        - language: ruby
+          code: 'require ''uri''
+
+            require ''net/http''
+
+            require ''openssl''
+
+
+            url = URI("https://api.iugu.com/v1/account_id/accounts/contact_id")
+
+
+            http = Net::HTTP.new(url.host, url.port)
+
+            http.use_ssl = true
+
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+
+            request = Net::HTTP::Get.new(url)
+
+
+            response = http.request(request)
+
+            puts response.read_body'
+        - language: python
+          code: 'import requests
+
+
+            url = "https://api.iugu.com/v1/accounts_id/accounts/contact_id"
+
+
+            response = requests.request("GET", url)
+
+
+            print(response.text)'
+        samples-languages:
+        - curl
+        - javascript
+        - ruby
+        - python
+    delete:
+      summary: Deletar contato de conta
+      description: Deleta os dados de um determinado contato de conta
+      operationId: deletar-contato-de-conta
+      parameters:
+      - name: account_id
+        in: path
+        description: ID da Conta
+        schema:
+          type: string
+        required: true
+      - name: ID
+        in: path
+        description: ID do Contato
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": \"B7ED9DA6AC97460C9249B0DABD82D77A\",\n    \"name\": \"Nome do contato\",\n    \"cpf\": \"12312312312\",\n    \"email\": \"contact@email.com\",\n    \"phone\": \"(11) 91234-1234\",\n    \"kind\": \"financial\"\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: B7ED9DA6AC97460C9249B0DABD82D77A
+                  name:
+                    type: string
+                    example: Nome do contato
+                  cpf:
+                    type: string
+                    example: '12312312312'
+                  email:
+                    type: string
+                    example: contact@email.com
+                  phone:
+                    type: string
+                    example: (11) 91234-1234
+                  kind:
+                    type: string
+                    example: financial
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"errors\": \"Account contact Not Found\"\n}\n#ID do contato não encontrado#"
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl --request DELETE \\\n  --url https://api.iugu.com/v1/account_id/contacts/contact_id \\\n  --header 'Content-Type: application/json'"
+        - language: javascript
+          code: "const fetch = require('node-fetch');\n\nlet url = 'https://api.iugu.com/v1/account_id/contacts/contact_id';\n\nlet options = {method: 'DELETE'};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          name: Node
+        - language: ruby
+          code: 'require ''uri''
+
+            require ''net/http''
+
+            require ''openssl''
+
+
+            url = URI("https://api.iugu.com/v1/account_id/accounts/contact_id")
+
+
+            http = Net::HTTP.new(url.host, url.port)
+
+            http.use_ssl = true
+
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+
+            request = Net::HTTP::Delete.new(url)
+
+
+            response = http.request(request)
+
+            puts response.read_body'
+        - language: python
+          code: 'import requests
+
+
+            url = "https://api.iugu.com/v1/accounts_id/accounts/contact_id"
+
+
+            response = requests.request("DELETE", url)
+
+
+            print(response.text)'
+        samples-languages:
+        - curl
+        - javascript
+        - ruby
+        - python
+  /accounts/{account_id}/owners/{id}:
+    put:
+      summary: Atualizar sócio de conta
+      description: Permite a criação de contatos vinculados à contas
+      operationId: atualizar-contato-de-subconta
+      parameters:
+      - name: name
+        in: query
+        description: Nome do sócio
+        schema:
+          type: string
+      - name: cpf
+        in: query
+        description: CPF do sócio sem pontos
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: Email do sócio
+        schema:
+          type: string
+      - name: phone
+        in: query
+        description: Telefone do sócio no formato `(xx) xxxxx-xxxx`
+        schema:
+          type: string
+      - name: account_id
+        in: path
+        description: ID da conta
+        schema:
+          type: string
+        required: true
+      - name: id
+        in: path
+        description: ID do sócio
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": \"B7ED9DA6AC97460C9249B0DABD82D77A\",\n    \"name\": \"Nome do sócio\",\n    \"cpf\": \"12312312312\",\n    \"email\": \"owner@iugu.com\",\n    \"phone\": \"(11) 91234-1234\",\n    \"kind\": \"owner\"\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: B7ED9DA6AC97460C9249B0DABD82D77A
+                  name:
+                    type: string
+                    example: Nome do sócio
+                  cpf:
+                    type: string
+                    example: '12312312312'
+                  email:
+                    type: string
+                    example: owner@iugu.com
+                  phone:
+                    type: string
+                    example: (11) 91234-1234
+                  kind:
+                    type: string
+                    example: owner
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"errors\": {\n        \"cpf\": [\n            \"não é válido\"\n        ],\n        \"name\": [\n            \"não pode ficar em branco\"\n        ]\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      cpf:
+                        type: array
+                        items:
+                          type: string
+                          example: não é válido
+                      name:
+                        type: array
+                        items:
+                          type: string
+                          example: não pode ficar em branco
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl --request PUT \\\n  --url https://api.iugu.com/v1/account_id/owners/contact_id\\\n  --header 'Content-Type: application/json'"
+        - language: javascript
+          code: "const fetch = require('node-fetch');\n\nlet url = 'https://api.iugu.com/v1/account_id/owners/id';\n\nlet options = {method: 'PUT', headers: {'Content-Type': 'application/json'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          name: Node
+        - language: ruby
+          code: 'require ''uri''
+
+            require ''net/http''
+
+            require ''openssl''
+
+
+            url = URI("https://api.iugu.com/v1/account_id/owners/id")
+
+
+            http = Net::HTTP.new(url.host, url.port)
+
+            http.use_ssl = true
+
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+
+            request = Net::HTTP::Put.new(url)
+
+            request["Content-Type"] = ''application/json''
+
+
+            response = http.request(request)
+
+            puts response.read_body'
+        - language: python
+          code: 'import requests
+
+
+            url = "https://api.iugu.com/v1/account_id/owners/id"
+
+
+            headers = {"Content-Type": "application/json"}
+
+
+            response = requests.request("PUT", url, headers=headers)
+
+
+            print(response.text)'
+        samples-languages:
+        - curl
+        - javascript
+        - ruby
+        - python
+  /accounts/{id}:
+    put:
+      summary: Editar Subconta
+      description: 'Atualiza os parâmetros de uma conta de pagamentos.<div class="magic-block-callout type-warning"><h3><i title="Danger" class="fa fa-exclamation-triangle"></i> IMPORTANTE!</h3><div class="callout-body"><p>Para executar esta chamada é necessário que a conta esteja <a href="https://dev.iugu.com/reference/enviar-verifica%C3%A7%C3%A3o-de-subconta">verificada</a>. Atenção: Para a Autenticação, no lugar do token de API da conta (api_token), deve-se utilizar o token de usuário (user_token), gerado no retorno da <a href="https://dev.iugu.com/reference/criar-subconta">chamada de criação de subconta</a>.'
+      operationId: atualizar-subconta
+      parameters:
+      - name: id
+        in: path
+        description: ID da conta a ser atualizada.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subscriptions_billing_days:
+                  type: integer
+                  description: Número de dias antes do vencimento da assinatura para criação da fatura referente ao próximo ciclo.
+                  format: int32
+                subscriptions_trial_period:
+                  type: integer
+                  description: Duração (em dias) do período de testes de uma assinatura.
+                  format: int32
+                default_return_url:
+                  type: string
+                  description: URL padrão para a qual direcionar o cliente após o pagamento de uma fatura via web.
+                owner_emails_to_notify:
+                  type: string
+                  description: Lista de emails, separados por vígula, que devem receber notificações específicas para usuários com permissão de "dono".
+                reply_to:
+                  type: string
+                  description: E-mail para resposta dos clientes
+                website:
+                  type: string
+                  description: Deve começar com http:// ou https://. <br>**Exemplo:** http://www.exemplo.com/</br>
+                auto_withdraw_type:
+                  type: string
+                  description: 'Periodicidade da agenda: `daily`, `weekly`, `biweekly` ou `monthly`.<br>
+
+                    Quando presente, ativa a agenda. Ausente ou vazio, desativa.
+
+                    '
+                auto_withdraw_option:
+                  type: integer
+                  description: 'Depende do `auto_withdraw_type`. Para `weekly` e `biweekly`: dia da semana de `1` a `5` (1= Segunda, 2= Terça, 3= Quarta, 4= Quinta, 5= Sexta). Para `monthly`: dia do mês de `1` a `31`. Não se aplica a `daily`.'
+                  format: int32
+                auto_withdraw_anchor_date:
+                  type: string
+                  description: 'Apenas `biweekly`: data de referência (início do ciclo) que define quais semanas são ativas. (Formato: ''AAAA-MM-DD''). <br> Obrigatória para `biweekly`; ignorada para os demais tipos.'
+              required:
+              - website
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": \"0C1FAA736E13411696C3A2E8FF519033\",\n  \"name\": \"Subconta E\",\n  \"created_at\": \"2024-08-03T17:07:01-03:00\",\n  \"updated_at\": \"2024-08-20T11:49:11-03:00\",\n  \"can_receive?\": true,\n  \"is_verified?\": true,\n  \"last_verification_request_status\": \"accepted\",\n  \"last_verification_request_data\": null,\n  \"last_verification_request_feedback\": null,\n  \"change_plan_type\": 1,\n  \"subscriptions_trial_period\": 0,\n  \"subscriptions_billing_days\": 5,\n  \"disable_emails\": false,\n  \"last_withdraw\": null,\n  \"reply_to\": \"no-reply@iugu.com\",\n  \"webapp_on_test_mode\": false,\n  \"marketplace\": false,\n  \"default_return_url\": null,\n  \"credit_card_verified\": true,\n  \"fines\": null,\n  \"late_payment_fine\": null,\n  \"per_day_interest\": null,\n  \"old_advancement\": null,\n  \"early_payment_discount\": null,\n  \"early_payment_discount_days\": null,\n  \"early_payment_discount_percent\": null,\n  \"sac_phone\": null,\n\
+                    \  \"sac_email\": null,\n  \"informations\": null,\n  \"configuration\": null,\n  \"bank_accounts\": [\n    {\n      \"branch\": \"0002\",\n      \"number\": \"4421692\",\n      \"digit\": \"0\"\n    }\n  ],\n  \"auto_withdraw\": false,\n  \"disabled_withdraw\": false,\n  \"payment_email_notification\": false,\n  \"payment_email_notification_receiver\": null,\n  \"auto_advance\": false,\n  \"auto_advance_type\": null,\n  \"auto_advance_option\": null,\n  \"balance\": \"R$ 0,00\",\n  \"balance_in_protest\": \"R$ 0,00\",\n  \"balance_available_for_withdraw\": \"R$ 0,00\",\n  \"protected_balance\": \"R$ 0,00\",\n  \"customer_minimum_balance_cents\": 0,\n  \"payable_balance\": \"R$ 0,00\",\n  \"receivable_balance\": \"R$ 0,00\",\n  \"commission_balance\": \"R$ 0,00\",\n  \"volume_last_month\": \"R$ 0,00\",\n  \"volume_this_month\": \"R$ 0,00\",\n  \"total_subscriptions\": 0,\n  \"total_active_subscriptions\": 0,\n  \"taxes_paid_last_month\": \"R$ 0,00\",\n  \"taxes_paid_this_month\"\
+                    : \"R$ 0,00\",\n  \"has_bank_address?\": true,\n  \"permissions\": [\n    \"owner\"\n  ],\n  \"custom_logo_url\": null,\n  \"custom_logo_small_url\": null,\n  \"early_payment_discounts\": [],\n  \"commissions\": null,\n  \"splits\": [],\n  \"contact_data\": {\n    \"name\": \"Subconta E\",\n    \"document_number\": \"11343675030\",\n    \"full_address\": \"Rua, Bairro, Cidade/SP, 13056344\"\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 0C1FAA736E13411696C3A2E8FF519033
+                  name:
+                    type: string
+                    example: Subconta E
+                  created_at:
+                    type: string
+                    example: '2024-08-03T17:07:01-03:00'
+                  updated_at:
+                    type: string
+                    example: '2024-08-20T11:49:11-03:00'
+                  can_receive?:
+                    type: boolean
+                    example: true
+                    default: true
+                  is_verified?:
+                    type: boolean
+                    example: true
+                    default: true
+                  last_verification_request_status:
+                    type: string
+                    example: accepted
+                  last_verification_request_data: {}
+                  last_verification_request_feedback: {}
+                  change_plan_type:
+                    type: integer
+                    example: 1
+                    default: 0
+                  subscriptions_trial_period:
+                    type: integer
+                    example: 0
+                    default: 0
+                  subscriptions_billing_days:
+                    type: integer
+                    example: 5
+                    default: 0
+                  disable_emails:
+                    type: boolean
+                    example: false
+                    default: true
+                  last_withdraw: {}
+                  reply_to:
+                    type: string
+                    example: no-reply@iugu.com
+                  webapp_on_test_mode:
+                    type: boolean
+                    example: false
+                    default: true
+                  marketplace:
+                    type: boolean
+                    example: false
+                    default: true
+                  default_return_url: {}
+                  credit_card_verified:
+                    type: boolean
+                    example: true
+                    default: true
+                  fines: {}
+                  late_payment_fine: {}
+                  per_day_interest: {}
+                  old_advancement: {}
+                  early_payment_discount: {}
+                  early_payment_discount_days: {}
+                  early_payment_discount_percent: {}
+                  sac_phone: {}
+                  sac_email: {}
+                  informations: {}
+                  configuration: {}
+                  bank_accounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        branch:
+                          type: string
+                          example: '0002'
+                        number:
+                          type: string
+                          example: '4421692'
+                        digit:
+                          type: string
+                          example: '0'
+                  auto_withdraw:
+                    type: boolean
+                    example: false
+                    default: true
+                  disabled_withdraw:
+                    type: boolean
+                    example: false
+                    default: true
+                  payment_email_notification:
+                    type: boolean
+                    example: false
+                    default: true
+                  payment_email_notification_receiver: {}
+                  auto_advance:
+                    type: boolean
+                    example: false
+                    default: true
+                  auto_advance_type: {}
+                  auto_advance_option: {}
+                  balance:
+                    type: string
+                    example: R$ 0,00
+                  balance_in_protest:
+                    type: string
+                    example: R$ 0,00
+                  balance_available_for_withdraw:
+                    type: string
+                    example: R$ 0,00
+                  protected_balance:
+                    type: string
+                    example: R$ 0,00
+                  customer_minimum_balance_cents:
+                    type: integer
+                    example: 0
+                    default: 0
+                  payable_balance:
+                    type: string
+                    example: R$ 0,00
+                  receivable_balance:
+                    type: string
+                    example: R$ 0,00
+                  commission_balance:
+                    type: string
+                    example: R$ 0,00
+                  volume_last_month:
+                    type: string
+                    example: R$ 0,00
+                  volume_this_month:
+                    type: string
+                    example: R$ 0,00
+                  total_subscriptions:
+                    type: integer
+                    example: 0
+                    default: 0
+                  total_active_subscriptions:
+                    type: integer
+                    example: 0
+                    default: 0
+                  taxes_paid_last_month:
+                    type: string
+                    example: R$ 0,00
+                  taxes_paid_this_month:
+                    type: string
+                    example: R$ 0,00
+                  has_bank_address?:
+                    type: boolean
+                    example: true
+                    default: true
+                  permissions:
+                    type: array
+                    items:
+                      type: string
+                      example: owner
+                  custom_logo_url: {}
+                  custom_logo_small_url: {}
+                  early_payment_discounts:
+                    type: array
+                    items:
+                      type: object
+                      properties: {}
+                  commissions: {}
+                  splits:
+                    type: array
+                    items:
+                      type: object
+                      properties: {}
+                  contact_data:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: Subconta E
+                      document_number:
+                        type: string
+                        example: '11343675030'
+                      full_address:
+                        type: string
+                        example: Rua, Bairro, Cidade/SP, 13056344
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Account Not Found:
+                  value: "{\n  \"errors\": \"Account Not Found\"\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Account Not Found
+    get:
+      summary: Informações da Conta
+      description: Retorna as informações de uma conta. Use o LIVE_API_TOKEN da sub-conta na autenticação.
+      operationId: informacoes-da-conta
+      parameters:
+      - name: id
+        in: path
+        description: ID da sub-conta
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: param
+        schema:
+          type: string
+      - in: query
+        name: param
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    id: 1234567890ABCDEF1234567890ABCDEF
+                    name: Test Company
+                    created_at: '2023-10-16T15:44:18-03:00'
+                    updated_at: '2024-08-20T09:28:08-03:00'
+                    can_receive?: true
+                    is_verified?: true
+                    last_verification_request_status: null
+                    last_verification_request_data: null
+                    last_verification_request_feedback: null
+                    change_plan_type: 1
+                    subscriptions_trial_period: 0
+                    subscriptions_billing_days: 5
+                    disable_emails: false
+                    last_withdraw: null
+                    reply_to: no-reply@example.com
+                    webapp_on_test_mode: false
+                    marketplace: true
+                    default_return_url: ''
+                    credit_card_verified: true
+                    fines: false
+                    late_payment_fine: 1
+                    per_day_interest: false
+                    old_advancement: true
+                    early_payment_discount: false
+                    early_payment_discount_days: null
+                    early_payment_discount_percent: null
+                    sac_phone: null
+                    sac_email: null
+                    informations:
+                    - key: account_limit_profile
+                      value: group_4
+                    - key: account_type
+                      value: Checking
+                    - key: address
+                      value: 1234 Example Ave
+                    - key: advance_fee
+                      value: '0.0345'
+                    - key: antifraud_percent
+                      value: '100'
+                    - key: bank
+                      value: Sample Bank
+                    - key: bank_ag
+                      value: '0001'
+                    - key: bank_cc
+                      value: 12345678-9
+                    - key: bank_ispb
+                      value: '00000000'
+                    - key: bank_slip_bank
+                      value: '123'
+                    - key: bank_slip_transferor_city
+                      value: Sample City
+                    - key: bank_slip_transferor_complement
+                      value: Top floor
+                    - key: bank_slip_transferor_district
+                      value: Central
+                    - key: bank_slip_transferor_name
+                      value: Sample Services Ltd
+                    - key: bank_slip_transferor_number
+                      value: '5678'
+                    - key: bank_slip_transferor_state
+                      value: ST
+                    - key: bank_slip_transferor_street
+                      value: Main St
+                    - key: bank_slip_transferor_zip_code
+                      value: 00000-000
+                    - key: caf_execution_id
+                      value: abcdef1234567890abcdef1234567890
+                    - key: cep
+                      value: '00000000'
+                    - key: city
+                      value: Sample City
+                    - key: company_name
+                      value: Sample Institution Ltd
+                    - key: company_type
+                      value: N/A
+                    - key: complement
+                      value: FLOOR 16 AND 17 BLOCK A
+                    - key: customer_minimum_balance_cents
+                      value: '3000'
+                    - key: FF:api_cashout
+                      value: 'true'
+                    - key: FF:checkout
+                      value: 'true'
+                    - key: FF:checkout-active
+                      value: 'false'
+                    - key: FF:MARKETPLACE:api_cashout
+                      value: 'true'
+                    - key: FF:MARKETPLACE:zero_auth
+                      value: 'true'
+                    - key: FF:panel_cashout
+                      value: 'true'
+                    - key: FF:transfer_p2p_outside
+                      value: 'true'
+                    - key: FF:zero_auth
+                      value: 'true'
+                    - key: last_bank_slip_bank
+                      value: '123'
+                    - key: limit_increase_request_due_date
+                      value: '2024-01-05'
+                    - key: number
+                      value: '1234'
+                    - key: owner_emails_to_notify
+                      value: john.doe@example.com,jane.doe@example.com
+                    - key: phone
+                      value: '11900000000'
+                    - key: raw_cpf_cnpj
+                      value: 12.345.678/0001-90
+                    - key: segment
+                      value: UNDEFINED
+                    - key: state
+                      value: ST
+                    - key: taxes
+                      value: '{"sample_credit_card_percent_1"=>0.031, "sample_credit_card_percent_2"=>0.036}'
+                    - key: trial_until
+                      value: '2024-02-13'
+                    - key: validate_cnpj
+                      value: '12345678000190'
+                    configuration:
+                      auto_withdraw: false
+                      disabled_withdraw: false
+                      payment_email_notification: false
+                      payment_email_notification_receiver: notification@example.com
+                      next_expected_withdraw_date: null
+                      auto_advance: true
+                      auto_advance_type: daily
+                      auto_advance_option: null
+                      commission_percent: null
+                      owner_emails_to_notify: john.doe@example.com,jane.doe@example.com
+                      fines: false
+                      late_payment_fine: 1
+                      per_day_interest: false
+                      bank_slip:
+                        active: true
+                        extra_due: '2'
+                        reprint_extra_due: '2'
+                      credit_card:
+                        active: true
+                        soft_descriptor: DESC*
+                        installments: true
+                        installments_pass_interest: false
+                        max_installments: '12'
+                        max_installments_without_interest: '1'
+                        two_step_transaction: true
+                      pix:
+                        active: true
+                      early_payment_discount: false
+                      early_payment_discount_days: null
+                      early_payment_discount_percent: null
+                    bank_accounts:
+                    - branch: '0001'
+                      number: '1234567'
+                      digit: '0'
+                    auto_withdraw: false
+                    disabled_withdraw: false
+                    payment_email_notification: false
+                    payment_email_notification_receiver: notification@example.com
+                    auto_advance: true
+                    auto_advance_type: daily
+                    auto_advance_option: null
+                    balance: R$ 100,00
+                    balance_in_protest: R$ 0,00
+                    balance_available_for_withdraw: R$ 100,00
+                    subaccounts_negative_balance_total: R$100,00
+                    protected_balance: R$ 0,00
+                    customer_minimum_balance_cents: 3000
+                    payable_balance: R$ -10,00
+                    receivable_balance: R$ 20,00
+                    commission_balance: R$ 0,00
+                    volume_last_month: R$ 50,00
+                    volume_this_month: R$ 70,00
+                    total_subscriptions: 30
+                    total_active_subscriptions: 8
+                    taxes_paid_last_month: R$ 0,00
+                    taxes_paid_this_month: R$ 0,00
+                    has_bank_address?: true
+                    permissions: null
+                    custom_logo_url: https://example.com/logo-big.png
+                    custom_logo_small_url: https://example.com/logo-small.png
+                    early_payment_discounts: []
+                    commissions: null
+                    splits:
+                    - d: 937D2E094342491083DA34DDD2735C9C
+                      split_id: F81629A2CF17445DAC4BF5A6FCF559CE
+                      recipient_account_id: C24E35B45BEF4BD8A89A57092B51A9D8
+                      cents: 0
+                      percent: 0
+                      credit_card_cents: null
+                      credit_card_percent: null
+                      bank_slip_cents: 9
+                      bank_slip_percent: null
+                      pix_cents: 109
+                      pix_percent: null
+                      permit_aggregated: true
+                      created_at: '2024-07-15T16:42:54-03:00'
+                      updated_at: '2024-07-15T16:42:54-03:00'
+                      credit_card_1x_cents: null
+                      credit_card_2x_cents: null
+                      credit_card_3x_cents: null
+                      credit_card_4x_cents: null
+                      credit_card_5x_cents: null
+                      credit_card_6x_cents: null
+                      credit_card_7x_cents: null
+                      credit_card_8x_cents: null
+                      credit_card_9x_cents: null
+                      credit_card_10x_cents: null
+                      credit_card_11x_cents: null
+                      credit_card_12x_cents: null
+                      credit_card_1x_percent: 0.09
+                      credit_card_2x_percent: 0.1
+                      credit_card_3x_percent: null
+                      credit_card_4x_percent: null
+                      credit_card_5x_percent: null
+                      credit_card_6x_percent: null
+                      credit_card_7x_percent: null
+                      credit_card_8x_percent: null
+                      credit_card_9x_percent: null
+                      credit_card_10x_percent: null
+                      credit_card_11x_percent: null
+                      credit_card_12x_percent: null
+                      credit_card_13x_cents: null
+                      credit_card_14x_cents: null
+                      credit_card_15x_cents: null
+                      credit_card_16x_cents: null
+                      credit_card_17x_cents: null
+                      credit_card_18x_cents: null
+                      credit_card_13x_percent: null
+                      credit_card_14x_percent: null
+                      credit_card_15x_percent: null
+                      credit_card_16x_percent: null
+                      credit_card_17x_percent: null
+                      credit_card_18x_percent: null
+                    contact_data:
+                      name: iugu Serviços na Internet S/A
+                      document_number: '15111975000164'
+                      full_address: Av. Paulista, 1048, Quinto andar, Bela Vista, São Paulo/SP, 01310100
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 1234567890ABCDEF1234567890ABCDEF
+                  name:
+                    type: string
+                    example: Test Company
+                  created_at:
+                    type: string
+                    example: '2023-10-16T15:44:18-03:00'
+                  updated_at:
+                    type: string
+                    example: '2024-08-20T09:28:08-03:00'
+                  can_receive?:
+                    type: boolean
+                    example: true
+                    default: true
+                  is_verified?:
+                    type: boolean
+                    example: true
+                    default: true
+                  last_verification_request_status: {}
+                  last_verification_request_data: {}
+                  last_verification_request_feedback: {}
+                  change_plan_type:
+                    type: integer
+                    example: 1
+                    default: 0
+                  subscriptions_trial_period:
+                    type: integer
+                    example: 0
+                    default: 0
+                  subscriptions_billing_days:
+                    type: integer
+                    example: 5
+                    default: 0
+                  disable_emails:
+                    type: boolean
+                    example: false
+                    default: true
+                  last_withdraw: {}
+                  reply_to:
+                    type: string
+                    example: no-reply@example.com
+                  webapp_on_test_mode:
+                    type: boolean
+                    example: false
+                    default: true
+                  marketplace:
+                    type: boolean
+                    example: true
+                    default: true
+                  default_return_url:
+                    type: string
+                    example: ''
+                  credit_card_verified:
+                    type: boolean
+                    example: true
+                    default: true
+                  fines:
+                    type: boolean
+                    example: false
+                    default: true
+                  late_payment_fine:
+                    type: integer
+                    example: 1
+                    default: 0
+                  per_day_interest:
+                    type: boolean
+                    example: false
+                    default: true
+                  old_advancement:
+                    type: boolean
+                    example: true
+                    default: true
+                  early_payment_discount:
+                    type: boolean
+                    example: false
+                    default: true
+                  early_payment_discount_days: {}
+                  early_payment_discount_percent: {}
+                  sac_phone: {}
+                  sac_email: {}
+                  informations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                          example: account_limit_profile
+                        value:
+                          type: string
+                          example: group_4
+                  configuration:
+                    type: object
+                    properties:
+                      auto_withdraw:
+                        type: boolean
+                        example: false
+                        default: true
+                      disabled_withdraw:
+                        type: boolean
+                        example: false
+                        default: true
+                      payment_email_notification:
+                        type: boolean
+                        example: false
+                        default: true
+                      payment_email_notification_receiver:
+                        type: string
+                        example: notification@example.com
+                      auto_advance:
+                        type: boolean
+                        example: true
+                        default: true
+                      auto_advance_type:
+                        type: string
+                        example: daily
+                      auto_advance_option: {}
+                      commission_percent: {}
+                      owner_emails_to_notify:
+                        type: string
+                        example: john.doe@example.com,jane.doe@example.com
+                      fines:
+                        type: boolean
+                        example: false
+                        default: true
+                      late_payment_fine:
+                        type: integer
+                        example: 1
+                        default: 0
+                      per_day_interest:
+                        type: boolean
+                        example: false
+                        default: true
+                      bank_slip:
+                        type: object
+                        properties:
+                          active:
+                            type: boolean
+                            example: true
+                            default: true
+                          extra_due:
+                            type: string
+                            example: '2'
+                          reprint_extra_due:
+                            type: string
+                            example: '2'
+                      credit_card:
+                        type: object
+                        properties:
+                          active:
+                            type: boolean
+                            example: true
+                            default: true
+                          soft_descriptor:
+                            type: string
+                            example: DESC*
+                          installments:
+                            type: boolean
+                            example: true
+                            default: true
+                          installments_pass_interest:
+                            type: boolean
+                            example: false
+                            default: true
+                          max_installments:
+                            type: string
+                            example: '12'
+                          max_installments_without_interest:
+                            type: string
+                            example: '1'
+                          two_step_transaction:
+                            type: boolean
+                            example: true
+                            default: true
+                      pix:
+                        type: object
+                        properties:
+                          active:
+                            type: boolean
+                            example: true
+                            default: true
+                      early_payment_discount:
+                        type: boolean
+                        example: false
+                        default: true
+                      early_payment_discount_days: {}
+                      early_payment_discount_percent: {}
+                  bank_accounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        branch:
+                          type: string
+                          example: '0001'
+                        number:
+                          type: string
+                          example: '1234567'
+                        digit:
+                          type: string
+                          example: '0'
+                  auto_withdraw:
+                    type: boolean
+                    example: false
+                    default: true
+                  disabled_withdraw:
+                    type: boolean
+                    example: false
+                    default: true
+                  payment_email_notification:
+                    type: boolean
+                    example: false
+                    default: true
+                  payment_email_notification_receiver:
+                    type: string
+                    example: notification@example.com
+                  auto_advance:
+                    type: boolean
+                    example: true
+                    default: true
+                  auto_advance_type:
+                    type: string
+                    example: daily
+                  auto_advance_option: {}
+                  balance:
+                    type: string
+                    example: R$ 100,00
+                  balance_in_protest:
+                    type: string
+                    example: R$ 0,00
+                  balance_available_for_withdraw:
+                    type: string
+                    example: R$ 100,00
+                  subaccounts_negative_balance_total:
+                    type: string
+                    example: R$100,00
+                  protected_balance:
+                    type: string
+                    example: R$ 0,00
+                  customer_minimum_balance_cents:
+                    type: integer
+                    example: 3000
+                    default: 0
+                  payable_balance:
+                    type: string
+                    example: R$ -10,00
+                  receivable_balance:
+                    type: string
+                    example: R$ 20,00
+                  commission_balance:
+                    type: string
+                    example: R$ 0,00
+                  volume_last_month:
+                    type: string
+                    example: R$ 50,00
+                  volume_this_month:
+                    type: string
+                    example: R$ 70,00
+                  total_subscriptions:
+                    type: integer
+                    example: 30
+                    default: 0
+                  total_active_subscriptions:
+                    type: integer
+                    example: 8
+                    default: 0
+                  taxes_paid_last_month:
+                    type: string
+                    example: R$ 0,00
+                  taxes_paid_this_month:
+                    type: string
+                    example: R$ 0,00
+                  has_bank_address?:
+                    type: boolean
+                    example: true
+                    default: true
+                  permissions: {}
+                  custom_logo_url:
+                    type: string
+                    example: https://example.com/logo-big.png
+                  custom_logo_small_url:
+                    type: string
+                    example: https://example.com/logo-small.png
+                  early_payment_discounts:
+                    type: array
+                    items:
+                      type: object
+                      properties: {}
+                  commissions: {}
+                  splits:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        d:
+                          type: string
+                          example: 937D2E094342491083DA34DDD2735C9C
+                        split_id:
+                          type: string
+                          example: F81629A2CF17445DAC4BF5A6FCF559CE
+                        recipient_account_id:
+                          type: string
+                          example: C24E35B45BEF4BD8A89A57092B51A9D8
+                        cents:
+                          type: integer
+                          example: 0
+                          default: 0
+                        percent:
+                          type: integer
+                          example: 0
+                          default: 0
+                        credit_card_cents: {}
+                        credit_card_percent: {}
+                        bank_slip_cents:
+                          type: integer
+                          example: 9
+                          default: 0
+                        bank_slip_percent: {}
+                        pix_cents:
+                          type: integer
+                          example: 109
+                          default: 0
+                        pix_percent: {}
+                        permit_aggregated:
+                          type: boolean
+                          example: true
+                          default: true
+                        created_at:
+                          type: string
+                          example: '2024-07-15T16:42:54-03:00'
+                        updated_at:
+                          type: string
+                          example: '2024-07-15T16:42:54-03:00'
+                        credit_card_1x_cents: {}
+                        credit_card_2x_cents: {}
+                        credit_card_3x_cents: {}
+                        credit_card_4x_cents: {}
+                        credit_card_5x_cents: {}
+                        credit_card_6x_cents: {}
+                        credit_card_7x_cents: {}
+                        credit_card_8x_cents: {}
+                        credit_card_9x_cents: {}
+                        credit_card_10x_cents: {}
+                        credit_card_11x_cents: {}
+                        credit_card_12x_cents: {}
+                        credit_card_1x_percent:
+                          type: number
+                          example: 0.09
+                          default: 0
+                        credit_card_2x_percent:
+                          type: number
+                          example: 0.1
+                          default: 0
+                        credit_card_3x_percent: {}
+                        credit_card_4x_percent: {}
+                        credit_card_5x_percent: {}
+                        credit_card_6x_percent: {}
+                        credit_card_7x_percent: {}
+                        credit_card_8x_percent: {}
+                        credit_card_9x_percent: {}
+                        credit_card_10x_percent: {}
+                        credit_card_11x_percent: {}
+                        credit_card_12x_percent: {}
+                        credit_card_13x_cents: {}
+                        credit_card_14x_cents: {}
+                        credit_card_15x_cents: {}
+                        credit_card_16x_cents: {}
+                        credit_card_17x_cents: {}
+                        credit_card_18x_cents: {}
+                        credit_card_13x_percent: {}
+                        credit_card_14x_percent: {}
+                        credit_card_15x_percent: {}
+                        credit_card_16x_percent: {}
+                        credit_card_17x_percent: {}
+                        credit_card_18x_percent: {}
+                  contact_data:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: iugu Serviços na Internet S/A
+                      document_number:
+                        type: string
+                        example: '15111975000164'
+                      full_address:
+                        type: string
+                        example: Av. Paulista, 1048, Quinto andar, Bela Vista, São Paulo/SP, 01310100
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Not Nnder Analysis:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+  /accounts/{id}/request_withdraw:
+    post:
+      summary: Pedido de Saque/Transferências Próprias
+      description: Realiza um pedido de saque de um determinado valor. O valor será enviado para o domicílio bancário da mesma titularidade cadastrado na conta.
+      operationId: pedido-de-saque
+      parameters:
+      - name: id
+        in: path
+        description: ID da sub-conta
+        schema:
+          type: string
+        required: true
+      - name: Request-Time
+        in: header
+        description: Timestamp do momento que enviar a requisição de assinatura digital (RSA)
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: Signature
+        in: header
+        description: Assinatura digital validada
+        required: true
+        schema:
+          type: string
+          default: signature=
+      - in: header
+        name: X-Signature-Token-Id
+        schema:
+          type: string
+        description: Indica explicitamente qual token/chave deve ser utilizado na assinatura da requisição, informando o ID do token desejado. Se omitido, mantém o comportamento atual.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  description: 'Valor do Saque (Formato: 500.0 para 500 reais)'
+                  format: float
+                custom_variables:
+                  type: array
+                  description: Variáveis personalizadas
+                  items:
+                    properties:
+                      name:
+                        type: string
+                        description: Nome da variável
+                      value:
+                        type: string
+                        description: Valor da variável
+                    type: object
+                api_token:
+                  type: string
+                  description: Chave de API privada
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "  \"id\": \"9E75E035E9DF4BF18ED7EE6A7AC1DC12\",\n  \"status\": \"accepted\",\n  \"receipt_url\": \"https://comprovantes.iugu.com/9e75e035-e9df-4bf1-8ed7-ee6a7ac1dc12-c0f864\",\n}"
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                Only Available On live_mode:
+                  value: "{\n  \"errors\": \"Apenas disponível para o ambiente produção\"\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Apenas disponível para o ambiente produção
+  /bank_verification:
+    post:
+      summary: Adicionar/cadastrar Domicílio Bancário
+      description: 'Envia dados para cadastrar ou alterar o domicílio bancário da conta que recebe saques e transferências.
+
+
+        <div class="magic-block-callout type-danger"><h3><i title="Danger" class="fa fa-exclamation-triangle"></i>Atenção</h3><div class="callout-body"><p>Informe uma conta bancária válida vinculada ao CPF/CNPJ cadastrado na verificação da subconta.</br>Não é possível receber valores em uma conta bancária que tenha um titular diferente do cadastrado na subconta.</p></div></div>'
+      operationId: adicionar-domicilio-bancario
+      parameters:
+      - name: Request-Time
+        in: header
+        description: Timestamp do momento que enviar a requisição de assinatura digital (RSA)
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: Signature
+        in: header
+        description: Assinatura digital
+        required: true
+        schema:
+          type: string
+          default: signature=
+      - in: header
+        name: X-Signature-Token-Id
+        schema:
+          type: string
+        description: Indica explicitamente qual token/chave deve ser utilizado na assinatura da requisição, informando o ID do token desejado. Se omitido, mantém o comportamento atual.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - agency
+              - account
+              - account_type
+              - bank
+              properties:
+                agency:
+                  type: string
+                  description: Número da agência
+                account:
+                  type: string
+                  description: Número da conta
+                account_type:
+                  type: string
+                  description: Tipo da Conta. **Conta Corrente:** `cc`. **Conta Poupança:** `cp`. **Conta Pagamento:** `cpg`.
+                bank:
+                  type: string
+                  description: Código do Banco (apenas números). **Consulte a tabela acima**.
+                automatic_validation:
+                  type: boolean
+                  description: Valida o dígito verificador da conta
+                document:
+                  type: string
+                  description: Documento de Comprovação dos Dados Bancários (Enviar via multipart ou base64) - (envio opcional)
+                  format: binary
+                RAW_BODY:
+                  type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '422':
+          description: '422'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: "{\n  \"errors\": {\n    \"account_type\": [\n      \"is invalid\"\n    ]\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      account_type:
+                        type: array
+                        items:
+                          type: string
+                          example: is invalid
+    get:
+      summary: Verificar envio de domicilio bancário
+      description: Consultar dados enviados para alterar domicílio bancário.
+      operationId: verificar-envio-de-domicilio-bancario
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                OK (retorno da api):
+                  value: "[\n    {\n        \"id\": \"00000000000000000000000000000000\",\n        \"status\": \"accepted\",\n        \"created_at\": \"2023-09-25T15:16:31-03:00\",\n        \"updated_at\": \"2023-09-25T15:16:32-03:00\",\n        \"account\": \"000000000-0\",\n        \"agency\": \"0000\",\n        \"operation\": null,\n        \"feedback\": null,\n        \"bank\": \"Itaú\"\n    },\n    {\n        \"id\": \"00000000000000000000000000000000\",\n        \"status\": \"accepted\",\n        \"created_at\": \"2023-09-25T14:55:59-03:00\",\n        \"updated_at\": \"2023-09-25T14:55:59-03:00\",\n        \"account\": \"000000000000-0\",\n        \"agency\": \"0000\",\n        \"operation\": null,\n        \"feedback\": null,\n        \"bank\": \"Caixa Econômica\"\n    },\n    {\n        \"id\": \"00000000000000000000000000000000\",\n        \"status\": \"accepted\",\n        \"created_at\": \"2023-09-25T14:51:43-03:00\",\n        \"updated_at\": \"2023-09-25T14:51:45-03:00\",\n \
+                    \       \"account\": \"000000000000-0\",\n        \"agency\": \"0000\",\n        \"operation\": null,\n        \"feedback\": null,\n        \"bank\": \"Caixa Econômica\"\n    }\n]"
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: '00000000000000000000000000000000'
+                    status:
+                      type: string
+                      example: accepted
+                    created_at:
+                      type: string
+                      example: '2023-09-25T15:16:31-03:00'
+                    updated_at:
+                      type: string
+                      example: '2023-09-25T15:16:32-03:00'
+                    account:
+                      type: string
+                      example: 000000000-0
+                    agency:
+                      type: string
+                      example: '0000'
+                    operation: {}
+                    feedback: {}
+                    bank:
+                      type: string
+                      example: Itaú
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"errors\": \"Not Found\"\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Not Found
+      deprecated: false
+  /marketplace:
+    get:
+      summary: Listar contas
+      description: Lista as contas de um marketplace ou parceiro de negócios.
+      operationId: listar-as-subcontas
+      parameters:
+      - name: limit
+        in: query
+        description: Limita em até 1.000 o número de registros listados. Caso não seja enviado, aplica-se o limite padrão de 100 registros
+        schema:
+          type: integer
+          format: int32
+      - name: start
+        in: query
+        description: Quantos registros pular do início da pesquisa
+        schema:
+          type: integer
+          format: int32
+      - name: query
+        in: query
+        description: Neste parâmetro pode ser passado um texto para pesquisa
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"items\": [\n    {\n      \"id\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\n      \"name\": \"Account #11111111-1111-1111-1111-111111111111\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\",\n      \"name\": \"Test Account\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC\",\n      \"name\": \"Example Subaccount\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\",\n      \"name\": \"Verified Subaccount\",\n      \"verified\": true\n    },\n    {\n      \"id\": \"EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE\",\n      \"name\": \"Sample Account\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF\",\n      \"name\": \"Main Account\",\n      \"verified\": true\n    },\n    {\n      \"id\": \"GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG\",\n      \"name\": \"Test User\",\n      \"verified\": false\n    },\n   \
+                    \ {\n      \"id\": \"HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\",\n      \"name\": \"Account #22222222-2222-2222-2222-222222222222\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\",\n      \"name\": \"Account #33333333-3333-3333-3333-333333333333\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ\",\n      \"name\": \"Account #44444444-4444-4444-4444-444444444444\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK\",\n      \"name\": \"Placeholder Name\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL\",\n      \"name\": \"Example\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\",\n      \"name\": \"Sample Data\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN\",\n      \"name\": \"Account #Kart\",\n      \"verified\"\
+                    : false\n    },\n    {\n      \"id\": \"OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\",\n      \"name\": \"Sample Kart Account\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP\",\n      \"name\": \"John Doe\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ\",\n      \"name\": \"Kartinho Account\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\",\n      \"name\": \"Test Subaccount\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS\",\n      \"name\": \"API Token Test\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\",\n      \"name\": \"Unverified Account 2\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU\",\n      \"name\": \"Verified API Account\",\n      \"verified\": true\n    },\n    {\n      \"id\": \"VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV\"\
+                    ,\n      \"name\": \"API Created Account\",\n      \"verified\": true\n    },\n    {\n      \"id\": \"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW\",\n      \"name\": \"Sample Subaccount Name\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n      \"name\": \"Test Subaccount\",\n      \"verified\": true\n    },\n    {\n      \"id\": \"YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY\",\n      \"name\": \"Subaccount Placeholder\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ\",\n      \"name\": \"Example Placeholder\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\n      \"name\": \"Sub Account Test\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\",\n      \"name\": \"Verified Kartinho\",\n      \"verified\": true\n    },\n    {\n      \"id\": \"CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC\",\n      \"name\": \"Verified\
+                    \ User Account\",\n      \"verified\": true\n    }\n  ],\n  \"totalItems\": 29\n}"
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                        name:
+                          type: string
+                          example: 'Account #11111111-1111-1111-1111-111111111111'
+                        verified:
+                          type: boolean
+                          example: false
+                          default: true
+                  totalItems:
+                    type: integer
+                    example: 29
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /marketplace/create_account:
+    post:
+      summary: Criar Subconta
+      description: Permite a criação de subcontas (contas de pagamento) para contas com permissão de Marketplace ou parceiro de negócios. [Para mais informações sobre como configurar um subconta](https://dev.iugu.com/docs/configurar-subconta-por-api)
+      operationId: criar-subconta
+      parameters:
+      - name: Request-Time
+        in: header
+        description: Timestamp do momento que enviar a requisição de assinatura digital (RSA)
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: Signature
+        in: header
+        description: Assinatura digital
+        required: true
+        schema:
+          type: string
+          default: signature=
+      - in: header
+        name: X-Signature-Token-Id
+        schema:
+          type: string
+        description: Indica explicitamente qual token/chave deve ser utilizado na assinatura da requisição, informando o ID do token desejado. Se omitido, mantém o comportamento atual.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nome da subconta, não deverá conter números ou caracteres especiais. Se não enviado, o ID da conta é utilizado por padrão.
+                splits:
+                  type: array
+                  description: Lista de splits que será utilizado nesse conta.
+                  items:
+                    properties:
+                      recipient_account_id:
+                        type: string
+                        description: ID Da conta que irá receber o split
+                      cents:
+                        type: integer
+                        description: Centavos a serem cobrados.
+                        format: int32
+                      percent:
+                        type: number
+                        description: Porcentagem a ser cobrada.
+                        format: float
+                      bank_slip_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações no boleto.
+                        format: int32
+                      bank_slip_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações no boleto.
+                        format: float
+                      credit_card_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações no cartão de crédito.
+                        format: int32
+                      credit_card_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações no cartão de crédito.
+                        format: float
+                      pix_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações no pix.
+                        format: int32
+                      pix_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações no pix.
+                        format: float
+                      permit_aggregated:
+                        type: boolean
+                        description: Permite agregar comissionamento percentual + fixo.
+                      credit_card_1x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 1x no cartão de crédito.
+                        format: int32
+                      credit_card_2x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 2x no cartão de crédito.
+                        format: int32
+                      credit_card_3x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 3x no cartão de crédito.
+                        format: int32
+                      credit_card_4x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 4x no cartão de crédito.
+                        format: int32
+                      credit_card_5x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 5x no cartão de crédito.
+                        format: int32
+                      credit_card_6x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 6x no cartão de crédito.
+                        format: int32
+                      credit_card_7x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 7x no cartão de crédito.
+                        format: int32
+                      credit_card_8x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 8x no cartão de crédito.
+                        format: int32
+                      credit_card_9x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 9x no cartão de crédito.
+                        format: int32
+                      credit_card_10x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 10x no cartão de crédito.
+                        format: int32
+                      credit_card_11x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 11x no cartão de crédito.
+                        format: int32
+                      credit_card_12x_cents:
+                        type: integer
+                        description: Valor em centavos a ser cobrado apenas em transações em 12x no cartão de crédito.
+                        format: int32
+                      credit_card_1x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 1x no cartão de crédito.
+                        format: float
+                      credit_card_2x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 2x no cartão de crédito.
+                        format: float
+                      credit_card_3x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 3x no cartão de crédito.
+                        format: float
+                      credit_card_4x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 4x no cartão de crédito.
+                        format: float
+                      credit_card_5x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 5x no cartão de crédito.
+                        format: float
+                      credit_card_6x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 6x no cartão de crédito.
+                        format: float
+                      credit_card_7x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 7x no cartão de crédito.
+                        format: float
+                      credit_card_8x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 8x no cartão de crédito.
+                        format: float
+                      credit_card_9x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 9x no cartão de crédito.
+                        format: float
+                      credit_card_10x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 10x no cartão de crédito.
+                        format: float
+                      credit_card_11x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 11x no cartão de crédito.
+                        format: float
+                      credit_card_12x_percent:
+                        type: number
+                        description: Valor em porcentagem a ser cobrado apenas em transações em 12x no cartão de crédito.
+                        format: float
+                    type: object
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"account_id\": \"49196DF60BC64B6EB42DEC9C5D81C2CC\",\n    \"name\": \"Subconta\",\n    \"live_api_token\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA111111111111111111111111111111111\",\n    \"test_api_token\": \"AAAAAAAAAAAAAAAAAAAAAA111111111111111111111111111111111AAAAAAAAA\",\n    \"user_token\": \"111111111111111111111111111111111AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"\n}"
+              schema:
+                type: object
+                properties:
+                  account_id:
+                    type: string
+                    example: 49196DF60BC64B6EB42DEC9C5D81C2CC
+                  name:
+                    type: string
+                    example: Subconta
+                  live_api_token:
+                    type: string
+                    example: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA111111111111111111111111111111111
+                  test_api_token:
+                    type: string
+                    example: AAAAAAAAAAAAAAAAAAAAAA111111111111111111111111111111111AAAAAAAAA
+                  user_token:
+                    type: string
+                    example: 111111111111111111111111111111111AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+  /marketplace/deactivate:
+    post:
+      summary: Desativar Subconta
+      description: Desative uma Subconta a partir do seu ID. Certifique-se que a conta **não tem saldo**.
+      operationId: desativar-subconta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - account_id
+              properties:
+                account_id:
+                  type: string
+                  description: ID da Subconta que será desativada.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"success\": true,\n  \"message\": \"A conta está em processo de desativação, em alguns instantes será finalizado.\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: A conta está em processo de desativação, em alguns instantes será finalizado.
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /payments/pix:
+    put:
+      summary: Ativar/desativar método Pix
+      description: Ative ou desative o método de pagamento Pix da subconta.
+      operationId: configurar-pagamentos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enable:
+                  type: boolean
+                  description: Habilita ou Desabilita o Pix. Ao habilitar, será gerada uma chave virtual do tipo EVP no Banco Central.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+            text/plain:
+              examples:
+                Result:
+                  value: "{\n  \"errors\": {\n    \"base\": [\n      \"Conta já possui Pix ativo\"\n    ]\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      base:
+                        type: array
+                        items:
+                          type: string
+                          example: Conta já possui Pix ativo
+      deprecated: false
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: api_token
+      in: query
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/adicionar-domicilio-bancario.md
+  - https://dev.iugu.com/reference/atualizar-contato-de-conta.md
+  - https://dev.iugu.com/reference/atualizar-contato-de-subconta.md
+  - https://dev.iugu.com/reference/atualizar-subconta.md
+  - https://dev.iugu.com/reference/buscar-contato-de-subconta.md
+  - https://dev.iugu.com/reference/configurar-conta.md
+  - https://dev.iugu.com/reference/configurar-pagamentos.md
+  - https://dev.iugu.com/reference/consultar-envio-de-documentos.md
+  - https://dev.iugu.com/reference/criar-contato-de-subconta.md
+  - https://dev.iugu.com/reference/criar-subconta.md
+  - https://dev.iugu.com/reference/deletar-contato-de-conta.md
+  - https://dev.iugu.com/reference/desativar-subconta.md
+  - https://dev.iugu.com/reference/informacoes-da-conta.md
+  - https://dev.iugu.com/reference/listar-as-subcontas.md
+  - https://dev.iugu.com/reference/listar-contatos-de-subconta.md
+  - https://dev.iugu.com/reference/pedido-de-saque.md
+  - https://dev.iugu.com/reference/reenviar-documentos.md
+  - https://dev.iugu.com/reference/verificar-envio-de-domicilio-bancario.md
+  merge:
+    pages: 18
+    deduped: 17
+    conflicts_kept_first: 0

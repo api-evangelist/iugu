@@ -1,0 +1,163 @@
+openapi: 3.2.0
+info:
+  title: Baas API
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: Baas
+paths:
+  /:
+    get:
+      summary: Listar Pagamentos de Boletos
+      description: 'Utilize o `live_api_token` da subconta ou conta mestre.
+
+
+        Lista pagamentos de boleto de uma conta'
+      operationId: baas-listar-pagamentos
+      parameters:
+      - name: start
+        in: query
+        description: Quantos registros pular do início da pesquisa, usado para paginação.
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: Limita o número de registros retornados em até 100, que é o padrão de retorno desta chamada. Também utilizado em paginação.
+        schema:
+          type: integer
+          format: int32
+      - name: created_at_from
+        in: query
+        description: Registros criados a partir dessa data passada no parâmetro. Formato (AAAA-MM-DD)
+        schema:
+          type: string
+          format: date
+      - name: created_at_to
+        in: query
+        description: Registros criados até esta data passada no parâmetro. Formato (AAAA-MM-DD)
+        schema:
+          type: string
+          format: date
+      - name: status
+        in: query
+        description: Usado para filtrar os pagamentos pelo status (pending, processing, rejected, done)
+        schema:
+          type: string
+      - name: barcode
+        in: query
+        description: Código de barras do pagamento
+        schema:
+          type: string
+      - name: updated_at_from
+        in: query
+        description: Registros atualizados a partir dessa data passada no parâmetro. Formato (AAAA-MM-DD)
+        schema:
+          type: string
+          format: date
+      - name: updated_at_to
+        in: query
+        description: Registros atualizados a até esta data passada no parâmetro. Formato (AAAA-MM-DD)
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "[\n    {\n        \"id\": \"00000000000000000000000000000000\",\n        \"account_id\": \"00000000000000000000000000000000\",\n        \"barcode\": \"846100000013310502962023004200030007003752691117\",\n        \"status\": \"pending\",\n        \"document_amount_cents\": 13105,\n        \"amount_cents\": 13105,\n        \"description\": null,\n        \"created_at\": \"2024-08-16T17:09:59-03:00\",\n        \"updated_at\": \"2024-08-16T17:10:09-03:00\"\n    },\n    {\n        \"id\": \"00000000000000000000000000000000\",\n        \"account_id\": \"00000000000000000000000000000000\",\n        \"barcode\": \"846100000013310502962023004200030007003752691117\",\n        \"status\": \"pending\",\n        \"document_amount_cents\": 13105,\n        \"amount_cents\": 13105,\n        \"description\": null,\n        \"created_at\": \"2024-08-16T17:13:17-03:00\",\n        \"updated_at\": \"2024-08-16T17:13:28-03:00\"\n    }\n]"
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: '00000000000000000000000000000000'
+                    account_id:
+                      type: string
+                      example: '00000000000000000000000000000000'
+                    barcode:
+                      type: string
+                      example: '846100000013310502962023004200030007003752691117'
+                    status:
+                      type: string
+                      example: pending
+                    document_amount_cents:
+                      type: integer
+                      example: 13105
+                      default: 0
+                    amount_cents:
+                      type: integer
+                      example: 13105
+                      default: 0
+                    description: {}
+                    created_at:
+                      type: string
+                      example: '2024-08-16T17:09:59-03:00'
+                    updated_at:
+                      type: string
+                      example: '2024-08-16T17:10:09-03:00'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"errors\": \"Not Found\"\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Not Found
+      deprecated: false
+      tags:
+      - Baas
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: api_token
+      in: query
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/baas-consulta-de-chave-pix-conta-iugu.md
+  - https://dev.iugu.com/reference/baas-consultar-comprovante-de-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-consultar-envio-de-documentos.md
+  - https://dev.iugu.com/reference/baas-criar-conta.md
+  - https://dev.iugu.com/reference/baas-criar-pedido-de-pagamento.md
+  - https://dev.iugu.com/reference/baas-criar-qr-deposito.md
+  - https://dev.iugu.com/reference/baas-decode-qrcode.md
+  - https://dev.iugu.com/reference/baas-enviar-verificacao-de-conta.md
+  - https://dev.iugu.com/reference/baas-extrato-financeiro.md
+  - https://dev.iugu.com/reference/baas-informacoes-da-conta.md
+  - https://dev.iugu.com/reference/baas-listar-chaves-pix.md
+  - https://dev.iugu.com/reference/baas-listar-comprovantes-de-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-listar-pagamentos.md
+  - https://dev.iugu.com/reference/baas-listar-saques-transferencia-proprias.md
+  - https://dev.iugu.com/reference/baas-listar-transferencias-entre-contas-iugu.md
+  - https://dev.iugu.com/reference/baas-pedido-de-saque-para-domicilio-proprio.md
+  - https://dev.iugu.com/reference/baas-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-validar-pagamento.md
+  - https://dev.iugu.com/reference/cancelar-pix-agendado-1.md
+  - https://dev.iugu.com/reference/consulta-de-bancos-cadastrados.md
+  - https://dev.iugu.com/reference/consulta-ispb-compe.md
+  - https://dev.iugu.com/reference/desativar-subconta-copy.md
+  - https://dev.iugu.com/reference/reenviar-documentos-para-verificar-conta-iugu-copy.md
+  merge:
+    pages: 23
+    deduped: 22
+    conflicts_kept_first: 0

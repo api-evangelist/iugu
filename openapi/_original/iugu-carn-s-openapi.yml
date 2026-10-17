@@ -1,0 +1,154 @@
+# x-archived-from: iugu-carn-s-openapi.yml
+# x-archived-on: 2026-10-17
+openapi: 3.1.0
+info:
+  title: carnês
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+x-readme-fauxas: true
+paths:
+  /payment_booklets/{id}/cancel:
+    put:
+      summary: Cancelar carnê
+      description: Cancelamento de Carnê que está com status de "pending"
+      operationId: cancelamentodocarne
+      parameters:
+      - name: id
+        in: path
+        description: ID do carnê
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": \"6F10E0ACB4F3471CAE1356093E3999BB\",\n  \"external_reference\": null,\n  \"custom_instruction\": null,\n  \"description\": \"Descrição da Capa do Carnê\",\n  \"price_cents\": 1000,\n  \"started_at\": \"2025-04-02T00:00:00-03:00\",\n  \"finish_at\": \"2025-05-02T00:00:00-03:00\",\n  \"status\": \"canceled\",\n  \"invoices\": null,\n  \"customer\": {\n    \"id\": \"796B9E7392444DAA971D3F1E0BE83F89\",\n    \"datasource_id\": \"EA29CC4EFA5B4150BCF2C13857246168\",\n    \"email\": \"jose_silva@teste.com\",\n    \"created_at\": \"2024-01-02T10:28:13-03:00\",\n    \"updated_at\": \"2024-04-29T12:03:42-03:00\",\n    \"name\": \"José\",\n    \"notes\": \"\",\n    \"cc_emails\": \"jose_2@teste.com\",\n    \"cpf_cnpj\": \"113.436.750-30\",\n    \"zip_code\": \"01310100\",\n    \"number\": \"1048\",\n    \"complement\": \"55b\",\n    \"street\": \"Avenida Paulista\",\n    \"district\": \"Bela Vista\",\n    \"phone\": \"999999999\",\n    \"phone_prefix\": \"011\"\
+                    ,\n    \"trade_name\": \"\",\n    \"login_allowed\": null,\n    \"default_payment_method_id\": null,\n    \"proxy_payments_from_customer_id\": null\n  },\n  \"payment_booklet_installments\": 2,\n  \"secure_url\": \"https://faturas.iugu.com/payment_booklet/6f10e0ac-b4f3-471c-ae13-56093e3999bb-d989\"\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6F10E0ACB4F3471CAE1356093E3999BB
+                  external_reference: {}
+                  custom_instruction: {}
+                  description:
+                    type: string
+                    example: Descrição da Capa do Carnê
+                  price_cents:
+                    type: integer
+                    example: 1000
+                    default: 0
+                  started_at:
+                    type: string
+                    example: '2025-04-02T00:00:00-03:00'
+                  finish_at:
+                    type: string
+                    example: '2025-05-02T00:00:00-03:00'
+                  status:
+                    type: string
+                    example: canceled
+                  invoices: {}
+                  customer:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 796B9E7392444DAA971D3F1E0BE83F89
+                      datasource_id:
+                        type: string
+                        example: EA29CC4EFA5B4150BCF2C13857246168
+                      email:
+                        type: string
+                        example: jose_silva@teste.com
+                      created_at:
+                        type: string
+                        example: '2024-01-02T10:28:13-03:00'
+                      updated_at:
+                        type: string
+                        example: '2024-04-29T12:03:42-03:00'
+                      name:
+                        type: string
+                        example: José
+                      notes:
+                        type: string
+                        example: ''
+                      cc_emails:
+                        type: string
+                        example: jose_2@teste.com
+                      cpf_cnpj:
+                        type: string
+                        example: 113.436.750-30
+                      zip_code:
+                        type: string
+                        example: '01310100'
+                      number:
+                        type: string
+                        example: '1048'
+                      complement:
+                        type: string
+                        example: 55b
+                      street:
+                        type: string
+                        example: Avenida Paulista
+                      district:
+                        type: string
+                        example: Bela Vista
+                      phone:
+                        type: string
+                        example: '999999999'
+                      phone_prefix:
+                        type: string
+                        example: '011'
+                      trade_name:
+                        type: string
+                        example: ''
+                      login_allowed: {}
+                      default_payment_method_id: {}
+                      proxy_payments_from_customer_id: {}
+                  payment_booklet_installments:
+                    type: integer
+                    example: 2
+                    default: 0
+                  secure_url:
+                    type: string
+                    example: https://faturas.iugu.com/payment_booklet/6f10e0ac-b4f3-471c-ae13-56093e3999bb-d989
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"errors\": \"Not Found\"\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Not Found
+      deprecated: false
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: query
+      name: api_token
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/cancelamentodocarne.md
+  merge:
+    pages: 1
+    deduped: 0
+    conflicts_kept_first: 0

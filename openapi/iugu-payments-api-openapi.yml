@@ -1,0 +1,96 @@
+openapi: 3.2.0
+info:
+  title: Iugu Payments API
+  version: '1.0'
+  description: 'Operations tagged Payments across 2 of this provider''s published API definitions: iugu-bancos-openapi.yml, iugu-conta-de-pagamento-e-marketplace-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: Payments
+paths:
+  /payments/pix:
+    put:
+      summary: Ativar/desativar Pix
+      description: Ative ou desative o método Pix. Ao requisitá-la, é criada uma chave EVP no BACEN.
+      operationId: baas-ativar-desativar-pix
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enable:
+                  type: boolean
+                  description: Habilita ou Desabilita o Pix. Ao habilitar, será gerada uma chave virtual do tipo EVP no Banco Central.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+            text/plain:
+              examples:
+                Result:
+                  value: "{\n  \"errors\": {\n    \"base\": [\n      \"Conta já possui Pix ativo\"\n    ]\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      base:
+                        type: array
+                        items:
+                          type: string
+                          example: Conta já possui Pix ativo
+      deprecated: false
+      tags:
+      - Payments
+    servers:
+    - url: https://api.iugu.com/v1
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: query
+      name: api_token
+x-refined-from:
+- iugu-bancos-openapi.yml
+- iugu-conta-de-pagamento-e-marketplace-openapi.yml
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/antecipar-recebiveis.md
+  - https://dev.iugu.com/reference/consultar-unidade-de-recebiveis.md
+  - https://dev.iugu.com/reference/listar-recebiveis.md
+  - https://dev.iugu.com/reference/listar-unidade-de-recebiveis.md
+  merge:
+    pages: 4
+    deduped: 3
+    conflicts_kept_first: 0

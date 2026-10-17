@@ -1,0 +1,252 @@
+openapi: 3.2.0
+info:
+  title: baas Payment Requests API
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: Payment Requests
+paths:
+  /payment_requests/:
+    post:
+      summary: Pagar Boleto
+      description: 'Utilize o `live_api_token` da subconta ou conta mestre.
+
+
+        Cria um pedido de pagamento de boleto.'
+      operationId: baas-criar-pedido-de-pagamento
+      parameters:
+      - name: Request-Time
+        in: header
+        description: Timestamp do momento que enviar a requisição de assinatura digital (RSA)
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: Signature
+        in: header
+        description: Assinatura digital validada
+        required: true
+        schema:
+          type: string
+          default: signature=
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - barcode
+              - amount_cents
+              - document_amount_cents
+              properties:
+                barcode:
+                  type: string
+                  description: Código de barras do pagamento
+                amount_cents:
+                  type: integer
+                  description: Valor de pagamento do boleto
+                  format: int32
+                document_amount_cents:
+                  type: integer
+                  description: Valor total do boleto
+                  format: int32
+                description:
+                  type: string
+                  description: Descrição do pagamento
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": \"A1F7D3920C5B4E68A4729D1FE83BC047\",\n  \"account_id\": \"6B2E91CD7F0A4835B19C6D2E4A70F3D8\",\n  \"barcode\": \"23700000000000000000000000000000000000000000000\",\n  \"status\": \"pending\",\n  \"document_amount_cents\": 500,\n  \"amount_cents\": 500,\n  \"description\": null,\n  \"created_at\": \"2026-06-24T12:32:21-03:00\",\n  \"updated_at\": \"2026-06-24T12:32:21-03:00\",\n  \"receipt_url\": \"https://comprovantes.iugu.com/a1f7d392-0c5b-4e68-a472-9d1fe83bc047-f20fae\",\n  \"payment_info\": {\n    \"barcode\": \"23700000000000000000000000000000000000000000000\",\n    \"amount_cents\": 500,\n    \"fine_cents\": 0,\n    \"interest_cents\": 0,\n    \"discount_cents\": 0,\n    \"total_amount_cents\": 500,\n    \"recipient_name\": \"BANCO TESTE S.A.\",\n    \"recipient_cnpj_cpf\": \"67970552000101\",\n    \"payer_name\": \"João Teste da Silva\",\n    \"payer_cnpj_cpf\": \"50215552008\",\n    \"allow_amount_change\": false,\n    \"allow_partial_payment\": false,\n    \"due_date\": \"2026-06-25\",\n    \"maximum_payment_date\": \"2026-08-09T00:00:00.000Z\",\n    \"details\": null,\n    \"emitter\": \"BRADESCO S.A\",\n    \"payee_cnpj_cpf\": \"91326007000153\"\n  }"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: '00000000000000000000000000000000'
+                  account_id:
+                    type: string
+                    example: '00000000000000000000000000000000'
+                  barcode:
+                    type: string
+                    example: '846100000013310502962023004200030007003752691117'
+                  status:
+                    type: string
+                    example: pending
+                  document_amount_cents:
+                    type: integer
+                    example: 10
+                    default: 0
+                  amount_cents:
+                    type: integer
+                    example: 10
+                    default: 0
+                  description:
+                    type: string
+                    example: teste
+                  created_at:
+                    type: string
+                    example: '2024-08-15T17:54:56-03:00'
+                  updated_at:
+                    type: string
+                    example: '2024-08-16T16:55:07-03:00'
+      tags:
+      - Payment Requests
+  /payment_requests/validate:
+    post:
+      summary: Validar Linha Digitável de um Boleto
+      description: 'Utilize o `live_api_token` da subconta ou conta mestre.
+
+
+        Valida se a linha digitavel de um boleto é valida. É importante se atentar ao parâmetro *"details"* onde será informado se o boleto esta em aberto ou baixado na CIP/Nuclea, Exemplo: Boletos pagos, cancelados ou expirados será retornado como "Retorno CIP 01 Boleto já baixado",'
+      operationId: baas-validar-pagamento
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - barcode
+              - detailed
+              properties:
+                barcode:
+                  type: string
+                  description: Código de barras do pagamento
+                detailed:
+                  type: boolean
+                  description: Detalhes do boleto, deverá ser enviado como "true"
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"message\": \"Boleto é válido\"\n}"
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Boleto é válido
+            text/plain:
+              examples:
+                Result:
+                  value: "{\n    \"message\": \"Boleto é válido\",\n    \"payment_info\": {\n        \"barcode\": \"12345610000000000001857380066019194920000008900\",\n        \"amount_cents\": 8900,\n        \"fine_cents\": 178,\n        \"interest_cents\": 35,\n        \"discount_cents\": 0,\n        \"total_amount_cents\": 9113,\n        \"recipient_name\": \"LOJISTA LTDA\",\n        \"recipient_cnpj_cpf\": \"12350768000171\",\n        \"payer_name\": \"NOME PAGADORA\",\n        \"payer_cnpj_cpf\": \"12345678900\",\n        \"allow_amount_change\": false,\n        \"allow_partial_payment\": false,\n        \"due_date\": \"2024-08-03\",\n        \"maximum_payment_date\": \"2024-09-23T00:00:00.000Z\",\n        \"details\": \"Retorno CIP  01 Boleto já baixado\",\n        \"emitter\": \"EMISSOR\",\n        \"payee_cnpj_cpf\": \"12345668000001\"\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Boleto é válido
+                  payment_info:
+                    type: object
+                    properties:
+                      barcode:
+                        type: string
+                        example: '12345610000000000001857380066019194920000008900'
+                      amount_cents:
+                        type: integer
+                        example: 8900
+                        default: 0
+                      fine_cents:
+                        type: integer
+                        example: 178
+                        default: 0
+                      interest_cents:
+                        type: integer
+                        example: 35
+                        default: 0
+                      discount_cents:
+                        type: integer
+                        example: 0
+                        default: 0
+                      total_amount_cents:
+                        type: integer
+                        example: 9113
+                        default: 0
+                      recipient_name:
+                        type: string
+                        example: LOJISTA LTDA
+                      recipient_cnpj_cpf:
+                        type: string
+                        example: '12350768000171'
+                      payer_name:
+                        type: string
+                        example: NOME PAGADORA
+                      payer_cnpj_cpf:
+                        type: string
+                        example: '12345678900'
+                      allow_amount_change:
+                        type: boolean
+                        example: false
+                        default: true
+                      allow_partial_payment:
+                        type: boolean
+                        example: false
+                        default: true
+                      due_date:
+                        type: string
+                        example: '2024-08-03'
+                      maximum_payment_date:
+                        type: string
+                        example: '2024-09-23T00:00:00.000Z'
+                      details:
+                        type: string
+                        example: Retorno CIP  01 Boleto já baixado
+                      emitter:
+                        type: string
+                        example: EMISSOR
+                      payee_cnpj_cpf:
+                        type: string
+                        example: '12345668000001'
+      deprecated: false
+      tags:
+      - Payment Requests
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: api_token
+      in: query
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/baas-consulta-de-chave-pix-conta-iugu.md
+  - https://dev.iugu.com/reference/baas-consultar-comprovante-de-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-consultar-envio-de-documentos.md
+  - https://dev.iugu.com/reference/baas-criar-conta.md
+  - https://dev.iugu.com/reference/baas-criar-pedido-de-pagamento.md
+  - https://dev.iugu.com/reference/baas-criar-qr-deposito.md
+  - https://dev.iugu.com/reference/baas-decode-qrcode.md
+  - https://dev.iugu.com/reference/baas-enviar-verificacao-de-conta.md
+  - https://dev.iugu.com/reference/baas-extrato-financeiro.md
+  - https://dev.iugu.com/reference/baas-informacoes-da-conta.md
+  - https://dev.iugu.com/reference/baas-listar-chaves-pix.md
+  - https://dev.iugu.com/reference/baas-listar-comprovantes-de-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-listar-pagamentos.md
+  - https://dev.iugu.com/reference/baas-listar-saques-transferencia-proprias.md
+  - https://dev.iugu.com/reference/baas-listar-transferencias-entre-contas-iugu.md
+  - https://dev.iugu.com/reference/baas-pedido-de-saque-para-domicilio-proprio.md
+  - https://dev.iugu.com/reference/baas-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-validar-pagamento.md
+  - https://dev.iugu.com/reference/cancelar-pix-agendado-1.md
+  - https://dev.iugu.com/reference/consulta-de-bancos-cadastrados.md
+  - https://dev.iugu.com/reference/consulta-ispb-compe.md
+  - https://dev.iugu.com/reference/desativar-subconta-copy.md
+  - https://dev.iugu.com/reference/reenviar-documentos-para-verificar-conta-iugu-copy.md
+  merge:
+    pages: 23
+    deduped: 22
+    conflicts_kept_first: 0

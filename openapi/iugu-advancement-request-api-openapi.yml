@@ -1,0 +1,74 @@
+openapi: 3.2.0
+info:
+  title: antecipação-de-recebíveis Advancement Request API
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: Advancement Request
+paths:
+  /advancement_request/simulation:
+    post:
+      summary: Criar Simulação de Antecipação
+      description: Simula a antecipação de um valor sugerido. Após a simulação ser concluída, a antecipação poderá ser efetuada ou não. Seja
+      operationId: antecipar-recebiveis
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - requested_advancement_cents
+              properties:
+                requested_advancement_cents:
+                  type: integer
+                  description: Valor à ser simulado para a antecipação (em centavos)
+                  format: int32
+      responses:
+        '202':
+          description: '202'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: Esta endpoint retorna apenas uma confirmação de que o pedido de simulação foi aceito. Para verificar o status da Simulação, utilize a endpoint "Verificar Status da Simulação" ou seja notificado via Webhook.
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: " {\n   \"errors\": \"string\"\n }"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: string
+      deprecated: false
+      tags:
+      - Advancement Request
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: query
+      name: api_token
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/antecipar-recebiveis.md
+  - https://dev.iugu.com/reference/consultar-unidade-de-recebiveis.md
+  - https://dev.iugu.com/reference/listar-recebiveis.md
+  - https://dev.iugu.com/reference/listar-unidade-de-recebiveis.md
+  merge:
+    pages: 4
+    deduped: 3
+    conflicts_kept_first: 0

@@ -143,314 +143,525 @@ common:
     url: finops/iugu-finops.yml
 
 apis:
-- aid: iugu:iugu-antecipa-o-de-receb-veis
-  name: Iugu Antecipa O De Receb Veis Openapi.Yml API
+- aid: iugu:iugu-account-api
+  name: Iugu Account API
+  description: The Account API from Iugu — 1 operation(s) for account.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-account-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-accounts-api
+  name: Iugu Accounts API
+  description: The Accounts API from Iugu — 12 operation(s) for accounts.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-advancement-request-api
+  name: Iugu Advancement Request API
+  description: The Advancement Request API from Iugu — 1 operation(s) for advancement request.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Advancement Request
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-advancement-request-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-api-tokens-api
+  name: Iugu Api Tokens API
+  description: The Api Tokens API from Iugu — 2 operation(s) for api tokens.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Api Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-api-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-automatic-pix-api
+  name: Iugu Automatic Pix API
+  description: The Automatic Pix API from Iugu — 7 operation(s) for automatic pix.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Automatic Pix
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-automatic-pix-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-baas-api
+  name: Iugu Baas API
+  description: The Baas API from Iugu — 1 operation(s) for baas.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Baas
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-baas-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-bank-account-pix-keys-api
+  name: Iugu Bank Account Pix Keys API
+  description: The Bank Account Pix Keys API from Iugu — 1 operation(s) for bank account pix keys.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Bank Account Pix Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-bank-account-pix-keys-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-bank-verification-api
+  name: Iugu Bank Verification API
+  description: The Bank Verification API from Iugu — 1 operation(s) for bank verification.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Bank Verification
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-bank-verification-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-banks-api
+  name: Iugu Banks API
+  description: The Banks API from Iugu — 2 operation(s) for banks.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Banks
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-banks-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-charge-api
+  name: Iugu Charge API
+  description: The Charge API from Iugu — 1 operation(s) for charge.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Charge
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-charge-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-charge-two-credit-cards-api
+  name: Iugu Charge Two Credit Cards API
+  description: The Charge Two Credit Cards API from Iugu — 1 operation(s) for charge two credit cards.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Charge Two Credit Cards
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-charge-two-credit-cards-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-chargebacks-api
+  name: Iugu Chargebacks API
+  description: The Chargebacks API from Iugu — 4 operation(s) for chargebacks.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Chargebacks
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-chargebacks-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-customers-api
+  name: Iugu Customers API
+  description: The Customers API from Iugu — 4 operation(s) for customers.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-customers-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-emails-api
+  name: Iugu Emails API
+  description: The Emails API from Iugu — 3 operation(s) for emails.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Emails
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-emails-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-financial-transaction-requests-api
+  name: Iugu Financial Transaction Requests API
   description: >-
-    The Antecipa O De Receb Veis Openapi.Yml API from Iugu — 4 operation(s) for antecipa o de receb veis
-    openapi.yml.
+    The Financial Transaction Requests API from Iugu — 1 operation(s) for financial transaction requests.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Antecipa O De Receb Veis Openapi.Yml
+  - Financial Transaction Requests
   properties:
   - type: OpenAPI
-    url: openapi/iugu-antecipa-o-de-receb-veis-openapi.yml
+    url: openapi/iugu-financial-transaction-requests-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-assinaturas
-  name: Iugu Assinaturas Openapi.Yml API
-  description: The Assinaturas Openapi.Yml API from Iugu — 5 operation(s) for assinaturas openapi.yml.
+- aid: iugu:iugu-invoices-api
+  name: Iugu Invoices API
+  description: The Invoices API from Iugu — 8 operation(s) for invoices.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Assinaturas Openapi.Yml
+  - Invoices
   properties:
   - type: OpenAPI
-    url: openapi/iugu-assinaturas-openapi.yml
+    url: openapi/iugu-invoices-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-baas
-  name: Iugu Baas Openapi.Yml API
-  description: The Baas Openapi.Yml API from Iugu — 22 operation(s) for baas openapi.yml.
+- aid: iugu:iugu-listar-pagamentos-api
+  name: Iugu Listar Pagamentos API
+  description: The Listar Pagamentos API from Iugu — 2 operation(s) for listar pagamentos.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Baas Openapi.Yml
+  - Listar Pagamentos
   properties:
   - type: OpenAPI
-    url: openapi/iugu-baas-openapi.yml
+    url: openapi/iugu-listar-pagamentos-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-bancos
-  name: Iugu Bancos Openapi.Yml API
-  description: The Bancos Openapi.Yml API from Iugu — 1 operation(s) for bancos openapi.yml.
+- aid: iugu:iugu-marketplace-api
+  name: Iugu Marketplace API
+  description: The Marketplace API from Iugu — 3 operation(s) for marketplace.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Bancos Openapi.Yml
+  - Marketplace
   properties:
   - type: OpenAPI
-    url: openapi/iugu-bancos-openapi.yml
+    url: openapi/iugu-marketplace-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-carn-s
-  name: Iugu Carn S Openapi.Yml API
-  description: The Carn S Openapi.Yml API from Iugu — 1 operation(s) for carn s openapi.yml.
-  humanURL: https://dev.iugu.com/docs
-  baseURL: https://api.iugu.com/v1
-  tags:
-  - Carn S Openapi.Yml
-  properties:
-  - type: OpenAPI
-    url: openapi/iugu-carn-s-openapi.yml
-  - type: Documentation
-    url: https://dev.iugu.com/docs
-- aid: iugu:iugu-clientes
-  name: Iugu Clientes Openapi.Yml API
-  description: The Clientes Openapi.Yml API from Iugu — 2 operation(s) for clientes openapi.yml.
-  humanURL: https://dev.iugu.com/docs
-  baseURL: https://api.iugu.com/v1
-  tags:
-  - Clientes Openapi.Yml
-  properties:
-  - type: OpenAPI
-    url: openapi/iugu-clientes-openapi.yml
-  - type: Documentation
-    url: https://dev.iugu.com/docs
-- aid: iugu:iugu-configurar-nome-cedente
-  name: Iugu Configurar Nome Cedente Openapi.Yml API
+- aid: iugu:iugu-marketplace-resource-search-api
+  name: Iugu Marketplace Resource Search API
   description: >-
-    The Configurar Nome Cedente Openapi.Yml API from Iugu — 2 operation(s) for configurar nome cedente
-    openapi.yml.
+    The Marketplace Resource Search API from Iugu — 1 operation(s) for marketplace resource search.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Configurar Nome Cedente Openapi.Yml
+  - Marketplace Resource Search
   properties:
   - type: OpenAPI
-    url: openapi/iugu-configurar-nome-cedente-openapi.yml
+    url: openapi/iugu-marketplace-resource-search-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-conta-de-pagamento-e-marketplace
-  name: Iugu Conta De Pagamento E Marketplace Openapi.Yml API
+- aid: iugu:iugu-payment-booklets-api
+  name: Iugu Payment Booklets API
+  description: The Payment Booklets API from Iugu — 1 operation(s) for payment booklets.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Payment Booklets
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-payment-booklets-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-payment-requests-api
+  name: Iugu Payment Requests API
+  description: The Payment Requests API from Iugu — 2 operation(s) for payment requests.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Payment Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-payment-requests-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-payment-token-api
+  name: Iugu Payment Token API
+  description: The Payment Token API from Iugu — 1 operation(s) for payment token.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Payment Token
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-payment-token-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-payments-api
+  name: Iugu Payments API
+  description: The Payments API from Iugu — 1 operation(s) for payments.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-payments-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-pix-api
+  name: Iugu Pix API
+  description: The Pix API from Iugu — 1 operation(s) for pix.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Pix
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-pix-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-plans-api
+  name: Iugu Plans API
+  description: The Plans API from Iugu — 3 operation(s) for plans.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-plans-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-profile-api
+  name: Iugu Profile API
+  description: The Profile API from Iugu — 1 operation(s) for profile.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Profile
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-profile-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-receivable-units-api
+  name: Iugu Receivable Units API
+  description: The Receivable Units API from Iugu — 2 operation(s) for receivable units.
+  humanURL: https://dev.iugu.com/docs
+  baseURL: https://api.iugu.com/v1
+  tags:
+  - Receivable Units
+  properties:
+  - type: OpenAPI
+    url: openapi/iugu-receivable-units-api-openapi.yml
+  - type: Documentation
+    url: https://dev.iugu.com/docs
+- aid: iugu:iugu-reschedule-automatic-pix-payment-api
+  name: Iugu Reschedule Automatic Pix Payment API
   description: >-
-    The Conta De Pagamento E Marketplace Openapi.Yml API from Iugu — 12 operation(s) for conta de pagamento
-    e marketplace openapi.yml.
+    The Reschedule Automatic Pix Payment API from Iugu — 1 operation(s) for reschedule automatic pix payment.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Conta De Pagamento E Marketplace Openapi.Yml
+  - Reschedule Automatic Pix Payment
   properties:
   - type: OpenAPI
-    url: openapi/iugu-conta-de-pagamento-e-marketplace-openapi.yml
+    url: openapi/iugu-reschedule-automatic-pix-payment-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-contesta-o
-  name: Iugu Contesta O Openapi.Yml API
-  description: The Contesta O Openapi.Yml API from Iugu — 4 operation(s) for contesta o openapi.yml.
+- aid: iugu:iugu-resource-search-api
+  name: Iugu Resource Search API
+  description: The Resource Search API from Iugu — 1 operation(s) for resource search.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Contesta O Openapi.Yml
+  - Resource Search
   properties:
   - type: OpenAPI
-    url: openapi/iugu-contesta-o-openapi.yml
+    url: openapi/iugu-resource-search-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-emails-transacionais
-  name: Iugu Emails Transacionais Openapi.Yml API
-  description: >-
-    The Emails Transacionais Openapi.Yml API from Iugu — 3 operation(s) for emails transacionais openapi.yml.
+- aid: iugu:iugu-signature-api
+  name: Iugu Signature API
+  description: The Signature API from Iugu — 1 operation(s) for signature.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Emails Transacionais Openapi.Yml
+  - Signature
   properties:
   - type: OpenAPI
-    url: openapi/iugu-emails-transacionais-openapi.yml
+    url: openapi/iugu-signature-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-faturas
-  name: Iugu Faturas Openapi.Yml API
-  description: The Faturas Openapi.Yml API from Iugu — 19 operation(s) for faturas openapi.yml.
+- aid: iugu:iugu-splits-api
+  name: Iugu Splits API
+  description: The Splits API from Iugu — 4 operation(s) for splits.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Faturas Openapi.Yml
+  - Splits
   properties:
   - type: OpenAPI
-    url: openapi/iugu-faturas-openapi.yml
+    url: openapi/iugu-splits-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-formas-de-pagamento-do-cliente
-  name: Iugu Formas De Pagamento Do Cliente Openapi.Yml API
-  description: >-
-    The Formas De Pagamento Do Cliente Openapi.Yml API from Iugu — 2 operation(s) for formas de pagamento
-    do cliente openapi.yml.
+- aid: iugu:iugu-static-qr-codes-api
+  name: Iugu Static Qr Codes API
+  description: The Static Qr Codes API from Iugu — 2 operation(s) for static qr codes.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Formas De Pagamento Do Cliente Openapi.Yml
+  - Static Qr Codes
   properties:
   - type: OpenAPI
-    url: openapi/iugu-formas-de-pagamento-do-cliente-openapi.yml
+    url: openapi/iugu-static-qr-codes-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-gatilhos
-  name: Iugu Gatilhos Openapi.Yml API
-  description: The Gatilhos Openapi.Yml API from Iugu — 3 operation(s) for gatilhos openapi.yml.
+- aid: iugu:iugu-subscriptions-api
+  name: Iugu Subscriptions API
+  description: The Subscriptions API from Iugu — 5 operation(s) for subscriptions.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Gatilhos Openapi.Yml
+  - Subscriptions
   properties:
   - type: OpenAPI
-    url: openapi/iugu-gatilhos-openapi.yml
+    url: openapi/iugu-subscriptions-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-listar-pagamentos
-  name: Iugu Listar Pagamentos Openapi.Yml API
-  description: >-
-    The Listar Pagamentos Openapi.Yml API from Iugu — 3 operation(s) for listar pagamentos openapi.yml.
+- aid: iugu:iugu-transfer-requests-api
+  name: Iugu Transfer Requests API
+  description: The Transfer Requests API from Iugu — 5 operation(s) for transfer requests.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Listar Pagamentos Openapi.Yml
+  - Transfer Requests
   properties:
   - type: OpenAPI
-    url: openapi/iugu-listar-pagamentos-openapi.yml
+    url: openapi/iugu-transfer-requests-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-log-de-gatilhos
-  name: Iugu Log De Gatilhos Openapi.Yml API
-  description: >-
-    The Log De Gatilhos Openapi.Yml API from Iugu — 1 operation(s) for log de gatilhos openapi.yml.
+- aid: iugu:iugu-transferors-api
+  name: Iugu Transferors API
+  description: The Transferors API from Iugu — 1 operation(s) for transferors.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Log De Gatilhos Openapi.Yml
+  - Transferors
   properties:
   - type: OpenAPI
-    url: openapi/iugu-log-de-gatilhos-openapi.yml
+    url: openapi/iugu-transferors-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-multi-split
-  name: Iugu Multi Split Openapi.Yml API
-  description: The Multi Split Openapi.Yml API from Iugu — 4 operation(s) for multi split openapi.yml.
+- aid: iugu:iugu-transferors-id-api
+  name: Iugu Transferors{id} API
+  description: The Transferors{id} API from Iugu — 1 operation(s) for transferors{id}.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Multi Split Openapi.Yml
+  - Transferors{id}
   properties:
   - type: OpenAPI
-    url: openapi/iugu-multi-split-openapi.yml
+    url: openapi/iugu-transferors-id-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-planos
-  name: Iugu Planos Openapi.Yml API
-  description: The Planos Openapi.Yml API from Iugu — 3 operation(s) for planos openapi.yml.
+- aid: iugu:iugu-transfers-api
+  name: Iugu Transfers API
+  description: The Transfers API from Iugu — 2 operation(s) for transfers.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Planos Openapi.Yml
+  - Transfers
   properties:
   - type: OpenAPI
-    url: openapi/iugu-planos-openapi.yml
+    url: openapi/iugu-transfers-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-qrcode-est-tico
-  name: Iugu Qrcode Est Tico Openapi.Yml API
-  description: >-
-    The Qrcode Est Tico Openapi.Yml API from Iugu — 1 operation(s) for qrcode est tico openapi.yml.
+- aid: iugu:iugu-validate-api
+  name: Iugu Validate API
+  description: The Validate API from Iugu — 1 operation(s) for validate.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Qrcode Est Tico Openapi.Yml
+  - Validate
   properties:
   - type: OpenAPI
-    url: openapi/iugu-qrcode-est-tico-openapi.yml
+    url: openapi/iugu-validate-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-relat-rios-para-concilia-o
-  name: Iugu Relat Rios Para Concilia O Openapi.Yml API
-  description: >-
-    The Relat Rios Para Concilia O Openapi.Yml API from Iugu — 6 operation(s) for relat rios para concilia
-    o openapi.yml.
+- aid: iugu:iugu-web-hook-logs-api
+  name: Iugu Web Hook Logs API
+  description: The Web Hook Logs API from Iugu — 1 operation(s) for web hook logs.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Relat Rios Para Concilia O Openapi.Yml
+  - Web Hook Logs
   properties:
   - type: OpenAPI
-    url: openapi/iugu-relat-rios-para-concilia-o-openapi.yml
+    url: openapi/iugu-web-hook-logs-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-tokens-de-api
-  name: Iugu Tokens De API
-  description: The Tokens De API from Iugu — 3 operation(s) for tokens de.
+- aid: iugu:iugu-withdraw-conciliations-api
+  name: Iugu Withdraw Conciliations API
+  description: The Withdraw Conciliations API from Iugu — 1 operation(s) for withdraw conciliations.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Tokens De
+  - Withdraw Conciliations
   properties:
   - type: OpenAPI
-    url: openapi/iugu-tokens-de-api-openapi.yml
+    url: openapi/iugu-withdraw-conciliations-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-tokens-e-cobran-a-direta
-  name: Iugu Tokens E Cobran A Direta Openapi.Yml API
-  description: >-
-    The Tokens E Cobran A Direta Openapi.Yml API from Iugu — 5 operation(s) for tokens e cobran a direta
-    openapi.yml.
+- aid: iugu:iugu-withdraw-requests-api
+  name: Iugu Withdraw Requests API
+  description: The Withdraw Requests API from Iugu — 2 operation(s) for withdraw requests.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Tokens E Cobran A Direta Openapi.Yml
+  - Withdraw Requests
   properties:
   - type: OpenAPI
-    url: openapi/iugu-tokens-e-cobran-a-direta-openapi.yml
+    url: openapi/iugu-withdraw-requests-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-transfer-ncia-banc-ria
-  name: Iugu Transfer Ncia Banc Ria Openapi.Yml API
-  description: >-
-    The Transfer Ncia Banc Ria Openapi.Yml API from Iugu — 2 operation(s) for transfer ncia banc ria openapi.yml.
+- aid: iugu:iugu-zero-auth-api
+  name: Iugu Zero Auth API
+  description: The Zero Auth API from Iugu — 1 operation(s) for zero auth.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Transfer Ncia Banc Ria Openapi.Yml
+  - Zero Auth
   properties:
   - type: OpenAPI
-    url: openapi/iugu-transfer-ncia-banc-ria-openapi.yml
+    url: openapi/iugu-zero-auth-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-transfer-ncia-de-valores
-  name: Iugu Transfer Ncia De Valores Openapi.Yml API
-  description: >-
-    The Transfer Ncia De Valores Openapi.Yml API from Iugu — 3 operation(s) for transfer ncia de valores
-    openapi.yml.
+- aid: iugu:iugu-webhooks-api
+  name: Iugu Webhooks API
+  description: The Webhooks API from Iugu — 3 operation(s) for webhooks.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
-  - Transfer Ncia De Valores Openapi.Yml
+  - Webhooks
   properties:
   - type: OpenAPI
-    url: openapi/iugu-transfer-ncia-de-valores-openapi.yml
+    url: openapi/iugu-webhooks-api-openapi.yml
   - type: Documentation
     url: https://dev.iugu.com/docs
-- aid: iugu:iugu-zero-auth
-  name: Iugu Zero Auth Openapi.Yml API
-  description: The Zero Auth Openapi.Yml API from Iugu — 1 operation(s) for zero auth openapi.yml.
-  humanURL: https://dev.iugu.com/docs
-  baseURL: https://api.iugu.com/v1
-  tags:
-  - Zero Auth Openapi.Yml
-  properties:
-  - type: OpenAPI
-    url: openapi/iugu-zero-auth-openapi.yml
-  - type: Documentation
-    url: https://dev.iugu.com/docs
-
 x-readme-harvest:
   date: '2026-10-14'
   ops: 144

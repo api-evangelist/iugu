@@ -1,0 +1,393 @@
+openapi: 3.2.0
+info:
+  title: faturas Automatic Pix API
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: Automatic Pix
+paths:
+  /automatic_pix/receiver_recurrence_payments/cancel:
+    post:
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                OK:
+                  summary: OK
+                  value:
+                    success: true
+                    cancellation_id: UUID
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Bad Request:
+                  summary: Bad Request
+                  value:
+                    success: false
+                    errors:
+                    - message: Descrição do erro
+          description: Bad Request
+      parameters:
+      - in: query
+        name: receiver_recurrence_payment_id
+        schema:
+          type: string
+        required: true
+        description: ID do pagamento agendado
+      - in: query
+        name: end_to_end_id
+        schema:
+          type: string
+        description: Identificador E2E do pagamento
+        required: true
+      summary: Copy of Copy of Copy of
+      operationId: post_automatic-pix-receiver-recurrence-payments-cancel
+      tags:
+      - Automatic Pix
+  /automatic_pix/receiver_recurrences:
+    get:
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                OK:
+                  summary: OK
+                  value:
+                    receiver_recurrences:
+                    - id: UUID
+                      client_id: account_123
+                      receiver_rec_id: RR123456
+                      frequency: monthly
+                      journey: 3
+                      status: approved
+                      authorized_at: '2026-02-15T10:30:00Z'
+                      cancelled_at: null
+                      cancel_reason: null
+                      start_date: '2026-03-15'
+                      end_date: '2027-03-15'
+                      receiver_document: '12345678000199'
+                      receiver_name: Empresa Recebedora LTDA
+                      payer_document: '12345678901'
+                      payer_name: Nome do Pagador
+                      payer_ispb: '00000000'
+                      payer_branch: '0001'
+                      payer_bank_account_number: '123456'
+                      amount_cents: 10000
+                      contract: CONTRATO-001
+                      payment_purpose: Mensalidade
+                      created_at: '2026-02-15T10:00:00Z'
+                      updated_at: '2026-02-15T10:30:00Z'
+                    totalItems: 1
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: Limita o número de registros retornados em até 100, que é o padrão dessa requisição. Também utilizado em <a href="https://dev.iugu.com/v1.0/reference#paginação">paginação</a>.
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: Número da página
+      operationId: get_automatic-pix-receiver-recurrences
+      tags:
+      - Automatic Pix
+      summary: Get automatic pix receiver recurrences
+      x-summary-source: derived
+    post:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                Ok:
+                  summary: Ok
+                  value:
+                    id: 3f7c9d21-84be-4a05-b1e2-6d5417c0af38
+                    receiver_rec_id: RN0473820120260807HKMPQRXZANV
+                    status: created
+                    qrcode_text: 00020126180014br.gov.bcb.pix5204000053039865802BR5925IUGU INSTITUICAO DE PAGAM6006CIDADE62070503***80920014br.gov.bcb.pix2570qr.iugu.com/public/payload/v2/rec/3f7c9d21-84be-4a05-b1e2-6d5417c0af386304ED12
+                    qrcode: iVBORw0KGgoAAAANSUhEUgAAANQAAADUAQAAAADMpTC1AAACQUlEQVR4nN2Yu60oNwxEj4yXjzrY/svaDkYVHAfaGxk3MwNb0UICluBnOEMu+e2cv359gv/O21prs9nrsPbZe3PYa609Yg+jCZBUbNuQaDrk+9q8yFtOyCYU1p6M9eYk59nvIvDSf+GfvxxD0qamkBbxXs7lj9Y2EVMTx/K3XJB/XB/IO+PfdzBGhGJUx/zLIS8P7yYvPPACGekvWFMtptY00YYh/7AIiaGmjSS0Y/VpaqlttbnZg075d/vZB4dUDMQ5/6oEU43atqZj/mlJaCQqGHDOv0ivRa1NWstUf8GSxPLlriLtlL0/0LD2S3NWFw8e2DjGD0lCP46VEqFjeDdpk1QasWoH8acFitgG2+ZCccYett6qLL0F01H8QWivavrYnczhrzF8tBfho8IpffbCpjRdbI4uN5s9hYfbYX74/etl0rH+EkCbFKIF78dU/hSxNjQGjYN47+W/RNCWRObwF9pc5BHtJ9fm+D1NrqRWIlfJjOEP+tVnG3KB2I7xUc6DZ0E5FPbjyiAfWRqS5mrBn/ocrJeQ29iuTSBT+nN5npeH7vfnKmfj6pSeT01LCkDzU7Fz/Ge9VkP6qaaM4a8Wro6pIdgraubmlWqQhko+FTMWz5jbxwrxZzsyqCe84asxiCVO8dEfFoRyeGCfri7CPsvB/ZKlQsRbrU7Nt8t9AvCyATzs9K595vZLnDegdPP03CXTSDz/XHOeA/vNZvdx45w+iyY1d6YVPyDO8S25q5A7GDVXpU3xw69P/4t98t9JbG4gOY+f1AAAAABJRU5ErkJggg==
+      parameters: []
+      summary: Pix Automático Recebedor - Jornada 2
+      operationId: post_automatic-pix-receiver-recurrences
+      description: Cria uma autorização de recorrência via Pix Automático (Jornada 2) sem gerar cobrança associada no momento da criação. Destinada a clientes que possuem motor de recorrência próprio e desejam migrar uma base já ativa (boleto, cartão ou Pix manual) para o débito automático, sem forçar uma cobrança fora do ciclo vigente. O endpoint retorna apenas o QR Code de recorrência. As cobranças de cada ciclo devem ser agendadas posteriormente através de POST /v1/invoices.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payer:
+                  type: object
+                  description: Dados do pagador (devedor da recorrência)
+                  properties:
+                    name:
+                      type: string
+                      description: Nome do pagador
+                    cpf_cnpj:
+                      type: string
+                      description: CPF ou CNPJ do pagador
+                frequency:
+                  type: string
+                  description: 'Frequência das cobranças. Valores: `weekly`, `monthly`, `quarterly`, `semiannual`, `annual`'
+                recurrence_beginning:
+                  type: string
+                  format: date
+                  description: Data de início da recorrência (futura, formato AAAA-MM-DD)
+                contract_number:
+                  type: string
+                  description: Identificador do contrato/pedido. Máx. 35 caracteres
+                end_date:
+                  type: string
+                  format: date
+                  description: Data de encerramento da recorrência (se informada, deve ser posterior a `recurrence_beginning`)
+                retry_policy:
+                  type: string
+                  description: Política de retentativa. `retry_not_allowed` (padrão) ou `retry_allowed`
+              required:
+              - contract_number
+              - recurrence_beginning
+              - frequency
+            examples: {}
+      tags:
+      - Automatic Pix
+  /automatic_pix/receiver_recurrences/{id}:
+    get:
+      description: Retorna os detalhes de uma recorrência específica.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                OK:
+                  summary: OK
+                  value:
+                    id: e3c19f7a-5d24-4b8e-a6f1-9c07d2b4e815
+                    receiver_rec_id: RN1511197520260305K8TQZ4MWX2A
+                    frequency: monthly
+                    journey: 3
+                    authorized_at: null
+                    cancelled_at: null
+                    cancel_reason: null
+                    expiration_request_at: null
+                    updated_recurrence_at: null
+                    payer_ispb: null
+                    payer_person_type: 0
+                    payer_document: '***.417.263-**'
+                    payer_branch: null
+                    payer_bank_account_number: null
+                    payer_city_ibge_code: 3304557
+                    status: created
+                    created_at: '2026-03-05T10:47:33.218-03:00'
+                    updated_at: '2026-03-05T10:47:33.218-03:00'
+                    start_date: '2026-04-10'
+                    amount_cents: null
+                    contract: CONTRATO-001
+                    payer_name: Mariana Costa Ferreira
+                    payment_purpose: null
+                    end_date: '2027-04-10'
+                    next_execution_at: null
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Not Found:
+                  summary: Not Found
+                  value:
+                    errors: Not Found
+          description: Not Found
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: UUID da recorrência.
+      summary: Consultar Pix Automático
+      operationId: get_automatic-pix-receiver-recurrences-id
+      tags:
+      - Automatic Pix
+  /automatic_pix/receiver_recurrences/{id}/cancel:
+    put:
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                OK:
+                  summary: OK
+                  value:
+                    success: true
+                    message: Recurrence cancellation requested
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: UUID da recorrência.
+      summary: Copy of Copy of
+      operationId: put_automatic-pix-receiver-recurrences-id-cancel
+      tags:
+      - Automatic Pix
+  /automatic_pix/receiver_recurrences/{receiver_recurrence_id}/cancellations:
+    get:
+      description: ''
+      responses:
+        '200':
+          description: ''
+      parameters:
+      - in: path
+        name: receiver_recurrence_id
+        schema:
+          type: string
+        required: true
+        description: UUID da recorrência
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          format: int32
+        description: Limita o número de registros retornados em até 100, que é o padrão dessa requisição. Também utilizado em <a href="https://dev.iugu.com/v1.0/reference#paginação">paginação</a>.
+      - in: query
+        name: page
+        schema:
+          type: integer
+          format: int32
+        description: Número da página.
+      operationId: get_automatic-pix-receiver-recurrences-receiver-recurrence-id-cancellations
+      tags:
+      - Automatic Pix
+      summary: Get automatic pix receiver recurrences receiver recurrence id cancellations
+      x-summary-source: derived
+  /automatic_pix/receiver_recurrences/{receiver_recurrence_id}/cancellations/{id}:
+    get:
+      description: ''
+      responses:
+        '200':
+          description: ''
+      parameters:
+      - in: path
+        name: receiver_recurrence_id
+        schema:
+          type: string
+        required: true
+        description: UUID da recorrência.
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: UUID do cancelamento.
+      operationId: get_automatic-pix-receiver-recurrences-receiver-recurrence-id-cancellations-id
+      tags:
+      - Automatic Pix
+      summary: Get automatic pix receiver recurrences receiver recurrence id cancellations id
+      x-summary-source: derived
+  /automatic_pix/recurrence_schedules/{id}:
+    get:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                OK:
+                  summary: OK
+                  value:
+                    id: b1c2d3e4-0000-0000-0000-000000000003
+                    receiver_recurrence_id: a7ac90a3-08a2-46e3-8d15-0e195ea485be
+                    end_to_end_id: E1511197520260312000000000003
+                    invoice_id: C0FFEE00112233445566778899AABBCC
+                    status: failed
+                    amount_cents: 15000
+                    due_date: '2026-03-15'
+                    executed_at: null
+                    error_code: AG08
+                    created_at: '2026-02-20T08:00:00.000Z'
+                    updated_at: '2026-02-20T09:30:00.000Z'
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Bad Request:
+                  summary: Bad Request
+                  value:
+                    errors:
+                    - message: ReceiverRecurrence not found
+          description: Bad Request
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: ID do agendamento.
+      summary: Buscar um agendamento de Pix Automatico
+      description: Retorna os dados de um agendamento de recorrência específico.
+      operationId: get_automatic-pix-recurrence-schedules-id
+      tags:
+      - Automatic Pix
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: api_token
+      in: query
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/buscar-fatura-por-id-externos-de-subcontas.md
+  - https://dev.iugu.com/reference/buscar-fatura-por-ids-externos.md
+  - https://dev.iugu.com/reference/buscar-fatura.md
+  - https://dev.iugu.com/reference/buscar-um-agendamento-de-pix-automatico.md
+  - https://dev.iugu.com/reference/cancelar-agendamento-pix-automatico.md
+  - https://dev.iugu.com/reference/cancelar-pix-automatico.md
+  - https://dev.iugu.com/reference/cancelar.md
+  - https://dev.iugu.com/reference/capturar-fatura.md
+  - https://dev.iugu.com/reference/considerar-fatura-paga-externamente.md
+  - https://dev.iugu.com/reference/consultar-cancelamento-de-pix-automatico.md
+  - https://dev.iugu.com/reference/consultar-pix-automatico.md
+  - https://dev.iugu.com/reference/criar-fatura.md
+  - https://dev.iugu.com/reference/enviar-por-email.md
+  - https://dev.iugu.com/reference/gerar-segunda-via.md
+  - https://dev.iugu.com/reference/listar-cancelamentos-de-pix-automatico.md
+  - https://dev.iugu.com/reference/listar-faturas.md
+  - https://dev.iugu.com/reference/listar-pix-automatico.md
+  - https://dev.iugu.com/reference/pix-automatico-jornada-2.md
+  - https://dev.iugu.com/reference/reembolsar-fatura.md
+  - https://dev.iugu.com/reference/solicitar-retentativa-de-agendamento.md
+  - https://dev.iugu.com/reference/validate-signature.md
+  merge:
+    pages: 21
+    deduped: 20
+    conflicts_kept_first: 0

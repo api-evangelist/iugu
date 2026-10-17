@@ -1,0 +1,195 @@
+openapi: 3.2.0
+info:
+  title: Iugu Account API
+  version: '1.0'
+  description: 'Operations tagged Account across 2 of this provider''s published API definitions: iugu-baas-openapi.yml, iugu-conta-de-pagamento-e-marketplace-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: Account
+paths:
+  /account/documents:
+    get:
+      summary: Consultar Envio de Documentos para Verificação de Conta iugu
+      description: 'Utilize o `live_ api_token` da subconta.
+
+
+        Este endpoint permite consultar o status do Envio de Documentos para Verificação de Subconta.'
+      operationId: baas-consultar-envio-de-documentos
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"items\": [\n    {\n      \"kind\": \"selfie\",\n      \"status\": \"pending_manual_analysis\",\n      \"created_at\": \"2024-10-28T12:01:37-03:00\",\n      \"updated_at\": \"2024-10-28T12:01:37-03:00\"\n    },\n    {\n      \"kind\": \"identification\",\n      \"status\": \"pending_manual_analysis\",\n      \"created_at\": \"2024-10-28T12:01:37-03:00\",\n      \"updated_at\": \"2024-10-28T12:01:37-03:00\"\n    }\n  ]\n}\n"
+                Sem pendências:
+                  value: "{\n  \"items\": []\n}"
+              schema:
+                oneOf:
+                - type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          kind:
+                            type: string
+                            example: selfie
+                          status:
+                            type: string
+                            example: pending_manual_analysis
+                          created_at:
+                            type: string
+                            example: '2024-10-28T12:01:37-03:00'
+                          updated_at:
+                            type: string
+                            example: '2024-10-28T12:01:37-03:00'
+                - title: Sem pendências
+                  type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Conta Mestre requisitou:
+                  value: "{\n  \"errors\": \"Only subaccount are allowed\"\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Only subaccount are allowed
+      tags:
+      - Account
+    put:
+      summary: Reenviar Documentos para Verificar Conta iugu
+      description: 'Utilize o `live_ api_token` da subconta.
+
+
+        Utilize este endpoint quando os Documentos enviados no endpoint `/v1/accounts/{account_id}/request_verification` são reprovados por nosso Time de Prevenção à Fraude.'
+      operationId: reenviar-documentos-para-verificar-conta-iugu-copy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: object
+                  description: 'Formatado em `Base64`. Limite de 15 MB por arquivo. <br><br>Extensões de arquivos aceitas: <br>`.pdf`, `.png`, `.jpeg`, `.jpg`, `.bmp`, `.webp`, `.heic`, `.heif`.'
+                  properties:
+                    identification:
+                      type: string
+                      description: Documento de Identificação Pessoal do Titular da Conta (frente e verso) — RG, CNH ou Passaporte  <br><br> **RG:** físico ou digital com QR Code <br> **CNH:** físico ou digital com QR Code <br> **Passaporte:** físico ou digital
+                      format: binary
+                    identification_front:
+                      type: string
+                      description: Documento de Identificação Pessoal do Titular da Conta **Frente** <br> **Obrigatório** se campo `identification` não for preenchido. <br><br> **RG:** físico ou digital com QR Code <br> **CNH:** físico ou digital com QR Code <br> **Passaporte:** físico ou digital
+                      format: binary
+                    identification_back:
+                      type: string
+                      description: Documento de Identificação Pessoal do Titular da Conta **Verso** <br> **Obrigatório** se campo `identification` não for preenchido. <br><br> **RG:** físico ou digital com QR Code <br> **CNH:** físico ou digital com QR Code <br> **Passaporte:** físico ou digital
+                      format: binary
+                    selfie:
+                      type: string
+                      description: Selfie (foto) do Titular da Conta — **Importante:** Deve ser tirada pela própria pessoa, sem interferência de terceiros, para garantir autenticidade. <br><br> **CNPJ (`person_type` = `Pessoa Jurídica`):** Representante legal da companhia
+                      format: binary
+                    address_proof:
+                      type: string
+                      description: Comprovante de Endereço do Titular da Conta. <br><br>**Importante**<br> O documento deve conter nome, endereço completo, código de barras, valor da fatura e data da emissão.<br><br> **Tipos de Contas**<br>Luz, energia, água, telefone fixou ou celular, internet ou faturas de instituições financeiras dos últimos **90 dias**. <br><br>**CNPJ (`person_type` = `Pessoa Jurídica`):** Envie Comprovante de Endereço da **companhia**.
+                      format: binary
+                    balance_sheet:
+                      type: string
+                      description: Relatório Financeiro da Companhia dos últimos **12 meses com a assinatura do representante legal e do contador (deve conter nome e CRC do contador)**.<br><br> **Tipos de Documento ** <br> Declaração de que não há Faturamento <br> Declaração de Faturamento simples <br> Relação de Faturamento Pessoa Jurídica <br> Extrato do SIMEI <br> Declaração anual do SIMEI <br> Declaração de Informações Socioeconômicas e Fiscais (DEFIS)
+                      format: binary
+                    social_contract:
+                      type: string
+                      description: Contrato Social. **Obrigatório** se `person_type` é `Pessoa Jurídica`.
+                      format: binary
+                    additional_document_one:
+                      type: string
+                      description: Documento extra `1`
+                      format: binary
+                    additional_document_two:
+                      type: string
+                      description: Documento extra `2`
+                      format: binary
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"items\": [\n    {\n      \"kind\": \"selfie\",\n      \"status\": \"pending_manual_analysis\",\n      \"created_at\": \"2024-10-28T12:01:37-03:00\",\n      \"updated_at\": \"2024-10-28T12:01:37-03:00\"\n    },\n    {\n      \"kind\": \"identification\",\n      \"status\": \"pending_manual_analysis\",\n      \"created_at\": \"2024-10-28T12:01:37-03:00\",\n      \"updated_at\": \"2024-10-28T12:01:37-03:00\"\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        kind:
+                          type: string
+                          example: selfie
+                        status:
+                          type: string
+                          example: pending_manual_analysis
+                        created_at:
+                          type: string
+                          example: '2024-10-28T12:01:37-03:00'
+                        updated_at:
+                          type: string
+                          example: '2024-10-28T12:01:37-03:00'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Account
+    servers:
+    - url: https://api.iugu.com/v1
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: api_token
+      in: query
+x-refined-from:
+- iugu-baas-openapi.yml
+- iugu-conta-de-pagamento-e-marketplace-openapi.yml
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/antecipar-recebiveis.md
+  - https://dev.iugu.com/reference/consultar-unidade-de-recebiveis.md
+  - https://dev.iugu.com/reference/listar-recebiveis.md
+  - https://dev.iugu.com/reference/listar-unidade-de-recebiveis.md
+  merge:
+    pages: 4
+    deduped: 3
+    conflicts_kept_first: 0

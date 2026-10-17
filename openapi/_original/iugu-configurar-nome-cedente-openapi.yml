@@ -1,0 +1,208 @@
+# x-archived-from: iugu-configurar-nome-cedente-openapi.yml
+# x-archived-on: 2026-10-17
+openapi: 3.1.0
+info:
+  title: configurar-nome-cedente
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+x-readme-fauxas: true
+paths:
+  /transferors:
+    post:
+      summary: Inserir Dados do Cedente
+      description: Insere os dados do cedente ou beneficiário, que é o responsável por receber o pagamento e também emitir a cobrança. Essas informações serão apresentadas na fatura. Em caso de boleto bancário, o nome do Beneficiário será o nome da Conta Mestre.
+      operationId: inserir-dados-cedente
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - street
+              - zip_code
+              - state
+              - number
+              - city
+              properties:
+                name:
+                  type: string
+                  description: Nome
+                street:
+                  type: string
+                  description: Rua
+                zip_code:
+                  type: string
+                  description: CEP
+                state:
+                  type: string
+                  description: 'Estado (Ex.: SP)'
+                number:
+                  type: string
+                  description: Número
+                city:
+                  type: string
+                  description: Cidade
+                district:
+                  type: string
+                  description: Bairro
+                complement:
+                  type: string
+                  description: Complemento
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n   \"account_informations\": [\n       {\n           \"key\": \"bank_slip_transferor_street\",\n           \"value\": \"Av. Paulista\"\n       },\n       {\n           \"key\": \"bank_slip_transferor_zip_code\",\n           \"value\": \"01310-100\"\n       },\n       {\n           \"key\": \"bank_slip_transferor_district\",\n           \"value\": \"Bela Vista\"\n       },\n       {\n           \"key\": \"bank_slip_transferor_state\",\n           \"value\": \"SP\"\n       },\n       {\n           \"key\": \"bank_slip_transferor_complement\",\n           \"value\": \"Quinto andar\"\n       },\n       {\n           \"key\": \"bank_slip_transferor_number\",\n           \"value\": \"1048\"\n       },\n       {\n           \"key\": \"bank_slip_transferor_name\",\n           \"value\": \"iugu Serviços na Internet S/A\"\n       },\n       {\n           \"key\": \"bank_slip_transferor_city\",\n           \"value\": \"São Paulo\"\n       }\n   ]\n}"
+              schema:
+                type: object
+                properties:
+                  account_informations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                          example: bank_slip_transferor_street
+                        value:
+                          type: string
+                          example: Av. Paulista
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+    put:
+      summary: Alterar Dados do Cedente
+      description: Altera os dados do cedente ou beneficiário, que é o responsável por receber o pagamento e também emitir a cobrança. Essas informações serão apresentadas na fatura. Em caso de boleto, o nome do Beneficiário será o nome da Conta Mestre.
+      operationId: alterar-dados-cedente
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - street
+              - zip_code
+              - state
+              - number
+              - city
+              properties:
+                name:
+                  type: string
+                  description: Nome
+                street:
+                  type: string
+                  description: Rua
+                zip_code:
+                  type: string
+                  description: CEP
+                state:
+                  type: string
+                  description: 'Estado (Ex.: SP)'
+                number:
+                  type: string
+                  description: Número
+                city:
+                  type: string
+                  description: Cidade
+                district:
+                  type: string
+                  description: Bairro
+                complement:
+                  type: string
+                  description: Complemento
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n   \"account_informations\": [\n       {\n           \"key\": \"bank_slip_transferor_street\",\n           \"value\": \"Av. Paulista\"\n       },\n       {\n           \"key\": \"bank_slip_transferor_zip_code\",\n           \"value\": \"01310-100\"\n       },\n       {\n           \"key\": \"bank_slip_transferor_district\",\n           \"value\": \"Bela Vista\"\n       },\n       {\n           \"key\": \"bank_slip_transferor_state\",\n           \"value\": \"SP\"\n       },\n       {\n           \"key\": \"bank_slip_transferor_complement\",\n           \"value\": \"Quinto andar\"\n       },\n       {\n           \"key\": \"bank_slip_transferor_number\",\n           \"value\": \"1048\"\n       },\n       {\n           \"key\": \"bank_slip_transferor_name\",\n           \"value\": \"iugu Serviços na Internet S/A\"\n       },\n       {\n           \"key\": \"bank_slip_transferor_city\",\n           \"value\": \"São Paulo\"\n       }\n   ]\n}"
+              schema:
+                type: object
+                properties:
+                  account_informations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                          example: bank_slip_transferor_street
+                        value:
+                          type: string
+                          example: Av. Paulista
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /transferors{id}:
+    delete:
+      summary: Deletar Dados do Cedente
+      description: Deleta os dados do cedente ou beneficiário, que é o responsável por receber o pagamento e também emitir a cobrança. Ao remover esses dados, a conta volta para os dados padrões.
+      operationId: deletar-dados-cedente
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: query
+      name: api_token
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/alterar-dados-cedente.md
+  - https://dev.iugu.com/reference/deletar-dados-cedente.md
+  - https://dev.iugu.com/reference/inserir-dados-cedente.md
+  merge:
+    pages: 3
+    deduped: 2
+    conflicts_kept_first: 0

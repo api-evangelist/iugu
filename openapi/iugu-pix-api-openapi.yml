@@ -1,0 +1,100 @@
+openapi: 3.2.0
+info:
+  title: baas Pix API
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: Pix
+paths:
+  /pix/keys:
+    get:
+      summary: Consultar chave Pix na Conta iugu
+      description: Consultar a chave PIX da Conta Iugu, funciona apenas em ambiente de **Produção**
+      operationId: baas-consulta-de-chave-pix-conta-iugu
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "[\n    {\n        \"key\": \"123e4f56-cce7-4255-b526-e0f33c3c3ce4\",\n        \"name\": \"Subconta Teste\",\n        \"created_at\": \"2023-08-17T20:53:49.835Z\",\n        \"start_date\": \"2023-08-17T20:53:49.835Z\",\n        \"type\": \"evp\"\n    }\n]"
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    key:
+                      type: string
+                      example: 123e4f56-cce7-4255-b526-e0f33c3c3ce4
+                    name:
+                      type: string
+                      example: Subconta Teste
+                    created_at:
+                      type: string
+                      example: '2023-08-17T20:53:49.835Z'
+                    start_date:
+                      type: string
+                      example: '2023-08-17T20:53:49.835Z'
+                    type:
+                      type: string
+                      example: evp
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                'return bad_request(recently_consulted: ''Already consulted 1 minute ago'')) if consulted_recently?(sanitized_key)':
+                  value: "{\n    \"errors\": \"Apenas disponível para o ambiente produção\"\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Apenas disponível para o ambiente produção
+      tags:
+      - Pix
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: api_token
+      in: query
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/baas-consulta-de-chave-pix-conta-iugu.md
+  - https://dev.iugu.com/reference/baas-consultar-comprovante-de-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-consultar-envio-de-documentos.md
+  - https://dev.iugu.com/reference/baas-criar-conta.md
+  - https://dev.iugu.com/reference/baas-criar-pedido-de-pagamento.md
+  - https://dev.iugu.com/reference/baas-criar-qr-deposito.md
+  - https://dev.iugu.com/reference/baas-decode-qrcode.md
+  - https://dev.iugu.com/reference/baas-enviar-verificacao-de-conta.md
+  - https://dev.iugu.com/reference/baas-extrato-financeiro.md
+  - https://dev.iugu.com/reference/baas-informacoes-da-conta.md
+  - https://dev.iugu.com/reference/baas-listar-chaves-pix.md
+  - https://dev.iugu.com/reference/baas-listar-comprovantes-de-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-listar-pagamentos.md
+  - https://dev.iugu.com/reference/baas-listar-saques-transferencia-proprias.md
+  - https://dev.iugu.com/reference/baas-listar-transferencias-entre-contas-iugu.md
+  - https://dev.iugu.com/reference/baas-pedido-de-saque-para-domicilio-proprio.md
+  - https://dev.iugu.com/reference/baas-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-validar-pagamento.md
+  - https://dev.iugu.com/reference/cancelar-pix-agendado-1.md
+  - https://dev.iugu.com/reference/consulta-de-bancos-cadastrados.md
+  - https://dev.iugu.com/reference/consulta-ispb-compe.md
+  - https://dev.iugu.com/reference/desativar-subconta-copy.md
+  - https://dev.iugu.com/reference/reenviar-documentos-para-verificar-conta-iugu-copy.md
+  merge:
+    pages: 23
+    deduped: 22
+    conflicts_kept_first: 0

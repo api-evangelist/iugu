@@ -1,0 +1,187 @@
+openapi: 3.2.0
+info:
+  title: tokens-e-cobrança-direta Payment Token API
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: Payment Token
+paths:
+  /payment_token:
+    post:
+      summary: Criar Token
+      description: 'O Token é uma representação do Cartão de Crédito, sendo totalmente seguro, de forma que não é possível que alguém consiga as informações deste cartão. O token é gerado para uma transação específica, tornando-o ainda mais seguro.
+
+
+        Cuidado
+
+
+        A API de Criação de Token não utiliza a autenticação via api_token.
+
+
+        Alerta de conformidade com PCI
+
+
+        Esta chamada API deve ser utilizada apenas em aplicações sem compatibilidade com JavaScript como por exemplo aplicações móveis. Se você efetuar esta chamada por dentro de seus servidores estará sujeito a uma auditoria do PCI. Para aplicações WEB, utilize a geração do token de cartão pelo iugu.js'
+      operationId: criar-token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - account_id
+              - method
+              properties:
+                account_id:
+                  type: string
+                  description: ID de sua Conta na Iugu (<a href="https://app.iugu.com/account" target="_blank">O ID de sua conta pode ser encontrado aqui</a>)
+                method:
+                  type: string
+                  description: Método de Pagamento (atualmente somente credit_card)
+                test:
+                  type: boolean
+                  description: Valor true para criar tokens de teste. <a href="http://support.iugu.com/hc/pt-br/articles/212456346-Usar-cart%C3%B5es-de-teste-em-modo-de-teste" target="_blank">Use cartões de teste</a>
+                data:
+                  properties:
+                    number:
+                      type: string
+                      description: Número do Cartão de Crédito
+                    verification_value:
+                      type: string
+                      description: CVV do Cartão de Crédito
+                    first_name:
+                      type: string
+                      description: Nome do Cliente como está no Cartão
+                    last_name:
+                      type: string
+                      description: Sobrenome do Cliente como está no Cartão
+                    month:
+                      type: string
+                      description: 'Mês de Vencimento no Formato "MM" (Ex: 01, 06, 12)'
+                    year:
+                      type: string
+                      description: 'Ano de Vencimento no Formato "AAAA" (Ex: 2020, 2030, 2018)'
+                  required:
+                  - number
+                  - verification_value
+                  - first_name
+                  - last_name
+                  - month
+                  - year
+                  type: object
+                  description: Dados do Método de Pagamento
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": \"ca9f3aa5-4df1-4a4c-9145-81641f1b4f6b\",\n  \"method\": \"credit_card\",\n  \"extra_info\": {\n    \"bin\": \"411111\",\n    \"year\": 2030,\n    \"month\": 1,\n    \"brand\": \"VISA\",\n    \"holder_name\": \"FIRST LAST\",\n    \"display_number\": \"XXXX-XXXX-XXXX-1111\"\n  },\n  \"test\": true\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: ca9f3aa5-4df1-4a4c-9145-81641f1b4f6b
+                  method:
+                    type: string
+                    example: credit_card
+                  extra_info:
+                    type: object
+                    properties:
+                      bin:
+                        type: string
+                        example: '411111'
+                      year:
+                        type: integer
+                        example: 2030
+                        default: 0
+                      month:
+                        type: integer
+                        example: 1
+                        default: 0
+                      brand:
+                        type: string
+                        example: VISA
+                      holder_name:
+                        type: string
+                        example: FIRST LAST
+                      display_number:
+                        type: string
+                        example: XXXX-XXXX-XXXX-1111
+                  test:
+                    type: boolean
+                    example: true
+                    default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"errors\": \"account_id invalido\"\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: account_id invalido
+        '422':
+          description: '422'
+          content:
+            text/plain:
+              examples:
+                Un.Entity:
+                  value: "{\n  \"errors\": {\n    \"method\": [\n      \"credit_cards não é suportado. (Métodos suportados: credit_card)\"\n    ], \n    \"number\": [\n      \"is not a valid credit card number\"\n    ], \n    \"year\": [\n      \"expired\"\n    ]\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      method:
+                        type: array
+                        items:
+                          type: string
+                          example: 'credit_cards não é suportado. (Métodos suportados: credit_card)'
+                      number:
+                        type: array
+                        items:
+                          type: string
+                          example: is not a valid credit card number
+                      year:
+                        type: array
+                        items:
+                          type: string
+                          example: expired
+      deprecated: false
+      security: []
+      tags:
+      - Payment Token
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: query
+      name: api_token
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/cobranca-direta-com-2-cartoes.md
+  - https://dev.iugu.com/reference/cobranca-direta.md
+  - https://dev.iugu.com/reference/criar-token.md
+  - https://dev.iugu.com/reference/listar-api-tokens.md
+  - https://dev.iugu.com/reference/reemissao-de-fatura-expirada.md
+  merge:
+    pages: 5
+    deduped: 4
+    conflicts_kept_first: 0

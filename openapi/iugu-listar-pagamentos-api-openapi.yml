@@ -1,0 +1,326 @@
+openapi: 3.2.0
+info:
+  title: listar-pagamentos Listar Pagamentos API
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1/payment_requests
+security:
+- sec0: []
+tags:
+- name: Listar Pagamentos
+paths:
+  /:
+    get:
+      summary: Listar Pagamentos
+      description: Lista pagamentos de boleto de uma conta
+      operationId: listar-pagamentos
+      parameters:
+      - name: start
+        in: query
+        description: Quantos registros pular do início da pesquisa, usado para paginação.
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: Limita o número de registros retornados em até 100, que é o padrão de retorno desta chamada. Também utilizado em paginação.
+        schema:
+          type: integer
+          format: int32
+      - name: created_at_from
+        in: query
+        description: Registros criados a partir dessa data passada no parâmetro. Formato (AAAA-MM-DD)
+        schema:
+          type: string
+          format: date
+      - name: created_at_to
+        in: query
+        description: Registros criados até esta data passada no parâmetro. Formato (AAAA-MM-DD)
+        schema:
+          type: string
+          format: date
+      - name: status
+        in: query
+        description: Usado para filtrar os pagamentos pelo status (pending, processing, rejected, done)
+        schema:
+          type: string
+      - name: barcode
+        in: query
+        description: Código de barras do pagamento
+        schema:
+          type: string
+      - name: updated_at_from
+        in: query
+        description: Registros atualizados a partir dessa data passada no parâmetro. Formato (AAAA-MM-DD)
+        schema:
+          type: string
+          format: date
+      - name: updated_at_to
+        in: query
+        description: Registros atualizados a até esta data passada no parâmetro. Formato (AAAA-MM-DD)
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "[\n    {\n        \"id\": \"00000000000000000000000000000000\",\n        \"account_id\": \"00000000000000000000000000000000\",\n        \"barcode\": \"846100000013310502962023004200030007003752691117\",\n        \"status\": \"pending\",\n        \"document_amount_cents\": 13105,\n        \"amount_cents\": 13105,\n        \"description\": null,\n        \"created_at\": \"2024-08-16T17:09:59-03:00\",\n        \"updated_at\": \"2024-08-16T17:10:09-03:00\"\n    },\n    {\n        \"id\": \"00000000000000000000000000000000\",\n        \"account_id\": \"00000000000000000000000000000000\",\n        \"barcode\": \"846100000013310502962023004200030007003752691117\",\n        \"status\": \"pending\",\n        \"document_amount_cents\": 13105,\n        \"amount_cents\": 13105,\n        \"description\": null,\n        \"created_at\": \"2024-08-16T17:13:17-03:00\",\n        \"updated_at\": \"2024-08-16T17:13:28-03:00\"\n    }\n]"
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: '00000000000000000000000000000000'
+                    account_id:
+                      type: string
+                      example: '00000000000000000000000000000000'
+                    barcode:
+                      type: string
+                      example: '846100000013310502962023004200030007003752691117'
+                    status:
+                      type: string
+                      example: pending
+                    document_amount_cents:
+                      type: integer
+                      example: 13105
+                      default: 0
+                    amount_cents:
+                      type: integer
+                      example: 13105
+                      default: 0
+                    description: {}
+                    created_at:
+                      type: string
+                      example: '2024-08-16T17:09:59-03:00'
+                    updated_at:
+                      type: string
+                      example: '2024-08-16T17:10:09-03:00'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"errors\": \"Not Found\"\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Not Found
+      deprecated: false
+      tags:
+      - Listar Pagamentos
+    post:
+      summary: Criar Pedido de Pagamento
+      description: Cria um pedido de pagamento.
+      operationId: criar-pedido-de-pagamento
+      parameters:
+      - name: Request-Time
+        in: header
+        description: Timestamp do momento que enviar a requisição de assinatura digital (RSA)
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: Signature
+        in: header
+        description: Assinatura digital validada
+        required: true
+        schema:
+          type: string
+          default: signature=
+      - in: header
+        name: X-Signature-Token-Id
+        schema:
+          type: string
+        description: Indica explicitamente qual token/chave deve ser utilizado na assinatura da requisição, informando o ID do token desejado. Se omitido, mantém o comportamento atual.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - barcode
+              - amount_cents
+              - document_amount_cents
+              properties:
+                barcode:
+                  type: string
+                  description: Código de barras do pagamento
+                amount_cents:
+                  type: integer
+                  description: Valor de pagamento do boleto
+                  format: int32
+                document_amount_cents:
+                  type: integer
+                  description: Valor total do boleto
+                  format: int32
+                description:
+                  type: string
+                  description: Descrição do pagamento
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": \"A1F7D3920C5B4E68A4729D1FE83BC047\",\n  \"account_id\": \"6B2E91CD7F0A4835B19C6D2E4A70F3D8\",\n  \"barcode\": \"23700000000000000000000000000000000000000000000\",\n  \"status\": \"pending\",\n  \"document_amount_cents\": 500,\n  \"amount_cents\": 500,\n  \"description\": null,\n  \"created_at\": \"2026-06-24T12:32:21-03:00\",\n  \"updated_at\": \"2026-06-24T12:32:21-03:00\",\n  \"receipt_url\": \"https://comprovantes.iugu.com/a1f7d392-0c5b-4e68-a472-9d1fe83bc047-f20fae\",\n  \"payment_info\": {\n    \"barcode\": \"23700000000000000000000000000000000000000000000\",\n    \"amount_cents\": 500,\n    \"fine_cents\": 0,\n    \"interest_cents\": 0,\n    \"discount_cents\": 0,\n    \"total_amount_cents\": 500,\n    \"recipient_name\": \"BANCO TESTE S.A.\",\n    \"recipient_cnpj_cpf\": \"67970552000101\",\n    \"payer_name\": \"João Teste da Silva\",\n    \"payer_cnpj_cpf\": \"50215552008\",\n    \"allow_amount_change\": false,\n    \"allow_partial_payment\": false,\n    \"due_date\": \"2026-06-25\",\n    \"maximum_payment_date\": \"2026-08-09T00:00:00.000Z\",\n    \"details\": null,\n    \"emitter\": \"BRADESCO S.A\",\n    \"payee_cnpj_cpf\": \"91326007000153\"\n  }"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: '00000000000000000000000000000000'
+                  account_id:
+                    type: string
+                    example: '00000000000000000000000000000000'
+                  barcode:
+                    type: string
+                    example: '846100000013310502962023004200030007003752691117'
+                  status:
+                    type: string
+                    example: pending
+                  document_amount_cents:
+                    type: integer
+                    example: 10
+                    default: 0
+                  amount_cents:
+                    type: integer
+                    example: 10
+                    default: 0
+                  description:
+                    type: string
+                    example: teste
+                  created_at:
+                    type: string
+                    example: '2024-08-15T17:54:56-03:00'
+                  updated_at:
+                    type: string
+                    example: '2024-08-16T16:55:07-03:00'
+      tags:
+      - Listar Pagamentos
+  /{id}:
+    get:
+      summary: Buscar Pagamento
+      description: Busca por um pagamento através do seu ID.
+      operationId: buscar-pagamento
+      parameters:
+      - name: id
+        in: path
+        description: ID do pagamento
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    id: 11334A9BBE5100DAC07C98DA3B9D2AD0
+                    account_id: A0A3672C83AE25A7E27A95E5758CEF79
+                    barcode: '23700000000000000000000000000000000000000000000'
+                    status: done
+                    document_amount_cents: 500
+                    amount_cents: 500
+                    description: null
+                    created_at: '2026-06-24T12:32:21-03:00'
+                    updated_at: '2026-06-24T12:44:30-03:00'
+                    receipt_url: https://comprovantes.iugu.com/11334a9b-be51-00da-c07c-98da3b9d2ad0-260493
+                    payment_info:
+                      barcode: '23700000000000000000000000000000000000000000000'
+                      amount_cents: 500
+                      fine_cents: 0
+                      interest_cents: 0
+                      discount_cents: 0
+                      total_amount_cents: 500
+                      recipient_name: BANCO TESTE S.A.
+                      recipient_cnpj_cpf: '67970552000101'
+                      payer_name: João Teste da Silva
+                      payer_cnpj_cpf: '50215552008'
+                      allow_amount_change: false
+                      allow_partial_payment: false
+                      due_date: '2026-06-25'
+                      maximum_payment_date: '2026-08-09T00:00:00.000Z'
+                      details: null
+                      emitter: BRADESCO S.A
+                      payee_cnpj_cpf: '91326007000153'
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: '00000000000000000000000000000000'
+                  account_id:
+                    type: string
+                    example: '00000000000000000000000000000000'
+                  barcode:
+                    type: string
+                    example: '846100000013310502962023004200030007003752691117'
+                  status:
+                    type: string
+                    example: pending
+                  document_amount_cents:
+                    type: integer
+                    example: 13105
+                    default: 0
+                  amount_cents:
+                    type: integer
+                    example: 13105
+                    default: 0
+                  description:
+                    type: string
+                    example: teste
+                  created_at:
+                    type: string
+                    example: '2024-08-16T18:19:54-03:00'
+                  updated_at:
+                    type: string
+                    example: '2024-08-16T18:20:04-03:00'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"errors\": \"Payment request Not Found\"\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Payment request Not Found
+      tags:
+      - Listar Pagamentos
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: query
+      name: api_token
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/buscar-pagamento.md
+  - https://dev.iugu.com/reference/criar-pedido-de-pagamento.md
+  - https://dev.iugu.com/reference/listar-pagamentos.md
+  - https://dev.iugu.com/reference/valida-pagamento.md
+  merge:
+    pages: 4
+    deduped: 3
+    conflicts_kept_first: 0

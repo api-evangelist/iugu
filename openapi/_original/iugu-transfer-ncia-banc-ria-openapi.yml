@@ -1,0 +1,213 @@
+# x-archived-from: iugu-transfer-ncia-banc-ria-openapi.yml
+# x-archived-on: 2026-10-17
+openapi: 3.1.0
+info:
+  title: transferência-bancária
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+x-readme-fauxas: true
+paths:
+  /withdraw_requests:
+    get:
+      summary: Listar Saques/Transferência Próprias
+      description: Retorna a lista de todas as transferências bancárias.
+      operationId: listar-transferencia-bancaria
+      parameters:
+      - name: custom_variables_name
+        in: query
+        description: Filtra as transferências bancárias pelo nome da variável customizada
+        schema:
+          type: string
+      - name: custom_variables_value
+        in: query
+        description: Filtra as transferências bancárias pelo valor da variável customizada
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: 'Status dos saques. Utilizado somente para "Saques". Por padrão, todos os tipos de saques são considerados: pending, processing, accepted, rejected, inconsistent, refunded, partially_refunded, reprocessing.'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"items\": [\n    {\n      \"id\": \"4194D625A1894FAFAB2478DC333DAF0D\",\n      \"status\": \"rejected\",\n      \"created_at\": \"2024-06-13T09:10:55-03:00\",\n      \"updated_at\": \"2024-06-14T10:11:03-03:00\",\n      \"reference\": \"core:transfer:17ctElpMA77H9gJvWtexma\",\n      \"feedback\": \"Código: '2' - Agência ou Conta Destinatária do Crédito Inválida\",\n      \"paying_at\": \"2024-06-14\",\n      \"custom_variables\": [],\n      \"amount\": \"R$ 5,00\",\n      \"account_name\": \"Nome da Conta\",\n      \"account_id\": \"44C5DC6376804D1FA792CBCA382105C1\",\n      \"receipt_url\": \"https://comprovantes.iugu.com/4194d625-a189-4faf-ab24-78dc333daf0d-d94ba\",\n      \"agreement_effect\": false,\n      \"bank_address\": {\n        \"bank\": \"Santander\",\n        \"bank_cc\": \"01010-1\",\n        \"bank_ag\": \"0003\",\n        \"account_type\": \"Corrente\"\n      }\n    },\n    {\n      \"id\": \"A4695F7541904889B0E992E330205190\",\n      \"status\"\
+                    : \"rejected\",\n      \"created_at\": \"2024-06-12T17:48:02-03:00\",\n      \"updated_at\": \"2024-06-13T11:33:07-03:00\",\n      \"reference\": \"core:transfer:2askLj8S91VspItoyCLDD7\",\n      \"feedback\": \"Código: '2' - Agência ou Conta Destinatária do Crédito Inválida\",\n      \"paying_at\": \"2024-06-13\",\n      \"custom_variables\": [],\n      \"amount\": \"R$ 5,00\",\n      \"account_name\": \"Nome da Conta\",\n      \"account_id\": \"44C5DC6376804D1FA792CBCA382105C1\",\n      \"receipt_url\": \"https://comprovantes.iugu.com/a4695f75-4190-4889-b0e9-92e330205190-c8dd\",\n      \"agreement_effect\": false,\n      \"bank_address\": {\n        \"bank\": \"Santander\",\n        \"bank_cc\": \"01010-1\",\n        \"bank_ag\": \"0003\",\n        \"account_type\": \"Corrente\"\n      }\n    }\n  ],\n  \"totalItems\": 2\n}"
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 4194D625A1894FAFAB2478DC333DAF0D
+                        status:
+                          type: string
+                          example: rejected
+                        created_at:
+                          type: string
+                          example: '2024-06-13T09:10:55-03:00'
+                        updated_at:
+                          type: string
+                          example: '2024-06-14T10:11:03-03:00'
+                        reference:
+                          type: string
+                          example: core:transfer:17ctElpMA77H9gJvWtexma
+                        feedback:
+                          type: string
+                          example: 'Código: ''2'' - Agência ou Conta Destinatária do Crédito Inválida'
+                        paying_at:
+                          type: string
+                          example: '2024-06-14'
+                        custom_variables:
+                          type: array
+                          items:
+                            type: object
+                            properties: {}
+                        amount:
+                          type: string
+                          example: R$ 5,00
+                        account_name:
+                          type: string
+                          example: Nome da Conta
+                        account_id:
+                          type: string
+                          example: 44C5DC6376804D1FA792CBCA382105C1
+                        receipt_url:
+                          type: string
+                          example: https://comprovantes.iugu.com/4194d625-a189-4faf-ab24-78dc333daf0d-d94ba
+                        agreement_effect:
+                          type: boolean
+                          example: false
+                          default: true
+                        bank_address:
+                          type: object
+                          properties:
+                            bank:
+                              type: string
+                              example: Santander
+                            bank_cc:
+                              type: string
+                              example: 01010-1
+                            bank_ag:
+                              type: string
+                              example: '0003'
+                            account_type:
+                              type: string
+                              example: Corrente
+                  totalItems:
+                    type: integer
+                    example: 2
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /withdraw_requests/{id}:
+    get:
+      summary: Buscar Saques/Transferência Própria
+      description: Retorna as informações de uma transferência bancária.
+      operationId: buscar-transferencia-bancaria
+      parameters:
+      - name: id
+        in: path
+        description: ID da transferência.
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": \"530706A3862D4BB49C8AC9637B850CDE\",\n    \"status\": \"pending\",\n    \"created_at\": \"2015-11-26T10:02:23-02:00\",\n    \"updated_at\": \"2015-11-26T10:02:23-02:00\",\n    \"reference\": null,\n    \"amount\": \"R$ 10,00\",\n    \"account_name\": \"Conta\",\n    \"account_id\": \"A682CECA59D74527B984CA529D7C2ED4\",\n    \"feedback\": null,\n    \"bank_address\": {\n        \"bank\": \"Bradesco\",\n        \"bank_cc\": \"11231-2\",\n        \"bank_ag\": \"1234\",\n        \"account_type\": \"Corrente\"\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 530706A3862D4BB49C8AC9637B850CDE
+                  status:
+                    type: string
+                    example: pending
+                  created_at:
+                    type: string
+                    example: '2015-11-26T10:02:23-02:00'
+                  updated_at:
+                    type: string
+                    example: '2015-11-26T10:02:23-02:00'
+                  reference: {}
+                  amount:
+                    type: string
+                    example: R$ 10,00
+                  account_name:
+                    type: string
+                    example: Conta
+                  account_id:
+                    type: string
+                    example: A682CECA59D74527B984CA529D7C2ED4
+                  feedback: {}
+                  bank_address:
+                    type: object
+                    properties:
+                      bank:
+                        type: string
+                        example: Bradesco
+                      bank_cc:
+                        type: string
+                        example: 11231-2
+                      bank_ag:
+                        type: string
+                        example: '1234'
+                      account_type:
+                        type: string
+                        example: Corrente
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: query
+      name: api_token
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/buscar-transferencia-bancaria.md
+  - https://dev.iugu.com/reference/listar-transferencia-bancaria.md
+  merge:
+    pages: 2
+    deduped: 1
+    conflicts_kept_first: 0

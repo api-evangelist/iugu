@@ -1,0 +1,98 @@
+openapi: 3.2.0
+info:
+  title: baas Banks API
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: Banks
+paths:
+  /banks:
+    get:
+      summary: Consulta de Bancos Cadastrados na Iugu
+      description: Consulta bancos cadastrados na iugu e retorna com o ISPB e COMPE
+      operationId: consulta-de-bancos-cadastrados
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "[\n  {\n    \"compe\": \"001\",\n    \"name\": \"Banco do Brasil\",\n    \"ispb\": \"00000000\"\n  },\n  {\n    \"compe\": \"003\",\n    \"name\": \"Banco da Amazonia\",\n    \"ispb\": \"04902979\"\n  },\n  {\n    \"compe\": \"033\",\n    \"name\": \"Santander\",\n    \"ispb\": \"90400888\"\n  },\n  {\n    \"compe\": \"037\",\n    \"name\": \"Banpará\",\n    \"ispb\": \"04913711\"\n  },\n  {\n    \"compe\": \"041\",\n    \"name\": \"Banrisul\",\n    \"ispb\": \"92702067\"\n  },\n  {\n    \"compe\": \"070\",\n    \"name\": \"BRB\",\n    \"ispb\": \"00000208\"\n  },\n  {\n    \"compe\": \"077\",\n    \"name\": \"Inter\",\n    \"ispb\": \"00416968\"\n  },\n  {\n    \"compe\": \"104\",\n    \"name\": \"Caixa Econômica\",\n    \"ispb\": \"00360305\"\n  },\n  {\n    \"compe\": \"121\",\n    \"name\": \"Agibank\",\n    \"ispb\": \"10664513\"\n  },\n  {\n    \"compe\": \"237\",\n    \"name\": \"Bradesco/Next\",\n    \"ispb\": \"60746948\"\n  },\n  {\n    \"compe\": \"341\",\n    \"name\": \"Itaú\",\n    \"ispb\": \"60701190\"\n  },\n  {\n    \"compe\": \"748\",\n    \"name\": \"Sicredi\",\n    \"ispb\": \"01181521\"\n  },\n  {\n    \"compe\": \"756\",\n    \"name\": \"Sicoob\",\n    \"ispb\": \"02038232\"\n  },\n  {\n    \"compe\": \"376\",\n    \"name\": \"JP Morgan\",\n    \"ispb\": \"33172537\"\n  },\n  {\n    \"compe\": \"085\",\n    \"name\": \"Via Credi/Civia Cooperativa\",\n    \"ispb\": \"05463212\"\n  },\n  {\n    \"compe\": \"655\",\n    \"name\": \"Neon/Votorantim\",\n    \"ispb\": \"59588111\"\n  },\n  {\n    \"compe\": \"260\",\n    \"name\": \"Nubank\",\n    \"ispb\": \"18236120\"\n  },\n  {\n    \"compe\": \"290\",\n    \"name\": \"PagSeguro\",\n    \"ispb\": \"08561701\"\n  },\n  {\n    \"compe\": \"212\",\n    \"name\": \"Banco Original\",\n    \"ispb\": \"92894922\"\n  },\n  {\n    \"compe\": \"422\",\n    \"name\": \"Safra\",\n    \"ispb\": \"58160789\"\n  },\n  {\n    \"compe\": \"746\",\n    \"name\": \"Modal\",\n    \"ispb\": \"30723886\"\n  },\n  {\n    \"compe\": \"021\",\n    \"name\": \"Banestes\",\n    \"ispb\": \"28127603\"\n  },\n  {\n    \"compe\": \"136\",\n    \"name\": \"Unicred\",\n    \"ispb\": \"00315557\"\n  },\n  {\n    \"compe\": \"274\",\n    \"name\": \"Money Plus\",\n    \"ispb\": \"11581339\"\n  },\n  {\n    \"compe\": \"389\",\n    \"name\": \"Mercantil do Brasil\",\n    \"ispb\": \"17184037\"\n  },\n  {\n    \"compe\": \"364\",\n    \"name\": \"Gerencianet Pagamentos\",\n    \"ispb\": \"09089356\"\n  },\n  {\n    \"compe\": \"336\",\n    \"name\": \"C6 Bank\",\n    \"ispb\": \"31872495\"\n  },\n  {\n    \"compe\": \"218\",\n    \"name\": \"BS2\",\n    \"ispb\": \"71027866\"\n  },\n  {\n    \"compe\": \"082\",\n    \"name\": \"Banco Topazio\",\n    \"ispb\": \"07679404\"\n  },\n  {\n    \"compe\": \"099\",\n    \"name\": \"Banco Uniprime\",\n    \"ispb\": \"03046391\"\n  },\n  {\n    \"compe\": \"633\",\n    \"name\": \"Rendimento\",\n    \"ispb\": \"68900810\"\n  },\n  {\n    \"compe\": \"197\",\n    \"name\": \"Stone\",\n    \"ispb\": \"16501555\"\n  },\n  {\n    \"compe\": \"707\",\n    \"name\": \"Banco Daycoval\",\n    \"ispb\": \"62232889\"\n  },\n  {\n    \"compe\": \"745\",\n    \"name\": \"Citibank\",\n    \"ispb\": \"33479023\"\n  },\n  {\n    \"compe\": \"004\",\n    \"name\": \"Banco do Nordeste\",\n    \"ispb\": \"07237373\"\n  },\n  {\n    \"compe\": \"301\",\n    \"name\": \"PJBank/Dock IP S.A\",\n    \"ispb\": \"13370835\"\n  },\n  {\n    \"compe\": \"097\",\n    \"name\": \"Cooperativa Central de Credito Noroeste Brasileiro\",\n    \"ispb\": \"04632856\"\n  },\n  {\n    \"compe\": \"084\",\n    \"name\": \"Uniprime Norte do Paraná\",\n    \"ispb\": \"02398976\"\n  },\n  {\n    \"compe\": \"384\",\n    \"name\": \"Global SCM\",\n    \"ispb\": \"11165756\"\n  },\n  {\n    \"compe\": \"403\",\n    \"name\": \"Cora\",\n    \"ispb\": \"37880206\"\n  },\n  {\n    \"compe\": \"752\",\n    \"name\": \"BNP Paribas Brasil\",\n    \"ispb\": \"01522368\"\n  },\n  {\n    \"compe\": \"323\",\n    \"name\": \"Mercado Pago\",\n    \"ispb\": \"10573521\"\n  },\n  {\n    \"compe\": \"383\",\n    \"name\": \"Juno\",\n    \"ispb\": \"21018182\"\n  },\n  {\n    \"compe\": \"173\",\n    \"name\": \"BRL Trust DTVM\",\n    \"ispb\": \"13486793\"\n  },\n  {\n    \"compe\": \"133\",\n    \"name\": \"Cresol\",\n    \"ispb\": \"10398952\"\n  },\n  {\n    \"compe\": \"047\",\n    \"name\": \"Banco Banese\",\n    \"ispb\": \"13009717\"\n  },\n  {\n    \"compe\": \"208\",\n    \"name\": \"Banco BTG Pactual\",\n    \"ispb\": \"30306294\"\n  },\n  {\n    \"compe\": \"613\",\n    \"name\": \"Banco Omni\",\n    \"ispb\": \"60850229\"\n  },\n  {\n    \"compe\": \"332\",\n    \"name\": \"Acesso Soluções de Pagamento\",\n    \"ispb\": \"13140088\"\n  },\n  {\n    \"compe\": \"273\",\n    \"name\": \"CCR de São Miguel do Oeste\",\n    \"ispb\": \"08253539\"\n  },\n  {\n    \"compe\": \"093\",\n    \"name\": \"Polocred\",\n    \"ispb\": \"07945233\"\n  },\n  {\n    \"compe\": \"355\",\n    \"name\": \"Ótimo\",\n    \"ispb\": \"34335592\"\n  },\n  {\n    \"compe\": \"213\",\n    \"name\": \"Arbi\",\n    \"ispb\": \"52937216\"\n  },\n  {\n    \"compe\": \"380\",\n    \"name\": \"Picpay\",\n    \"ispb\": \"22896431\"\n  },\n  {\n    \"compe\": \"125\",\n    \"name\": \"Banco Genial\",\n    \"ispb\": \"45246410\"\n  },\n  {\n    \"compe\": \"329\",\n    \"name\": \"QI Sociedade de Crédito\",\n    \"ispb\": \"32402502\"\n  },\n  {\n    \"compe\": \"412\",\n    \"name\": \"Social Bank\",\n    \"ispb\": \"15173776\"\n  },\n  {\n    \"compe\": \"741\",\n    \"name\": \"Banco Ribeirão Preto\",\n    \"ispb\": \"00517645\"\n  },\n  {\n    \"compe\": \"461\",\n    \"name\": \"ASAAS IP\",\n    \"ispb\": \"19540550\"\n  },\n  {\n    \"compe\": \"623\",\n    \"name\": \"Banco Pan\",\n    \"ispb\": \"59285411\"\n  },\n  {\n    \"compe\": \"735\",\n    \"name\": \"Neon\",\n    \"ispb\": \"00253448\"\n  },\n  {\n    \"compe\": \"318\",\n    \"name\": \"Banco BMG\",\n    \"ispb\": \"61186680\"\n  },\n  {\n    \"compe\": \"310\",\n    \"name\": \"VORTX DTVM LTDA\",\n    \"ispb\": \"22610500\"\n  },\n  {\n    \"compe\": \"450\",\n    \"name\": \"FitBank\",\n    \"ispb\": \"13203354\"\n  },\n  {\n    \"compe\": \"032\",\n    \"name\": \"ZOOP MEIOS DE PAGAMENTO\",\n    \"ispb\": \"19468242\"\n  },\n  {\n    \"compe\": \"174\",\n    \"name\": \"Pefisa\",\n    \"ispb\": \"43180355\"\n  },\n  {\n    \"compe\": \"451\",\n    \"name\": \"J17 - SCD S/A\",\n    \"ispb\": \"40475846\"\n  },\n  {\n    \"compe\": \"089\",\n    \"name\": \"Credisan\",\n    \"ispb\": \"62109566\"\n  },\n  {\n    \"compe\": \"363\",\n    \"name\": \"Singulare\",\n    \"ispb\": \"62285390\"\n  },\n  {\n    \"compe\": \"529\",\n    \"name\": \"Pinbank\",\n    \"ispb\": \"17079937\"\n  },\n  {\n    \"compe\": \"069\",\n    \"name\": \"Crefisa\",\n    \"ispb\": \"61033106\"\n  },\n  {\n    \"compe\": \"102\",\n    \"name\": \"XP Investimentos\",\n    \"ispb\": \"02332886\"\n  },\n  {\n    \"compe\": \"340\",\n    \"name\": \"Superdigital I.P. S.A.\",\n    \"ispb\": null\n  },\n  {\n    \"compe\": \"224\",\n    \"name\": \"BCO FIBRA S.A.\",\n    \"ispb\": \"58616418\"\n  },\n  {\n    \"compe\": \"457\",\n    \"name\": \"UY3 SCD S/A\",\n    \"ispb\": \"39587424\"\n  },\n  {\n    \"compe\": \"604\",\n    \"name\": \"Banco Industrial do Brasil\",\n    \"ispb\": \"31895683\"\n  },\n  {\n    \"compe\": \"358\",\n    \"name\": \"MIDWAY S.A. - SCFI\",\n    \"ispb\": \"09464032\"\n  },\n  {\n    \"compe\": \"536\",\n    \"name\": \"Neon Pagamentos S.A. IP\",\n    \"ispb\": \"20855875\"\n  },\n  {\n    \"compe\": \"404\",\n    \"name\": \"Sumup Sociedade de Crédito Direto S.A.\",\n    \"ispb\": null\n  },\n  {\n    \"compe\": \"111\",\n    \"name\": \"Banco Oliveira Trust TDVM S.A\",\n    \"ispb\": \"36113876\"\n  },\n  {\n    \"compe\": \"630\",\n    \"name\": \"BCO LETSBANK S.A.\",\n    \"ispb\": \"58497702\"\n  },\n  {\n    \"compe\": \"246\",\n    \"name\": \"BCO ABC BRASIL S.A.\",\n    \"ispb\": \"28195667\"\n  },\n  {\n    \"compe\": \"523\",\n    \"name\": \"HR DIGITAL SCD\",\n    \"ispb\": \"44292580\"\n  },\n  {\n    \"compe\": \"348\",\n    \"name\": \"BCO XP S.A.\",\n    \"ispb\": null\n  },\n  {\n    \"compe\": \"637\",\n    \"name\": \"BCO SOFISA S.A.\",\n    \"ispb\": \"60889128\"\n  },\n  {\n    \"compe\": \"542\",\n    \"name\": \"CLOUD WALK MEIOS DE PAGAMENTOS E SERVICOS LTDA\",\n    \"ispb\": \"18189547\"\n  },\n  {\n    \"compe\": \"413\",\n    \"name\": \"BANCO BV S.A.\",\n    \"ispb\": \"01858774\"\n  },\n  {\n    \"compe\": \"509\",\n    \"name\": \"CELCOIN IP S.A.\",\n    \"ispb\": \"13935893\"\n  },\n  {\n    \"compe\": \"462\",\n    \"name\": \"Stark Bank\",\n    \"ispb\": \"39908427\"\n  },\n  {\n    \"compe\": \"610\",\n    \"name\": \"BCO VR S.A.\",\n    \"ispb\": \"78626983\"\n  },\n  {\n    \"compe\": \"593\",\n    \"name\": \"TRANSFEERA IP S.A.\",\n    \"ispb\": \"27084098\"\n  },\n  {\n    \"compe\": \"712\",\n    \"name\": \"BCO OURINVEST S.A.\",\n    \"ispb\": \"78632767\"\n  },\n  {\n    \"compe\": \"825\",\n    \"name\": \"VIATECH\",\n    \"ispb\": \"35858847\"\n  },\n  {\n    \"compe\": \"397\",\n    \"name\": \"LISTO SCD S.A.\",\n    \"ispb\": \"34088029\"\n  },\n  {\n    \"compe\": \"439\",\n    \"name\": \"ID CTVM\",\n    \"ispb\": \"16695922\"\n  },\n  {\n    \"compe\": \"324\",\n    \"name\": \"CARTOS SCD S.A.\",\n    \"ispb\": \"21332862\"\n  },\n  {\n    \"compe\": \"557\",\n    \"name\": \"PAGPRIME IP\",\n    \"ispb\": \"30944783\"\n  },\n  {\n    \"compe\": \"526\",\n    \"name\": \"MONETARIE SCD\",\n    \"ispb\": \"46026562\"\n  },\n  {\n    \"compe\": \"481\",\n    \"name\": \"SUPERLOGICA SCD S.A.\",\n    \"ispb\": \"43599047\"\n  },\n  {\n    \"compe\": \"335\",\n    \"name\": \"BANCO DIGIO\",\n    \"ispb\": \"27098060\"\n  }\n]"
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    compe:
+                      type: string
+                      example: '001'
+                    name:
+                      type: string
+                      example: Banco do Brasil
+                    ispb:
+                      type: string
+                      example: '00000000'
+      deprecated: false
+      tags:
+      - Banks
+  /banks/list:
+    get:
+      summary: Consulta de ISPB e COMPE
+      description: Consulta o ISPB e COMPE de **todos** os bancos cadastrados no Bacen
+      operationId: consulta-ispb-compe
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "\n    {\n        \"compe\": null,\n        \"name\": \"CC INTEGRANTES MIN PUBL E PODER JUDIC AP E CE E CCLA PA\",\n        \"ispb\": \"84156470\"\n    },\n    {\n        \"compe\": \"113\",\n        \"name\": \"NEON CTVM S.A.\",\n        \"ispb\": \"61723847\"\n    },\n    {\n        \"compe\": \"081\",\n        \"name\": \"BANCOSEGURO S.A.\",\n        \"ispb\": \"10264663\"\n    },\n    {\n        \"compe\": \"329\",\n        \"name\": \"QI Sociedade de Crédito\",\n        \"ispb\": \"32402502\"\n    },\n    {\n        \"compe\": \"080\",\n        \"name\": \"B&T CC LTDA.\",\n        \"ispb\": \"73622748\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"CECM MILITARES ESTADUAIS DE SC\",\n        \"ispb\": \"04572960\"\n    },\n    {\n        \"compe\": \"292\",\n        \"name\": \"BS2 DTVM S.A.\",\n        \"ispb\": \"28650236\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"CCC DO NORTE DO BRASIL\",\n        \"ispb\": \"03502131\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"COOP SICREDI COOPERJURIS\",\n        \"ispb\": \"08041950\"\n    },\n    {\n        \"compe\": \"145\",\n        \"name\": \"LEVYCAM CCV LTDA\",\n        \"ispb\": \"50579044\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"CC SICOOB CREDSEGURO LTDA.\",\n        \"ispb\": \"02935307\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"CC SICOOB COOPEMAR\",\n        \"ispb\": \"04174720\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"COOP SICREDI NOVOS HORIZONTES\",\n        \"ispb\": \"07206072\"\n    },\n    {\n        \"compe\": \"288\",\n        \"name\": \"CAROL DTVM LTDA.\",\n        \"ispb\": \"62237649\"\n    },\n    {\n        \"compe\": \"450\",\n        \"name\": \"FitBank\",\n        \"ispb\": \"13203354\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"CC SICOOB ITAPAGIPE\",\n        \"ispb\": \"71506513\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"CC SICOOB CREDICONQUISTA\",\n        \"ispb\": \"02282165\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"COOP SICREDI CENTRO LESTE RS\",\n        \"ispb\": \"88471024\"\n    },\n    {\n        \"compe\": \"047\",\n        \"name\": \"Banco Banese\",\n        \"ispb\": \"13009717\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"SOL E MAR\",\n        \"ispb\": \"35210425\"\n    },\n    {\n        \"compe\": \"300\",\n        \"name\": \"BCO LA NACION ARGENTINA\",\n        \"ispb\": \"33042151\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"CCLA DE PERNAMBUCO - SICOOB PERNAMBUCO\",\n        \"ispb\": \"03732359\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"BANRISUL CARTOES S.A.\",\n        \"ispb\": \"92934215\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"CC CREDIUNA LTDA\",\n        \"ispb\": \"64237530\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"CC SICOOB UNIDAS\",\n        \"ispb\": \"01042487\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"SICOOB COOPVALE\",\n        \"ispb\": \"33924028\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"CCLA DA REGIÃO METROPOLITANA DE GOIÂNIA LTDA.\",\n        \"ispb\": \"07599206\"\n    },\n    {\n        \"compe\": null,\n        \"name\": \"AME DIGITAL BRASIL IP LTDA.\",\n        \"ispb\": \"32778350\"\n    },"
+      deprecated: false
+      tags:
+      - Banks
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: api_token
+      in: query
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/baas-consulta-de-chave-pix-conta-iugu.md
+  - https://dev.iugu.com/reference/baas-consultar-comprovante-de-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-consultar-envio-de-documentos.md
+  - https://dev.iugu.com/reference/baas-criar-conta.md
+  - https://dev.iugu.com/reference/baas-criar-pedido-de-pagamento.md
+  - https://dev.iugu.com/reference/baas-criar-qr-deposito.md
+  - https://dev.iugu.com/reference/baas-decode-qrcode.md
+  - https://dev.iugu.com/reference/baas-enviar-verificacao-de-conta.md
+  - https://dev.iugu.com/reference/baas-extrato-financeiro.md
+  - https://dev.iugu.com/reference/baas-informacoes-da-conta.md
+  - https://dev.iugu.com/reference/baas-listar-chaves-pix.md
+  - https://dev.iugu.com/reference/baas-listar-comprovantes-de-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-listar-pagamentos.md
+  - https://dev.iugu.com/reference/baas-listar-saques-transferencia-proprias.md
+  - https://dev.iugu.com/reference/baas-listar-transferencias-entre-contas-iugu.md
+  - https://dev.iugu.com/reference/baas-pedido-de-saque-para-domicilio-proprio.md
+  - https://dev.iugu.com/reference/baas-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-validar-pagamento.md
+  - https://dev.iugu.com/reference/cancelar-pix-agendado-1.md
+  - https://dev.iugu.com/reference/consulta-de-bancos-cadastrados.md
+  - https://dev.iugu.com/reference/consulta-ispb-compe.md
+  - https://dev.iugu.com/reference/desativar-subconta-copy.md
+  - https://dev.iugu.com/reference/reenviar-documentos-para-verificar-conta-iugu-copy.md
+  merge:
+    pages: 23
+    deduped: 22
+    conflicts_kept_first: 0

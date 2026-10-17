@@ -1,0 +1,141 @@
+openapi: 3.2.0
+info:
+  title: listar-pagamentos Validate API
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1/payment_requests
+security:
+- sec0: []
+tags:
+- name: Validate
+paths:
+  /validate:
+    post:
+      summary: Validar Pagamento
+      description: 'Valida se a linha digitavel de um boleto é valida. É importante se atentar ao parâmetro *"details"* onde será informado se o boleto esta em aberto ou baixado na CIP/Nuclea, Exemplo: Boletos pagos, cancelados ou expirados será retornado como "Retorno CIP 01 Boleto já baixado",'
+      operationId: valida-pagamento
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - barcode
+              - detailed
+              properties:
+                barcode:
+                  type: string
+                  description: Código de barras do pagamento
+                detailed:
+                  type: boolean
+                  description: Detalhes do boleto, deverá ser enviado como "true"
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"message\": \"Boleto é válido\"\n}"
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Boleto é válido
+            text/plain:
+              examples:
+                Result:
+                  value: "{\n    \"message\": \"Boleto é válido\",\n    \"payment_info\": {\n        \"barcode\": \"12345610000000000001857380066019194920000008900\",\n        \"amount_cents\": 8900,\n        \"fine_cents\": 178,\n        \"interest_cents\": 35,\n        \"discount_cents\": 0,\n        \"total_amount_cents\": 9113,\n        \"recipient_name\": \"LOJISTA LTDA\",\n        \"recipient_cnpj_cpf\": \"12350768000171\",\n        \"payer_name\": \"NOME PAGADORA\",\n        \"payer_cnpj_cpf\": \"12345678900\",\n        \"allow_amount_change\": false,\n        \"allow_partial_payment\": false,\n        \"due_date\": \"2024-08-03\",\n        \"maximum_payment_date\": \"2024-09-23T00:00:00.000Z\",\n        \"details\": \"Retorno CIP  01 Boleto já baixado\",\n        \"emitter\": \"EMISSOR\",\n        \"payee_cnpj_cpf\": \"12345668000001\"\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Boleto é válido
+                  payment_info:
+                    type: object
+                    properties:
+                      barcode:
+                        type: string
+                        example: '12345610000000000001857380066019194920000008900'
+                      amount_cents:
+                        type: integer
+                        example: 8900
+                        default: 0
+                      fine_cents:
+                        type: integer
+                        example: 178
+                        default: 0
+                      interest_cents:
+                        type: integer
+                        example: 35
+                        default: 0
+                      discount_cents:
+                        type: integer
+                        example: 0
+                        default: 0
+                      total_amount_cents:
+                        type: integer
+                        example: 9113
+                        default: 0
+                      recipient_name:
+                        type: string
+                        example: LOJISTA LTDA
+                      recipient_cnpj_cpf:
+                        type: string
+                        example: '12350768000171'
+                      payer_name:
+                        type: string
+                        example: NOME PAGADORA
+                      payer_cnpj_cpf:
+                        type: string
+                        example: '12345678900'
+                      allow_amount_change:
+                        type: boolean
+                        example: false
+                        default: true
+                      allow_partial_payment:
+                        type: boolean
+                        example: false
+                        default: true
+                      due_date:
+                        type: string
+                        example: '2024-08-03'
+                      maximum_payment_date:
+                        type: string
+                        example: '2024-09-23T00:00:00.000Z'
+                      details:
+                        type: string
+                        example: Retorno CIP  01 Boleto já baixado
+                      emitter:
+                        type: string
+                        example: EMISSOR
+                      payee_cnpj_cpf:
+                        type: string
+                        example: '12345668000001'
+      deprecated: false
+      tags:
+      - Validate
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: query
+      name: api_token
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/buscar-pagamento.md
+  - https://dev.iugu.com/reference/criar-pedido-de-pagamento.md
+  - https://dev.iugu.com/reference/listar-pagamentos.md
+  - https://dev.iugu.com/reference/valida-pagamento.md
+  merge:
+    pages: 4
+    deduped: 3
+    conflicts_kept_first: 0

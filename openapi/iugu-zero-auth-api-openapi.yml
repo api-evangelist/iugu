@@ -1,0 +1,126 @@
+openapi: 3.2.0
+info:
+  title: zero-auth Zero Auth API
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: Zero Auth
+paths:
+  /zero_auth:
+    post:
+      summary: Consultar Zero Auth
+      description: Para mais detalhes sobre o Zero Auth, clique aqui
+      operationId: consultar-zero-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - token
+              properties:
+                token:
+                  type: string
+                  description: Token de Pagamento criado, <a href="https://dev.iugu.com/docs/tokenizacao-de-cartao-de-credito#iugujs" target="_blank"> [clique aqui] para mais informações</a>
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"zero_auth\": {\n        \"code\": \"00\",\n        \"message\": \"Transacao autorizada\",\n        \"valid\": true\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  zero_auth:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: '00'
+                      message:
+                        type: string
+                        example: Transacao autorizada
+                      valid:
+                        type: boolean
+                        example: true
+                        default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"token\": [\n        \"must be a kind of: String\",\n        \"can't be blank\"\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: array
+                    items:
+                      type: string
+                      example: 'must be a kind of: String'
+        '422':
+          description: '422'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"zero_auth\": {\n        \"code\": \"54\",\n        \"message\": \"Autorizacao negada\",\n        \"valid\": false\n    }\n}"
+                invalid brand:
+                  value: "{\n    \"zero_auth\": {\n        \"code\": \"57\",\n        \"message\": \"Bandeira Inválida\"\n    }\n}"
+              schema:
+                oneOf:
+                - type: object
+                  properties:
+                    zero_auth:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: '54'
+                        message:
+                          type: string
+                          example: Autorizacao negada
+                        valid:
+                          type: boolean
+                          example: false
+                          default: true
+                - title: invalid brand
+                  type: object
+                  properties:
+                    zero_auth:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: '57'
+                        message:
+                          type: string
+                          example: Bandeira Inválida
+      deprecated: false
+      tags:
+      - Zero Auth
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: query
+      name: api_token
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/consultar-zero-auth.md
+  merge:
+    pages: 1
+    deduped: 0
+    conflicts_kept_first: 0

@@ -1,0 +1,353 @@
+openapi: 3.2.0
+info:
+  title: gatilhos Web Hooks API
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: Webhooks
+paths:
+  /web_hooks:
+    post:
+      summary: Criar Gatilho
+      description: Cria um gatilho
+      operationId: criar-gatilho
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - event
+              - url
+              properties:
+                event:
+                  type: string
+                  description: Nome do evento desejado. Acesse a lista com todos os eventos e descrição [aqui](https://dev.iugu.com/docs/gatilhos).
+                url:
+                  type: string
+                  description: Endpoint para qual o gatilho será enviado
+                authorization:
+                  type: string
+                  description: Grave uma chave / key para usar como "Basic Authentication" na validação do recebimento dos gatilhos.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": \"C79D36E7B6E74150B28F6CCA2EAC7707\",\n  \"url\": \"https://dev.iugu.com/reference/criar-gatilho\",\n  \"authorization\": null,\n  \"event\": \"invoice.created\",\n  \"active\": true\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: C79D36E7B6E74150B28F6CCA2EAC7707
+                  url:
+                    type: string
+                    example: https://dev.iugu.com/reference/criar-gatilho
+                  authorization: {}
+                  event:
+                    type: string
+                    example: invoice.created
+                  active:
+                    type: boolean
+                    example: true
+                    default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Webhooks
+    get:
+      summary: Listar Gatilhos
+      description: Retorna a lista de gatilhos de uma conta
+      operationId: listar-gatilhos
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "\n  {\n    \"id\": \"A7399634A4F1423E8F8B199DA79F45AD\",\n    \"url\": \"https://endpoint_gatilho.in/12345\",\n    \"authorization\": null,\n    \"event\": \"all\",\n    \"active\": true\n  }"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: A7399634A4F1423E8F8B199DA79F45AD
+                  url:
+                    type: string
+                    example: https://endpoint_gatilho.in/12345
+                  authorization: {}
+                  event:
+                    type: string
+                    example: all
+                  active:
+                    type: boolean
+                    example: true
+                    default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Webhooks
+  /web_hooks/{id}:
+    put:
+      summary: Alterar Gatilho
+      description: Altera e também permite editar um gatilho
+      operationId: alterar-gatilho
+      parameters:
+      - name: id
+        in: path
+        description: ID do gatilho
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event:
+                  type: string
+                  description: Nome do evento desejado
+                url:
+                  type: string
+                  description: Endpoint para qual o gatilho será enviado
+                authorization:
+                  type: string
+                  description: Grave uma chave / key para usar como "Basic Authentication" na validação do recebimento dos gatilhos.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": \"N37ZZ9X2GBS59MT37SPGOGDDBTX4HGZ4\",\n  \"url\": \"https://dev.iugu.com/reference/criar-gatilho-teste2\",\n  \"authorization\": null,\n  \"event\": \"invoice.created\",\n  \"active\": true\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: N37ZZ9X2GBS59MT37SPGOGDDBTX4HGZ4
+                  url:
+                    type: string
+                    example: https://dev.iugu.com/reference/criar-gatilho-teste2
+                  authorization: {}
+                  event:
+                    type: string
+                    example: invoice.created
+                  active:
+                    type: boolean
+                    example: true
+                    default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Webhooks
+    delete:
+      summary: Remover Gatilho
+      description: Remove um gatilho
+      operationId: remover-gatilho
+      parameters:
+      - name: id
+        in: path
+        description: ID do Gatilho
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": \"N37ZZ9X2GBS59MT37SPGOGDDBTX4HGZ4\",\n  \"url\": \"https://dev.iugu.com/reference/criar-gatilho-teste-2\",\n  \"authorization\": null,\n  \"event\": \"invoice.created\",\n  \"active\": true\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: N37ZZ9X2GBS59MT37SPGOGDDBTX4HGZ4
+                  url:
+                    type: string
+                    example: https://dev.iugu.com/reference/criar-gatilho-teste-2
+                  authorization: {}
+                  event:
+                    type: string
+                    example: invoice.created
+                  active:
+                    type: boolean
+                    example: true
+                    default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Webhooks
+    get:
+      summary: Buscar Gatilho
+      description: Busca por um gatilho específico através do seu ID.
+      operationId: buscar-gatilho
+      parameters:
+      - name: id
+        in: path
+        description: ID do Gatilho
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": \"N37ZZ9X2GBS59MT37SPGOGDDBTX4HGZ4\",\n  \"url\": \"https://dev.iugu.com/reference/criar-gatilho-teste2\",\n  \"authorization\": null,\n  \"event\": \"invoice.created\",\n  \"active\": true\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: N37ZZ9X2GBS59MT37SPGOGDDBTX4HGZ4
+                  url:
+                    type: string
+                    example: https://dev.iugu.com/reference/criar-gatilho-teste2
+                  authorization: {}
+                  event:
+                    type: string
+                    example: invoice.created
+                  active:
+                    type: boolean
+                    example: true
+                    default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Webhooks
+  /web_hooks/{id}/toggle_activation:
+    put:
+      summary: Ativar/Desativar Gatilho
+      description: Ativar ou desativar um gatilho
+      operationId: ativardesativar-gatilho
+      parameters:
+      - name: id
+        in: path
+        description: ID do gatilho
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": \"D57FCEA0EB7A4647B05E1B562035D9CA\",\n    \"url\": \"https://endpoint_gatilho.in/123\",\n    \"authorization\": \"my_key\",\n    \"event\": \"all\",\n    \"active\": true\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: D57FCEA0EB7A4647B05E1B562035D9CA
+                  url:
+                    type: string
+                    example: https://endpoint_gatilho.in/123
+                  authorization:
+                    type: string
+                    example: my_key
+                  event:
+                    type: string
+                    example: all
+                  active:
+                    type: boolean
+                    example: true
+                    default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Webhooks
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: query
+      name: api_token
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/alterar-gatilho.md
+  - https://dev.iugu.com/reference/ativardesativar-gatilho.md
+  - https://dev.iugu.com/reference/buscar-gatilho.md
+  - https://dev.iugu.com/reference/criar-gatilho.md
+  - https://dev.iugu.com/reference/listar-gatilhos.md
+  - https://dev.iugu.com/reference/remover-gatilho.md
+  merge:
+    pages: 6
+    deduped: 5
+    conflicts_kept_first: 0

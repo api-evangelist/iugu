@@ -1,0 +1,522 @@
+openapi: 3.2.0
+info:
+  title: Iugu Transfer Requests API
+  version: '1.0'
+  description: 'Operations tagged Transfer Requests across 2 of this provider''s published API definitions: iugu-baas-openapi.yml, iugu-transfer-ncia-de-valores-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: Transfer Requests
+paths:
+  /transfer_requests:
+    post:
+      summary: PIX/TED Out
+      description: Realize uma transferência para terceiros via TED ou PIX
+      operationId: baas-pix-ted-out
+      parameters:
+      - name: Request-Time
+        in: header
+        description: Timestamp do momento que enviar a requisição de assinatura digital (RSA)
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: Signature
+        in: header
+        description: Assinatura digital validada
+        required: true
+        schema:
+          type: string
+          default: signature=
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - transfer_type
+              - amount_cents
+              properties:
+                scheduled_date:
+                  type: string
+                  description: Data para **agendar** o PIX (AAAA-MM-DD)
+                  format: date
+                transfer_type:
+                  type: string
+                  description: Tipo de transferência, "ted", "pix" ou "institucional".
+                amount_cents:
+                  type: integer
+                  description: Valor em centavos. Valor mínimo 2 centavos
+                  format: int32
+                description:
+                  type: string
+                  description: Descrição da transferência que irá aparecer no comprovante
+                check_payer:
+                  type: string
+                  description: Insira o documento (CPF ou CNPJ) do destinatário para validar se é o mesmo identificado através da chave PIX utilizada na transferência. Caso o documento enviado neste parâmetro seja diferente do cadastrado na chave PIX, a chamada retornará um erro. Agora é aceito o campo alfanumérico apenas para CNPJ.
+                qrcode_type:
+                  type: string
+                  description: Tipo do QR Code
+                end_to_end_id:
+                  type: string
+                  description: ID único do BACEN para rastreamento da transação Pix
+                conciliation_id:
+                  type: string
+                  description: ID opcional para rastreamento interno da transação. <br> **Limite de 35 caracteres/Não aceita caractere especial.**
+                external_reference:
+                  type: string
+                  description: Referência ou identificador externo da transferência. Não aparece no comprovante, apenas no retorno da requisição e no painel Alia.
+                receiver:
+                  type: object
+                  description: Dados do destinatário da transferência. Utilize "name" limitação de 140 caracteres e "cpf_cnpj" quando a transferência for TED ou PIX para conta bancária.
+                  properties:
+                    name:
+                      type: string
+                      description: Nome do recebedor da transferência. Obrigatório se a transferência for TED ou PIX para conta bancária.
+                    cpf_cnpj:
+                      type: string
+                      description: CPF ou CNPJ do recebedor da transferência. Obrigatório se a transferência for TED ou PIX para conta bancária ou transfer_type = institucional.<br>Agora é aceito o campo alfanumérico apenas para CNPJ.
+                    bank:
+                      type: object
+                      description: Dados bancários do destinatário da transferência
+                      properties:
+                        ispb:
+                          type: string
+                          description: 'Número ''ispb'', Identificador de Sistema de Pagamentos Brasileiro do banco que receberá a transferência. Ex: 60701190 caso seja Itaú. Campo obrigatório caso a transferência seja TED ou PIX para conta bancária ou transfer_type = institucional'
+                        branch:
+                          type: string
+                          description: Agência. Não precisa informar dígito. Obrigatório se transfer_type = institucional. Opcional se tipo da conta seja conta de pagamento.
+                        account:
+                          type: string
+                          description: Número da conta + dígito da conta (se houver). Não é necessário traço para separar o dígito. Campo obrigatório caso a transferência seja TED ou PIX para conta bancária.
+                        account_type:
+                          type: string
+                          description: 'Tipo de Conta: checking_account (Conta Corrente), salary_account (Conta Salário), savings_account (Poupança), payment_account (Conta de Pagamento). Campo obrigatório caso a transferência seja TED ou PIX para conta corrente.'
+                        bank_branch_digit:
+                          type: string
+                          description: Caso sua agência possua um 5° digito, é necessário informar nesse parâmetro.
+                    pix:
+                      type: object
+                      description: Dados PIX do destinatário da transferência
+                      properties:
+                        type:
+                          type: string
+                          description: 'Tipo de chave PIX utilizada, ex: cpf, cnpj, email, phone, evp (chave aleatória)'
+                        key:
+                          type: string
+                          description: 'Chave à ser utilizada para transferência, ex: teste@teste.com, +5511999999999, etc'
+                hist:
+                  type: string
+                  description: Histórico da Transação. Obrigatório se transfer_type = institucional.
+                cit:
+                  type: string
+                  description: Código Identificador de Transferência. Obrigatório se transfer_type = institucional.
+                reason_code:
+                  type: string
+                  description: Código da Finalidade da Transferência. Opcional — Se transfer_type = institucional.
+      responses:
+        '202':
+          description: '202'
+          content:
+            application/json:
+              examples:
+                Sucesso (PIX):
+                  value: "{\n  \"transfer_request_id\": \"0321A2977E7D4C199AF26AE5C74220EA\",\n  \"created_at\": \"2023-02-15T21:50:45-03:00\",\n  \"amount_cents\": 2,\n  \"transfer_type\": \"pix\",\n  \"end_to_end_id\": \"E1511197520230216005028cd18c6d3d\",\n  \"external_reference\": \"T002\",\n  \"receipt_url\": \"https://comprovantes.iugu.com/0321a297-7e7d-4c19-9af2-6ae5c74220ea-e3049a\",\n  \"status\": \"done\"\n}"
+                Sucesso (TED):
+                  value: ''
+              schema:
+                type: object
+                properties:
+                  transfer_request_id:
+                    type: string
+                    example: 0321A2977E7D4C199AF26AE5C74220EA
+                  created_at:
+                    type: string
+                    example: '2023-02-15T21:50:45-03:00'
+                  amount_cents:
+                    type: integer
+                    example: 2
+                    default: 0
+                  transfer_type:
+                    type: string
+                    example: pix
+                  end_to_end_id:
+                    type: string
+                    example: E1511197520230216005028cd18c6d3d
+                  external_reference:
+                    type: string
+                    example: T002
+                  receipt_url:
+                    type: string
+                    example: https://comprovantes.iugu.com/0321a297-7e7d-4c19-9af2-6ae5c74220ea-e3049a
+                  status:
+                    type: string
+                    example: done
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '#Campo name dentro do objeto receiver de conter no máximo 140 caracteres#'
+        '422':
+          description: '422'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: 'Documento do recebedor não condiz com o informado
+
+                    Payer document number don''t match with the one provided'
+      tags:
+      - Transfer Requests
+    servers:
+    - url: https://api.iugu.com/v1
+  /transfer_requests/:
+    get:
+      summary: Listar Comprovantes de Transferências para Terceiros
+      description: Retorna uma lista com os comprovantes de Transferências para Terceiros de uma conta.
+      operationId: baas-listar-comprovantes-de-pix-ted-out
+      parameters:
+      - name: limit
+        in: query
+        description: Limita o número de registros retornados em até 100
+        schema:
+          type: integer
+          format: int32
+      - name: start
+        in: query
+        description: Quantos registros pular do início da pesquisa, usado na paginação
+        schema:
+          type: integer
+          format: int32
+      - name: query
+        in: path
+        description: Neste parâmetro pode ser passado um texto para pesquisa, como valor, chave Pix ou banco
+        schema:
+          type: string
+        required: true
+      - name: sortBy
+        in: query
+        description: Parâmetro utilizado para ordenar, por valor passar "amount_cents", por data  "executed_at"
+        schema:
+          type: string
+      - in: query
+        name: created_at_from
+        schema:
+          type: string
+          format: date
+        description: Registros criados a partir desta data passada no parâmetro. Formato (AAAA-MM-DD)
+      - in: query
+        name: created_at_to
+        schema:
+          type: string
+          format: date
+        description: Registros criados até esta data passada no parâmetro. Formato (AAAA-MM-DD)
+      - name: updated_at_from
+        in: query
+        description: Registros atualizados a partir dessa data passada no parâmetro. Formato (AAAA-MM-DD)
+        schema:
+          type: string
+          format: date
+      - name: updated_at_to
+        in: query
+        description: Registros atualizados a até esta data passada no parâmetro. Formato (AAAA-MM-DD)
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"totalItems\": 10, - Quantidade de Comprovantes retornados\n  \"items\": [\n    {\n  \"id\": \"000016C4DAF14A89A271D3D341B352B7\", - ID da Transferência\n  \"status\": \"done\", - Status da Transferência\n  \"transfer_type\": \"pix\", - Tipo da Transferência\n  \"description\": \"null\", - Descrição da transferência\n  \"external_reference\": \"Null\" - Referência externa da transferência\n  \"created_at\": \"2022-10-22T03:39:28-03:00\", - Data de Criação\n  \"updated_at\": \"2022-10-22T03:39:32-03:00\", - Data de Atualização\n  \"amount_cents\": 1940, - Valor em Centavos\n  \"end_to_end_id\": \"E1511197520221022063963b8d59e368\", \n  \"amount\": \"19.40 BRL\", -  Valor em BRL\n  \"executed_at\": \"2022-10-22T03:39:32-03:00\", - Data de Execução\n  \"rejected_at\": null, - Data de Rejeição\n  \"rejected_reason\": null, - Motivo de Rejeição\n  \"receipt_url\": \"https://comprovantes.iugu.com/000016C4DAF14A89A271D3D341B352B7-hed1\", - Link do Comprovante PDF\n  \"sender_account\": {\n    \"id\": \"E1BE8579D3A94695BF9B8D78589F5173\", - ID da conta de origem\n    \"name\": \"Conta Teste - GRUPO 4 (doc. approved)\", - Nome da Conta\n    \"cpf_cnpj\": \"***117.192/0001-**\", - Documento da Conta\n    \"account_type\": \"Conta Corrente\", - Tipo de Conta\n    \"account_number\": \"8785963\", - Número da Conta\n    \"bank\": null, - Banco\n    \"bank_agency\": \"0001\" - Número de Agência\n  },\n  \"receiver_account\": {\n    \"name\": \"Teste Teste\", - Nome do Recebedor\n    \"cpf_cnpj\": \"***.991.608-**\", - Documento\n    \"account_type\": \"payment_account\", - Tipo de Conta\n    \"bank_account\": \"19523074449\", - Número da Conta\n    \"bank\": null, - Banco\n    \"bank_agency\": \"1\", - Agência\n    \"pix_key_type\": \"cpf\", - Tipo de Chave PIX\n    \"pix_key\": \"99999999999\" - Chave PIX\n  }\n}\n"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      tags:
+      - Transfer Requests
+    servers:
+    - url: https://api.iugu.com/v1
+  /transfer_requests/decode_qrcode:
+    post:
+      summary: Extrair Informações do QR Code Pix
+      description: Este endpoint decodifica uma string previamente extraída de um QR Code, convertendo o código em informações legíveis. Ele não processa a imagem do QR Code diretamente, mas atua sobre a string gerada a partir da imagem, transformando-a no conteúdo codificado pelo QR.
+      operationId: baas-decode-qrcode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                qrcode_payload:
+                  type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Sucesso:
+                  value: "{\n  \"end_to_end_id\": \"X12345678901234567890abcdef\",\n  \"type\": \"dynamic_qr_code\",\n  \"qr_code\": {\n    \"review_code\": 1,\n    \"ispb\": 12345678,\n    \"receiver_branch\": \"0002\",\n    \"receiver_account_type\": \"checking_account\",\n    \"receiver_account_number\": \"1234567\",\n    \"receiver_key\": \"abcdef12-3456-7890-abcd-ef1234567890\",\n    \"receiver_key_type\": \"evp\",\n    \"receiver_category_code\": \"0001\",\n    \"receiver_document_type\": \"cpf\",\n    \"receiver_document_number\": \"12345678901\",\n    \"receiver_name\": \"João da Silva\",\n    \"conciliation_id\": \"BCDE1234567890ABCDE1234567890ABCDE\",\n    \"payer_text\": \" \",\n    \"payer_document_type\": \"cnpj\",\n    \"payer_city\": \"RIO DE JANEIRO\",\n    \"amount\": 150,\n    \"change_amount\": 0,\n    \"created_at\": \"2024-10-16T13:58:01.000Z\",\n    \"payload_date\": \"2024-10-16T16:56:08.742Z\",\n    \"qr_expires_in\": 133318,\n    \"ispb_receiver_url\": \"qr.iugu.com/public/payload/v2/BCDE1234567890ABCDE1234567890ABCDE\",\n    \"use_once\": false,\n    \"status\": \"pending\",\n    \"finality\": \"Compra ou Transferência\",\n    \"finality_code\": 0,\n    \"bank\": \"BANCO FICTÍCIO S.A.\"\n  }\n}"
+                Result:
+                  value: "{\n \"user_answer\": \"cancel\"\n}"
+              schema:
+                oneOf:
+                - title: Sucesso
+                  type: object
+                  properties:
+                    end_to_end_id:
+                      type: string
+                      example: X12345678901234567890abcdef
+                    type:
+                      type: string
+                      example: dynamic_qr_code
+                    qr_code:
+                      type: object
+                      properties:
+                        review_code:
+                          type: integer
+                          example: 1
+                          default: 0
+                        ispb:
+                          type: integer
+                          example: 12345678
+                          default: 0
+                        receiver_branch:
+                          type: string
+                          example: '0002'
+                        receiver_account_type:
+                          type: string
+                          example: checking_account
+                        receiver_account_number:
+                          type: string
+                          example: '1234567'
+                        receiver_key:
+                          type: string
+                          example: abcdef12-3456-7890-abcd-ef1234567890
+                        receiver_key_type:
+                          type: string
+                          example: evp
+                        receiver_category_code:
+                          type: string
+                          example: '0001'
+                        receiver_document_type:
+                          type: string
+                          example: cpf
+                        receiver_document_number:
+                          type: string
+                          example: '12345678901'
+                        receiver_name:
+                          type: string
+                          example: João da Silva
+                        conciliation_id:
+                          type: string
+                          example: BCDE1234567890ABCDE1234567890ABCDE
+                        payer_text:
+                          type: string
+                          example: ' '
+                        payer_document_type:
+                          type: string
+                          example: cnpj
+                        payer_city:
+                          type: string
+                          example: RIO DE JANEIRO
+                        amount:
+                          type: integer
+                          example: 150
+                          default: 0
+                        change_amount:
+                          type: integer
+                          example: 0
+                          default: 0
+                        created_at:
+                          type: string
+                          example: '2024-10-16T13:58:01.000Z'
+                        payload_date:
+                          type: string
+                          example: '2024-10-16T16:56:08.742Z'
+                        qr_expires_in:
+                          type: integer
+                          example: 133318
+                          default: 0
+                        ispb_receiver_url:
+                          type: string
+                          example: qr.iugu.com/public/payload/v2/BCDE1234567890ABCDE1234567890ABCDE
+                        use_once:
+                          type: boolean
+                          example: false
+                          default: true
+                        status:
+                          type: string
+                          example: pending
+                        finality:
+                          type: string
+                          example: Compra ou Transferência
+                        finality_code:
+                          type: integer
+                          example: 0
+                          default: 0
+                        bank:
+                          type: string
+                          example: BANCO FICTÍCIO S.A.
+                - type: object
+                  properties:
+                    user_answer:
+                      type: string
+                      example: cancel
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"errors\": \"status_does_not_allow_answer\"\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: status_does_not_allow_answer
+      deprecated: false
+      tags:
+      - Transfer Requests
+    servers:
+    - url: https://api.iugu.com/v1
+  /transfer_requests/{id}:
+    get:
+      summary: Consultar Comprovante de Transferência para Terceiros
+      description: Consulte um comprovante de Transferência para Terceiros através do seu ID.
+      operationId: baas-consultar-comprovante-de-pix-ted-out
+      parameters:
+      - name: id
+        in: path
+        description: ID da Transferência
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": \"000016C4DAF14A89A271D3D341B352B7\", - ID da Transferência\n  \"status\": \"done\", - Status da Transferência\n  \"transfer_type\": \"pix\", - Tipo da Transferência\n  \"description\": \"null\", - Descrição da transferência\n  \"external_reference\": \"Null\" - Referência externa da transferência\n  \"created_at\": \"2022-10-22T03:39:28-03:00\", - Data de Criação\n  \"updated_at\": \"2022-10-22T03:39:32-03:00\", - Data de Atualização\n  \"amount_cents\": 1940, - Valor em Centavos\n  \"end_to_end_id\": \"E1511197520221022063963b8d59e368\", \n  \"amount\": \"19.40 BRL\", -  Valor em BRL\n  \"executed_at\": \"2022-10-22T03:39:32-03:00\", - Data de Execução\n  \"rejected_at\": null, - Data de Rejeição\n  \"rejected_reason\": null, - Motivo de Rejeição\n  \"receipt_url\": \"https://comprovantes.iugu.com/000016C4DAF14A89A271D3D341B352B7-hed1\", - Link do Comprovante PDF\n  \"sender_account\": {\n    \"id\": \"E1BE8579D3A94695BF9B8D78589F5173\", - ID da conta de origem\n    \"name\": \"Conta Teste - GRUPO 4 (doc. approved)\", - Nome da Conta\n    \"cpf_cnpj\": \"***117.192/0001-**\", - Documento da Conta\n    \"account_type\": \"Conta Corrente\", - Tipo de Conta\n    \"account_number\": \"8785963\", - Número da Conta\n    \"bank\": null, - Banco\n    \"bank_agency\": \"0001\" - Número de Agência\n  },\n  \"receiver_account\": {\n    \"name\": \"Teste Teste\", - Nome do Recebedor\n    \"cpf_cnpj\": \"***.991.608-**\", - Documento\n    \"account_type\": \"payment_account\", - Tipo de Conta\n    \"bank_account\": \"19523074449\", - Número da Conta\n    \"bank\": null, - Banco\n    \"bank_agency\": \"1\", - Agência\n    \"pix_key_type\": \"cpf\", - Tipo de Chave PIX\n    \"pix_key\": \"99999999999\" - Chave PIX\n  }\n}"
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\"errors\": \"Transferência não encontrada\"  \n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Transferência não encontrada
+      deprecated: false
+      tags:
+      - Transfer Requests
+    servers:
+    - url: https://api.iugu.com/v1
+  /transfer_requests/{id}/scheduled_cancel:
+    patch:
+      summary: Cancelar Pix Agendado
+      description: 'Utilize o `live_api_token`
+
+
+        Cancela um PIX agendado. **Importante:** O status da transferência deve ser `scheduled`.'
+      operationId: cancelar-pix-agendado-1
+      parameters:
+      - name: id
+        in: path
+        description: ID da Transferência. Informada no retorno do endpoint [Transferência para Terceiros](https://dev.iugu.com/reference/transfer%C3%AAncia-para-terceiros-1) — `/v1/transfer_requests` na propriedade `transfer_request_id`.
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"transfer_request_id\": \"E2483B68CA624DC98A88AFC7D1565213\",\n    \"created_at\": \"2025-02-11T11:28:08-03:00\",\n    \"amount_cents\": 10,\n    \"transfer_type\": \"pix\",\n    \"end_to_end_id\": \"E151119752025021114280e7d38e1745\",\n    \"external_reference\": null,\n    \"receipt_url\": \"https://comprovantes.iugu.test/e2483b68-ca62-4dc9-8a88-afc7d1565213-d52c04\",\n    \"status\": \"cancelled\"\n}"
+              schema:
+                type: object
+                properties:
+                  transfer_request_id:
+                    type: string
+                    example: E2483B68CA624DC98A88AFC7D1565213
+                  created_at:
+                    type: string
+                    example: '2025-02-11T11:28:08-03:00'
+                  amount_cents:
+                    type: integer
+                    example: 10
+                    default: 0
+                  transfer_type:
+                    type: string
+                    example: pix
+                  end_to_end_id:
+                    type: string
+                    example: E151119752025021114280e7d38e1745
+                  external_reference: {}
+                  receipt_url:
+                    type: string
+                    example: https://comprovantes.iugu.test/e2483b68-ca62-4dc9-8a88-afc7d1565213-d52c04
+                  status:
+                    type: string
+                    example: cancelled
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      tags:
+      - Transfer Requests
+    servers:
+    - url: https://api.iugu.com/v1
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: api_token
+      in: query
+x-refined-from:
+- iugu-baas-openapi.yml
+- iugu-transfer-ncia-de-valores-openapi.yml
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/antecipar-recebiveis.md
+  - https://dev.iugu.com/reference/consultar-unidade-de-recebiveis.md
+  - https://dev.iugu.com/reference/listar-recebiveis.md
+  - https://dev.iugu.com/reference/listar-unidade-de-recebiveis.md
+  merge:
+    pages: 4
+    deduped: 3
+    conflicts_kept_first: 0

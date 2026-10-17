@@ -1,0 +1,121 @@
+openapi: 3.2.0
+info:
+  title: baas Bank Account Pix Keys API
+  version: '1.0'
+servers:
+- url: https://api.iugu.com/v1
+security:
+- sec0: []
+tags:
+- name: Bank Account Pix Keys
+paths:
+  /bank_account_pix_keys:
+    get:
+      summary: Listar chaves Pix na Conta iugu
+      description: Lista todas as chaves PIX atreladas a conta, ativas, processando e aguardando um pedido de custodia solicitado ou enviado ou aguardando resolução.
+      operationId: baas-listar-chaves-pix
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Sucesso:
+                  value: "{\n \"pix_keys\": [\n {\n \"id\": \"923B72F0DD2F42FD94CEA3E771C8363B\",\n \"pix_key\": \"email@iugu.com\",\n \"pix_key_type\": \"email\",\n \"created_at\": \"2024-01-15T12:40:15-03:00\",\n \"status\": \"active\"\n }\n ]\n}"
+              schema:
+                type: object
+                properties:
+                  pix_keys:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 923B72F0DD2F42FD94CEA3E771C8363B
+                        pix_key:
+                          type: string
+                          example: email@iugu.com
+                        pix_key_type:
+                          type: string
+                          example: email
+                        created_at:
+                          type: string
+                          example: '2024-01-15T12:40:15-03:00'
+                        status:
+                          type: string
+                          example: active
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"errors\": \"Apenas disponível para o ambiente produção\"\n}"
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    example: Apenas disponível para o ambiente produção
+      x-readme:
+        code-samples:
+        - language: curl
+          code: 'curl --location --request GET
+
+            ''https://api.iugu.com/v1/transfer_requests/{ID}'' \
+
+            --header ''Accept: application/json'' \
+
+            --header ''Content-Type: application/json'' \
+
+            --header ''Request-Time: 2022-06-08T15:35:06-03:00'' \
+
+            --header ''Authorization: Basic {{api_token in base64}}'' \
+
+            --header ''Cookie: __cfruid={{cookie}}'''
+        samples-languages:
+        - curl
+      tags:
+      - Bank Account Pix Keys
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: api_token
+      in: query
+x-readme-fauxas: true
+x-provenance:
+  method: searched
+  source: https://dev.iugu.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.iugu.com/reference/baas-consulta-de-chave-pix-conta-iugu.md
+  - https://dev.iugu.com/reference/baas-consultar-comprovante-de-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-consultar-envio-de-documentos.md
+  - https://dev.iugu.com/reference/baas-criar-conta.md
+  - https://dev.iugu.com/reference/baas-criar-pedido-de-pagamento.md
+  - https://dev.iugu.com/reference/baas-criar-qr-deposito.md
+  - https://dev.iugu.com/reference/baas-decode-qrcode.md
+  - https://dev.iugu.com/reference/baas-enviar-verificacao-de-conta.md
+  - https://dev.iugu.com/reference/baas-extrato-financeiro.md
+  - https://dev.iugu.com/reference/baas-informacoes-da-conta.md
+  - https://dev.iugu.com/reference/baas-listar-chaves-pix.md
+  - https://dev.iugu.com/reference/baas-listar-comprovantes-de-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-listar-pagamentos.md
+  - https://dev.iugu.com/reference/baas-listar-saques-transferencia-proprias.md
+  - https://dev.iugu.com/reference/baas-listar-transferencias-entre-contas-iugu.md
+  - https://dev.iugu.com/reference/baas-pedido-de-saque-para-domicilio-proprio.md
+  - https://dev.iugu.com/reference/baas-pix-ted-out.md
+  - https://dev.iugu.com/reference/baas-validar-pagamento.md
+  - https://dev.iugu.com/reference/cancelar-pix-agendado-1.md
+  - https://dev.iugu.com/reference/consulta-de-bancos-cadastrados.md
+  - https://dev.iugu.com/reference/consulta-ispb-compe.md
+  - https://dev.iugu.com/reference/desativar-subconta-copy.md
+  - https://dev.iugu.com/reference/reenviar-documentos-para-verificar-conta-iugu-copy.md
+  merge:
+    pages: 23
+    deduped: 22
+    conflicts_kept_first: 0
