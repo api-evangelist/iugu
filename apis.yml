@@ -161,6 +161,8 @@ apis:
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -185,6 +187,8 @@ apis:
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
+  - API Tokens
+  tags_raw:
   - Api Tokens
   properties:
   - type: OpenAPI
@@ -209,6 +213,8 @@ apis:
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
+  - BaaS
+  tags_raw:
   - Baas
   properties:
   - type: OpenAPI
@@ -305,6 +311,8 @@ apis:
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
+  - Email
+  tags_raw:
   - Emails
   properties:
   - type: OpenAPI
@@ -451,6 +459,8 @@ apis:
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
+  - Profiles
+  tags_raw:
   - Profile
   properties:
   - type: OpenAPI
@@ -488,6 +498,8 @@ apis:
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
+  - ResourceSearch
+  tags_raw:
   - Resource Search
   properties:
   - type: OpenAPI
@@ -512,6 +524,8 @@ apis:
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
+  - Split
+  tags_raw:
   - Splits
   properties:
   - type: OpenAPI
@@ -536,6 +550,8 @@ apis:
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
@@ -548,6 +564,8 @@ apis:
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
+  - TransferRequests
+  tags_raw:
   - Transfer Requests
   properties:
   - type: OpenAPI
@@ -571,7 +589,8 @@ apis:
   description: The Transferors{id} API from Iugu — 1 operation(s) for transferors{id}.
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - Transferors{id}
   properties:
   - type: OpenAPI
@@ -608,6 +627,8 @@ apis:
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
+  - Webhook Logs
+  tags_raw:
   - Web Hook Logs
   properties:
   - type: OpenAPI
@@ -656,6 +677,8 @@ apis:
   humanURL: https://dev.iugu.com/docs
   baseURL: https://api.iugu.com/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
