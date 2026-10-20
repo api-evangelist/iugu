@@ -27,37 +27,6 @@
     detected: '2026-10-13'
   status: not-a-workflow
   arazzo: null
-- slug: iugu-pix-banco-central-do-brasil
-  label: Pix (Banco Central do Brasil)
-  partner_name: Pix (Banco Central do Brasil)
-  category: instant payments (Brazil)
-  type: register
-  channel: regulator-register
-  evidence: https://www.bcb.gov.br/estabilidadefinanceira/participantespix
-  source: edge
-  relationship: standard-participant
-  contract_reference:
-    register: Pix participants (Banco Central do Brasil, https://www.bcb.gov.br/content/estabilidadefinanceira/participantes_pix/lista-participantes-instituicoes-em-adesao-pix-20261015.csv)
-    spec_file: null
-    standard: Pix
-    role: pix-participant
-    registrations:
-    - registered_name: IUGU IP S.A.
-      ispb: '15111975'
-      cnpj: 15.111.975/0001-64
-      institution_type: Instituição de Pagamento
-      spi_participation: Direta
-      pix_participation: Facultativa
-      pix_modality: Provedor de Conta Transacional
-      payment_initiation: false
-      matched_domain: iugu.com
-      matched_by: domain
-      identity: wikidata Q130740888 'Iugu' P6204 15.111.975/0001-64 P856 https://www.iugu.com
-    signal_note: 'participation only: the domain comes from a labelled lookup (registrations[].identity)'
-    detected_by: sweep-latam-open-finance.py
-    detected: '2026-10-15'
-  status: not-a-workflow
-  arazzo: null
 - slug: iugu-zapier
   label: Zapier
   partner: zapier
@@ -81,5 +50,36 @@
     app_slug: iugu
     beta: false
     builder: unknown (not in the directory record)
+  status: not-a-workflow
+  arazzo: null
+- slug: iugu-pix-banco-central-do-brasil
+  label: Pix (Banco Central do Brasil)
+  partner_name: Pix (Banco Central do Brasil)
+  category: instant payments (Brazil)
+  type: register
+  channel: regulator-register
+  evidence: https://www.bcb.gov.br/estabilidadefinanceira/participantespix
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Pix participants (Banco Central do Brasil, https://www.bcb.gov.br/content/estabilidadefinanceira/participantes_pix/lista-participantes-instituicoes-em-adesao-pix-20261020.csv)
+    spec_file: null
+    standard: Pix
+    role: pix-participant
+    registrations:
+    - registered_name: IUGU IP S.A.
+      ispb: '15111975'
+      cnpj: 15.111.975/0001-64
+      institution_type: Instituição de Pagamento
+      spi_participation: Direta
+      pix_participation: Facultativa
+      pix_modality: Provedor de Conta Transacional
+      payment_initiation: false
+      matched_domain: iugu.com
+      matched_by: domain
+      identity: wikidata Q130740888 'Iugu' P6204 15.111.975/0001-64 P856 https://www.iugu.com
+    signal_note: 'participation only: the domain comes from a labelled lookup (registrations[].identity)'
+    detected_by: sweep-latam-open-finance.py
+    detected: '2026-10-19'
   status: not-a-workflow
   arazzo: null
