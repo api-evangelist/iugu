@@ -1,4 +1,4 @@
-# Iugu (iugu)
+# Iugu
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,71 +66,167 @@
 
 Iugu is a Brazilian payment infrastructure platform offering REST APIs for invoicing, subscriptions, payment splits, boleto bancário generation, credit card processing, and marketplace payments. The platform enables businesses to automate financial operations including recurring billing, split payments for marketplaces, Pix instant payments, and sub-account management. Iugu operates as a Bacen-licensed Payment Institution and is PCI DSS compliant, serving e-commerce, SaaS, and marketplace companies across Brazil.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/iugu/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/iugu/refs/heads/main/apis.yml)
+**Areas:** Payments · Brazil · Invoicing · Subscription · Boleto · Pix · Credit Cards · Marketplace · Split Payments · Financial Infrastructure · Fintech
 
-## Scope
+## Iugu on APIs.io
 
-- **Type:** Index
+Everything profiled for Iugu is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/iugu/](https://apis.io/providers/iugu/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (43)
 
-- Payments
-- Brazil
-- Invoicing
-- Subscriptions
-- Boleto
-- Pix
-- Credit Card
-- Marketplace
-- Split Payments
-- Financial Infrastructure
-- FinTech
+- [Iugu Account API](https://apis.io/apis/iugu/iugu-account-api/) — The Account API from Iugu — 1 operation(s) for account.
+- [Iugu Accounts API](https://apis.io/apis/iugu/iugu-accounts-api/) — The Accounts API from Iugu — 12 operation(s) for accounts.
+- [Iugu Advancement Request API](https://apis.io/apis/iugu/iugu-advancement-request-api/) — The Advancement Request API from Iugu — 1 operation(s) for advancement request.
+- [Iugu Api Tokens API](https://apis.io/apis/iugu/iugu-api-tokens-api/) — The Api Tokens API from Iugu — 2 operation(s) for api tokens.
+- [Iugu Automatic Pix API](https://apis.io/apis/iugu/iugu-automatic-pix-api/) — The Automatic Pix API from Iugu — 7 operation(s) for automatic pix.
+- [Iugu Baas API](https://apis.io/apis/iugu/iugu-baas-api/) — The Baas API from Iugu — 1 operation(s) for baas.
+- [Iugu Bank Account Pix Keys API](https://apis.io/apis/iugu/iugu-bank-account-pix-keys-api/) — The Bank Account Pix Keys API from Iugu — 1 operation(s) for bank account pix keys.
+- [Iugu Bank Verification API](https://apis.io/apis/iugu/iugu-bank-verification-api/) — The Bank Verification API from Iugu — 1 operation(s) for bank verification.
+- [Iugu Banks API](https://apis.io/apis/iugu/iugu-banks-api/) — The Banks API from Iugu — 2 operation(s) for banks.
+- [Iugu Charge API](https://apis.io/apis/iugu/iugu-charge-api/) — The Charge API from Iugu — 1 operation(s) for charge.
+- [Iugu Charge Two Credit Cards API](https://apis.io/apis/iugu/iugu-charge-two-credit-cards-api/) — The Charge Two Credit Cards API from Iugu — 1 operation(s) for charge two credit cards.
+- [Iugu Chargebacks API](https://apis.io/apis/iugu/iugu-chargebacks-api/) — The Chargebacks API from Iugu — 4 operation(s) for chargebacks.
+- [Iugu Customers API](https://apis.io/apis/iugu/iugu-customers-api/) — The Customers API from Iugu — 4 operation(s) for customers.
+- [Iugu Emails API](https://apis.io/apis/iugu/iugu-emails-api/) — The Emails API from Iugu — 3 operation(s) for emails.
+- [Iugu Financial Transaction Requests API](https://apis.io/apis/iugu/iugu-financial-transaction-requests-api/) — The Financial Transaction Requests API from Iugu — 1 operation(s) for financial transaction requests.
+- [Iugu Invoices API](https://apis.io/apis/iugu/iugu-invoices-api/) — The Invoices API from Iugu — 8 operation(s) for invoices.
+- [Iugu Listar Pagamentos API](https://apis.io/apis/iugu/iugu-listar-pagamentos-api/) — The Listar Pagamentos API from Iugu — 2 operation(s) for listar pagamentos.
+- [Iugu Marketplace API](https://apis.io/apis/iugu/iugu-marketplace-api/) — The Marketplace API from Iugu — 3 operation(s) for marketplace.
+- [Iugu Marketplace Resource Search API](https://apis.io/apis/iugu/iugu-marketplace-resource-search-api/) — The Marketplace Resource Search API from Iugu — 1 operation(s) for marketplace resource search.
+- [Iugu Payment Booklets API](https://apis.io/apis/iugu/iugu-payment-booklets-api/) — The Payment Booklets API from Iugu — 1 operation(s) for payment booklets.
+- [Iugu Payment Requests API](https://apis.io/apis/iugu/iugu-payment-requests-api/) — The Payment Requests API from Iugu — 2 operation(s) for payment requests.
+- [Iugu Payment Token API](https://apis.io/apis/iugu/iugu-payment-token-api/) — The Payment Token API from Iugu — 1 operation(s) for payment token.
+- [Iugu Payments API](https://apis.io/apis/iugu/iugu-payments-api/) — The Payments API from Iugu — 1 operation(s) for payments.
+- [Iugu Pix API](https://apis.io/apis/iugu/iugu-pix-api/) — The Pix API from Iugu — 1 operation(s) for pix.
+- [Iugu Plans API](https://apis.io/apis/iugu/iugu-plans-api/) — The Plans API from Iugu — 3 operation(s) for plans.
+- [Iugu Profile API](https://apis.io/apis/iugu/iugu-profile-api/) — The Profile API from Iugu — 1 operation(s) for profile.
+- [Iugu Receivable Units API](https://apis.io/apis/iugu/iugu-receivable-units-api/) — The Receivable Units API from Iugu — 2 operation(s) for receivable units.
+- [Iugu Reschedule Automatic Pix Payment API](https://apis.io/apis/iugu/iugu-reschedule-automatic-pix-payment-api/) — The Reschedule Automatic Pix Payment API from Iugu — 1 operation(s) for reschedule automatic pix payment.
+- [Iugu Resource Search API](https://apis.io/apis/iugu/iugu-resource-search-api/) — The Resource Search API from Iugu — 1 operation(s) for resource search.
+- [Iugu Signature API](https://apis.io/apis/iugu/iugu-signature-api/) — The Signature API from Iugu — 1 operation(s) for signature.
+- [Iugu Splits API](https://apis.io/apis/iugu/iugu-splits-api/) — The Splits API from Iugu — 4 operation(s) for splits.
+- [Iugu Static Qr Codes API](https://apis.io/apis/iugu/iugu-static-qr-codes-api/) — The Static Qr Codes API from Iugu — 2 operation(s) for static qr codes.
+- [Iugu Subscriptions API](https://apis.io/apis/iugu/iugu-subscriptions-api/) — The Subscriptions API from Iugu — 5 operation(s) for subscriptions.
+- [Iugu Transfer Requests API](https://apis.io/apis/iugu/iugu-transfer-requests-api/) — The Transfer Requests API from Iugu — 5 operation(s) for transfer requests.
+- [Iugu Transferors API](https://apis.io/apis/iugu/iugu-transferors-api/) — The Transferors API from Iugu — 1 operation(s) for transferors.
+- [Iugu Transferors{id} API](https://apis.io/apis/iugu/iugu-transferors-id-api/) — The Transferors{id} API from Iugu — 1 operation(s) for transferors{id}.
+- [Iugu Transfers API](https://apis.io/apis/iugu/iugu-transfers-api/) — The Transfers API from Iugu — 2 operation(s) for transfers.
+- [Iugu Validate API](https://apis.io/apis/iugu/iugu-validate-api/) — The Validate API from Iugu — 1 operation(s) for validate.
+- [Iugu Web Hook Logs API](https://apis.io/apis/iugu/iugu-web-hook-logs-api/) — The Web Hook Logs API from Iugu — 1 operation(s) for web hook logs.
+- [Iugu Withdraw Conciliations API](https://apis.io/apis/iugu/iugu-withdraw-conciliations-api/) — The Withdraw Conciliations API from Iugu — 1 operation(s) for withdraw conciliations.
+- [Iugu Withdraw Requests API](https://apis.io/apis/iugu/iugu-withdraw-requests-api/) — The Withdraw Requests API from Iugu — 2 operation(s) for withdraw requests.
+- [Iugu Zero Auth API](https://apis.io/apis/iugu/iugu-zero-auth-api/) — The Zero Auth API from Iugu — 1 operation(s) for zero auth.
+- [Iugu Webhooks API](https://apis.io/apis/iugu/iugu-webhooks-api/) — The Webhooks API from Iugu — 3 operation(s) for webhooks.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-06-13
-- **Modified:** 2026-06-13
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### Iugu API
+Model Context Protocol servers that expose the API to agents.
 
-RESTful API providing 140+ endpoints for payment processing, customer management, invoicing, subscriptions, marketplace split payments, Pix, boleto bancário, credit card tokenization, webhooks, and financial reporting in Brazil.
+- [iugu-mcp.yml](https://apis.io/servers/iugu/iugu-mcp-yml/)
 
-- **Human URL:** [https://dev.iugu.com/docs](https://dev.iugu.com/docs)
-- **Base URL:** `https://api.iugu.com/v1`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Payments
-- Brazil
-- Invoicing
-- Subscriptions
-- Boleto
-- Pix
-- Credit Card
-- Marketplace
+- [Iugu Agentic Access](https://apis.io/agentic-access/iugu/iugu-agentic-access/)
 
-#### Properties
+#### Governance rules (1)
 
-- [Documentation](https://dev.iugu.com/docs)
-- [OpenAPI](https://dev.iugu.com/llms.txt) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+Spectral rulesets for the provider's contracts.
 
-## Common Properties
+- [Iugu API Rules](https://apis.io/rules/iugu/iugu-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Iugu Authentication](https://apis.io/security/iugu/iugu-authentication/)
+- [Iugu Domain Security](https://apis.io/security/iugu/iugu-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Iugu Plans Pricing](https://apis.io/plans/iugu/iugu-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Iugu Rate Limits](https://apis.io/rate-limits/iugu/iugu-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Iugu Finops](https://apis.io/finops/iugu/iugu-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.iugu.com)
 - [Documentation](https://dev.iugu.com/docs)
-- [Git Hub Org](https://github.com/iugu)
-- [LinkedIn](https://www.linkedin.com/company/iugu)
-- [Blog](https://www.iugu.com/blog)
 - [Pricing](https://www.iugu.com/planos)
-- [Status Page](https://status.iugu.com/)
-- [X (Twitter)](https://x.com/iugu)
-- [Plans](plans/iugu-plans-pricing.yml)
-- [Rate Limits](rate-limits/iugu-rate-limits.yml)
-- [Fin Ops](finops/iugu-finops.yml)
+- [Support](https://support.iugu.com/hc/pt-br)
+- [Blog](https://www.iugu.com/blog)
+- [Status](https://status.iugu.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 41.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 51.1 |
+| Contract governance | 18.2 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 45.2 |
+| Access clarity | 31.6 |
+
+**Agent readiness 28.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | verified |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 15.2** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/iugu/](https://apis.io/providers/iugu/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Iugu: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/iugu/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
